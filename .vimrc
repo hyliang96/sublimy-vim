@@ -22,7 +22,8 @@ endif
 if has('syntax') && !exists('g:syntax_on')
     syntax enable
 endif
-
+"   hdima/python-syntax
+let g:python_highlight_all = 1      " 开启python的所有语法高亮
 
 set showcmd                         " 右下角：n模式显示已输入命令；v模式显示选区范围
 set showmode                        " 左下角的状态栏显示INSERT之类的字样
@@ -1200,8 +1201,10 @@ nnoremap <silent> <C-S> :call UpDate()<cr>:echo "saved"<cr>
 vnoremap <silent> <C-S> <esc>:call UpDate()<cr>:echo "saved"<cr>
 inoremap <silent> <C-S> <c-o>:call UpDate()<cr><c-o>:echo "saved"<cr>
 " 存为
-nnoremap  <S-S> :update<space>
-vnoremap  <S-S> <esc>:update<space>
+nnoremap  ᜤ : update<space>
+vnoremap  ᜤ  <esc>:update<space>
+inoremap  ᜤ  <c-o>:update<space>
+
 " 退出
 " 若 本tab非tree窗口数目多于1，或为0（即只有tree窗口），则:q退出窗口
 " 否则若 tab数>1，则关闭此tab

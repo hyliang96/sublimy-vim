@@ -13,6 +13,9 @@ call plug#begin('~/.vim/plugged')
 " ------Plugins start-------
 " 中文帮助, 使用方法`:h 待查找的内容`
 Plug 'yianwillis/vimcdoc'
+" python 语法高亮
+Plug 'hdima/python-syntax'
+" , { 'for': 'python' }
 " 目录树
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle','NERDTreeMirror','NERDTree'] }
 " 目录树下显示git状态
@@ -60,7 +63,7 @@ Plug 'tpope/vim-surround'
 " 补全 HTML/XML 标签
 " Plug 'docunext/closetag.vim'
 " 配色库
-" Plug 'colors'
+Plug 'flazz/vim-colorschemes'
 " ------Plugins end  -------
 
 if filereadable(expand("~/.vimrc.bundles.local"))
