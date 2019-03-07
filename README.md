@@ -1,10 +1,12 @@
 # 我的vim配置
 
-仿sublime的快捷键，绝大多数时间可在insert模式下工作
+此vim仿sublime的快捷键，绝大多数时间可在insert模式下工作
 
-安装各种实用插件，fork了一些插件，改善了corner cases下的用户体验
+安装了各种实用插件，fork了一些插件，改善了corner cases下的用户体验
 
 实现了一些insert模式下基础操作，相比原生的vim命令，同样改善了corner cases下的用户体验
+
+![img0](README.assets/img0.png)
 
 ## 安装方法
 
@@ -112,7 +114,7 @@ cp vim_keymap.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
 
 这一设置并不需要。这里只是想说明，我的alt+字母是采用的哪套方案，以便你自行添加其他快捷键。所有.vimrc里用到的alt+字母都已经在上述profile里设置过了。
 
-![屏幕快照 2019-03-08 01.15.56](https://github.com/hyliang96/sublimy-vim/blob/master/README.assets/img1.png)
+![修改mac的英文键盘方案](README.assets/img1.png)
 
 ## 使用快捷键
 
@@ -405,32 +407,33 @@ Plug 'Valloric/YouCompleteMe',{'do':'python3 install.py --all'}
 * `(n)vim --version`，若返回显示 python 和 python3 都不支持（是`-`号），则会无法编译
 * 上文所述编译依赖没装全，或者太老了，请找管理员安装或升级
 
-#插件推荐列表
+#ToDO
 
-我想装还装的插件有：
+安装以下插件
+
+- [ ] python代码缩进：`Plug 'vim-scripts/indentpython.vim'`
+- [ ] python代码自动转pep8格式：`Plug 'tell-k/vim-autopep8'`
+- [ ] 代码折叠：`Plug 'tmhedberg/SimpylFold'`。都提供对方法（methods）或类（classes）进行折叠的手段，只显示类或方法的定义部分，而不是全部的代码。
+
+- [ ] 标签窗口：`Plug 'vim-scripts/taglist.vim'`。显示定位程序中各种符号的插件（例如宏定义、变量名、结构名、函数名）
+- [ ] 重写'vim-multiple-cursor'的快捷键解析，使之能应对复杂的组合按键以及escape sequence
+
+# 参考
+
+[vim中文帮助下载](https://github.com/yianwillis/vimcdoc/releases)
+
+[vim中文帮助在线](http://yianwillis.github.io/vimcdoc/)
 
 [利器系列之 —— 编辑利器 Vim 之插件配置](http://blog.guorongfei.com/2015/10/06/vim-plugin/)
 
 [如何优雅的使用 Vim（二）：插件介绍](https://segmentfault.com/a/1190000014560645)
 
-[那些离了就活不了的 VIM 插件](https://www.zlovezl.cn/articles/vim-plugins-cannot-live-without/)
+[那些离了就活不了的 VIM 插件](https://www.zlovezl.cn/articles/vim-plugins-cannot-live-without/) 
 
 [mac下配置vim](https://www.jianshu.com/p/923aec861af3)
 
-* python代码缩进：`Plug 'vim-scripts/indentpython.vim'`
+[很好很强大的vimrc（带注释版）](https://www.cnblogs.com/zourrou/archive/2011/04/16/2018493.html)
 
-* python代码自动转pep8格式：`Plug 'tell-k/vim-autopep8'`
+[dorianneto/vim-sublime](https://github.com/dorianneto)
 
-* 代码折叠：`Plug 'tmhedberg/SimpylFold'`
-
-  都提供对方法（methods）或类（classes）进行折叠的手段，只显示类或方法的定义部分，而不是全部的代码。
-
-* 标签窗口：`Plug 'vim-scripts/taglist.vim'`
-
-  显示定位程序中各种符号的插件（例如宏定义、变量名、结构名、函数名）
-
-# 文档
-
-[vim中文帮助下载](https://github.com/yianwillis/vimcdoc/releases)
-
-[vim中文帮助在线](http://yianwillis.github.io/vimcdoc/)
+[YouCompleteMe 插件 MacOS 安装](https://www.jianshu.com/p/edc4bbed92ca)
