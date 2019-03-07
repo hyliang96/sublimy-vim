@@ -14,8 +14,7 @@ call plug#begin('~/.vim/plugged')
 " 中文帮助, 使用方法`:h 待查找的内容`
 Plug 'yianwillis/vimcdoc'
 " python 语法高亮
-Plug 'hdima/python-syntax'
-" , { 'for': 'python' }
+Plug 'hdima/python-syntax', { 'for': 'python' }
 " 目录树
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle','NERDTreeMirror','NERDTree'] }
 " 目录树下显示git状态
