@@ -112,9 +112,7 @@ cp vim_keymap.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
 
 这一设置并不需要。这里只是想说明，我的alt+字母是采用的哪套方案，以便你自行添加其他快捷键。所有.vimrc里用到的alt+字母都已经在上述profile里设置过了。
 
-### ![屏幕快照 2019-03-08 01.15.56](README.assets/屏幕快照 2019-03-08 01.15.56-1979126.png)
-
-![屏幕快照 2019-03-08 01.15.56](README.assets/屏幕快照 2019-03-08 01.15.56.png)
+![屏幕快照 2019-03-08 01.15.56](https://github.com/hyliang96/sublimy-vim/blob/master/README.assets/img1.png)
 
 ## 使用快捷键
 
