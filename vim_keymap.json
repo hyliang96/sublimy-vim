@@ -466,6 +466,10 @@
       "Text" : "Ω",
       "Action" : 12
     },
+    "0x53-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜤ"
+    },
     "0xf700-0x260000" : {
       "Action" : 10,
       "Text" : "[1;6A"
@@ -599,9 +603,9 @@
     "Alpha Component" : 1,
     "Green Component" : 0.10676553100347519
   },
-  "Name" : "vim keymap",
+  "Name" : "tmux",
   "Blinking Cursor" : false,
-  "Guid" : "3F975345-8180-4710-97CC-359A80FEEE92",
+  "Guid" : "3F975615-8180-4710-97CC-359A80FEEE92",
   "Idle Code" : 0,
   "Ansi 10 Color" : {
     "Red Component" : 0.45490196078431372,
@@ -1305,9 +1309,9 @@
     "Alpha Component" : 1,
     "Green Component" : 0.10676553100347519
   },
-  "Name" : "vim keymap Hotkey Window",
+  "Name" : "Hotkey Window",
   "Blinking Cursor" : false,
-  "Guid" : "BBB97D69-A13D-4FB8-8347-901065561D6F",
+  "Guid" : "AAA97D69-A13D-4FB8-8347-901065561D6F",
   "Idle Code" : 0,
   "Ansi 10 Color" : {
     "Red Component" : 0.45490196078431372,
