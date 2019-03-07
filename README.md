@@ -1,5 +1,6 @@
 # 我的vim配置
 
+
 此vim仿sublime的快捷键，绝大多数时间可在insert模式下工作
 
 安装了各种实用插件，fork了一些插件，改善了corner cases下的用户体验
@@ -32,7 +33,7 @@
 
     直接`./nvim.appimage`，即启动nvim，相当于输入`vim`命令
 
-    
+
 
     修改PATH以便使用：
 
@@ -55,7 +56,7 @@
     ./squashfs-root/usr/bin/nvim
     ```
 
-    ​	
+    ​
 
     修改PATH以便使用：将`squashfs-root/`放到任何你要的【地方】，再在.zshenv之类的文件中加入
 
@@ -93,7 +94,7 @@ UltiSnippets、YouCompleteMe 需要当中至少一个才能使用；但YouComple
 命令行下输入
 
 ```
-nvim  +'PlugInstall --sync' +'PlugUpdate' +qa  
+nvim  +'PlugInstall --sync' +'PlugUpdate' +qa
 ```
 
 以自动安装Vim-Plug，并安装插件，特别是编译YouCompleteMe插件
@@ -198,7 +199,7 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
 
 * escape和alt-键
 
-  neovim中，\<esc>+一个键，应该写作\<M-一个键>(alt+这个键)，而这种写法vim不支持。故应该写成下面这样 
+  neovim中，\<esc>+一个键，应该写作\<M-一个键>(alt+这个键)，而这种写法vim不支持。故应该写成下面这样
 
   ```
   if has('nvim')
@@ -259,9 +260,9 @@ end
 
 call plug#begin('~/.vim/plugged')
 
-" ------Plugins start------- 
+" ------Plugins start-------
 " <github号>/<repo名>
-Plug 'junegunn/vim-easy-align'     
+Plug 'junegunn/vim-easy-align'
 " repo的url
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 " 本地绝对路径
@@ -428,7 +429,7 @@ Plug 'Valloric/YouCompleteMe',{'do':'python3 install.py --all'}
 
 [如何优雅的使用 Vim（二）：插件介绍](https://segmentfault.com/a/1190000014560645)
 
-[那些离了就活不了的 VIM 插件](https://www.zlovezl.cn/articles/vim-plugins-cannot-live-without/) 
+[那些离了就活不了的 VIM 插件](https://www.zlovezl.cn/articles/vim-plugins-cannot-live-without/)
 
 [mac下配置vim](https://www.jianshu.com/p/923aec861af3)
 
