@@ -50,7 +50,7 @@
 
   - 系统无FUSE，将镜像解压，执行其中的二进制文件
 
-    ```
+    ```bash
     ./nvim.appimage --appimage-extract # 解压得到 squashfs-root/ 文件夹
     ./squashfs-root/usr/bin/nvim
     ```
@@ -92,7 +92,7 @@ UltiSnippets、YouCompleteMe 需要当中至少一个才能使用；但YouComple
 
 命令行下输入
 
-```
+```bash
 nvim  +'PlugInstall --sync' +'PlugUpdate' +qa
 ```
 
@@ -102,7 +102,7 @@ nvim  +'PlugInstall --sync' +'PlugUpdate' +qa
 
 [图文教程](https://www.jianshu.com/p/c251d26374c5)
 
-```
+```bash
 cp vim_keymap.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
 ```
 
@@ -187,7 +187,7 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
 
   `~/.vimrc`中设
 
-  ```
+  ```vim
   set timeout           " mapping的时长限制
   set timeoutlen=1000   " 单位毫秒，默认值1000
   set ttimeout          " 收到键码串的时长限制，例如escape sequance
@@ -200,7 +200,7 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
 
   neovim中，\<esc>+一个键，应该写作\<M-一个键>(alt+这个键)，而这种写法vim不支持。故应该写成下面这样
 
-  ```
+  ```vim
   if has('nvim')
       nmap <M-d>  <plug>DeleteWordAfter
   else
@@ -212,8 +212,8 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
 
   neovim对\<esc>后长度超过1的escape sequence支持不太好，很多都识别不了；而vim无此问题。例如
 
-  ```
-  # 在cat -v下输入 Fn+ctrl+left(即Ctrl+Home），返回^[[1;5F
+  ```vim
+  " 在cat -v下输入 Fn+ctrl+left(即Ctrl+Home），返回^[[1;5F
   nmap <esc>[1;5F <plug>SomeFunction
   ```
 
@@ -225,7 +225,7 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
 
   然后在~/.vimrc中写这样的映射
 
-  ```
+  ```vim
   nnoremap ᜀ  do_some_thing
   ```
 
@@ -244,7 +244,7 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
 
 ### .vimrc插件写法
 
-```
+```vim
 " 自动安装vim-plug 到 ~/.vim/autoload/plug.vim   (vim用)
 "                 到 ~/.local/share/nvim/site/autoload   (neovim用)
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -296,7 +296,7 @@ call plug#end()
 
 * 一个参数名，有多个参数写成如下列表格式 ：
 
-  ```
+  ```vim
   Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle','NERDTreeMirror','NERDTree'] }
   ```
 
@@ -330,7 +330,7 @@ vim的自动补全插件，会实时显示候选菜单，需要编译，是所�
 
 * mac
 
-  ```
+  ```bash
   brew install cmake
   ```
 
@@ -348,7 +348,7 @@ vim的自动补全插件，会实时显示候选菜单，需要编译，是所�
 
 在 `/.vimrc`文件中加入
 
-```
+```vim
 Plug 'Valloric/YouCompleteMe', {'do':'python3 install.py'}
 ```
 
@@ -360,37 +360,37 @@ Plug 'Valloric/YouCompleteMe', {'do':'python3 install.py'}
 
 C-family languages
 
-```
+```vim
 Plug 'Valloric/YouCompleteMe',{'do':'python3 install.py --clang-completer'}
 ```
 
 C# suppor t`brew install Mono`
 
-```
+```vim
 Plug 'Valloric/YouCompleteMe',{'do':'python3 install.py --cs-completer'}
 ```
 
 Go support
 
-```
+```vim
 Plug 'Valloric/YouCompleteMe',{'do':'python3 install.py --go-completer'}
 ```
 
 Rust support: support `brew install rust`
 
-```
+```vim
 Plug 'Valloric/YouCompleteMe',{'do':'python3 install.py --rust-completer'}
 ```
 
 Java support: support  `brew cask install java8`
 
-```
+```vim
 Plug 'Valloric/YouCompleteMe',{'do':'python3 install.py --java-completer'}
 ```
 
 全部安装
 
-```
+```vim
 Plug 'Valloric/YouCompleteMe',{'do':'python3 install.py --all'}
 ```
 
@@ -398,7 +398,7 @@ Plug 'Valloric/YouCompleteMe',{'do':'python3 install.py --all'}
 
 若自动下载安装成功、但自动编译失败，则需手动编译：`~/.vim/plugged/YouCompleteMe`，执行
 
-```
+```bash
 ./install.py
 ```
 
