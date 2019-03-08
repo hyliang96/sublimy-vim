@@ -186,123 +186,6 @@ nnoremap <c-h> :h<space>
 vnoremap <c-h> :<c-u>h<space>
 inoremap <c-h> <c-o>:h<space>
 "-----------------------------------------------------------------
-" Buffers操作快捷方式!
-" alt+n  （需事先手动保存）关闭本buffer，并开一个新buffer
-nnoremap  ᜩ  :bd\|enew<cr>
-vnoremap  ᜩ  <esc>:bd\|enew<cr>
-inoremap  ᜩ  <c-o>:bd\|enew<cr>
-" <esc>ctrl+n  （需要事前手动保存）关闭本buffer，开一个文件到新buffer
-nnoremap  <esc>ᜩ  :bd\|edit<space>
-vnoremap  <esc>ᜩ  <esc>:bd\|edit<space>
-inoremap  <esc>ᜩ  <c-o>:bd\|edit<space>
-" nnoremap ᜩ  :update<cr>:bd!|enew<cr>
-" vnoremap ᜩ  <esc>:update<cr>:bd!|enew<cr>
-" inoremap ᜩ  <c-o>:update<cr><c-o>:bd!|enew<cr>
-" alt+ctrl+n  开一空白个新buffer
-nnoremap ᜦ  :update<cr>:enew<cr>
-vnoremap ᜦ  <esc>:update<cr>:enew<cr>
-inoremap ᜦ  <c-o>:update<cr><c-o>:enew<cr>
-" <esc>alt+crtl+n  开一个文件为新buffer
-nnoremap <esc>ᜦ  :update<cr>:edit<space>
-vnoremap <esc>ᜦ  <esc>:update<cr>:edit<space>
-inoremap <esc>ᜦ  <c-o>:update<cr><c-o>:edit<space>
-" alt+ctrl+b
-nnoremap ᜧ  :update<cr>:buffers<cr>
-vnoremap ᜧ  <esc>:update<cr>:buffers<cr>
-inoremap ᜧ  <c-o>:update<cr><c-o>:buffers<cr>
-" alt+ctrl+[
-nnoremap ᜥ  :update<cr>:bnext<CR>
-vnoremap ᜥ  <esc>:update<cr>:bnext<CR>
-inoremap ᜥ  <c-o>:update<cr><c-o>:bnext<CR>
-" alt+ctrl+]
-nnoremap ᜣ :update<cr>:bprevious<CR>
-vnoremap ᜣ <esc>:update<cr>:bprevious<CR>
-inoremap ᜣ <c-o>:update<cr><c-o>:bprevious<CR>
-" alt+ctrl+w 关闭当前buffer
-nnoremap ᜨ :bd<CR>
-vnoremap ᜨ <esc>:bd<CR>
-inoremap ᜨ <c-o>:bd<CR>
-"-----------------------------------------------------------------
-" 窗口分割
-set splitright    " 默认开在右侧
-" alt+\：垂直分割窗口
-nnoremap « :vsp<cr>
-vnoremap « <esc>:vsp<cr>v
-inoremap «  <c-o>:vsp<cr>
-" <esc> alt+\：垂直分割窗口 开文件
-nnoremap <esc>« :vsp<space>
-vnoremap <esc>« <esc>:vsp<space>
-inoremap <esc>«  <c-o>:vsp<space>
-
-set splitbelow  " 默认开在下边
-" alt+shift+\：水平分割窗口
-nnoremap » :sp<cr>
-vnoremap » <esc>:sp<cr>v
-inoremap » <c-o>:sp<cr>
-" <esc> alt+shift+\：水平分割窗口  开文件
-nnoremap <esc>» :sp<space>
-vnoremap <esc>» <esc>:sp<space>
-inoremap <esc>» <c-o>:sp<space>
-
-" alt+Fn+上下左右：去往上下左右一个窗口
-" alt+ctrl+left
-map   ᜉ  <plug>LWin
-map!   ᜉ <plug>LWin
-noremap  <plug>LWin  <c-w>h
-inoremap <plug>LWin  <c-o><c-w>h
-    " " 普通终端
-" noremap  <esc>[1;9H <c-w>h
-" inoremap <esc>[1;9H <c-o><c-w>h
-    " " tmux下
-" noremap  <esc><esc>[1~ <c-w>h
-" inoremap <esc><esc>[1~ <c-o><c-w>h
-" alt+ctrl+right
-map  ᜊ   <plug>RWin
-map! ᜊ   <plug>RWin
-noremap  <plug>RWin   <c-w>l
-inoremap <plug>RWin   <c-o><c-w>l
-" 普通终端
-" noremap  <esc>[1;9F <c-w>l
-" inoremap <esc>[1;9F <c-o><c-w>l
-    " " tmux下
-" noremap  <esc><esc>[4~ <c-w>l
-" inoremap <esc><esc>[4~ <c-o><c-w>l
-" alt+ctrl+up
-map  ᜋ   <plug>UWin
-map!  ᜋ  <plug>UWin
-noremap  <plug>UWin  <c-w>k
-inoremap <plug>UWin  <c-o><c-w>k
-" noremap  <esc><esc>[5~ <c-w>k
-" inoremap <esc><esc>[5~ <c-o><c-w>k
-" alt+shift+doen
-map   ᜌ    <plug>DWin
-map!   ᜌ   <plug>DWin
-noremap  <plug>DWin   <c-w>j
-inoremap <plug>DWin   <c-o><c-w>j
-" noremap  <esc><esc>[6~ <c-w>j
-" inoremap <esc><esc>[6~ <c-o><c-w>j
-
-
-" 窗口移动
-" 变宽：alt +
-nnoremap <silent> ≠ :exe "vertical resize " . (winwidth(0) * 15/14)<CR>
-vnoremap <silent> ≠ <esc>:exe "vertical resize " . (winwidth(0) * 15/14)<CR>gv
-inoremap <silent> ≠ <c-o>:exe "vertical resize " . (winwidth(0) * 15/14)<CR>
-" 变窄  alt -
-nnoremap <silent> – :exe "vertical resize " . (winwidth(0) * 14/15)<CR>
-vnoremap <silent> – <esc>:exe "vertical resize " . (winwidth(0) * 14/15)<CR>gv
-inoremap <silent> – <c-o>:exe "vertical resize " . (winwidth(0) * 14/15)<CR>
-" 变高  shift alt +
-nnoremap <silent> ± :exe "resize " . (winheight(0) * 10/9)<CR>
-vnoremap <silent> ± <esc>:exe "resize " . (winheight(0) * 10/9)<CR>gv
-inoremap <silent> ± <c-o>:exe "resize " . (winheight(0) * 10/9)<CR>
-" 变矮  shift alt -
-nnoremap <silent> — :exe "resize " . (winheight(0) * 9/10)<CR>
-vnoremap <silent> — <esc>:exe "resize " . (winheight(0) * 9/10)<CR>gv
-inoremap <silent> — <c-o>:exe "resize " . (winheight(0) * 9/10)<CR>
-
-
-"-----------------------------------------------------------------
 "一些不错的映射转换语法（如果在一个文件中混合了不同语言时有用）
 nnoremap <leader>1 :set filetype=python<CR>
 nnoremap <leader>2 :set filetype=cpp<CR>
@@ -343,8 +226,152 @@ let Tlist_Enable_Fold_Column = 0
 let Tlist_Process_File_Always = 1
 let Tlist_Display_Prototype = 0
 let Tlist_Compact_Format = 1
+
+"=========================================================================
+" 标签页、窗口、buffer操作
+"=========================================================================
+" 标签页
+" alt+t 新开一空标签页
+nnoremap  †   :tabnew<CR>
+vnoremap  †   <esc>:tabnew<CR>v
+inoremap  †   <c-o>:tabnew<CR>
+" 开一个文件到新标签页
+" <esc> alt+t
+nnoremap <esc>†  :tabedit<space>
+vnoremap <esc>†  <esc>:tabedit<space>
+inoremap <esc>†  <c-o>:tabedit<space>
+" shift+left 左一个标签页
+nnoremap <S-Left> :tabprev<CR>
+vnoremap <S-Left> <esc>:tabprev<CR>v
+inoremap <S-Left> <c-o>:tabprev<CR>
+" shift+right 右一个标签页
+nnoremap <S-Right> :tabnext<CR>
+vnoremap <S-Right> <esc>:tabnext<CR>v
+inoremap <S-Right> <c-o>:tabnext<CR>
+"-----------------------------------------------------------------
+" alt  开文件
+" alt+n  （需事先手动保存）关闭本buffer，并开一个新buffer
+nnoremap  ᜩ  :bd\|enew<cr>
+vnoremap  ᜩ  <esc>:bd\|enew<cr>
+inoremap  ᜩ  <c-o>:bd\|enew<cr>
+" <esc>ctrl+n  （需要事前手动保存）关闭本buffer，开一个文件到新buffer
+nnoremap  <esc>ᜩ  :bd\|edit<space>
+vnoremap  <esc>ᜩ  <esc>:bd\|edit<space>
+inoremap  <esc>ᜩ  <c-o>:bd\|edit<space>
+"-----------------------------------------------------------------
+" ctrl+alt: buffer操作
+"-----------------------------------------------------------------
+" nnoremap ᜩ  :update<cr>:bd!|enew<cr>
+" vnoremap ᜩ  <esc>:update<cr>:bd!|enew<cr>
+" inoremap ᜩ  <c-o>:update<cr><c-o>:bd!|enew<cr>
+" alt+ctrl+n  开一空白个新buffer
+nnoremap ᜦ  :update<cr>:enew<cr>
+vnoremap ᜦ  <esc>:update<cr>:enew<cr>
+inoremap ᜦ  <c-o>:update<cr><c-o>:enew<cr>
+" <esc>alt+crtl+n  开一个文件为新buffer
+nnoremap <esc>ᜦ  :update<cr>:edit<space>
+vnoremap <esc>ᜦ  <esc>:update<cr>:edit<space>
+inoremap <esc>ᜦ  <c-o>:update<cr><c-o>:edit<space>
+" alt+ctrl+b
+nnoremap ᜧ  :update<cr>:buffers<cr>
+vnoremap ᜧ  <esc>:update<cr>:buffers<cr>
+inoremap ᜧ  <c-o>:update<cr><c-o>:buffers<cr>
+" alt+ctrl+[
+nnoremap ᜥ  :update<cr>:bnext<CR>
+vnoremap ᜥ  <esc>:update<cr>:bnext<CR>
+inoremap ᜥ  <c-o>:update<cr><c-o>:bnext<CR>
+" alt+ctrl+]
+nnoremap ᜣ :update<cr>:bprevious<CR>
+vnoremap ᜣ <esc>:update<cr>:bprevious<CR>
+inoremap ᜣ <c-o>:update<cr><c-o>:bprevious<CR>
+" alt+ctrl+w 关闭当前buffer
+nnoremap ᜨ :bd<CR>
+vnoremap ᜨ <esc>:bd<CR>
+inoremap ᜨ <c-o>:bd<CR>
+"-----------------------------------------------------------------
+" alt、ctrl+alt: 窗口操作
+"-----------------------------------------------------------------
+" 窗口分割
+set splitright    " 默认开在右侧
+" alt+\：垂直分割窗口
+nnoremap « :vsp<cr>
+vnoremap « <esc>:vsp<cr>v
+inoremap «  <c-o>:vsp<cr>
+" <esc> alt+\：垂直分割窗口 开文件
+nnoremap <esc>« :vsp<space>
+vnoremap <esc>« <esc>:vsp<space>
+inoremap <esc>«  <c-o>:vsp<space>
+
+set splitbelow  " 默认开在下边
+" alt+shift+\：水平分割窗口
+nnoremap » :sp<cr>
+vnoremap » <esc>:sp<cr>v
+inoremap » <c-o>:sp<cr>
+" <esc> alt+shift+\：水平分割窗口  开文件
+nnoremap <esc>» :sp<space>
+vnoremap <esc>» <esc>:sp<space>
+inoremap <esc>» <c-o>:sp<space>
+"-----------------------------------------------------------------
+" alt+Fn+上下左右：去往上下左右一个窗口
+" alt+ctrl+left
+map   ᜉ  <plug>LWin
+map!   ᜉ <plug>LWin
+noremap  <plug>LWin  <c-w>h
+inoremap <plug>LWin  <c-o><c-w>h
+    " " 普通终端
+" noremap  <esc>[1;9H <c-w>h
+" inoremap <esc>[1;9H <c-o><c-w>h
+    " " tmux下
+" noremap  <esc><esc>[1~ <c-w>h
+" inoremap <esc><esc>[1~ <c-o><c-w>h
+" alt+ctrl+right
+map  ᜊ   <plug>RWin
+map! ᜊ   <plug>RWin
+noremap  <plug>RWin   <c-w>l
+inoremap <plug>RWin   <c-o><c-w>l
+" 普通终端
+" noremap  <esc>[1;9F <c-w>l
+" inoremap <esc>[1;9F <c-o><c-w>l
+    " " tmux下
+" noremap  <esc><esc>[4~ <c-w>l
+" inoremap <esc><esc>[4~ <c-o><c-w>l
+" alt+ctrl+up
+map  ᜋ   <plug>UWin
+map!  ᜋ  <plug>UWin
+noremap  <plug>UWin  <c-w>k
+inoremap <plug>UWin  <c-o><c-w>k
+" noremap  <esc><esc>[5~ <c-w>k
+" inoremap <esc><esc>[5~ <c-o><c-w>k
+" alt+shift+doen
+map   ᜌ    <plug>DWin
+map!   ᜌ   <plug>DWin
+noremap  <plug>DWin   <c-w>j
+inoremap <plug>DWin   <c-o><c-w>j
+" noremap  <esc><esc>[6~ <c-w>j
+" inoremap <esc><esc>[6~ <c-o><c-w>j
+"-----------------------------------------------------------------
+" 窗口尺寸
+" 变宽：alt +
+nnoremap <silent> ≠ :exe "vertical resize " . (winwidth(0) * 15/14)<CR>
+vnoremap <silent> ≠ <esc>:exe "vertical resize " . (winwidth(0) * 15/14)<CR>gv
+inoremap <silent> ≠ <c-o>:exe "vertical resize " . (winwidth(0) * 15/14)<CR>
+" 变窄  alt -
+nnoremap <silent> – :exe "vertical resize " . (winwidth(0) * 14/15)<CR>
+vnoremap <silent> – <esc>:exe "vertical resize " . (winwidth(0) * 14/15)<CR>gv
+inoremap <silent> – <c-o>:exe "vertical resize " . (winwidth(0) * 14/15)<CR>
+" 变高  shift alt +
+nnoremap <silent> ± :exe "resize " . (winheight(0) * 10/9)<CR>
+vnoremap <silent> ± <esc>:exe "resize " . (winheight(0) * 10/9)<CR>gv
+inoremap <silent> ± <c-o>:exe "resize " . (winheight(0) * 10/9)<CR>
+" 变矮  shift alt -
+nnoremap <silent> — :exe "resize " . (winheight(0) * 9/10)<CR>
+vnoremap <silent> — <esc>:exe "resize " . (winheight(0) * 9/10)<CR>gv
+inoremap <silent> — <c-o>:exe "resize " . (winheight(0) * 9/10)<CR>
+
+
 "=========================================================================
 " plugin - NERD_tree.vim 以树状方式浏览系统中的文件和目录
+"=========================================================================
 " :ERDtree 打开NERD_tree         :NERDtreeClose    关闭NERD_tree
 " o 打开关闭文件或者目录         t 在标签页中打开
 " T 在后台标签页中打开           ! 执行此文件
@@ -372,8 +399,10 @@ autocmd VimEnter * wincmd p " 开vim或tab，默认进入右侧编辑区
 " 解决在mac下，tree栏目中每行首显示^G, 这是因为其vim 不支持conceal，更新vim使
 " 之支持即可
 " let g:NERDTreeNodeDelimiter = "\u00a0"
+
 "=========================================================================
 " plugin - NERD_commenter.vim   注释代码用的
+"=========================================================================
 " let mapleader=","                " 把默认的leader从“\”改为“,”
 " [count],cc 光标及以下count行逐行添加注释(7,cc)
 " [count],cu 光标及以下count行逐行取消注释(7,cu)
@@ -452,6 +481,8 @@ noremap <leader>dc a /*  */<LEFT><LEFT><LEFT>
 let g:checksyntax_auto = 0 " 不自动检查
 
 "=========================================================================
+" 索索
+"=========================================================================
 " 搜索 ctrl+f
 nnoremap <C-f> :MarkClear<cr>/
 vnoremap <C-f> "9y:MarkClear<cr>/<c-r>9
@@ -492,7 +523,7 @@ let g:mwDefaultHighlightingPalette = 'mypalette'
 
 "=========================================================================
 " 多光标
-" ------------------------------------------------------------------------
+"=========================================================================
 " 快捷键                                               mc：multiple cursor
 " ------------------------------------------------------------------------
 " 始模式       快捷键  末模式  功能
@@ -866,6 +897,7 @@ inoremap Ω <esc><C-o>a
 nnoremap ¸ <C-i>
 vnoremap ¸ <esc><C-o>v
 inoremap ¸ <esc><C-i>a
+
 "=========================================================================
 " 自动补全
 " ------------------------------------------------------------------------
@@ -969,6 +1001,7 @@ imap <expr> <PageUp> pumvisible() ? "\<PageUp>":"\<plug>PageUp"
 " 一按tab出补全列表，按右/左键或<tab>/<S-tab>移动选项
 set wildmenu                     " 开启语义补全
 set wildmode=list:longest,full   " 补全方式
+
 
 "=========================================================================
 " 快速跳转
@@ -1137,6 +1170,7 @@ imap ᜡ  <c-o>]c
 " 开关gitgutter
 noremap  <Leader>g :GitGutterToggle<CR>
 inoremap  <esc>g <c-o>:GitGutterToggle<CR>
+
 "========================================================================
 " 选择
 " 选中一行，含行尾换行符
@@ -1204,25 +1238,6 @@ imap <c-e><c-u> <plug>DeleteLine
 nnoremap <plug>DeleteLine a<c-g>u<esc>0v$"_d
 inoremap <plug>DeleteLine <c-g>u<c-o>0<C-o>v$"_d
 " cnoremap <plug>DeleteLine <c-e><c-u>
-"=========================================================================
-" 标签页
-" alt+t 新开一空标签页
-nnoremap  †   :tabnew<CR>
-vnoremap  †   <esc>:tabnew<CR>v
-inoremap  †   <c-o>:tabnew<CR>
-" 开一个文件到新标签页
-" <esc> alt+t
-nnoremap <esc>†  :tabedit<space>
-vnoremap <esc>†  <esc>:tabedit<space>
-" imap <S-t> <esc>:tabedit<space>
-" 左一个标签页
-nnoremap <S-Left> :tabprev<CR>
-vnoremap <S-Left> <esc>:tabprev<CR>v
-inoremap <S-Left> <c-o>:tabprev<CR>
-" 右一个标签页
-nnoremap <S-Right> :tabnext<CR>
-vnoremap <S-Right> <esc>:tabnext<CR>v
-inoremap <S-Right> <c-o>:tabnext<CR>
 
 "=========================================================================
 " ctrl+s保存
@@ -1253,7 +1268,7 @@ command! -nargs=1 -complete=file Rename call <SID>rename_file(<f-args>)
 nnoremap <c-r>  :Rename<space>
 vnoremap <c-r>  <esc>:Rename<space>
 inoremap <c-r> <c-o>:Rename<space>
-
+" ------------------------------------------------------------------------
 " 退出
 " 若 本tab非tree窗口数目多于1，或为0（即只有tree窗口），则:q退出窗口
 " 否则若 tab数>1，则关闭此tab
@@ -1293,14 +1308,16 @@ inoremap ∑ <c-o>:q<cr>
 nnoremap <expr> „ tabpagenr() > 1 ? ':tabclose<cr>' : ':qa<cr>'
 vnoremap <expr> „ tabpagenr() > 1 ? '<esc>:tabclose<cr>' : '<esc>:qa<cr>'
 inoremap <expr> „ tabpagenr() > 1 ? '<c-o>:tabclose<cr>' : '<c-o>:qa<cr>'
-
+" ------------------------------------------------------------------------
 " 进出visual模式: ctrl+'
 vnoremap ᜏ <esc>
 inoremap ᜏ <c-o>v
 nnoremap ᜏ v
-" 退出插入模式：ctrl+i
+" 进出插入模式：ctrl+i
 inoremap ᜎ <C-o>:stopinsert<cr>
 nnoremap ᜎ  i
+" 退出命令模式
+cnoremap ᜎ  <esc>
 
 " noremap <esc> <NOP>
 " inoremap <esc> <NOP>
@@ -1397,7 +1414,7 @@ let g:ctrlp_prompt_mappings = {
 \ 'PrtCurStart()':        ['<c-a>','<esc>[1~'],
 \ 'PrtCurEnd()':          ['<c-e>','<esc>[4~'],
 \ 'PrtClear()':           ['<c-u>','<c-u><c-k>'],
-\ 'PrtExit()':            ['<esc>', '<c-b>','<c-w>','∑'],
+\ 'PrtExit()':            ['<esc>', 'ᜎ ','<c-w>','∑'],
 \ 'DiffOpen("\<c-o>")':   ['<c-d>'],
 \ }
 
@@ -1412,6 +1429,7 @@ inoremap π <c-o>:stopinsert<cr>:CtrlPFunky<Cr>
 nnoremap ∏ :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 inoremap ∏ <c-o>:stopinsert<cr>:execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 let g:ctrlp_funky_syntax_highlight = 1
+
 "=========================================================================
 " 括号补全
 " Plug 'Raimondi/delimitMate'
