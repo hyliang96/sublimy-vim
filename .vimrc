@@ -893,7 +893,7 @@ inoremap <expr> <plug>CR (getline('.') !~ "^[ \t]*$"?
 nnoremap Ω  <C-o>
 vnoremap Ω <esc><C-o>v
 inoremap Ω <esc><C-o>a
-" (几) alt+shift+r : 前往后（几回）光标位置
+" (几) alt+shift+z : 前往后（几回）光标位置
 nnoremap ¸ <C-i>
 vnoremap ¸ <esc><C-o>v
 inoremap ¸ <esc><C-i>a
@@ -1348,7 +1348,7 @@ cnoremap ᜎ  <esc>
     " - buffer下按它清除所在行的文件
 " - `<c-z>`,`<c-s-z>`:　撤销、重做于ctrlp中
 " 打开命令
-" - `<cr>`、`<c-t>`、`<A-->`、`<A-\>`: 开在本窗口（现在的文件就关了）、新Tab、横分屏、竖分屏
+" - `<A-C-N>`、`<A-t>`、`<A-S-\>`、`<A-\>`(即`<cr>`): 开在本窗口（现在的文件就关了）、新Tab、横分屏、竖分屏
 " - `<c-o>`：打开，ctrlp会问你用上述哪种方法打开
 " 输入路径
 " - `<s-tab>`：开关输入栏
@@ -1399,12 +1399,13 @@ let g:ctrlp_show_hidden=1
 " 用户覆盖默认快捷键
 let g:ctrlp_prompt_mappings = {
 \ 'PrtHistory(1)':        ['<c-z>'],
-\ 'PrtHistory(-1)':       ['<esc>[[z'],
+\ 'PrtHistory(-1)':       ['ᜃ'],
 \ 'CreateNewFile()':      ['<c-n>'],
 \ 'ToggleType(1)':        ['<S-right>'],
 \ 'ToggleType(-1)':       ['<S-left>'],
 \ 'AcceptSelection("h")': ['»','<c-h>'],
-\ 'AcceptSelection("v")': ['«','<c-v>'],
+\ 'AcceptSelection("v")': ['«','<c-v>','<cr>'],
+\ 'AcceptSelection("e")': ['ᜦ','<2-LeftMouse>'],
 \ 'ToggleByFname()':      ['<c-f>'],
 \ 'ToggleRegex()':        ['<c-r>'],
 \ 'PrtCurLeft()':         ['<left>'],
@@ -1424,12 +1425,12 @@ let g:ctrlp_extensions = ['funky']
 " funky: 函数的模糊搜索
 " alt+p 进入当前文件的函数列表搜索
 nnoremap π :CtrlPFunky<Cr>
-inoremap π <c-o>:stopinsert<cr>:CtrlPFunky<Cr>
+inoremap π <c-o>:CtrlPFunky<Cr>
 " alt+shif+p 搜索当前光标下单词对应的函数
 nnoremap ∏ :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-inoremap ∏ <c-o>:stopinsert<cr>:execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+inoremap ∏ <c-o>:execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 let g:ctrlp_funky_syntax_highlight = 1
-
+let g:ctrlp_funky_matchtype = 'path'
 "=========================================================================
 " 括号补全
 " Plug 'Raimondi/delimitMate'
