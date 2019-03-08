@@ -181,9 +181,47 @@ autocmd BufReadPost *
             \   exe "normal g'\"" |
             \ endif
 "-----------------------------------------------------------------
+" help
+nnoremap <c-h> :h<space>
+vnoremap <c-h> :<c-u>h<space>
+inoremap <c-h> <c-o>:h<space>
+"-----------------------------------------------------------------
 " Buffers操作快捷方式!
-nnoremap <C-RETURN> :bnext<CR>
-nnoremap <C-S-RETURN> :bprevious<CR>
+" alt+n  （需事先手动保存）关闭本buffer，并开一个新buffer
+nnoremap  ᜩ  :bd\|enew<cr>
+vnoremap  ᜩ  <esc>:bd\|enew<cr>
+inoremap  ᜩ  <c-o>:bd\|enew<cr>
+" <esc>ctrl+n  （需要事前手动保存）关闭本buffer，开一个文件到新buffer
+nnoremap  <esc>ᜩ  :bd\|edit<space>
+vnoremap  <esc>ᜩ  <esc>:bd\|edit<space>
+inoremap  <esc>ᜩ  <c-o>:bd\|edit<space>
+" nnoremap ᜩ  :update<cr>:bd!|enew<cr>
+" vnoremap ᜩ  <esc>:update<cr>:bd!|enew<cr>
+" inoremap ᜩ  <c-o>:update<cr><c-o>:bd!|enew<cr>
+" alt+ctrl+n  开一空白个新buffer
+nnoremap ᜦ  :update<cr>:enew<cr>
+vnoremap ᜦ  <esc>:update<cr>:enew<cr>
+inoremap ᜦ  <c-o>:update<cr><c-o>:enew<cr>
+" <esc>alt+crtl+n  开一个文件为新buffer
+nnoremap <esc>ᜦ  :update<cr>:edit<space>
+vnoremap <esc>ᜦ  <esc>:update<cr>:edit<space>
+inoremap <esc>ᜦ  <c-o>:update<cr><c-o>:edit<space>
+" alt+ctrl+b
+nnoremap ᜧ  :update<cr>:buffers<cr>
+vnoremap ᜧ  <esc>:update<cr>:buffers<cr>
+inoremap ᜧ  <c-o>:update<cr><c-o>:buffers<cr>
+" alt+ctrl+[
+nnoremap ᜥ  :update<cr>:bnext<CR>
+vnoremap ᜥ  <esc>:update<cr>:bnext<CR>
+inoremap ᜥ  <c-o>:update<cr><c-o>:bnext<CR>
+" alt+ctrl+]
+nnoremap ᜣ :update<cr>:bprevious<CR>
+vnoremap ᜣ <esc>:update<cr>:bprevious<CR>
+inoremap ᜣ <c-o>:update<cr><c-o>:bprevious<CR>
+" alt+ctrl+w 关闭当前buffer
+nnoremap ᜨ :bd<CR>
+vnoremap ᜨ <esc>:bd<CR>
+inoremap ᜨ <c-o>:bd<CR>
 "-----------------------------------------------------------------
 " 窗口分割
 set splitright    " 默认开在右侧
@@ -315,7 +353,7 @@ let Tlist_Compact_Format = 1
 " u 打开上层目录                 m 显示文件系统菜单（添加、删除、移动操作）
 " r 递归刷新当前目录             R 递归刷新当前根目录
 "-----------------------------------------------------------------
-" alt+t NERDTree 切换
+" ctrl+T tree 切换
 noremap <c-t> :NERDTreeToggle<CR>
 inoremap <c-t> <c-o>:NERDTreeToggle<CR>
 let NERDTreeShowHidden=1             " 显示隐藏文件
@@ -1187,7 +1225,7 @@ vnoremap <S-Right> <esc>:tabnext<CR>v
 inoremap <S-Right> <c-o>:tabnext<CR>
 
 "=========================================================================
-" 保存
+" ctrl+s保存
 autocmd BufWritePre * :%s/\s\+$//e  " 保存时自动删除行尾空格
 
 function! UpDate()
@@ -1200,10 +1238,21 @@ endfunction
 nnoremap <silent> <C-S> :call UpDate()<cr>:echo "saved"<cr>
 vnoremap <silent> <C-S> <esc>:call UpDate()<cr>:echo "saved"<cr>
 inoremap <silent> <C-S> <c-o>:call UpDate()<cr><c-o>:echo "saved"<cr>
-" 存为
-nnoremap  ᜤ : update<space>
-vnoremap  ᜤ  <esc>:update<space>
-inoremap  ᜤ  <c-o>:update<space>
+" <esc>ctrl+s 存为
+nnoremap  <esc><c-s>  :update<space>
+vnoremap  <esc><c-s>  <esc>:update<space>
+inoremap  <esc><c-s>  <c-o>:update<space>
+" ctrl+r 文件改名
+function! s:rename_file(new_file_path)
+  execute 'saveas ' . a:new_file_path
+  call delete(expand('#:p'))
+  bd #
+endfunction
+
+command! -nargs=1 -complete=file Rename call <SID>rename_file(<f-args>)
+nnoremap <c-r>  :Rename<space>
+vnoremap <c-r>  <esc>:Rename<space>
+inoremap <c-r> <c-o>:Rename<space>
 
 " 退出
 " 若 本tab非tree窗口数目多于1，或为0（即只有tree窗口），则:q退出窗口

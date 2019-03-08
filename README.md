@@ -35,17 +35,17 @@
 
 
     修改PATH以便使用：
-
+    
     ```bash
     mv nvim.appimage 【某个你用的路径，如/local】/bin/nvim
     ```
-
+    
     在.zshenv之类的文件中加入
-
+    
     ```bash
     export PATH=【某个你用的路径，如/local】/bin:$PATH
     ```
-
+    
     而后在命令行中输入`nvim`即可使用此镜像
 
   - 系统无FUSE，将镜像解压，执行其中的二进制文件
@@ -222,6 +222,14 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
 * 冷门文字
 
   iterm中，选`profile`-`key`-`+`-输入组合快捷键-选`Send Key`-输入一个冷门文字（如 ‘\xE1\x9C\x80’=‘ᜀ’ ，\xE1\x9C\xA0='ᜠ'附近的字符 ），可参考[utf-8编码查询](http://bianma.911cha.com)。
+
+  ```
+  # 已使用了：
+  \xE1\x9C\x80-\xE1\x9C\x8F
+  \xE1\x9C\xA0-\xE1\x9C\xA9
+  # 其中未被用的
+  ᜤ
+  ```
 
   然后在~/.vimrc中写这样的映射
 
