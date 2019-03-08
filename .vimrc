@@ -14,7 +14,6 @@ set fileencoding=utf-8
 if filereadable(expand("~/.vimrc.bundles"))
     source ~/.vimrc.bundles
 endif
-
 "-----------------------------------------------------------------
 " 基础设置
 "-----------------------------------------------------------------
