@@ -116,7 +116,7 @@ cp vim_keymap.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
 
 ![修改mac的英文键盘方案](README.assets/img1.png)
 
-## 使用快捷键
+## 快捷键
 
 详见`~/.vimrc`中的注释
 
