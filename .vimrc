@@ -896,7 +896,7 @@ fun! UnsetUndoableSpaceChar()
     " 光标所在行非皆空格、TAB，则标记undo节点
     inoremap <plug>CR <cr>
 endf
-" call SetUndoableSpaceChar()
+call SetUndoableSpaceChar()
 
 " ------------------------------------------------------------------------
 " (几) alt+z : 前往前（几回）光标位置
