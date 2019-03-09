@@ -45,7 +45,7 @@ set backspace=indent,eol,start           " 不设定在插入状态无法用退�
 set cmdheight=1                          " 设定命令行的行数为 1
 set laststatus=2                         " 显示状态栏 (默认值为 1, 无法显示状态栏)
 set timeout                              " mapping的时长限制
-set timeoutlen=1500                      " 单位毫秒，默认值1000
+set timeoutlen=1000                      " 单位毫秒，默认值1000
 set ttimeout                             " 收到键码串的时长限制，例如escape sequance
 set ttimeoutlen=50                       " 察觉不到的小值，键码串必需50ms内收到，不然当断开处理
 set nobackup                             " no backup files
@@ -458,8 +458,17 @@ let g:NERDToggleCheckAllLines = 1  " 当所选非空行皆被注释，toggle才�
 "=========================================================================
 " 搜索 ctrl+f
 nnoremap <C-f> :MarkClear<cr>/
-vnoremap <C-f> "9y:MarkClear<cr>/<c-r>9
-inoremap <C-f> <esc>:MarkClear<cr>/
+vnoremap <C-f> "9y:MarkClear<cr><esc>/<c-r>9<cr>
+inoremap <C-f> <c-o>:MarkClear<cr><c-o>/
+" 下一个 ctrl+enter
+nnoremap ᜫ  n
+vnoremap ᜫ  <esc>n
+inoremap ᜫ  <c-o>n
+
+" 上一个 ctrl+shift+enter
+nnoremap ᜬ   N
+vnoremap ᜬ <esc>N
+inoremap ᜬ  <c-o>N
 " 关闭搜索的高亮 alt+f
 nnoremap <silent> ƒ :silent! nohls<cr>
 vnoremap <silent> ƒ <esc>:silent! nohls<cr>v
@@ -1417,7 +1426,7 @@ cnoremap ᜎ  <c-u><bs><esc>a
 " ------------------------------------------------------------------------
 nnoremap <c-p> :CtrlP<cr>
 vnoremap <c-p> <esc>:CtrlP<cr>
-inoremap <c-p> <c-o>:CtrlP<cr>
+inoremap <c-p> <esc>:CtrlP<cr>
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 " 设置过滤不进行查找的后缀名
@@ -1441,6 +1450,7 @@ let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_show_hidden=1
+let g:ctrlp_exit_to_insert=1   " 退出ctrlp则进入insert模式
 " 用户覆盖默认快捷键
 let g:ctrlp_prompt_mappings = {
 \ 'PrtHistory(1)':        ['<c-z>'],
@@ -1460,20 +1470,19 @@ let g:ctrlp_prompt_mappings = {
 \ 'PrtCurStart()':        ['<c-a>','<esc>[1~'],
 \ 'PrtCurEnd()':          ['<c-e>','<esc>[4~'],
 \ 'PrtClear()':           ['<c-u>','<c-u><c-k>'],
-\ 'PrtExit()':            ['<esc>', 'ᜎ ','<c-w>','∑'],
+\ 'PrtExit()':    ['<esc>', 'ᜎ ','<c-w>','∑'],
 \ 'DiffOpen("\<c-o>")':   ['<c-d>'],
 \ }
-
 " ------------------------------------------------------------------------
 "  ctrlp 的插件
 let g:ctrlp_extensions = ['funky']
 " funky: 函数的模糊搜索
 " alt+p 进入当前文件的函数列表搜索
 nnoremap π :CtrlPFunky<Cr>
-inoremap π <c-o>:CtrlPFunky<Cr>
+inoremap π <esc>:CtrlPFunky<Cr>
 " alt+shif+p 搜索当前光标下单词对应的函数
 nnoremap ∏ :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-inoremap ∏ <c-o>:execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+inoremap ∏ <esc>:execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_funky_matchtype = 'path'
 "=========================================================================
@@ -1615,3 +1624,4 @@ let Tlist_Compact_Format = 1
 " Best view with a 256 color terminal and Powerline fonts
 " Updated by Dorian Neto (https://github.com/dorianneto)"
 "=========================================================================
+"
