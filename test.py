@@ -4,7 +4,9 @@
 print('hello world!')
 
 #  sa#
-if f():
+def f():
     print( 'asdsa  sd f sd  ')
     return [1, 3,  4]
+
+
 

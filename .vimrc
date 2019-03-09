@@ -779,7 +779,18 @@ set shiftround       " 总是缩进到4格的倍数
 nnoremap <expr> <c-]> ((col('.')==col('$')-1) ?
             \ 'v>gv<esc>$':
             \ 'v>gv<esc>'.&shiftwidth.'l')
-vnoremap <c-]> >gv
+fun VMoveRight() range
+    let l1=line("'<")
+    let c1=col("'<")
+    let l2=line("'>")
+    let c2=col("'>")
+    normal! gv>gv
+    call setpos("'<", [0, l1, c1+&shiftwidth, 0])
+    call setpos("'>", [0, l2, c2+&shiftwidth, 0])
+    normal! gv
+endf
+vnoremap <c-]> :call VMoveRight()<cr>
+" vnoremap <c-]> >gv
 " inoremap <c-]> <esc>v>gvva
 inoremap <expr> <c-]> ((col('.')==col('$')) ?
             \ '<c-o>:stopinsert<cr>v>gv<esc>gi<c-o>$' :
@@ -794,24 +805,48 @@ nnoremap <expr> ᜁ   ((getline('.')=~'^\s\+')?
                 \ 'v<gv<esc>^':
                 \ ':call MoveLeft()<cr>'):
             \ '')
-vnoremap ᜁ   <gv
-" inoremap ᜁ   <esc>v<gvva
-function! MoveLeft()
-    let c=col('.')
-    let l=line('.')
-    normal! v<gvv
-    call cursor(l,c-&shiftwidth)
+" vnoremap ᜁ   <gv
+" 行首有空白字符
+function! EmptyStart_(l)
+    return getline(a:l)=~'^\s\+'
 endfunction
-inoremap <expr> ᜁ   ((getline('.')=~'^\s\+')?
-                \ (EmptyBefore()?
-                \ '<c-o>:stopinsert<cr>v<gv<esc>^i':
-                \ '<c-o>:call MoveLeft()<cr>'):
-            \ '')
-" inoremap <expr> ᜁ   ((getline('.')=~'^\s\+')?
-                " \ (EmptyBefore()?
-                " \ '<c-o>:stopinsert<cr>v<gv<esc>^i':
-                " \ '<c-o>:stopinsert<cr>v<gv<esc>gi<c-o>'.&shiftwidth.'h'):
-            " \ '')
+" l行,c字符之前（不含c）皆空白字符否
+function! EmptyBefore_(l,c)
+    return getline(a:l)[0:a:c-2]=~'^\s*$' &&  a:c != 1
+endfunction
+function! MoveLeft_(l,c)
+    if !EmptyStart_(a:l)
+        let c=a:c
+    elseif EmptyBefore_(a:l,a:c)
+        let c=matchend(getline("'<"),'^\s\+')+1-&shiftwidth
+    else
+        let c=a:c-&shiftwidth
+    endif
+    return [a:l,c]
+endfunction
+fun VMoveLeft() range
+    let l1=line("'<")
+    let c1=col("'<")
+    let l2=line("'>")
+    let c2=col("'>")
+    let [l1,c1]=MoveLeft_(l1,c1)
+    let [l2,c2]=MoveLeft_(l2,c2)
+    normal! gv<gv
+    call setpos("'<", [0, l1, c1, 0])
+    call setpos("'>", [0, l2, c2, 0])
+    normal! gv
+endf
+vnoremap  ᜁ  :call VMoveLeft()<cr>
+" inoremap ᜁ   <esc>v<gvva
+
+fun! IMoveLeft()
+    let [l0,c0]=getpos(".")[1:2]
+    let [l0,c0]=MoveLeft_(l0,c0)
+    normal! gv<gv
+    call setpos(".",[0,l0,c0,0])
+    normal! v
+endf
+inoremap  ᜁ  <c-o>:call IMoveLeft()<cr>
 " ------------------------------------------------------------------------
 " 缩进线
 let g:indentLine_char = '⎸'
