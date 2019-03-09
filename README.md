@@ -226,7 +226,7 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
   ```
   # 已使用了：
   \xE1\x9C\x80-\xE1\x9C\x8F
-  \xE1\x9C\xA0-\xE1\x9C\xA9
+  \xE1\x9C\xA0-\xE1\x9C\xAA
   # 其中未被用的
   ᜤ
   ```
@@ -420,10 +420,17 @@ Plug 'Valloric/YouCompleteMe',{'do':'python3 install.py --all'}
 安装以下插件
 
 - [ ] python代码缩进：`Plug 'vim-scripts/indentpython.vim'`
+
 - [ ] python代码自动转pep8格式：`Plug 'tell-k/vim-autopep8'`
+
 - [ ] 代码折叠：`Plug 'tmhedberg/SimpylFold'`。都提供对方法（methods）或类（classes）进行折叠的手段，只显示类或方法的定义部分，而不是全部的代码。
 
-- [ ] 标签窗口：`Plug 'vim-scripts/taglist.vim'`。显示定位程序中各种符号的插件（例如宏定义、变量名、结构名、函数名）
+- [ ] 标签窗口：ctags+`Plug 'vim-scripts/taglist.vim'` [majutsushi/tagbar](https://github.com/majutsushi/tagbar)。显示定位程序中各种符号的插件（例如宏定义、变量名、结构名、函数名）
+
+  [mac下配置vim](https://www.jianshu.com/p/923aec861af3)
+
+  [那些离了就活不了的 VIM 插件](https://www.zlovezl.cn/articles/vim-plugins-cannot-live-without/)
+
 - [ ] 重写'vim-multiple-cursor'的快捷键解析，使之能应对复杂的组合按键以及escape sequence
 
 # 参考

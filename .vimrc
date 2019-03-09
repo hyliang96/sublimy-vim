@@ -1,7 +1,4 @@
-" scriptencoding utf-8
-set encoding=utf-8
-set fileencoding=utf-8
-" set termencoding=utf-8
+
 
 "=========================================================================
 " DesCRiption: 适合自己使用的vimrc文件，for Linux/Mac, GUI/Console
@@ -18,82 +15,68 @@ endif
 "-----------------------------------------------------------------
 " 基础设置
 "-----------------------------------------------------------------
-"" 开语法高亮
-if has('syntax') && !exists('g:syntax_on')
-    syntax enable
-endif
-"   hdima/python-syntax
-let g:python_highlight_all = 1      " 开启python的所有语法高亮
-
-set showcmd                         " 右下角：n模式显示已输入命令；v模式显示选区范围
-set showmode                        " 左下角的状态栏显示INSERT之类的字样
-set nocompatible                    " 关闭 vi 兼容模式
-colorscheme my_molokai " Monokai         设定配色方案
-set number                          " 显示行号
-set cursorline                      " 突出显示当前行
-set ruler                           " 打开状态栏标尺
-set nobackup                        " 覆盖文件时不备份
-set autochdir                       " 自动切换当前目录为当前文件所在的目录
-set backupcopy=yes                  " 设置备份时的行为为覆盖
-set ignorecase smartcase            " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
-" set nowrapscan                      " 禁止在搜索到文件两端时重新搜索
-set incsearch                       " 输入搜索内容时就显示搜索结果
-set hlsearch                        " 搜索时高亮显示被找到的文本
-set noerrorbells                    " 关闭错误信息响铃
-set novisualbell                    " 关闭使用可视响铃代替呼叫
-set t_vb=                           " 置空错误铃声的终端代码
-set showmatch                       " 插入括号时，短暂地跳转到匹配的对应括号
-set matchtime=1                     " 短暂跳转到匹配括号的时间(单位秒)
-set magic                           " 设置魔术
-set hidden                          " 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
-set guioptions-=T                   " 隐藏工具栏
-set guioptions-=m                   " 隐藏菜单栏
-set smartindent                     " 开启新行时使用智能自动缩进
-set backspace=indent,eol,start      " 不设定在插入状态无法用退格键和 Delete 键删除回车符
-set cmdheight=1                     " 设定命令行的行数为 1
-set laststatus=2                    " 显示状态栏 (默认值为 1, 无法显示状态栏)
-" 按键时长限制
-
-set timeout           " mapping的时长限制
-set timeoutlen=1000   " 单位毫秒，默认值1000
-set ttimeout          " 收到键码串的时长限制，例如escape sequance
-set ttimeoutlen=50    " 察觉不到的小值，键码串必需50ms内收到，不然当断开处理
-" set ttimeoutlen=-1
-"
-" " 取消自动生成备份、缓冲文件
-" set nobackup       " no backup files
-" set noswapfile     " no swap files
-" set nowritebackup  " only in case you don't want a backup file while editing
-" set noundofile     " no undo files
-au BufRead,BufNewFile * start       " 开vim即insert模式
-au BufRead,BufNewFile * filetype detect
-let mapleader = ','                 " 修改leader
+if has('syntax') && !exists('g:syntax_on') | syntax enable | endif  " 开语法高亮
+let g:python_highlight_all = 1           " 开启python的所有语法高亮，插件'hdima/python-syntax'
+set showcmd                              " 右下角：n模式显示已输入命令；v模式显示选区范围
+set showmode                             " 左下角的状态栏显示INSERT之类的字样
+set nocompatible                         " 关闭 vi 兼容模式
+colorscheme my_molokai                   " 设定配色方案, 其他备选  Monokai
+set number                               " 显示行号
+set cursorline                           " 突出显示当前行
+set ruler                                " 打开状态栏标尺
+set nobackup                             " 覆盖文件时不备份
+set autochdir                            " 自动切换当前目录为当前文件所在的目录
+set backupcopy=yes                       " 设置备份时的行为为覆盖
+set ignorecase smartcase                 " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
+" set nowrapscan                           " 禁止在搜索到文件两端时重新搜索
+set incsearch                            " 输入搜索内容时就显示搜索结果
+set hlsearch                             " 搜索时高亮显示被找到的文本
+set noerrorbells                         " 关闭错误信息响铃
+set novisualbell                         " 关闭使用可视响铃代替呼叫
+set t_vb=                                " 置空错误铃声的终端代码
+set showmatch                            " 插入括号时，短暂地跳转到匹配的对应括号
+set matchtime=1                          " 短暂跳转到匹配括号的时间(单位秒)
+set magic                                " 设置魔术
+set hidden                               " 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
+set guioptions-=T                        " 隐藏工具栏
+set guioptions-=m                        " 隐藏菜单栏
+set smartindent                          " 开启新行时使用智能自动缩进
+set backspace=indent,eol,start           " 不设定在插入状态无法用退格键和 Delete 键删除回车符
+set cmdheight=1                          " 设定命令行的行数为 1
+set laststatus=2                         " 显示状态栏 (默认值为 1, 无法显示状态栏)
+set timeout                              " mapping的时长限制
+set timeoutlen=1500                      " 单位毫秒，默认值1000
+set ttimeout                             " 收到键码串的时长限制，例如escape sequance
+set ttimeoutlen=50                       " 察觉不到的小值，键码串必需50ms内收到，不然当断开处理
+set nobackup                             " no backup files
+set noswapfile                           " no swap(缓冲文件) files
+set nowritebackup                        " only in case you don't want a backup file while editing
+set noundofile                           " no undo files
+au BufRead,BufNewFile * start            " 开vm即insert模式
+au BufRead,BufNewFile * filetype detect  " 开vm即检查文件类型
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}3?\ %c:%l/%L%)\
-                                    " 设置在状态行显示的信息
-" 开/关行号
-noremap <C-n> :set invnumber<CR>
-" lazy ':'
-map \ :
-" 启用鼠标
-if has('mouse')
-    set mouse=a
-endif
+                                         " 设置在状态行显示的信息
+if has('mouse') | set mouse=a | endif    " 启用鼠标
+noremap <C-n> :set invnumber<CR>|        " 开关行号
 
-" 用iTerm2.app时，插入模式改为细光标，其他模式还是粗光标
 " if $TERM_PROGRAM =~ "iTerm"
-let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+let &t_SI = "\<Esc>]50;CursorShape=1\x7" " 插入模式改为细光标
+let &t_EI = "\<Esc>]50;CursorShape=0\x7" " 其他模式还是粗光标
 " endif
 
+map ᜪ <c-;>
+map! ᜪ <c-;>
+noremap <c-;> :|
+inoremap <c-;> <c-o>:|                   " ctrl+; 开始命令模式
+let mapleader = ','                      " 修改leader
 "-----------------------------------------------------------------
 " 折叠
 "-----------------------------------------------------------------
-set foldenable                      " 开始折叠
-set foldmethod=syntax               " 设置语法折叠
-set foldcolumn=0                    " 设置折叠区域的宽度
-setlocal foldlevel=1                " 设置折叠层数为
-" set foldclose=all                 " 设置为自动关闭折叠
-" nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+set foldenable                           " 开始折叠
+set foldmethod=syntax                    " 设置语法折叠
+set foldcolumn=0                         " 设置折叠区域的宽度
+setlocal foldlevel=1                     " 设置折叠层数为
+" set foldclose=all                      " 设置为自动关闭折叠
 " 用ctrl+=键来开关折叠
 nnoremap <silent> <c-=> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <silent> <expr> <c-=> foldclosed(line('.')) < 0 ? 'zc' : 'zo'
@@ -131,6 +114,8 @@ if has("multi_byte")
     set encoding=utf-8
     set termencoding=utf-8
     set formatoptions+=mM
+    set fileencoding=utf-8
+    scriptencoding utf-8
     set fencs=utf-8,gbk
     if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
         set ambiwidth=double
@@ -187,18 +172,38 @@ vnoremap <c-h> :<c-u>h<space>
 inoremap <c-h> <c-o>:h<space>
 "-----------------------------------------------------------------
 "一些不错的映射转换语法（如果在一个文件中混合了不同语言时有用）
-nnoremap <leader>1 :set filetype=python<CR>
-nnoremap <leader>2 :set filetype=cpp<CR>
-nnoremap <leader>3 :set filetype=matlab<CR>
-nnoremap <leader>4 :set filetype=bash<CR>
-" xhtml, css, javascript, php
+" 关闭<c-b>按键，把它作为多种快捷键的leader
+" nnoremap <expr> <esc> ''
+" vnoremap <expr> <esc> ''
+" inoremap <expr> <esc> ''
+
+nnoremap <esc>.p :set filetype=python<CR>
+vnoremap <esc>.p <esc>:set filetype=python<CR>gv
+inoremap <esc>.p <c-o>:set filetype=python<cr>
+
+nnoremap <esc>.c :set filetype=cpp<cr>
+vnoremap <esc>.c <esc>:set filetype=cpp<cr>gv
+inoremap <esc>.c <c-o>:set filetype=cpp<cr>
+
+nnoremap <esc>.m :set filetype=matlab<cr>
+vnoremap <esc>.m <esc>:set filetype=matlab<cr>gv
+inoremap <esc>.m <c-o>:set filetype=matlab<cr>
+
+nnoremap <esc>.s :set filetype=bash<cr>
+vnoremap <esc>.s <esc>:set filetype=bash<cr>gv
+inoremap <esc>.s <c-o>:set filetype=bash<cr>
+
+nnoremap <esc>.0  :filetype detect<cr>
+vnoremap <esc>.0  <esc>:filetype detect<cr>gv
+inoremap <esc>.0  <c-o>:filetype detect<cr>
+" i更多语言高亮：xhtml, css, javascript, php
 "-----------------------------------------------------------------
 " 语言专属设置
 " 让 Tohtml 产生有 CSS 语法的 html
 " syntax/2html.vim，可以用:runtime! syntax/2html.vim
 let html_use_css=1
+" 运行python代码
 autocmd FileType python map <F12> :!python %<CR>
-"-----------------------------------------------------------------
 " 打开javascript折叠
 let b:javascript_fold=1
 " 打开javascript对dom、html和css的支持
@@ -208,24 +213,7 @@ autocmd filetype javascript set dictionary=$VIMFILES/dict/javascript.dict
 autocmd filetype css set dictionary=$VIMFILES/dict/css.dict
 autocmd filetype php set dictionary=$VIMFILES/dict/php.dict
 
-"-----------------------------------------------------------------
-if MySys() == "windows"                " 设定windows系统中ctags程序的位置
-    let Tlist_Ctags_Cmd = '"'.$VIMRUNTIME.'/ctags.exe"'
-elseif MySys() == "linux"              " 设定windows系统中ctags程序的位置
-    let Tlist_Ctags_Cmd = '/usr/bin/ctags'
-endif
-nnoremap <silent><F4> :TlistToggle<CR>
-let Tlist_Show_One_File = 1            " 不同时显示多个文件的tag，只显示当前文件的
-let Tlist_Exit_OnlyWindow = 1          " 如果taglist窗口是最后一个窗口，则退出vim
-let Tlist_Use_Right_Window = 1         " 在右侧窗口中显示taglist窗口
-let Tlist_File_Fold_Auto_Close=1       " 自动折叠当前非编辑文件的方法列表
-let Tlist_Auto_Open = 0
-let Tlist_Auto_Update = 1
-let Tlist_Hightlight_Tag_On_BufEnter = 1
-let Tlist_Enable_Fold_Column = 0
-let Tlist_Process_File_Always = 1
-let Tlist_Display_Prototype = 0
-let Tlist_Compact_Format = 1
+
 
 "=========================================================================
 " 标签页、窗口、buffer操作
@@ -396,8 +384,7 @@ endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd VimEnter * wincmd p " 开vim或tab，默认进入右侧编辑区
 " autocmd VimEnter,BufWinEnter * NERDTreeFind | wincmd p "进入vim时打开NERDTreeFind窗口
-" 解决在mac下，tree栏目中每行首显示^G, 这是因为其vim 不支持conceal，更新vim使
-" 之支持即可
+" 解决在mac下，tree栏目中每行首显示^G, 这是因为其vim 不支持conceal，更新vim使之支持即可
 " let g:NERDTreeNodeDelimiter = "\u00a0"
 
 "=========================================================================
@@ -457,7 +444,7 @@ function! IComment()
         call feedkeys("gi")
     endif
 endfunction
-inoremap <silent> <C-/> <Esc>:call IComment()<cr>
+inoremap <silent> <C-/> <esc>:call IComment()<cr>
 " imap <C-/> <ESC><Plug>NERDCommenterToggle$a
 
 " -----------------------------------------------------------------
@@ -466,22 +453,8 @@ let NERDCompactSexyComs=1          " 多行注释时样子更好看
 " let g:NERDCommentEmptyLines = 1    " 允许注释空白行
 let g:NERDToggleCheckAllLines = 1  " 当所选非空行皆被注释，toggle才解注，否则toggle加注
 
-"-----------------------------------------------------------------
-" plugin - DoxygenToolkit.vim  由注释生成文档，并且能够快速生成函数标准注释
-let g:DoxygenToolkit_authorName="Asins - asinsimple AT gmail DOT com"
-let g:DoxygenToolkit_briefTag_funcName="yes"
-noremap <leader>da :DoxAuthor<CR>
-noremap <leader>df :Dox<CR>
-noremap <leader>db :DoxBlock<CR>
-noremap <leader>dc a /*  */<LEFT><LEFT><LEFT>
-
-"-----------------------------------------------------------------
-" plugin – checksyntax.vim    JavaScript常见语法错误检查
-" 默认快捷方式为 F5
-let g:checksyntax_auto = 0 " 不自动检查
-
 "=========================================================================
-" 索索
+" 搜索
 "=========================================================================
 " 搜索 ctrl+f
 nnoremap <C-f> :MarkClear<cr>/
@@ -667,13 +640,13 @@ inoremap <C-v> <C-o>:set paste<CR><C-R>"<C-o>:set nopaste<CR>
 ""<C-o>:stopinsert<cr>:call ICtrlV()<cr>
 " ------------------------------------------------------------------------
 " 原文粘贴
-" 在任何模式下，F2 开/关 原文粘贴（paste模式）
+" 在任何模式下，alt+v 开/关 原文粘贴（paste模式）
 "   * cmd+V插入文字前，需开paste模式
 "   * cmd+V插入文字后，需关paste模式
 " paste模式下，进入插入模式，cmd+V可原文粘贴
 "   * 不出现自动缩进
 "   * 若受行为注释，所粘诸行不自动加注
-set pastetoggle=<F2>
+set pastetoggle=√     " alt+v  开关原文黏贴模式
 " ------------------------------------------------------------------------
 " 从服务器vim剪/拷到笔记本剪切板
 "   * 鼠标双击选词    鼠标双击选中一词，再按d(相当于cmd+x)/y(相当于cmd+c)
@@ -803,16 +776,42 @@ set listchars=tab:>-,space:·,trail:·,extends:→,precedes:←
 " 缩进平移
 set shiftround       " 总是缩进到4格的倍数
 " ctrl+] 右一个缩进
-nnoremap <c-]> v>gvv
+nnoremap <expr> <c-]> ((col('.')==col('$')-1) ?
+            \ 'v>gv<esc>$':
+            \ 'v>gv<esc>'.&shiftwidth.'l')
 vnoremap <c-]> >gv
-inoremap <c-]> <esc>v>gvva
+" inoremap <c-]> <esc>v>gvva
+inoremap <expr> <c-]> ((col('.')==col('$')) ?
+            \ '<c-o>:stopinsert<cr>v>gv<esc>gi<c-o>$' :
+            \ '<c-o>:stopinsert<cr>v>gv<esc>gi<c-o>'.&shiftwidth.'l')
 " ctrl+[ 左一个缩进
 " iterm2 把ctrl+[ 映射为 ᜁ
 " 此处把 ᜁ 映射为如下
 " 这是因为vim 中，<c-[> 和 <esc> 同键值
-nnoremap ᜁ   v<gvv
+" nnoremap ᜁ   v<gvv
+nnoremap <expr> ᜁ   ((getline('.')=~'^\s\+')?
+                \ (EmptyBefore()?
+                \ 'v<gv<esc>^':
+                \ ':call MoveLeft()<cr>'):
+            \ '')
 vnoremap ᜁ   <gv
-inoremap ᜁ   <esc>v<gvva
+" inoremap ᜁ   <esc>v<gvva
+function! MoveLeft()
+    let c=col('.')
+    let l=line('.')
+    normal! v<gvv
+    call cursor(l,c-&shiftwidth)
+endfunction
+inoremap <expr> ᜁ   ((getline('.')=~'^\s\+')?
+                \ (EmptyBefore()?
+                \ '<c-o>:stopinsert<cr>v<gv<esc>^i':
+                \ '<c-o>:call MoveLeft()<cr>'):
+            \ '')
+" inoremap <expr> ᜁ   ((getline('.')=~'^\s\+')?
+                " \ (EmptyBefore()?
+                " \ '<c-o>:stopinsert<cr>v<gv<esc>^i':
+                " \ '<c-o>:stopinsert<cr>v<gv<esc>gi<c-o>'.&shiftwidth.'h'):
+            " \ '')
 " ------------------------------------------------------------------------
 " 缩进线
 let g:indentLine_char = '⎸'
@@ -880,14 +879,25 @@ function! GetCharBeforeCursor()
     return char
 endfunction
 " 最终的空格、tab、换行
-" 光标所在行中，光标前一字符，不是空格和tab，则标记undo节点
-inoremap <expr> <Space> (GetCharBeforeCursor()!~"^[ \t]$"?
-    \ '<C-g>u<space>':'<space>')
-inoremap <expr> <plug>TAB (GetCharBeforeCursor() !~ "^[ \t]$"?
-    \ '<C-g>u<tab>' : '<tab>')
-" 光标所在行非皆空格、TAB，则标记undo节点
-inoremap <expr> <plug>CR (getline('.') !~ "^[ \t]*$"?
-    \ '<c-g>u<cr>' : '<cr>')
+fun! SetUndoableSpaceChar()
+        " 光标所在行中，光标前一字符，不是空格和tab，则标记undo节点
+    inoremap <expr> <Space> (GetCharBeforeCursor()!~"^[ \t]$"?
+        \ '<C-g>u<space>':'<space>')
+    inoremap <expr> <plug>TAB (GetCharBeforeCursor() !~ "^[ \t]$"?
+        \ '<C-g>u<tab>' : '<tab>')
+    " 光标所在行非皆空格、TAB，则标记undo节点
+    inoremap <expr> <plug>CR (getline('.') !~ "^[ \t]*$"?
+        \ '<c-g>u<cr>' : '<cr>')
+endf
+fun! UnsetUndoableSpaceChar()
+        " 光标所在行中，光标前一字符，不是空格和tab，则标记undo节点
+    inoremap <Space> <space>
+    inoremap <plug>TAB <tab>
+    " 光标所在行非皆空格、TAB，则标记undo节点
+    inoremap <plug>CR <cr>
+endf
+" call SetUndoableSpaceChar()
+
 " ------------------------------------------------------------------------
 " (几) alt+z : 前往前（几回）光标位置
 nnoremap Ω  <C-o>
@@ -1316,8 +1326,8 @@ nnoremap ᜏ v
 " 进出插入模式：ctrl+i
 inoremap ᜎ <C-o>:stopinsert<cr>
 nnoremap ᜎ  i
-" 退出命令模式
-cnoremap ᜎ  <esc>
+" 退出命令模式，进入insert模式
+cnoremap ᜎ  <c-u><bs><esc>a
 
 " noremap <esc> <NOP>
 " inoremap <esc> <NOP>
@@ -1372,7 +1382,7 @@ cnoremap ᜎ  <esc>
 " ------------------------------------------------------------------------
 nnoremap <c-p> :CtrlP<cr>
 vnoremap <c-p> <esc>:CtrlP<cr>
-inoremap <c-p> <c-o>:stopinsert<cr>:CtrlP<cr>
+inoremap <c-p> <c-o>:CtrlP<cr>
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 " 设置过滤不进行查找的后缀名
@@ -1513,6 +1523,42 @@ endif
 
 
 
+
+"=========================================================================
+" 待装插件
+"-------------------------------------------------------------------------
+" plugin - DoxygenToolkit.vim  由注释生成文档，并且能够快速生成函数标准注释
+let g:DoxygenToolkit_authorName="Asins - asinsimple AT gmail DOT com"
+let g:DoxygenToolkit_briefTag_funcName="yes"
+noremap <leader>da :DoxAuthor<CR>
+noremap <leader>df :Dox<CR>
+noremap <leader>db :DoxBlock<CR>
+noremap <leader>dc a /*  */<LEFT><LEFT><LEFT>
+"-------------------------------------------------------------------------
+" plugin – checksyntax.vim    JavaScript常见语法错误检查
+" 默认快捷方式为 F5
+let g:checksyntax_auto = 0 " 不自动检查
+"-------------------------------------------------------------------------
+" Plug ’vim-scripts/taglist.vim‘
+" taglist插件，详见https://www.jianshu.com/p/923aec861af3
+if MySys() == "windows"                " 设定windows系统中ctags程序的位置
+    let Tlist_Ctags_Cmd = '"'.$VIMRUNTIME.'/ctags.exe"'
+elseif MySys() == "linux"              " 设定windows系统中ctags程序的位置
+    let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+endif
+nnoremap <silent><F4> :TlistToggle<CR>
+let Tlist_Show_One_File = 1            " 不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Exit_OnlyWindow = 1          " 如果taglist窗口是最后一个窗口，则退出vim
+let Tlist_Use_Right_Window = 1         " 在右侧窗口中显示taglist窗口
+let Tlist_File_Fold_Auto_Close=1       " 自动折叠当前非编辑文件的方法列表
+let Tlist_Auto_Open = 0
+let Tlist_Auto_Update = 1
+let Tlist_Hightlight_Tag_On_BufEnter = 1
+let Tlist_Enable_Fold_Column = 0
+let Tlist_Process_File_Always = 1
+let Tlist_Display_Prototype = 0
+let Tlist_Compact_Format = 1
+
 " =========================================================================
 " 上文参考资料
 " =========================================================================
@@ -1528,5 +1574,3 @@ endif
 " Best view with a 256 color terminal and Powerline fonts
 " Updated by Dorian Neto (https://github.com/dorianneto)"
 "=========================================================================
-"
-
