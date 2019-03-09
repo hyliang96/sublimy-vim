@@ -949,7 +949,7 @@ vnoremap Ω <esc><C-o>v
 inoremap Ω <esc><C-o>a
 " (几) alt+shift+z : 前往后（几回）光标位置
 nnoremap ¸ <C-i>
-vnoremap ¸ <esc><C-o>v
+vnoremap ¸ <esc><C-i>v
 inoremap ¸ <esc><C-i>a
 
 "=========================================================================
