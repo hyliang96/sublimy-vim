@@ -1490,17 +1490,21 @@ map Q gq
 "=========================================================================
 " 编译报错
 " alt+e+alt+e: 显示报错列表
-noremap ᜢᜢ <ESC>:cl<CR>
-inoremap ᜢᜢ <ESC>:cl<CR>
+nnoremap ᜢᜢ :cl<CR>
+vnoremap ᜢᜢ <ESC>:cl<CR>
+inoremap ᜢᜢ <c-o>:cl<CR>
 " alt+e+alt+]: 下一条报错
-noremap ᜢᜡ <ESC>:cn<CR>
-inoremap ᜢᜡ <ESC>:cn<CR>
+nnoremap ᜢᜡ  :cn<CR>
+vnoremap ᜢᜡ <ESC>:cn<CR>
+inoremap ᜢᜡ <C-o>:cn<CR>
 " alt+e+[: 前一条报错
-noremap ᜢᜠ <ESC>:cp<CR>
-inoremap ᜢᜠ <ESC>:cp<CR>
+nnoremap ᜢᜠ  :cp<CR>
+vnoremap ᜢᜠ <ESC>:cp<CR>
+inoremap ᜢᜠ <c-o>:cp<CR>
 " alt+e+alt+<cr>:  显示详细错误信息
-noremap ᜢᜣ <ESC>:cc<CR>
-inoremap ᜢᜣ <ESC>:cc<CR>
+nnoremap ᜢᜣ :cc<CR>
+vnoremap ᜢᜣ <ESC>:cc<CR>
+inoremap ᜢᜣ <c-o>:cc<CR>
 
 "=========================================================================
 " 关闭 vimscript的换行号自动缩进三个tab的特性
@@ -1558,6 +1562,8 @@ let Tlist_Enable_Fold_Column = 0
 let Tlist_Process_File_Always = 1
 let Tlist_Display_Prototype = 0
 let Tlist_Compact_Format = 1
+
+
 
 " =========================================================================
 " 上文参考资料
