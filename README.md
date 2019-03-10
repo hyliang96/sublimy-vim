@@ -8,11 +8,6 @@
 
 ![img0](README.assets/img0.png)
 
-## 演示
-
-### 复制剪切粘贴
-
-[![ctrlp](README.assets/img0.png)](https://youtu.be/kxL9OHTDofo)
 
 ## 安装方法
 
