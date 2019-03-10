@@ -14,6 +14,10 @@
 
 [![ctrlp](README.assets/img0.png)](https://github.com/hyliang96/sublimy-vim-demo/blob/master/ctrlp.mp4)
 
+
+
+<iframe height=498 width=510 src="https://github.com/hyliang96/sublimy-vim-demo/blob/master/ctrlp2.mp4" frameborder=0 allowfullscreen></iframe>
+
 ## 安装方法
 
 本配置支持neovim，vim>=8.0，vim-gnome，macvim，
