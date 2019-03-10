@@ -72,7 +72,7 @@
 
 分屏、标签页、缓冲区、开/关/存/重命名文件
 
-目录树(NERDTree)、文件/函数搜索跳转(CtrlP, CtrlP-Funky)、自动补全/代码段(YouCompleteMe, UltisSnippets)
+目录树(NERDTree)、文件/函数搜索跳转(CtrlP, CtrlP-Funky)、自动补全/代码段(YouCompleteMe, UltisSnippets)、多光标(Vim-Multiple-Cursor)
 
 gif演示还在制作中，文字说明详见`~/.vimrc`中的注释 和 [视频演示](https://github.com/hyliang96/sublimy-vim-demo)
 
