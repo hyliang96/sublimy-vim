@@ -12,7 +12,7 @@
 
 ### 复制剪切粘贴
 
-![复制剪切粘贴](http://t.cn/EM52Kjs?m=4348335223420103&u=5911750124)
+[![ctrlp](README.assets/img0.png)](https://github.com/hyliang96/sublimy-vim-demo/blob/master/ctrlp.mp4)
 
 ## 安装方法
 
