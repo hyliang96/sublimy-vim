@@ -74,9 +74,9 @@
 
 目录树(NERDTree)、文件/函数搜索跳转(CtrlP, CtrlP-Funky)、自动补全/代码段(YouCompleteMe, UltisSnippets)
 
-（demo制作中）
+gif演示还在制作中，文字说明详见`~/.vimrc`中的注释 和 [视频演示](https://github.com/hyliang96/sublimy-vim-demo)
 
-### 安装方法
+## 安装方法
 
 本配置支持neovim，vim>=8.0，vim-gnome，macvim，
 
@@ -183,10 +183,6 @@ cp vim_keymap.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
 这一设置并不需要。这里只是想说明，我的alt+字母是采用的哪套方案，以便你自行添加其他快捷键。所有.vimrc里用到的alt+字母都已经在上述profile里设置过了。
 
 ![修改mac的英文键盘方案](README.assets/img1.png)
-
-## 快捷键
-
-详见`~/.vimrc`中的注释
 
 ## 内核选用neovim
 
