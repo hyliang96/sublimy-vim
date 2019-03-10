@@ -10,6 +10,8 @@
 
 ## 演示
 
+`⌃C`复制、`⌃V`粘贴、`⌃X`剪切、`⌃/`注释
+
 ![复制、粘贴、剪切、注释](https://github.com/hyliang96/sublimy-vim-demo/blob/master/注释复制剪切粘贴.gif)
 
 ## 安装方法
