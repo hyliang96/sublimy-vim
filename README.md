@@ -32,7 +32,13 @@
 
 #### 光标纵向跳转（翻页）
 
-![左右移动删除](https://github.com/hyliang96/sublimy-vim-demo/blob/master/上下移动.gif)
+`⇧↑/↓`上/下翻半页，`Fn↑/↓`上/下翻一页
+
+`⇧⌃↑/↓` 到文档首/末字符
+
+`⌥↑/↓/M`页面不动、光标跳到页顶/底/中，`⇧⌥↑/↓/M`滚动页面、让光标位于页顶/底/中
+
+![光标纵向跳转](https://github.com/hyliang96/sublimy-vim-demo/blob/master/上下移动.gif)
 
 ## 安装方法
 
