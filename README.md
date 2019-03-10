@@ -8,6 +8,12 @@
 
 ![img0](README.assets/img0.png)
 
+## 演示
+
+### 复制剪切粘贴
+
+![复制剪切粘贴](http://t.cn/EM52Kjs?m=4348335223420103&u=5911750124)
+
 ## 安装方法
 
 本配置支持neovim，vim>=8.0，vim-gnome，macvim，
