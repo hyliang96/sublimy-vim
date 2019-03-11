@@ -292,7 +292,6 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
   \xE1\x9C\x80-\xE1\x9C\x8F
   \xE1\x9C\xA0-\xE1\x9C\xAC
   # 其中未被用的
-  ᜤ
   ```
 
   然后在~/.vimrc中写这样的映射

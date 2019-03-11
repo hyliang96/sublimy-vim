@@ -540,6 +540,68 @@ let g:multi_cursor_skip_key            = '<C-q>'
 let g:multi_cursor_quit_key            = '≈' " alt+x
 
 "=========================================================================
+" plug 'mg979/vim-visual-multi'
+" 高性能多光标、多选区、正则表达式搜索、按住Shift+方向键选择
+let g:VM_maps = {}
+" ------------------------------------------------------------------------
+"  进入多光标模式：
+" v模式下，alt+a：将选中区域加入多光标选区
+let g:VM_maps["Visual Add"]               = 'å'
+" v模式下， <esc>alt+a 清空多光标选区，再将当前区域加入多光标选区
+let g:VM_maps["Visual All"]               = '<esc>å'
+" i/n 模式下，alt+a，光标所在区加一个多光标
+let g:VM_maps["Add Cursor At Pos"]        = 'å'
+" shift+ctrl+l: 选区变为多行光标，光标都在选区开头字符所在列
+" FIXME 选区中有宽字符时会出错
+let g:VM_maps["Visual Cursors"]           = 'ᜭ'
+" i/n模式下
+"   ctrl+d，选中光标所在词，继续按ctrl+d以增选整词
+""       <c-q>：跳过一个
+"       <c-x>: 清除这个光标
+"   shift+ctrl+d 选中所有与光标所在词相同的整词
+" v模式下
+"   ctrl+d，增选与选区相同的文字，不必是整词
+"   shift+ctrl+d，选中所有与选区相同的文字，不必是整词
+" 上述按键按完后，都进入到多光标的n模式
+" ------------------------------------------------------------------------
+" 在多光标n模式下：
+    "   S-Left/Right：左右移动选区边界
+    "   o 切换在选区左还是右边界
+    " p: 用剪切板替换各选区
+    " c：清空当前各选区，加入插入模式
+    " a: 选区后进入插入模式
+    " i: 选区前进入插入模式
+        " <esc>/<c-i>: 退出多光标i模式
+        " <esc>/<c-'>: 退出多光标v模式
+    " <esc>: 在多光标n模式，按它退出多光标模式
+" ------------------------------------------------------------------------
+
+let g:VM_maps['Find Under']         = '<plug>(FindUnder)'   " 增选下一个与本词相同的词
+let g:VM_maps['Find Subword Under'] = '<plug>(FindUnder)'   " 增选下一个与选区相同的文字
+let g:VM_maps["Select All"]               = '<plug>(SelectAll)'  " 全选
+let g:VM_maps["Remove Region"]=         '<c-x>'     " 清除这个光标
+let g:VM_maps['q Skip']               = '<c-q>'     " 跳过一个
+" shift+ctrl+d： ᜤ
+nmap <c-d> <plug>(FindUnder)
+nmap  ᜤ   <plug>(SelectAll)
+vmap <c-d> :<c-u>stopinsert<cr>gv<plug>(FindUnder)
+vmap  ᜤ  :<c-u>stopinsert<cr>gv<plug>(FindUnder)<plug>(SelectAll)
+imap <c-d> <esc><plug>(FindUnder)
+imap ᜤ  <esc><plug>(SelectAll)
+
+
+" let g:VM_maps['c']               = ['c', '<BS>']     " 跳过一个
+" let maps["Select Operator"][0]          = 'gs'
+" let maps["Start Regex Search"][0]       = 'g/'
+" let maps["Visual Regex"][0]             = 'g/'
+" let maps[":call vm#commands#regex_done()
+" Add Cursor Down"][0]          = '<C-Down>'
+" let maps["Add Cursor Up"][0]            = '<C-Up>'
+" let g:VM_maps["Visual Find"]              = '<c-f>'
+" let g:VM_maps["Select l"]           = '<S-Right>'       " start selecting left
+" let g:VM_maps["Select h"]           = '<S-Left>'        " start selecting right
+
+"=========================================================================
 " 复制黏贴
 " ------------------------------------------------------------------------
 " 剪切
@@ -809,11 +871,19 @@ inoremap <expr> <c-]> ((col('.')==col('$')) ?
 " 此处把 ᜁ 映射为如下
 " 这是因为vim 中，<c-[> 和 <esc> 同键值
 " nnoremap ᜁ   v<gvv
-nnoremap <expr> ᜁ   ((getline('.')=~'^\s\+')?
-                \ (EmptyBefore()?
-                \ 'v<gv<esc>^':
-                \ ':call MoveLeft()<cr>'):
-            \ '')
+fun NMoveLeft()
+    let l0=line(".")
+    let c0=col(".")
+    let [l0,c0]=MoveLeft_(l0,c0)
+    normal! gv<gvv
+    call setpos(".",[0,l0,c0,0])
+endf
+nnoremap  ᜁ  :call NMoveLeft()<cr>
+" nnoremap <expr> ᜁ   ((getline('.')=~'^\s\+')?
+                " \ (EmptyBefore()?
+                " \ 'v<gv<esc>^':
+                " \ ':call MoveLeft()<cr>'):
+            " \ '')
 " vnoremap ᜁ   <gv
 " 行首有空白字符
 function! EmptyStart_(l)
