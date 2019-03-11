@@ -590,10 +590,21 @@ imap <c-d> <esc><plug>(FindUnder)
 imap ᜤ  <esc><plug>(SelectAll)
 
 
+" let g:VM_maps["Start Regex Search"]       = '<plug>(RegExSearch)'
+" let g:VM_maps["Visual Regex"]             = '<plug>(RegExSearch)'
+" " 正则表达式搜索 shift+ctrl+f
+" " fun RegExSearch()
+    " " call feedkeys('r/')
+" " endf
+" vnoremap <plug>(") "
+" nmap ᜮ  :MarkClear<cr><plug>(RegExSearch)
+" " vmap ᜮ  <plug>(RegExSearch)
+" vmap ᜮ  <plug>(")9y:MarkClear<cr><esc><plug>(RegExSearch)<c-r>9<cr>
+" imap ᜮ  <c-o>:MarkClear<cr><c-o><plug>(RegExSearch)
+
+
 " let g:VM_maps['c']               = ['c', '<BS>']     " 跳过一个
 " let maps["Select Operator"][0]          = 'gs'
-" let maps["Start Regex Search"][0]       = 'g/'
-" let maps["Visual Regex"][0]             = 'g/'
 " let maps[":call vm#commands#regex_done()
 " Add Cursor Down"][0]          = '<C-Down>'
 " let maps["Add Cursor Up"][0]            = '<C-Up>'
