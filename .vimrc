@@ -302,10 +302,10 @@ inoremap <esc>» <c-o>:sp<space>
 "-----------------------------------------------------------------
 " alt+Fn+上下左右：去往上下左右一个窗口
 " alt+ctrl+left
-map   ᜉ  <plug>LWin
-map!   ᜉ <plug>LWin
-noremap  <plug>LWin  <c-w>h
-inoremap <plug>LWin  <c-o><c-w>h
+map   ᜉ  <plug>(LWin)
+map!   ᜉ <plug>(LWin)
+noremap  <plug>(LWin)  <c-w>h
+inoremap <plug>(LWin)  <c-o><c-w>h
     " " 普通终端
 " noremap  <esc>[1;9H <c-w>h
 " inoremap <esc>[1;9H <c-o><c-w>h
@@ -313,10 +313,10 @@ inoremap <plug>LWin  <c-o><c-w>h
 " noremap  <esc><esc>[1~ <c-w>h
 " inoremap <esc><esc>[1~ <c-o><c-w>h
 " alt+ctrl+right
-map  ᜊ   <plug>RWin
-map! ᜊ   <plug>RWin
-noremap  <plug>RWin   <c-w>l
-inoremap <plug>RWin   <c-o><c-w>l
+map  ᜊ   <plug>(RWin)
+map! ᜊ   <plug>(RWin)
+noremap  <plug>(RWin)   <c-w>l
+inoremap <plug>(RWin)   <c-o><c-w>l
 " 普通终端
 " noremap  <esc>[1;9F <c-w>l
 " inoremap <esc>[1;9F <c-o><c-w>l
@@ -324,17 +324,17 @@ inoremap <plug>RWin   <c-o><c-w>l
 " noremap  <esc><esc>[4~ <c-w>l
 " inoremap <esc><esc>[4~ <c-o><c-w>l
 " alt+ctrl+up
-map  ᜋ   <plug>UWin
-map!  ᜋ  <plug>UWin
-noremap  <plug>UWin  <c-w>k
-inoremap <plug>UWin  <c-o><c-w>k
+map  ᜋ   <plug>(UWin)
+map!  ᜋ  <plug>(UWin)
+noremap  <plug>(UWin)  <c-w>k
+inoremap <plug>(UWin)  <c-o><c-w>k
 " noremap  <esc><esc>[5~ <c-w>k
 " inoremap <esc><esc>[5~ <c-o><c-w>k
 " alt+shift+doen
-map   ᜌ    <plug>DWin
-map!   ᜌ   <plug>DWin
-noremap  <plug>DWin   <c-w>j
-inoremap <plug>DWin   <c-o><c-w>j
+map   ᜌ    <plug>(DWin)
+map!   ᜌ   <plug>(DWin)
+noremap    <plug>(DWin)   <c-w>j
+inoremap   <plug>(DWin)   <c-o><c-w>j
 " noremap  <esc><esc>[6~ <c-w>j
 " inoremap <esc><esc>[6~ <c-o><c-w>j
 "-----------------------------------------------------------------
@@ -478,9 +478,9 @@ cnoremap <silent> ƒ <c-u><bs>:silent! nohls<cr>gi
 " ------------------------------------------------------------------------
 " 同词高亮
 " 双击选中一个词，高亮出全部相同的整词
-noremap <plug>2LEFTMOUSE <2-leftMouse>
-map <silent> <2-leftmouse> 1<Leader>m<plug>2LEFTMOUSE
-imap <silent> <2-leftmouse> <c-o>1<Leader>m<c-o><plug>2LEFTMOUSE
+noremap <plug>(2LEFTMOUSE) <2-leftMouse>
+map <silent> <2-leftmouse> 1<Leader>m<plug>(2LEFTMOUSE)
+imap <silent> <2-leftmouse> <c-o>1<Leader>m<c-o><plug>(2LEFTMOUSE)
 " alt+l 选中一个词/放弃选中一个词
 nnoremap ¬ viw
 vnoremap ¬ <esc>viw
@@ -892,16 +892,16 @@ inoremap <c-z> <esc>g-a
 " imap <expr> <c-z>  pumvisible()?  '<esc>g-a' : '<c-o>u'
 " 重做
 " ctrl+shift+z  --- iterm2 --> <esc>[[z -- vim ---> 重做
-map  ᜃ     <plug>CtrlShiftZ
-map! ᜃ     <plug>CtrlShiftZ
+map  ᜃ     <plug>(CtrlShiftZ)
+map! ᜃ     <plug>(CtrlShiftZ)
 " nnoremap <plug>CtrlShiftZ <c-r>
-" vnoremap <expr> <plug>CtrlShiftZ SelectOneChar()? '<esc>:redo<cr>' : '<esc>:redo<cr>gv'
-" inoremap <expr> <plug>CtrlShiftZ  pumvisible()?  '<esc>:redo<cr>' : '<c-o><c-r>'
-nnoremap <plug>CtrlShiftZ g+
-vnoremap <plug>CtrlShiftZ <esc>g+a
-snoremap <plug>CtrlShiftZ <c-g><esc>g+a
-" vnoremap <expr> <plug>CtrlShiftZ SelectOneChar()? '<esc>g+' : '<esc>g+gv'
-inoremap <plug>CtrlShiftZ <esc>g+a
+" vnoremap <expr> <plug>(CtrlShiftZ) SelectOneChar()? '<esc>:redo<cr>' : '<esc>:redo<cr>gv'
+" inoremap <expr> <plug>(CtrlShiftZ)  pumvisible()?  '<esc>:redo<cr>' : '<c-o><c-r>'
+nnoremap <plug>(CtrlShiftZ) g+
+vnoremap <plug>(CtrlShiftZ) <esc>g+a
+snoremap <plug>(CtrlShiftZ) <c-g><esc>g+a
+" vnoremap <expr> <plug>(CtrlShiftZ) SelectOneChar()? '<esc>g+' : '<esc>g+gv'
+inoremap <plug>(CtrlShiftZ) <esc>g+a
 " ------------------------------------------------------------------------
 " 使得undo粒度变细：凡在非空白字符后输入空格或tab、在非空行输入换行，
 " 皆用<C-G>u添加一个undo的节点
@@ -927,18 +927,18 @@ fun! SetUndoableSpaceChar()
         " 光标所在行中，光标前一字符，不是空格和tab，则标记undo节点
     inoremap <expr> <Space> (GetCharBeforeCursor()!~"^[ \t]$"?
         \ '<C-g>u<space>':'<space>')
-    inoremap <expr> <plug>TAB (GetCharBeforeCursor() !~ "^[ \t]$"?
+    inoremap <expr> <plug>(TAB) (GetCharBeforeCursor() !~ "^[ \t]$"?
         \ '<C-g>u<tab>' : '<tab>')
     " 光标所在行非皆空格、TAB，则标记undo节点
-    inoremap <expr> <plug>CR (getline('.') !~ "^[ \t]*$"?
+    inoremap <expr> <plug>(CR) (getline('.') !~ "^[ \t]*$"?
         \ '<c-g>u<cr>' : '<cr>')
 endf
 fun! UnsetUndoableSpaceChar()
         " 光标所在行中，光标前一字符，不是空格和tab，则标记undo节点
     inoremap <Space> <space>
-    inoremap <plug>TAB <tab>
+    inoremap <plug>(TAB) <tab>
     " 光标所在行非皆空格、TAB，则标记undo节点
-    inoremap <plug>CR <cr>
+    inoremap <plug>(CR) <cr>
 endf
 call SetUndoableSpaceChar()
 
@@ -1041,12 +1041,12 @@ function! Expandable()
     return (! pumvisible()) && GetCharBeforeCursor() !~ "^[ \t]\\?$"
 endfunction
 
-imap <expr> <TAB> Expandable()?'<c-n>':'<plug>TAB'
-imap <expr> <CR> pumvisible()?"\<C-Y>":"\<plug>CR"
-imap <expr> <PageDown> pumvisible() ? "\<PageDown>":"\<plug>PageDown"
-imap <expr> <PageUp> pumvisible() ? "\<PageUp>":"\<plug>PageUp"
-" imap <expr> <PageDown> pumvisible()?"\<PageDown>\<C-N>\<C-P>":"\<plug>PageDown"
-" imap <expr> <PageUp> pumvisible()?"\<PageUp>\<C-P>\<C-N>":"\<plug>PageUp"
+imap <expr> <TAB> Expandable()?'<c-n>':'<plug>(TAB)'
+imap <expr> <CR> pumvisible()?"\<C-Y>":"\<plug>(CR)"
+imap <expr> <PageDown> pumvisible() ? "\<PageDown>":"\<plug>(PageDown)"
+imap <expr> <PageUp> pumvisible() ? "\<PageUp>":"\<plug>(PageUp)"
+" imap <expr> <PageDown> pumvisible()?"\<PageDown>\<C-N>\<C-P>":"\<plug>(PageDown)"
+" imap <expr> <PageUp> pumvisible()?"\<PageUp>\<C-P>\<C-N>":"\<plug>(PageUp)"
 " 停止补全 并删除待补全的词汇
 " inoremap <expr> <C-U> pumvisible()?"\<C-E>":"\<C-U>"
 
@@ -1079,10 +1079,10 @@ inoremap <S-Down> <c-o><C-d><c-o>$
 " 长距离上下移动
 " 上翻一页
 " noremap <PageUp> z^0
-" inoremap <plug>PageUp <c-o>z^<c-o>0
+" inoremap <plug>(PageUp) <c-o>z^<c-o>0
 noremap <expr> <PageUp> (line('w$')-line('w0')+1<=2*line('.')?
     \ '<C-U>0<c-u>0':'<c-u>0')
-inoremap <expr> <plug>PageUp (line('w$')-line('w0')+1<=2*line('.')?
+inoremap <expr> <plug>(PageUp) (line('w$')-line('w0')+1<=2*line('.')?
     \ '<c-o><C-U><c-o>0<c-o><c-u><c-o>0':'<c-o><c-u><c-o>0')
 
 " function! PageUp()
@@ -1100,11 +1100,11 @@ inoremap <expr> <plug>PageUp (line('w$')-line('w0')+1<=2*line('.')?
 " 下翻一页
 noremap <expr> <PageDown> (line('w$')-line('w0')+1<=2*(line('$')-line('.')+1)?
     \ '<C-d>$<c-d>$':'<c-d>$')
-inoremap <expr> <plug>PageDown ((line('w$')-line('w0')+1<=2*(line('$')-line('.')+1))?
+inoremap <expr> <plug>(PageDown) ((line('w$')-line('w0')+1<=2*(line('$')-line('.')+1))?
     \ '<c-o><C-d><c-o>$<c-o><c-d><c-o>$':'<c-o><c-d><c-o>$')
 
 " noremap <PageDown> z+$
-" inoremap <plug>PageDown <C-o>z+<C-o>$
+" inoremap <plug>(PageDown) <C-o>z+<C-o>$
 " noremap <PageDown> <c-f>$
 " inoremap <PageDown> <c-o><C-f><C-o>$
 " 去文件头
@@ -1240,58 +1240,58 @@ inoremap <C-a> <c-o>gg<c-o>v<S-g>$
 " 删除
 " alt+del 删除前一个词
 if has('nvim')
-    nmap <M-BS> <plug>DeleteWordBefore
-    imap <M-BS> <plug>DeleteWordBefore
-    cmap <M-BS> <plug>DeleteWordBefore
+    nmap <M-BS> <plug>(DeleteWordBefore)
+    imap <M-BS> <plug>(DeleteWordBefore)
+    cmap <M-BS> <plug>(DeleteWordBefore)
 else
-    nmap <esc><bs> <plug>DeleteWordBefore
-    imap <esc><bs> <plug>DeleteWordBefore
-    cmap <esc><bs> <plug>DeleteWordBefore
+    nmap <esc><bs> <plug>(DeleteWordBefore)
+    imap <esc><bs> <plug>(DeleteWordBefore)
+    cmap <esc><bs> <plug>(DeleteWordBefore)
 endif
-nnoremap <expr> <plug>DeleteWordBefore (col('.')==1)? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>vb"_d'
-" nnoremap <expr> <plug>DeleteWordBefore (col('.')==1)? 'i<bs><c-o>:stopinsert<cr>' : ' <left>vb"_d'
-inoremap <expr> <plug>DeleteWordBefore (col('.')==1)? '<c-g>u<bs>' : '<c-g>u<left><c-o>vb"_d'
-" inoremap <expr> <plug>DeleteWordBefore (col('.')==1)? '<bs>' : '<left><c-o>vb"_d'
-cnoremap <plug>DeleteWordBefore <c-w>
+nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>vb"_d'
+" nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? 'i<bs><c-o>:stopinsert<cr>' : ' <left>vb"_d'
+inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<c-g>u<bs>' : '<c-g>u<left><c-o>vb"_d'
+" inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<bs>' : '<left><c-o>vb"_d'
+cnoremap <plug>(DeleteWordBefore) <c-w>
 " alt+fn+del 删除后一个词
 if has('nvim')
-    nmap <M-d> <plug>DeleteWordAfter
-    imap <M-d> <plug>DeleteWordAfter
-    cmap <M-d> <plug>DeleteWordAfter
+    nmap <M-d> <plug>(DeleteWordAfter)
+    imap <M-d> <plug>(DeleteWordAfter)
+    cmap <M-d> <plug>(DeleteWordAfter)
 else
-    nmap <esc>d <plug>DeleteWordAfter
-    imap <esc>d <plug>DeleteWordAfter
-    cmap <esc>d <plug>DeleteWordAfter
+    nmap <esc>d <plug>(DeleteWordAfter)
+    imap <esc>d <plug>(DeleteWordAfter)
+    cmap <esc>d <plug>(DeleteWordAfter)
 endif
-nnoremap <expr> <plug>DeleteWordAfter ((col('.')==col('$')-1)? 'a<c-g>u<del><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>ve"_d')
-inoremap <expr> <plug>DeleteWordAfter (col('.')==col('$'))? '<del>' : '<c-g>u<C-o>ve"_d'
-cnoremap <expr> <plug>DeleteWordAfter ''
-" cnoremap <plug>DeleteWordAfter <S-right><c-w>  " FIXME 这样写不行，还不知道怎么写
+nnoremap <expr> <plug>(DeleteWordAfter) ((col('.')==col('$')-1)? 'a<c-g>u<del><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>ve"_d')
+inoremap <expr> <plug>(DeleteWordAfter) (col('.')==col('$'))? '<del>' : '<c-g>u<C-o>ve"_d'
+cnoremap <expr> <plug>(DeleteWordAfter) ''
+" cnoremap <plug>(DeleteWordAfter) <S-right><c-w>  " FIXME 这样写不行，还不知道怎么写
 " alt+shift+del 删除光标前的整行
-nmap <c-u> <plug>DeleteLineBefore
-imap <c-u> <plug>DeleteLineBefore
-cmap <c-u> <plug>DeleteLineBefore
-nnoremap <expr> <plug>DeleteLineBefore (col('.')==1) ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc><left>v0"_d'
-inoremap <expr> <plug>DeleteLineBefore (col('.')==1) ? '<c-g>u<bs>' :'<c-g>u<left><c-o>v0"_d'
-cnoremap <plug>DeleteLineBefore <c-u>
+nmap <c-u> <plug>(DeleteLineBefore)
+imap <c-u> <plug>(DeleteLineBefore)
+cmap <c-u> <plug>(DeleteLineBefore)
+nnoremap <expr> <plug>(DeleteLineBefore) (col('.')==1) ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc><left>v0"_d'
+inoremap <expr> <plug>(DeleteLineBefore) (col('.')==1) ? '<c-g>u<bs>' :'<c-g>u<left><c-o>v0"_d'
+cnoremap <plug>(DeleteLineBefore) <c-u>
 " alt+shift+fn+del 删除光标 后的整行
-nmap <c-k> <plug>DeleteLineAfter
-imap <c-k> <plug>DeleteLineAfter
-cmap <c-k> <plug>DeleteLineAfter
-nnoremap <expr> <plug>DeleteLineAfter (col('.')>=col('$')-1)? 'a<c-g>u<del><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>v$h"_d'
+nmap <c-k> <plug>(DeleteLineAfter)
+imap <c-k> <plug>(DeleteLineAfter)
+cmap <c-k> <plug>(DeleteLineAfter)
+nnoremap <expr> <plug>(DeleteLineAfter) (col('.')>=col('$')-1)? 'a<c-g>u<del><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>v$h"_d'
 " FIXME 在multiple-cursor下，撤销会出bug
-inoremap <expr> <plug>DeleteLineAfter (col('.')==col('$'))? '<c-g>u<del>' : '<c-g>u<c-o>v$<left>"_d'
+inoremap <expr> <plug>(DeleteLineAfter) (col('.')==col('$'))? '<c-g>u<del>' : '<c-g>u<c-o>v$<left>"_d'
 " FIXME 在multiple-cursor下，撤销会出bug
-cnoremap <expr> <plug>DeleteLineAfter ''
+cnoremap <expr> <plug>(DeleteLineAfter) ''
 " cnorempa: FIXME 还不知道怎么写
 " shift+del 删除
 " 或 ctrl+l整行选中，backspace删除
-nmap <c-e><c-u> <plug>DeleteLine
-imap <c-e><c-u> <plug>DeleteLine
+nmap  <c-e><c-u>   <plug>(DeleteLine)
+imap   <c-e><c-u>  <plug>(DeleteLine)
 " cmap <c-e><c-u> <plug>DeleteLine
-nnoremap <plug>DeleteLine a<c-g>u<esc>0v$"_d
-inoremap <plug>DeleteLine <c-g>u<c-o>0<C-o>v$"_d
-" cnoremap <plug>DeleteLine <c-e><c-u>
+nnoremap <plug>(DeleteLine) a<c-g>u<esc>0v$"_d
+inoremap <plug>(DeleteLine) <c-g>u<c-o>0<C-o>v$"_d
+" cnoremap <plug>(DeleteLine) <c-e><c-u>
 
 "=========================================================================
 " ctrl+s保存

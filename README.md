@@ -133,18 +133,18 @@ gif演示还在制作中，文字说明详见`~/.vimrc`中的注释 和 [视频�
 
     而后在命令行中输入`nvim`即可使用此镜像
 
-* 设置nvim配置文件的链接
+### 设置nvim配置文件的链接
 
-  ```bash
-  ln -s 《本repo》/{.vim,.vimrc,.vimrc.bundles} ~
-  ln -s ~/.vim ~/.config/nvim
-  ```
+```bash
+ln -s 《本repo》/{.vim,.vimrc,.vimrc.bundles} ~
+ln -s ~/.vim ~/.config/nvim
+```
 
-  注：
+注：
 
-  * `~/.config/nvim/init.vim` 相当于 `~/.vimrc` ，可直接用之
-  * `~/.config/nvim` 相当于` ~/.vim`，可直接用之
-  * `本repo/.vim/init.vim -> ../.vimrc`  的链接已经设过了，您无需`ln -s ~/.vimrc ~/.config/nvim/init.vim`
+* `~/.config/nvim/init.vim` 相当于 `~/.vimrc` ，可直接用之
+* `~/.config/nvim` 相当于` ~/.vim`，可直接用之
+* `本repo/.vim/init.vim -> ../.vimrc`  的链接已经设过了，您无需`ln -s ~/.vimrc ~/.config/nvim/init.vim`
 
 ### 安装neovim的python依赖
 
