@@ -407,44 +407,99 @@ autocmd VimEnter * wincmd p " 开vim或tab，默认进入右侧编辑区
 map ᜀ  <c-/>
 map! ᜀ  <c-/>
 
+" function! NComment()
+    " let firstLine = line("'<")
+    " let lastLine = line("'>")
+    " let theLine = getline('.')
+    " if ( firstLine ==# lastLine ) && ( theLine =~ "^[ \t]*$" )
+        " call feedkeys("\<Plug>NERDCommenterToggle$a")
+    " else
+        " call feedkeys("\<PLUG>NERDCommenterToggle")
+    " endif
+" endfunction
 function! NComment()
-    let firstLine = line("'<")
-    let lastLine = line("'>")
+    let l0=line('.')
+    let c0=col('.')
     let theLine = getline('.')
-    if ( firstLine ==# lastLine ) && ( theLine =~ "^[ \t]*$" )
-        call feedkeys("\<Plug>NERDCommenterToggle$a")
+    let len0=len(theLine)
+    if ( theLine =~ "^[ \t]*$" )
+        exe "silent normal! :call NERDComment('n', 'Toggle')\<CR>"
+        startinsert
+        normal! $
     else
-        call feedkeys("\<PLUG>NERDCommenterToggle")
+        exe "silent normal! :call NERDComment('n', 'Toggle')\<CR>"
+        let len1=len(getline('.'))
+        call cursor(l0,len1-len0+c0)
     endif
 endfunction
+
 nnoremap <silent> <C-/> :call NComment()<cr>
 " nmap <C-/> <Plug>NERDCommenterToggle
 
+" function! VComment() range
+    " let firstLine = line("'<")
+    " let lastLine = line("'>")
+    " let theLine = getline('.')
+    " if ( firstLine ==# lastLine ) && ( theLine =~ "^[ \t]*$" )
+        " call feedkeys("\<Esc>\<Plug>NERDCommenterToggle$a")
+    " else
+        " call feedkeys("gv\<PLUG>NERDCommenterTogglegv")
+    " endif
+" endfunction
 function! VComment() range
     let firstLine = line("'<")
     let lastLine = line("'>")
     let theLine = getline('.')
+    let [l1,c1]=getpos("'<")[1:2]
+    let [l2,c2]=getpos("'>")[1:2]
+
+    let len1=len(getline("'<"))
+    let len2=len(getline("'>"))
     if ( firstLine ==# lastLine ) && ( theLine =~ "^[ \t]*$" )
-        call feedkeys("\<Esc>\<Plug>NERDCommenterToggle$a")
+        exe "silent normal! :call NERDComment('v', 'Toggle')\<CR>"
+        startinsert
+        normal! $
     else
-        call feedkeys("gv\<PLUG>NERDCommenterTogglegv")
+        exe "silent normal! :call NERDComment('v', 'Toggle')\<CR>"
+        let len1_=len(getline("'<"))
+        let len2_=len(getline("'>"))
+        call setpos("'<",[0,l1,len1_-len1+c1,0])
+        call setpos("'>",[0,l2,len2_-len2+c2,0])
+        normal! gv
     endif
 endfunction
 vnoremap <silent> <C-/> :call VComment()<cr>
 " vmap <C-/> <Plug>NERDCommenterToggle<CR>gv
 
+" function! IComment()
+    " let firstLine = line("'<")
+    " let lastLine = line("'>")
+    " let theLine = getline('.')
+    " if ( firstLine ==# lastLine ) && ( theLine =~ "^[ \t]*$" )
+        " call feedkeys("\<Plug>NERDCommenterToggle$a")
+    " else
+        " call feedkeys("\<PLUG>NERDCommenterToggle")
+        " call feedkeys("gi")
+    " endif
+" endfunction
+" function! NERDComment(mode, type) range
 function! IComment()
-    let firstLine = line("'<")
-    let lastLine = line("'>")
+    let l0=line('.')
+    let c0=col('.')
     let theLine = getline('.')
-    if ( firstLine ==# lastLine ) && ( theLine =~ "^[ \t]*$" )
-        call feedkeys("\<Plug>NERDCommenterToggle$a")
+    let len0=len(theLine)
+    if ( theLine =~ "^[ \t]*$" )
+        exe "silent normal! :call NERDComment('n', 'Toggle')\<CR>"
+        startinsert
+        normal! $
     else
-        call feedkeys("\<PLUG>NERDCommenterToggle")
-        call feedkeys("gi")
+        exe "silent normal! :call NERDComment('n', 'Toggle')\<CR>"
+        let len1=len(getline('.'))
+        startinsert
+        call cursor(l0,len1-len0+c0)
     endif
 endfunction
-inoremap <silent> <C-/> <esc>:call IComment()<cr>
+inoremap <silent> <C-/> <c-o>:call IComment()<cr>
 " imap <C-/> <ESC><Plug>NERDCommenterToggle$a
 
 " -----------------------------------------------------------------
