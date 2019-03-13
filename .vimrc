@@ -663,7 +663,7 @@ imap ᜤ  <esc><plug>(SelectAll)
 " let maps[":call vm#commands#regex_done()
 " Add Cursor Down"][0]          = '<C-Down>'
 " let maps["Add Cursor Up"][0]            = '<C-Up>'
-" let g:VM_maps["Visual Find"]              = '<c-f>'
+let g:VM_maps["Visual Find"]              = ''
 " let g:VM_maps["Select l"]           = '<S-Right>'       " start selecting left
 " let g:VM_maps["Select h"]           = '<S-Left>'        " start selecting right
 
