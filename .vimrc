@@ -1298,7 +1298,16 @@ noremap <End> $
 inoremap <End> <c-o>$
 " noremap <expr> <End> EmptyBeforeAndThis()? '^' : '$'
 " inoremap <expr> <End> EmptyBeforeAndThis()? '<c-o>^' : '<c-o>$'
-"
+
+map <Esc>OH <Home>
+map! <Esc>OH <Home>
+map <Esc>OF <End>
+map! <Esc>OF <End>
+
+map <Esc>[H <Home>
+map! <Esc>[H <Home>
+map <Esc>[F <End>
+map! <Esc>[F <End>
 " 在tmux下，home的key code是^[[1~，END的 key code 是^[[4~
 map <ESC>[1~    <Home>
 map! <ESC>[1~    <Home>
@@ -1308,6 +1317,7 @@ map  <kHome> <Home>
 map! <kHome> <Home>
 map  <kEnd> <End>
 map! <kEnd> <End>
+
 " 在item2下，设置
 " shift+alt+left -> <esc>[1~
 " shift+alt+right -> <esc>[4~
