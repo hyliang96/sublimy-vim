@@ -541,9 +541,9 @@ nnoremap ¬ viw
 vnoremap ¬ <esc>viw
 inoremap ¬ <c-o>viw
 " 单击退出同词高亮
-nnoremap <leftMouse> :MarkClear<cr><leftMouse>
-vnoremap <leftMouse> <esc>:MarkClear<cr><leftMouse>
-inoremap <leftMouse> <c-o>:MarkClear<cr><leftMouse>
+nnoremap <silent> <leftMouse> :silent MarkClear<cr><leftMouse>
+vnoremap <silent> <leftMouse> <esc>:silent MarkClear<cr><leftMouse>
+inoremap <silent> <leftMouse> <c-o>:silent MarkClear<cr><leftMouse>
 " 同词高亮使用 :hi Search 返回的颜色
 function! s:GetColor(color_type)
     exec 'redir => result | silent! hi '.a:color_type.' | redir END'
