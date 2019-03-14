@@ -166,6 +166,10 @@
       "Action" : 10,
       "Text" : "[1;2D"
     },
+    "0xd-0x40000" : {
+      "Action" : 12,
+      "Text" : "ᜫ"
+    },
     "0xf700-0x280000" : {
       "Text" : "ᜅ",
       "Action" : 12
@@ -259,8 +263,8 @@
       "Text" : "[15;2~"
     },
     "0xf703-0x2a0000" : {
-      "Text" : "[4~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[F"
     },
     "0x69-0x40000" : {
       "Text" : "ᜎ",
@@ -299,8 +303,8 @@
       "Action" : 12
     },
     "0x7f-0x20000" : {
-      "Text" : "0x05 0x15",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x05 0x15"
     },
     "0xf702-0x260000" : {
       "Action" : 10,
@@ -323,8 +327,8 @@
       "Action" : 10
     },
     "0xf702-0x2a0000" : {
-      "Text" : "[1~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[H"
     },
     "0xf700-0x220000" : {
       "Action" : 10,
@@ -394,13 +398,13 @@
       "Action" : 10,
       "Text" : "[19;2~"
     },
-    "0xf70e-0x20000" : {
-      "Action" : 10,
-      "Text" : "[23;2~"
+    "0xd-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜬ"
     },
     "0xf72b-0x0" : {
       "Action" : 10,
-      "Text" : "[4~"
+      "Text" : "[F"
     },
     "0x31-0x200000" : {
       "Action" : 12,
@@ -434,6 +438,10 @@
       "Action" : 11,
       "Text" : "0x1f"
     },
+    "0xf70e-0x20000" : {
+      "Action" : 10,
+      "Text" : "[23;2~"
+    },
     "0x70-0x80000" : {
       "Text" : "π",
       "Action" : 12
@@ -446,9 +454,17 @@
       "Action" : 11,
       "Text" : "0x1b 0x7f"
     },
+    "0x61-0x80000" : {
+      "Action" : 12,
+      "Text" : "å"
+    },
     "0x7f-0xa0000" : {
       "Text" : "0x15",
       "Action" : 11
+    },
+    "0x4c-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜭ"
     },
     "0x35-0x200000" : {
       "Action" : 12,
@@ -480,7 +496,11 @@
     },
     "0xf729-0x0" : {
       "Action" : 10,
-      "Text" : "[1~"
+      "Text" : "[H"
+    },
+    "0x44-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜤ"
     },
     "0x5d-0xc0000" : {
       "Action" : 12,
@@ -557,6 +577,10 @@
     "0x6d-0x80000" : {
       "Text" : "µ",
       "Action" : 12
+    },
+    "0x46-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜮ"
     },
     "0x39-0x200000" : {
       "Action" : 12,
@@ -643,11 +667,11 @@
     "Green Component" : 0.8666666666666667
   },
   "Ansi 8 Color" : {
-    "Red Component" : 0.40781760215759277,
+    "Red Component" : 0.23137254901960785,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.4078223705291748,
+    "Blue Component" : 0.23137254901960785,
     "Alpha Component" : 1,
-    "Green Component" : 0.40782788395881653
+    "Green Component" : 0.23137254901960785
   },
   "Badge Color" : {
     "Red Component" : 1,
@@ -657,8 +681,8 @@
     "Green Component" : 0.1491314172744751
   },
   "Semantic History" : {
-    "action" : "best editor",
     "text" : "",
+    "action" : "best editor",
     "editor" : "com.sublimetext.3"
   },
   "Ambiguous Double Width" : false,
@@ -696,11 +720,11 @@
     "Green Component" : 1
   },
   "Ansi 6 Color" : {
-    "Red Component" : 0,
+    "Red Component" : 0.38133472763001919,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.7803921568627451,
+    "Blue Component" : 0.67205810546875,
     "Alpha Component" : 1,
-    "Green Component" : 0.77254901960784317
+    "Green Component" : 0.66863783291510037
   },
   "Transparency" : 0,
   "HotKey Activated By Modifier" : false,
@@ -717,7 +741,7 @@
   "Bound Hosts" : [
 
   ],
-  "Non Ascii Font" : "NotoMonoForPowerline 12",
+  "Non Ascii Font" : "MesloLGSDZForPowerline-Regular 12",
   "Ansi 13 Color" : {
     "Red Component" : 1,
     "Color Space" : "sRGB",
@@ -890,6 +914,10 @@
   "Custom Command" : "No",
   "HotKey Key Code" : 49,
   "Keyboard Map" : {
+    "0x6e-0xc0000" : {
+      "Action" : 12,
+      "Text" : "ᜦ"
+    },
     "0x7c-0xa0000" : {
       "Text" : "»",
       "Action" : 12
@@ -901,6 +929,10 @@
     "0xf702-0x220000" : {
       "Action" : 10,
       "Text" : "[1;2D"
+    },
+    "0xd-0x40000" : {
+      "Action" : 12,
+      "Text" : "ᜫ"
     },
     "0xf700-0x280000" : {
       "Text" : "ᜅ",
@@ -922,9 +954,21 @@
       "Action" : 11,
       "Text" : "0x7f"
     },
+    "0x76-0x80000" : {
+      "Action" : 12,
+      "Text" : "√"
+    },
     "0xf700-0x2c0000" : {
       "Text" : "ᜋ",
       "Action" : 12
+    },
+    "0x77-0xc0000" : {
+      "Action" : 12,
+      "Text" : "ᜨ"
+    },
+    "0x3b-0x40000" : {
+      "Action" : 12,
+      "Text" : "ᜪ"
     },
     "0x33-0x200000" : {
       "Action" : 12,
@@ -983,8 +1027,8 @@
       "Text" : "[15;2~"
     },
     "0xf703-0x2a0000" : {
-      "Text" : "[4~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[F"
     },
     "0x69-0x40000" : {
       "Text" : "ᜎ",
@@ -1023,8 +1067,8 @@
       "Action" : 12
     },
     "0x7f-0x20000" : {
-      "Text" : "0x05 0x15",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x05 0x15"
     },
     "0xf702-0x260000" : {
       "Action" : 10,
@@ -1047,8 +1091,8 @@
       "Action" : 10
     },
     "0xf702-0x2a0000" : {
-      "Text" : "[1~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[H"
     },
     "0xf700-0x220000" : {
       "Action" : 10,
@@ -1073,6 +1117,10 @@
     "0xf729-0x40000" : {
       "Action" : 10,
       "Text" : "[1;5H"
+    },
+    "0x6e-0x80000" : {
+      "Action" : 12,
+      "Text" : "ᜩ"
     },
     "0x50-0xa0000" : {
       "Text" : "∏",
@@ -1114,13 +1162,13 @@
       "Action" : 10,
       "Text" : "[19;2~"
     },
-    "0xf70e-0x20000" : {
-      "Action" : 10,
-      "Text" : "[23;2~"
+    "0xd-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜬ"
     },
     "0xf72b-0x0" : {
       "Action" : 10,
-      "Text" : "[4~"
+      "Text" : "[F"
     },
     "0x31-0x200000" : {
       "Action" : 12,
@@ -1138,9 +1186,9 @@
       "Text" : "¸",
       "Action" : 12
     },
-    "0x70-0x80000" : {
-      "Text" : "π",
-      "Action" : 12
+    "0x5b-0xc0000" : {
+      "Action" : 12,
+      "Text" : "ᜣ"
     },
     "0x38-0x200000" : {
       "Action" : 12,
@@ -1154,6 +1202,14 @@
       "Action" : 11,
       "Text" : "0x1f"
     },
+    "0xf70e-0x20000" : {
+      "Action" : 10,
+      "Text" : "[23;2~"
+    },
+    "0x70-0x80000" : {
+      "Text" : "π",
+      "Action" : 12
+    },
     "0xf701-0x260000" : {
       "Action" : 10,
       "Text" : "[1;6B"
@@ -1162,13 +1218,25 @@
       "Action" : 11,
       "Text" : "0x1b 0x7f"
     },
+    "0x61-0x80000" : {
+      "Action" : 12,
+      "Text" : "å"
+    },
     "0x7f-0xa0000" : {
       "Text" : "0x15",
       "Action" : 11
     },
+    "0x4c-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜭ"
+    },
     "0x35-0x200000" : {
       "Action" : 12,
       "Text" : "5"
+    },
+    "0x62-0xc0000" : {
+      "Action" : 12,
+      "Text" : "ᜧ"
     },
     "0xf701-0x2a0000" : {
       "Text" : "ᜈ",
@@ -1192,7 +1260,15 @@
     },
     "0xf729-0x0" : {
       "Action" : 10,
-      "Text" : "[1~"
+      "Text" : "[H"
+    },
+    "0x44-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜤ"
+    },
+    "0x5d-0xc0000" : {
+      "Action" : 12,
+      "Text" : "ᜥ"
     },
     "0x2f-0x40000" : {
       "Text" : "ᜀ",
@@ -1266,6 +1342,10 @@
       "Text" : "µ",
       "Action" : 12
     },
+    "0x46-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜮ"
+    },
     "0x39-0x200000" : {
       "Action" : 12,
       "Text" : "9"
@@ -1310,7 +1390,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.44313725490196076
   },
-  "Window Type" : 2,
+  "Window Type" : 1,
   "Use Bright Bold" : true,
   "Has Hotkey" : true,
   "HotKey Modifier Activation" : 0,
@@ -1339,7 +1419,7 @@
   },
   "Name" : "Hotkey Window",
   "Blinking Cursor" : false,
-  "Guid" : "AAA97D69-A13D-4FB8-8347-901065561D6F",
+  "Guid" : "2FE23C7D-644C-4C8B-AA9E-514E97EE024A",
   "Idle Code" : 0,
   "Ansi 10 Color" : {
     "Red Component" : 0.45490196078431372,
@@ -1349,11 +1429,11 @@
     "Green Component" : 0.8666666666666667
   },
   "Ansi 8 Color" : {
-    "Red Component" : 0.40781760215759277,
+    "Red Component" : 0.23137254901960785,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.4078223705291748,
+    "Blue Component" : 0.23137254901960785,
     "Alpha Component" : 1,
-    "Green Component" : 0.40782788395881653
+    "Green Component" : 0.23137254901960785
   },
   "Badge Color" : {
     "Red Component" : 1,
@@ -1363,8 +1443,8 @@
     "Green Component" : 0.1491314172744751
   },
   "Semantic History" : {
-    "action" : "best editor",
     "text" : "",
+    "action" : "best editor",
     "editor" : "com.sublimetext.3"
   },
   "Ambiguous Double Width" : false,
@@ -1378,6 +1458,7 @@
   },
   "Blur" : true,
   "Normal Font" : "MesloLGSDZForPowerline-Regular 12",
+  "Application Keypad Allowed" : false,
   "Vertical Spacing" : 1,
   "Ansi 7 Color" : {
     "Red Component" : 0.7810397744178772,
@@ -1403,13 +1484,13 @@
     "Green Component" : 1
   },
   "Ansi 6 Color" : {
-    "Red Component" : 0,
+    "Red Component" : 0.38133472763001919,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.7803921568627451,
+    "Blue Component" : 0.67205810546875,
     "Alpha Component" : 1,
-    "Green Component" : 0.77254901960784317
+    "Green Component" : 0.66863783291510037
   },
-  "Transparency" : 0.29999999999999999,
+  "Transparency" : 0.088640149111675129,
   "HotKey Activated By Modifier" : false,
   "Background Color" : {
     "Red Component" : 0.15294117647058825,
@@ -1424,7 +1505,7 @@
   "Bound Hosts" : [
 
   ],
-  "Non Ascii Font" : "NotoMonoForPowerline 12",
+  "Non Ascii Font" : "MesloLGSDZForPowerline-Regular 12",
   "Ansi 13 Color" : {
     "Red Component" : 1,
     "Color Space" : "sRGB",
