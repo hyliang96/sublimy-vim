@@ -78,13 +78,77 @@ gif演示还在制作中，文字说明详见`~/.vimrc`中的注释 和 [视频�
 
 ## 安装方法
 
-本配置支持neovim，vim>=8.0，vim-gnome，macvim，
+### 安装vim内核
 
-`vim --version` 查看特性，需要支持(显示`+`号)以下特性：clipboard、python 或 python3、conceal
+本配置支持的内核有neovim，vim>=8.0，vim-gnome，macvim，
 
-这里只展示neovim的安装方法；其他的vim安装很方便，可请自行安装。
+`vim --version` 查看内核特性，需要支持(显示`+`号)以下特性：clipboard、python 或 python3、conceal
 
-### n(eo)vim安装方法
+支持上述特性的vim内核有:
+
+#### neovim
+
+推荐用neovim，其安装方法[见下](#neovim安装方法)。neovim（简称nvim）是vim的一个fork项目，重构了其内核。
+
+**选择nvim的原因**
+
+- 我的vim配置依赖以下vim的特性
+
+  - clipboard：系统剪切板与vim剪切板互通
+  - python 或 python3：UltiSnippets、YouCompleteMe 需要当中至少一个
+  - ​conceal：无此特性，则indentline无法显示缩进线, NERDTree的树栏中会出现`^G`符号作为一个文件(夹)的前缀
+
+  查看vim是否支持上述特性，请执行`vim --version`，返回列表中，加号表示支持，减号表示不支持。
+
+  vim不一定都支持，但nvim支持上述所有特性。
+
+- nvim比vim在翻页时更快，特别是用鼠标滚动翻页时，nvim能够实时停下，而vim会持续滚动很久才停
+
+**neovim和vim的不同**
+
+* neovim在设置快捷键时和vim不同，请见下[neovim的escape sequence无法识别](#neovim的escape sequence无法识别)
+
+* neovim的配置文件和vim不同，请见下[neovim安装方法](#neovim安装方法)/设置nvim配置文件的链接
+
+#### mac安装最新的vim
+
+mac上安装vim (VIM - Vi IMproved 8.1版本) 支持上述所有特性（但它在linux上不支持clipboard，故无法融合linux系统剪切板和vim 街切板），mac上安装方法：
+
+```bash
+brew install vim
+```
+
+* 安装在路径：`/usr/local/bin/vim`
+
+* mac自带的vim的路径是：`/usr/bin/vim`，不支持conceal
+
+需要在`.bashrc`中修改PATH，以优先加载新装vim
+
+```bash
+export PATH="/usr/local/bin:$PATH"
+```
+
+此后输入`vim`会启动新装的vim
+
+#### mac上装最新的macvim
+
+macvim只在mac上有，自带图形界面、支持⌘键设置快捷键
+
+```bash
+brew install macvim
+```
+
+此后输入`macvim`会启动它
+
+#### linux安装vim-genome
+
+在linux上vim-genome (VIM - Vi IMproved 8.0版本)都支持上述所有特性，linux上安装方法：
+
+```
+sudo apt-get install vim-gnome
+```
+
+### neovim安装方法
 
 - mac：`brew install neovim`，而后在命令行中输入`nvim`即可使用此镜像
 
@@ -94,67 +158,79 @@ gif演示还在制作中，文字说明详见`~/.vimrc`中的注释 和 [视频�
 
   使用方法：
 
-  - 系统有FUSE
+  - 若系统有FUSE
 
-    设置为可执行文件`chmod u+x nvim.appimage`
+  设置为可执行文件`chmod u+x nvim.appimage`
 
-    直接`./nvim.appimage`，即启动nvim，相当于输入`vim`命令
+  直接`./nvim.appimage`，即启动nvim，相当于输入`vim`命令
 
+      修改PATH以便使用：
+      
+      ```bash
+      mv nvim.appimage 【某个你用的路径，如/local】/bin/nvim
+      ```
+      
+      在.zshenv之类的文件中加入
+      
+      ```bash
+      export PATH=【某个你用的路径，如/local】/bin:$PATH
+      ```
+      
+      而后在命令行中输入`nvim`即可使用此镜像
 
+    - 若系统无FUSE，将镜像解压，执行其中的二进制文件
 
-    修改PATH以便使用：
-    
-    ```bash
-    mv nvim.appimage 【某个你用的路径，如/local】/bin/nvim
-    ```
-    
-    在.zshenv之类的文件中加入
-    
-    ```bash
-    export PATH=【某个你用的路径，如/local】/bin:$PATH
-    ```
-    
-    而后在命令行中输入`nvim`即可使用此镜像
+  ```bash
+  ./nvim.appimage --appimage-extract # 解压得到 squashfs-root/ 文件夹
+  ./squashfs-root/usr/bin/nvim​
+  ```
 
-  - 系统无FUSE，将镜像解压，执行其中的二进制文件
+  修改PATH以便使用：将`squashfs-root/`放到任何你要的【地方】，再在.zshenv之类的文件中加入
 
-    ```bash
-    ./nvim.appimage --appimage-extract # 解压得到 squashfs-root/ 文件夹
-    ./squashfs-root/usr/bin/nvim
-    ```
+  ```
+  export PATH=【地方】/squashfs-root/usr/bin/:$PATH
+  ```
 
-    ​
+  而后在命令行中输入`nvim`即可使用此镜像
 
-    修改PATH以便使用：将`squashfs-root/`放到任何你要的【地方】，再在.zshenv之类的文件中加入
+- 设置nvim配置文件的链接
 
-    ```
-    export PATH=【地方】/squashfs-root/usr/bin/:$PATH
-    ```
+  ```bash
+  ln -s 《本repo》/{.vim,.vimrc,.vimrc.bundles} ~
+  ln -s ~/.vim ~/.config/nvim
+  ```
 
-    而后在命令行中输入`nvim`即可使用此镜像
+  注：
 
-### 设置nvim配置文件的链接
+  - `~/.config/nvim/init.vim` 相当于 `~/.vimrc` ，可直接用之
+  - `~/.config/nvim` 相当于` ~/.vim`，可直接用之
+  - `本repo/.vim/init.vim -> ../.vimrc`  的链接已经设过了，您无需`ln -s ~/.vimrc ~/.config/nvim/init.vim`
 
-```bash
-ln -s 《本repo》/{.vim,.vimrc,.vimrc.bundles} ~
-ln -s ~/.vim ~/.config/nvim
+### 安装vim的python依赖
+
+(neo)vim都需要支持python2或python3中至少一个。不支持的话，以供需要 `pynvim` 模块的插件（如UltiSnippets、YouCompleteMe）无法使用，启动vim时有如下报错
+
+```
+YouCompleteMe unavailable: unable to load Python.
+UltiSnips requires py >= 2.7 or py3
+Press ENTER or type command to continue
 ```
 
-注：
+但YouCompleteMe的编译无需此依赖
 
-* `~/.config/nvim/init.vim` 相当于 `~/.vimrc` ，可直接用之
-* `~/.config/nvim` 相当于` ~/.vim`，可直接用之
-* `本repo/.vim/init.vim -> ../.vimrc`  的链接已经设过了，您无需`ln -s ~/.vimrc ~/.config/nvim/init.vim`
+* 给vim装python依赖
 
-### 安装neovim的python依赖
+  `vim -version`若见python、python3皆是`-`，则说明不支持
 
-安装neovim的python依赖
+  要支持的话，可以[安装最新版的vim](#mac安装最新的vim)或[安装最新版的vim-gnome](#linux安装vim-genome)
 
-```bash
-pip install neovim
-```
+* 安装neovim的python依赖
 
-UltiSnippets、YouCompleteMe 需要当中至少一个才能使用；但YouCompleteMe的编译无需之
+  只需运行（[详见官方wiki](https://github.com/neovim/neovim/wiki/Installing-Neovim)）
+
+  ```bash
+  pip install neovim
+  ```
 
 ### 安装vim插件
 
@@ -183,27 +259,6 @@ cp vim_keymap.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
 这一设置并不需要。这里只是想说明，我的alt+字母是采用的哪套方案，以便你自行添加其他快捷键。所有.vimrc里用到的alt+字母都已经在上述profile里设置过了。
 
 ![修改mac的英文键盘方案](README.assets/img1.png)
-
-## 内核选用neovim
-
-neovim（简称nvim）是vim的一个fork项目，重构了其内核。
-
-### 选择nvim的原因
-
-* 我的vim配置依赖以下vim的特性
-  * clipboard：系统剪切板与vim剪切板互通
-  * python 或 python3：UltiSnippets、YouCompleteMe 需要当中至少一个
-  * ​conceal：无此特性，则indentline无法显示缩进线, NERDTree的树栏中会出现`^G`符号作为一个文件(夹)的前缀
-
-  查看vim是否支持上述特性，请执行`vim --version`，返回列表中，加号表示支持，减号表示不支持。
-
-  vim不一定都支持，但nvim支持上述所有特性。
-
-* nvim比vim在翻页时更快，特别是用鼠标滚动翻页时，nvim能够实时停下，而vim会持续滚动很久才停
-
-### 快捷键设置注意事项
-
-neovim在设置快捷键时和vim不同，请见下[neovim的escape sequence无法识别](#neovim的escape sequence无法识别)
 
 ## 快捷键设置
 
