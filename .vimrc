@@ -1303,7 +1303,7 @@ map <Esc>OH <Home>
 map! <Esc>OH <Home>
 map <Esc>OF <End>
 map! <Esc>OF <End>
-
+" tmux 外，Home、End键
 map <Esc>[H <Home>
 map! <Esc>[H <Home>
 map <Esc>[F <End>
