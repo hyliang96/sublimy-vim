@@ -1173,8 +1173,8 @@ set complete-=i                          " 不补全当前文件所在文件夹�
 set completeopt=menuone,longest,preview
 
 function! Expandable()
-" 光标不在行首，且光标前一字符非TAB、空格，且未展开补全菜单，则返回1，否则0
-    return (! pumvisible()) && GetCharBeforeCursor() !~ "^[ \t]\\?$"
+" 光标不在行首   且光标前一字为字母/_/.   且未展开补全菜单，则返回1，否则0
+    return (! pumvisible()) && GetCharBeforeCursor() =~ "^[a-zA-Z_.]$"
 endfunction
 
 imap <expr> <TAB> Expandable()?'<c-n>':'<plug>(TAB)'
