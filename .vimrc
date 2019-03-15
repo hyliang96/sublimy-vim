@@ -512,24 +512,77 @@ let g:NERDToggleCheckAllLines = 1  " 当所选非空行皆被注释，toggle才�
 " 搜索
 "=========================================================================
 " 搜索 ctrl+f
-nnoremap <C-f> :MarkClear<cr>/
+nnoremap <C-f> :MarkClear<cr>i<c-o>:stopinsert<cr>/
 vnoremap <C-f> "9y:MarkClear<cr><esc>/<c-r>9<cr>
 inoremap <C-f> <c-o>:MarkClear<cr><c-o>/
 " 下一个 ctrl+enter
 nnoremap ᜫ  n
 vnoremap ᜫ  <esc>n
 inoremap ᜫ  <c-o>n
-
 " 上一个 ctrl+shift+enter
 nnoremap ᜬ   N
 vnoremap ᜬ <esc>N
 inoremap ᜬ  <c-o>N
-" 关闭搜索的高亮 alt+f
-nnoremap <silent> ƒ :silent! nohls<cr>
-vnoremap <silent> ƒ <esc>:silent! nohls<cr>v
-inoremap <silent> ƒ <c-o>:silent! nohls<cr>
+" 关闭搜索的高亮 shift+ctrl+f
+nnoremap <silent> ᜮ :silent! nohls<cr>
+vnoremap <silent> ᜮ <esc>:silent! nohls<cr>v
+inoremap <silent> ᜮ <c-o>:silent! nohls<cr>
 " 放弃搜索，退出搜索框
-cnoremap <silent> ƒ <c-u><bs>:silent! nohls<cr>gi
+cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
+
+" ------------------------------------------------------------------------
+" 目录下搜索
+" vimgrep /匹配模式/[g][j] 要搜索的文件/范围 
+" g：表示是否把每一行的多个匹配结果都加入
+" j：表示是否搜索完后定位到第一个匹配位置
+
+" vimgrep /pattern/ %           在当前打开文件中查找
+" vimgrep /pattern/ *           在当前目录下查找所有
+" vimgrep /pattern/ **          在当前目录及子目录下查找所有
+" vimgrep /pattern/ *.c         查找当前目录下所有.c文件
+" vimgrep /pattern/ **/*        只查找子目录
+
+" :copen       显示所有搜索结果
+
+
+" alt+f
+nnoremap <plug>(VimGrep) :vimgrep //g **     \|"HELP\| * : under now dir\| ** : under now dir and subdirs\| *.c : .c files "\|<home><right><right><right><right><right><right><right><right><right>
+nmap ƒ <plug>(VimGrep)
+vmap ƒ <esc><plug>(VimGrep)
+imap ƒ  <c-o><plug>(VimGrep)
+" shift+alt+f  打开搜索列表
+" 左键双击/回车即可在当前窗口显示此文件，光标进入该窗口
+" 再要将光标回到搜索列表，可以鼠标点击进入下方列表窗口，
+                            " 或ctrl+alt+down，或
+                            " shift+alt+f
+" alt+w 关闭列表窗口
+nnoremap <silent> Ï :copen<cr>
+vnoremap <silent> Ï <esc>:copen<cr>
+inoremap <silent> Ï <c-o>:copen<cr>
+" alt+enter 下一个
+fun! CNext()
+" 支持循环
+    try
+        cnext
+    catch /E553/
+        crewind
+    endtry
+endf
+nnoremap <silent> ᜯ   :call CNext()<cr>
+vnoremap <silent> ᜯ   <esc>:call CNext()<cr>
+inoremap <silent> ᜯ   <c-o>:call CNext()<cr>
+" shift+alt+enter 上一个
+fun! CPrevious()
+" 支持循环
+    try
+        cprevious
+    catch /E553/
+        clast
+    endtry
+endf
+nnoremap <silent> ᜰ  :call CPrevious()<cr>
+vnoremap <silent> ᜰ  <esc>:call CPrevious()<cr>
+inoremap <silent> ᜰ  <c-o>:call CPrevious()<cr>
 " ------------------------------------------------------------------------
 " 同词高亮
 " 双击选中一个词，高亮出全部相同的整词

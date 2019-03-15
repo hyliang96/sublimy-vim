@@ -30,6 +30,10 @@ else
     let s:molokai_original = 0
 endif
 
+" set total background color
+" see more: https://groups.google.com/forum/#!msg/vim_dev/afPqwAFNdrU/nqh6tOM87QUJ
+" set bg=dark
+
 " tmux与vim配色冲突：在tmux里进入vim，文字自带不透明纯黑底色
 " 将全文中，所有hi Normal ... ctermbg=xxx改为hi Normal ... ctermbg=NONE
 " 其含义为，将其字体背景色设为透明，故可显现其后的bg（背景色）
@@ -145,13 +149,11 @@ end
 if &t_Co > 255
    if s:molokai_original == 1
       hi Normal                   ctermbg=NONE
-                                          "234
-      hi CursorLine               ctermbg=234   cterm=none
+      hi CursorLine               ctermbg=233   cterm=none
       hi CursorLineNr ctermfg=208               cterm=none
    else
       hi Normal       ctermfg=252 ctermbg=NONE
-                                          "233
-      hi CursorLine               ctermbg=234   cterm=none
+      hi CursorLine               ctermbg=233   cterm=none
       hi CursorLineNr ctermfg=208               cterm=none
    endif
    hi Boolean         ctermfg=135
@@ -222,8 +224,8 @@ if &t_Co > 255
    hi Structure       ctermfg=81
    hi Tag             ctermfg=161
    hi Title           ctermfg=166
-   hi Todo            ctermfg=231 ctermbg=232   cterm=bold
-
+   " hi Todo            ctermfg=231 ctermbg=232   cterm=bold
+   hi Todo            ctermfg=231 ctermbg=None   cterm=bold
    hi Typedef         ctermfg=81
    hi Type            ctermfg=81                cterm=none
    hi Underlined      ctermfg=244               cterm=underline
@@ -231,7 +233,8 @@ if &t_Co > 255
    hi VertSplit       ctermfg=244 ctermbg=232   cterm=bold
    hi VisualNOS                   ctermbg=234
    hi Visual                      ctermbg=234
-   hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
+   " hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
+   hi WarningMsg      ctermfg=231 ctermbg=None cterm=bold
    hi WildMenu        ctermfg=81  ctermbg=16
 
    hi Comment         ctermfg=59
@@ -282,9 +285,7 @@ if &t_Co > 255
    endif
 end
 
-" set total background color
-" see more: https://groups.google.com/forum/#!msg/vim_dev/afPqwAFNdrU/nqh6tOM87QUJ
-" set bg=dark
+
 
 " Special 表示空白字符，显示哪些空白字符见~/.vimr中的 `set clistchars`
 hi SpecialKey ctermfg=237 guifg=#3A3A3A
@@ -294,7 +295,7 @@ hi SpecialKey ctermfg=237 guifg=#3A3A3A
 
 " 自动补齐的下拉菜单
 hi PMenu    ctermfg=250 ctermbg=236 guifg=#8E9EA1 guibg=#252829
-hi PMenuSel ctermfg=250 ctermbg=234 guifg=#F8F8F2 guibg=#293739
+hi PMenuSel ctermfg=250 ctermbg=233 guifg=#F8F8F2 guibg=#293739
 
 
 
