@@ -264,7 +264,7 @@ cp vim_keymap.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
 
 为了能够利用尽可能多的快捷键，需要用iterm2的按键映射功能
 
-### 为什么要用iterm2
+### 为什么要在终端做键盘映射
 
 因为若不用，会浪费很多组合按键
 
@@ -283,7 +283,7 @@ shift+ctrl+字母=ctrl+字母
 
   把上述重复的组合按键，用iterm2的按键映射功能，转成一个冷门文字，再在~/.vimrc中将此文字映射成你要的按键，详见下[neovim的escape sequence无法识别](#neovim的escape sequence无法识别)/冷门文字
 
-  注：iterm2不是所有`shfit+ctrl+字母`都支持设置键盘映射，例如"shift+ctrl+t"就无法设置
+  注：iterm2不是所有`shfit+ctrl+字母`都支持设置键盘映射，例如"shift+ctrl+t"就无法设置，这是由于别的软件（如拼音输入法）占用了这些快捷键
 
 ### neovim的escape sequence无法识别
 
@@ -345,7 +345,7 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
   ```
   # 已使用了：
   \xE1\x9C\x80-\xE1\x9C\x8F
-  \xE1\x9C\xA0-\xE1\x9C\xAE
+  \xE1\x9C\xA0-\xE1\x9C\xB0
   # 其中未被用的
   ```
 
