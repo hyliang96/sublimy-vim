@@ -40,7 +40,7 @@ set magic                                " 设置魔术
 set hidden                               " 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
 set guioptions-=T                        " 隐藏工具栏
 set guioptions-=m                        " 隐藏菜单栏
-set smartindent                          " 开启新行时使用智能自动缩进
+" set smartindent                          " 开启新行时使用智能自动缩进；适用C风格的语言，开启此选项，则以”#“开头的句子，无法用'>>'命令右缩进
 set backspace=indent,eol,start           " 不设定在插入状态无法用退格键和 Delete 键删除回车符
 set cmdheight=1                          " 设定命令行的行数为 1
 set laststatus=2                         " 显示状态栏 (默认值为 1, 无法显示状态栏)
@@ -966,6 +966,7 @@ set listchars=tab:>-,space:·,trail:·,extends:→,precedes:←
 " 缩进平移
 set shiftround       " 总是缩进到4格的倍数
 " ctrl+] 右一个缩进
+" nnoremap <expr> <c-]> ((col('.')==col('$')-1) ? '>>$': '>>'.&shiftwidth.'l')
 nnoremap <expr> <c-]> ((col('.')==col('$')-1) ?
             \ 'v>gv<esc>$':
             \ 'v>gv<esc>'.&shiftwidth.'l')
