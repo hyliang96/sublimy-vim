@@ -934,7 +934,7 @@ nnoremap <backspace> i<backspace><c-o>:stopinsert<cr>
     " endif
 " endfunction
 " " 删除选区，进入修改模式，不改变剪切板内容
-vmap c :call VC()<cr>
+" vmap c :call VC()<cr>
 " vnoremap c "_c
 
 "=========================================================================
@@ -1325,12 +1325,12 @@ else
 endif
 
 " alt+left => <esc>b 左移一词
-noremap  <M-left>  gE
-inoremap  <M-left>  <left><c-o>gE<right>
+noremap  <M-left>  ge
+inoremap  <M-left>  <left><c-o>ge<right>
 cnoremap  <M-left>  <s-left>
 " alt+right => <esc>f 右移一词
-noremap  <M-right>   E
-inoremap  <M-right>   <c-o>E<right>
+noremap  <M-right>   e
+inoremap  <M-right>   <esc>ea
 cnoremap  <M-right>   <s-right>
 
 " 光标前皆字符，且不在行首
