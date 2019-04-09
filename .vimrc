@@ -1507,6 +1507,7 @@ endfunction
 nnoremap <silent> <C-S> :call UpDate()<cr>:echo "saved"<cr>
 vnoremap <silent> <C-S> <esc>:call UpDate()<cr>:echo "saved"<cr>
 inoremap <silent> <C-S> <c-o>:call UpDate()<cr><c-o>:echo "saved"<cr>
+
 " <esc>ctrl+s 存为
 nnoremap  <esc><c-s>  :update<space>
 vnoremap  <esc><c-s>  <esc>:update<space>
