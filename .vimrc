@@ -769,7 +769,7 @@ imap <expr> <c-x> EmptyLine()? '<esc>"_ddi' : '<esc>^vg_d"_ddi'
 " 复制一行，带换行符
 " nmap <C-c> ^vg_y
 " 复制一行，不带换行符
-noremap <c-c> mz^y$:call system('timeout 0.1 nc localhost 8377 &', @")<CR>`z
+noremap <expr> <c-c> EmptyLine()? '' : 'mz^y$:call system("timeout 0.1 nc localhost 8377 &", @")<CR>`z'
 " 选区末尾若有换行符，不复制该换行符
 function! VCtrlC() range
     if strlen(getline("'>"))<col("'>")
@@ -795,7 +795,7 @@ vnoremap <c-c> :call VCtrlC()<cr>
 " vmap <expr> <C-c> (strlen(getline("'>"))<col("'>"))? ':call CCtrlC()<cr>' : 'y'
 " imap <expr> <C-c> col('.')==1?'<esc>yyi':'<esc>yya'
 " 选区末尾若有换行符，不复制该换行符
-inoremap <c-c> <esc>^y$:call system('timeout 0.1 nc localhost 8377 &', @")<CR>gi
+inoremap <expr> <c-c> EmptyLine()? '' : '<esc>^y$:call system("timeout 0.1 nc localhost 8377 &", @")<CR>gi'
 " imap <C-c> <c-o>:stopinsert<cr>yya
 
 " -----------------------------------------
