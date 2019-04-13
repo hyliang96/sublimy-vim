@@ -1721,6 +1721,7 @@ au Syntax * RainbowParenthesesLoadChevrons  " <>
 " ------------------------------------------------------------------------
 " 快速给词加环绕符号,例如单引号/双引号/括号/成对标签等
 "'tpope/vim-surround'
+vmap ` S`
 vmap ' S'
 vmap " S"
 vmap < S<
