@@ -760,7 +760,6 @@ fun! EmptyLine()
     return getline(".")=~ "^[ \t]*$"
 endf
 imap <expr> <c-x> EmptyLine()? '<esc>"_ddi' : '<esc>^vg_d"_ddi'
-
 " imap <c-x> <c-o>:stopinsert<cr>ddi
 " imap <expr> <C-x> col('.')==1?'<esc>ddi':'<esc>dda'
 " imap <C-x> <c-o>:stopinsert<cr>dda
