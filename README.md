@@ -96,7 +96,7 @@ gif演示还在制作中，文字说明详见`~/.vimrc`中的注释 和 [视频�
 
   - clipboard：系统剪切板与vim剪切板互通
   - python 或 python3：UltiSnippets、YouCompleteMe 需要当中至少一个
-  - ​conceal：无此特性，则indentline无法显示缩进线, NERDTree的树栏中会出现`^G`符号作为一个文件(夹)的前缀
+  - conceal：无此特性，则indentline无法显示缩进线, NERDTree的树栏中会出现`^G`符号作为一个文件(夹)的前缀
 
   查看vim是否支持上述特性，请执行`vim --version`，返回列表中，加号表示支持，减号表示不支持。
 
@@ -349,6 +349,11 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
   # 其中未被用的
   ```
 
+  ```
+  # 闲置未被用为vim快捷键的按键组合
+  shift+ctrl+l ᜭ
+  ```
+
   然后在~/.vimrc中写这样的映射
 
   ```vim
@@ -402,6 +407,8 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " { 'branch': '<repo的分支名>' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+" 制定commit
+Plug 'xxxx/xxxxx', { 'commit': '3becd17' }
 " 指定插件repo所用git标签，rtp描述了包含vim插件的子目录；
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 " 安装插件时，在终端下，cd到'dir'目录，执行'do'命令，多用于插件的编译

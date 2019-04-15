@@ -659,9 +659,19 @@ let g:VM_maps["Visual Add"]               = 'å'
 let g:VM_maps["Visual All"]               = '<esc>å'
 " i/n 模式下，alt+a，光标所在区加一个多光标
 let g:VM_maps["Add Cursor At Pos"]        = 'å'
-" shift+ctrl+l: 选区变为多行光标，光标都在选区开头字符所在列
+" ctrl+l: 多行选择转多行光标：多行选中（v模式），选区变为多行光标的insert模式，光标都在选区开头字符所在列
 " FIXME 选区中有宽字符时会出错
-let g:VM_maps["Visual Cursors"]           = 'ᜭ'
+let g:VM_maps["Visual Cursors"]           = '<plug>(MultiLineCurosr)'
+" v模式下，ctrl+l: 单行为选中整行，多行则转为多行光标
+fun VCtrlL() range
+    if line("'<") <  line("'>")
+        call feedkeys("gv\<plug>(MultiLineCurosr)")
+    else
+        call feedkeys("gv\<plug>(SelectOneLine)")
+    endif
+endf
+vmap  <c-l> :call VCtrlL()<cr>
+
 " i/n模式下
 "   ctrl+d，选中光标所在词，继续按ctrl+d以增选整词
 ""       <c-q>：跳过一个
@@ -1428,7 +1438,7 @@ inoremap  <esc>g <c-o>:GitGutterToggle<CR>
 " 选择
 " 选中一行，含行尾换行符
 nnoremap <c-l> 0v$
-vnoremap <c-l> <esc>0v$
+vnoremap <plug>(SelectOneLine) <esc>0v$
 inoremap <c-l> <c-o>0<C-o>v$
 " 全选
 nnoremap <C-a> ggv<S-g>$
