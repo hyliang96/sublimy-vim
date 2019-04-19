@@ -352,9 +352,9 @@ nnoremap <silent> ± :exe "resize " . (winheight(0) * 10/9)<CR>
 vnoremap <silent> ± <esc>:exe "resize " . (winheight(0) * 10/9)<CR>gv
 inoremap <silent> ± <c-o>:exe "resize " . (winheight(0) * 10/9)<CR>
 " 变矮  shift alt -
-nnoremap <silent> — :exe "resize " . (winheight(0) * 9/10)<CR>
-vnoremap <silent> — <esc>:exe "resize " . (winheight(0) * 9/10)<CR>gv
-inoremap <silent> — <c-o>:exe "resize " . (winheight(0) * 9/10)<CR>
+nnoremap <silent> ᜭ :exe "resize " . (winheight(0) * 9/10)<CR>
+vnoremap <silent> ᜭ <esc>:exe "resize " . (winheight(0) * 9/10)<CR>gv
+inoremap <silent> ᜭ <c-o>:exe "resize " . (winheight(0) * 9/10)<CR>
 
 
 "=========================================================================

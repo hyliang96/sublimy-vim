@@ -351,7 +351,7 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
 
   ```
   # 闲置未被用为vim快捷键的按键组合
-  shift+ctrl+l ᜭ
+  
   ```
 
   然后在~/.vimrc中写这样的映射
