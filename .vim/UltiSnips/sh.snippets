@@ -11,4 +11,66 @@ snippet here "get the absolute path of the dir this file is in" b
 ${1:here}=\$(cd "\$(dirname "\${BASH_SOURCE[0]-\$0}")"; pwd)
 endsnippet
 
+snippet getopt "the template of getopt argparsing, long arg is supported" b
+
+# 使用规则
+# bash/zsh getopt_demo.sh 一堆参数，其前中后均可有 余参数
+# 格式化参数：以'-'开头，必需符合本代码的解析要求
+    #             短参数                           长参数
+    # 无选项       -a                              --a-long
+    # 必有选项     -bss          -b ss             --b-long ss
+    #             -b'sds sds'   -b 'sds sds'      --b-long 'sds sds'
+    # 可有选项若无  -c                              --c-long
+    # 可有选项若有  -css          -c'sds sds'  只可短参数，选项与参数间不得有空格
+# 余参数：不以'-'开头
+
+# 参数预处理
+TEMP=\$(getopt \
+    -o      ${1:短参数 形如 ab:c::} \
+    --long  ${2:长参数 形如 a-long,b-long:,c-long::} \
+    -n      '参数解析错误' \
+    -- "\$@")
+# 写法
+    #   -o     短参数 不需要分隔符
+    #   --long 长参数 用','分隔
+    #   \`\`无选项  \`:\`必有选项  \`::\` 可由选项
+if [ \$? != 0 ] ; then echo "格式化的参数解析错误，正在退出" >&2 ; exit 1 ; fi
+eval set -- "\$TEMP" # 将\$TEMP复制给 \$1, \$2, ...
+
+
+# 处理参数
+while true ; do case "\$1" in
+    ${4:处理格式化的参数}
+    # '--'后是 余参数
+    --) shift ; break ;;
+    # 处理参数的代码错误
+    *) echo "参数处理错误" ; exit 1 ;;
+esac ; done
+
+
+# 余下参数
+for arg do
+   ${5:处理余下参数}"\$arg"
+done
+
+endsnippet
+
+snippet noopt "an argument with no option"
+# 无选项
+-${1:短参数}|--${2:长参数})  ${3:参数处理} ; shift ;;
+endsnippet
+
+snippet hasopt "an argument with an option"
+# 必有选项
+-${1:短参数}|--${2:长参数})  ${3:选项处理}"\$2" ; shift 2 ;;
+endsnippet
+
+snippet optopt "an argument with an optional option"
+# 可省选项
+-${1:短参数}|--${2:长参数}) case "\$2" in
+    # 无选项
+    "")  ${3:无选项处理} ; shift 2 ;;
+    # 有选项
+    *)   ${4:选项处理}"\$2" ; shift 2 ;;  esac ;;
+endsnippet
 
