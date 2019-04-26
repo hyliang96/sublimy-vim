@@ -49,8 +49,8 @@ esac ; done
 
 
 # 余下参数
-for arg do
-   ${5:处理余下参数}"\$arg"
+for i in "$@"; do
+   ${5:处理余下参数}"\$i"
 done
 
 endsnippet
