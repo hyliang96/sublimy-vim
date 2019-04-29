@@ -20,7 +20,7 @@ let g:python_highlight_all = 1           " 开启python的所有语法高亮，�
 set showcmd                              " 右下角：n模式显示已输入命令；v模式显示选区范围
 set showmode                             " 左下角的状态栏显示INSERT之类的字样
 set nocompatible                         " 关闭 vi 兼容模式
-colorscheme my_molokai                   " 设定配色方案, 其他备选  Monokai
+colorscheme gruvbox                      " 设定配色方案, 其他备选  Monokai my_molokai gruvbox
 set number                               " 显示行号
 set cursorline                           " 突出显示当前行
 set ruler                                " 打开状态栏标尺
