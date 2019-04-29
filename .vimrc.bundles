@@ -34,6 +34,8 @@ Plug 'mg979/vim-visual-multi', { 'commit': '3becd17' }
 " 界面框架（tab，提示栏等）美化
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" airline的gruvbox主题
+Plug 'morhetz/gruvbox'
 " 获取git状态，让airline显示之；并支持在vim中进行git操作
 Plug 'tpope/vim-fugitive'
 " 它会在 Vim 的行号列旁显示 git diff 的差异标记

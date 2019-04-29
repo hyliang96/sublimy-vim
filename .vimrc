@@ -156,7 +156,10 @@ endif
 let g:airline#extensions#tabline#enabled = 1      " 标签页栏美化
 let g:airline#extensions#branch#enabled=1         " 显示 git 分支
 " let g:airline#extensions#hunks#enabled=0
-let g:airline_theme='badwolf'   " 'molokai'       ” 状态栏配色
+let g:airline_theme='gruvbox'   " 'molokai'       ” 状态栏配色
+" 其他方案搭配
+" (colorscheme, airline_theme) = (vimmy_molokai, badwolf) | (gruvbox,gruvbox)
+" 安装airline配色方案： Plug 'morhetz/gruvbox'
 let g:airline#extensions#tabline#show_buffers = 0 " 不显示已关tab的遗骸
 let g:airline_powerline_fonts=1
 "-----------------------------------------------------------------
