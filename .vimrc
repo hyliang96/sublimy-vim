@@ -21,6 +21,7 @@ set showcmd                              " 右下角：n模式显示已输入命
 set showmode                             " 左下角的状态栏显示INSERT之类的字样
 set nocompatible                         " 关闭 vi 兼容模式
 colorscheme gruvbox                      " 设定配色方案, 其他备选  Monokai my_molokai gruvbox
+set bg=dark                              " 背景设置为dark色
 set number                               " 显示行号
 set cursorline                           " 突出显示当前行
 set ruler                                " 打开状态栏标尺
