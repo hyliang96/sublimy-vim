@@ -503,7 +503,7 @@ function! IComment()
         call cursor(l0,len1-len0+c0)
     endif
 endfunction
-inoremap <silent> <C-/> <c-o>:call IComment()<cr>
+inoremap <silent> <C-/> <space><bs><c-o>:call IComment()<cr>
 " imap <C-/> <ESC><Plug>NERDCommenterToggle$a
 
 " -----------------------------------------------------------------
@@ -839,7 +839,7 @@ vmap p :call VCtrlV()<cr>
 " vmap <C-v> <c-b>Pv<right>
 " inoremap <C-v> <c-r>"
 " inoremap <C-v> <C-o>:set paste<CR><C-R>"<C-o>:set nopaste<CR>
-inoremap <C-v> <C-o>:set paste<CR><C-R>"<C-o>:set nopaste<CR>
+inoremap <C-v> <space><bs><C-o>:set paste<CR><C-R>"<C-o>:set nopaste<CR>
 ""<C-o>:stopinsert<cr>:call ICtrlV()<cr>
 " ------------------------------------------------------------------------
 " 原文粘贴
@@ -1508,7 +1508,7 @@ inoremap <plug>(DeleteLine) <c-g>u<c-o>0<C-o>v$"_d
 
 "=========================================================================
 " ctrl+s保存
-autocmd BufWritePre * :%s/\s\+$//e  " 保存时自动删除行尾空格
+autocmd BufWritePost * :%s/\s\+$//e  " 保存时自动删除行尾空格
 
 function! UpDate()
     let l=line('.')
