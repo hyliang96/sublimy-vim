@@ -1244,6 +1244,8 @@ function! Expandable()
     return (! pumvisible()) && GetCharBeforeCursor() =~ "^[a-zA-Z_.]$"
 endfunction
 
+" function!
+
 imap <expr> <TAB> Expandable()?'<c-n>':'<plug>(TAB)'
 imap <expr> <CR> pumvisible()?"\<C-Y>":"\<plug>(CR)"
 imap <expr> <PageDown> pumvisible() ? "\<PageDown>":"\<plug>(PageDown)"
