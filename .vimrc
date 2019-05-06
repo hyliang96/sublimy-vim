@@ -519,6 +519,16 @@ let g:NERDToggleCheckAllLines = 1  " 当所选非空行皆被注释，toggle才�
 nnoremap <C-f> :MarkClear<cr>i<c-o>:stopinsert<cr>/
 vnoremap <C-f> "9y:MarkClear<cr><esc>/<c-r>9<cr>
 inoremap <C-f> <c-o>:MarkClear<cr><c-o>/
+" 大小写敏感 case
+cnoremap <C-c> \C
+" 大小写不敏感 non-sensitive
+cnoremap <C-n> \c
+" 整词匹配 大小写敏感
+cnoremap <C-w> \<\><left><left>
+" " 整词搜索 <esc> ctrl+f     进入搜索栏会显示'\<光标\>'
+" nnoremap <esc><C-f> :MarkClear<cr>i<c-o>:stopinsert<cr>/\<\><left><left>
+" vnoremap <esc><C-f> "9y:MarkClear<cr><esc>/\<\><left><left><c-r>9<cr>
+" inoremap <esc><C-f> <c-o>:MarkClear<cr><c-o>/\<\><left><left>
 " 下一个 ctrl+enter
 nnoremap ᜫ  n
 vnoremap ᜫ  <esc>n
@@ -531,7 +541,7 @@ inoremap ᜬ  <c-o>N
 nnoremap <silent> ᜮ :silent! nohls<cr>
 vnoremap <silent> ᜮ <esc>:silent! nohls<cr>v
 inoremap <silent> ᜮ <c-o>:silent! nohls<cr>
-" 放弃搜索，退出搜索框
+" 放弃搜索，退出搜索框 shift+ctrl+f
 cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
 
 " ------------------------------------------------------------------------
@@ -1136,13 +1146,13 @@ fun! SetUndoableSpaceChar()
     inoremap <expr> <plug>(CR) (getline('.') !~ "^[ \t]*$"?
         \ '<c-g>u<cr>' : '<cr>')
 endf
-fun! UnsetUndoableSpaceChar()
-        " 光标所在行中，光标前一字符，不是空格和tab，则标记undo节点
-    inoremap <Space> <space>
-    inoremap <plug>(TAB) <tab>
-    " 光标所在行非皆空格、TAB，则标记undo节点
-    inoremap <plug>(CR) <cr>
-endf
+" fun! UnsetUndoableSpaceChar()
+        " " 光标所在行中，光标前一字符，不是空格和tab，则标记undo节点
+    " inoremap <Space> <space>
+    " inoremap <plug>(TAB) <tab>
+    " " 光标所在行非皆空格、TAB，则标记undo节点
+    " inoremap <plug>(CR) <cr>
+" endf
 call SetUndoableSpaceChar()
 
 " ------------------------------------------------------------------------
@@ -1235,7 +1245,6 @@ let g:SuperTabMappingTabManual = '<c-j>'
 " ------------------------------------------------------------------------
 " 方案三：vim自带的<c-n>补全 需要以下按键映射
 " YCM 不需要用，但兼容之，故保留，以免YCM编译不成功用不了，可以用Vim自带补全
-
 set complete-=i                          " 不补全当前文件所在文件夹下的诸文件、及被导入文件
 set completeopt=menuone,longest,preview
 
@@ -1243,10 +1252,6 @@ function! Expandable()
 " 光标不在行首   且光标前一字为字母/_/.   且未展开补全菜单，则返回1，否则0
     return (! pumvisible()) && GetCharBeforeCursor() =~ "^[a-zA-Z_.]$"
 endfunction
-
-" function! LineHead()
-    " return 1 " col('.')==#1
-" endfunction
 
 imap <expr> <TAB>  Expandable()?'<c-n>':'<plug>(TAB)'
 imap <expr> <CR> pumvisible()?"\<C-Y>":"\<plug>(CR)"
@@ -1769,6 +1774,12 @@ nnoremap ᜢᜣ :cc<CR>
 vnoremap ᜢᜣ <ESC>:cc<CR>
 inoremap ᜢᜣ <c-o>:cc<CR>
 
+"=========================================================================
+" <c-\> 插入断点
+" python 用 ipdb 来 debug
+autocmd FileType python  inoremap <expr> <c-\> EmptyLine() ? "__import__('ipdb').set_trace()" : "\<c-o>O__import__('ipdb').set_trace()"
+autocmd FileType python  nnoremap <c-\> O__import__('ipdb').set_trace()
+autocmd FileType python  vnoremap <c-\> <esc>O__import__('ipdb').set_trace()
 "=========================================================================
 " 关闭 vimscript的换行号自动缩进三个tab的特性
 " inoremap \ <space><backspace>\
