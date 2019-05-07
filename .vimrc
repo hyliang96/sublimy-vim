@@ -1138,7 +1138,7 @@ endfunction
 " 最终的空格、tab、换行
 fun! SetUndoableSpaceChar()
         " 光标所在行中，光标前一字符，不是空格和tab，则标记undo节点
-    inoremap <expr> <Space> (GetCharBeforeCursor()!~"^[ \t]$"?
+    inoremap <expr> <space> (GetCharBeforeCursor()!~"^[ \t]$"?
         \ '<C-g>u<space>':'<space>')
     inoremap <expr> <plug>(TAB) (GetCharBeforeCursor() !~ "^[ \t]$"?
         \ '<C-g>u<tab>' : '<tab>')
@@ -1224,7 +1224,30 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 " SuperTab 插件
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabMappingTabManual = '<c-j>'
-
+function! g:SuperTabNormalTab()
+    if col('.') ==# 1
+    " 若光标在行首，则按tab一下，所在行会依照语法和上下文来缩进多个tab（可转为
+    " 若干个space）
+        let lid = line('.')
+        let i = lid-1
+        let command = "\<bs>\<cr>"
+        while i > 0
+            if ! (getline(i)=~ "^[ \t]*$")
+                break
+            endif
+            let i = i-1
+            let command = "\<bs>".command."\<cr>"
+        endwhile
+        return "\<C-g>u".command       " 添加undo断点
+    else
+        if GetCharBeforeCursor() !~ "^[ \t]$"
+        " 一个字符若不是空白字符（space、tab）
+            return "\<C-g>u\<tab>"    " 添加undo断点
+        else
+            return "\<tab>"
+        endif
+    endif
+endfunction
 " ------------------------------------------------------------------------
 " 方案二 NeoComplCache.vim    自动补全插件
 " 暂时不删除，留待YCM无法编译时用
@@ -1253,7 +1276,7 @@ function! Expandable()
     return (! pumvisible()) && GetCharBeforeCursor() =~ "^[a-zA-Z_.]$"
 endfunction
 
-imap <expr> <TAB>  Expandable()?'<c-n>':'<plug>(TAB)'
+imap <expr> <TAB> (col('.')==#1 ? '<bs><cr>' : (Expandable()?'<c-n>':'<plug>(TAB)'))
 imap <expr> <CR> pumvisible()?"\<C-Y>":"\<plug>(CR)"
 imap <expr> <PageDown> pumvisible() ? "\<PageDown>":"\<plug>(PageDown)"
 imap <expr> <PageUp> pumvisible() ? "\<PageUp>":"\<plug>(PageUp)"
