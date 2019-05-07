@@ -53,8 +53,8 @@ set nobackup                             " no backup files
 set noswapfile                           " no swap(缓冲文件) files
 set nowritebackup                        " only in case you don't want a backup file while editing
 set noundofile                           " no undo files
-au BufRead,BufNewFile * start            " 开vm即insert模式
-au BufRead,BufNewFile * filetype detect  " 开vm即检查文件类型
+au BufRead,BufNewFile,BufEnter * start   " 开vim/进入新窗口/进入新tab皆启动insert模式
+au BufRead,BufNewFile * filetype detect  " 开vim即检查文件类型
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}3?\ %c:%l/%L%)\
                                          " 设置在状态行显示的信息
 if has('mouse') | set mouse=a | endif    " 启用鼠标
@@ -379,13 +379,13 @@ let NERDTreeShowHidden=1             " 显示隐藏文件
 let NERDTreeWinSize=25               " tree栏宽度
 let NERDTreeMapOpenInTab='<ENTER>'   " 在tree中，回车将文件开新tab
 "-----------------------------------------------------------------
-let s:open_tree_when_open_file=0     " 开vim即开nerdtree
+let s:open_tree_when_open_file=1     " 开vim即开nerdtree
 if s:open_tree_when_open_file
     autocmd VimEnter * NERDTree
     autocmd BufWinEnter * NERDTreeMirror
 endif
 " 进入一个tab，将光标从tree窗口移到文件窗口
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd VimEnter * wincmd p " 开vim或tab，默认进入右侧编辑区
 " autocmd VimEnter,BufWinEnter * NERDTreeFind | wincmd p "进入vim时打开NERDTreeFind窗口
 " 解决在mac下，tree栏目中每行首显示^G, 这是因为其vim 不支持conceal，更新vim使之支持即可
@@ -569,7 +569,7 @@ imap ƒ  <c-o><plug>(VimGrep)
 " 再要将光标回到搜索列表，可以鼠标点击进入下方列表窗口，
                             " 或ctrl+alt+down，或
                             " shift+alt+f
-" alt+w 关闭列表窗口
+" alt+shift+f 关闭列表窗口
 nnoremap <silent> Ï :copen<cr>
 vnoremap <silent> Ï <esc>:copen<cr>
 inoremap <silent> Ï <c-o>:copen<cr>
@@ -1569,7 +1569,9 @@ nnoremap <c-r>  :Rename<space>
 vnoremap <c-r>  <esc>:Rename<space>
 inoremap <c-r> <c-o>:Rename<space>
 " ------------------------------------------------------------------------
-" 退出
+" 关闭与退出
+"
+" ctrl+w 智能判断关闭窗口
 " 若 本tab非tree窗口数目多于1，或为0（即只有tree窗口），则:q退出窗口
 " 否则若 tab数>1，则关闭此tab
 " 否则若 有tree窗口，则关闭tree窗口，再:q退出本窗口
@@ -1595,16 +1597,15 @@ inoremap <expr> <C-w> ((winnr('$')-TreeWindowNumber())!=1?'<c-o>:q<cr>':
 \ (TreeWindowNumber()?'<c-o>:NERDTreeToggle<CR><c-o>:q<CR>': '<c-o>:q<CR>'
 \ )))
 
-" vim程序退出
-" shift+ctrl+w
+" shift+ctrl+w vim程序退出
 nnoremap ᜐ   :qa<cr>
 vnoremap ᜐ   <esc>:qa<cr>
 inoremap  ᜐ   <c-o>:qa<cr>
-" alt+w 退出窗口
+" alt+w 关闭窗口
 nnoremap ∑ :q<cr>
 vnoremap ∑ <esc>:q<cr>
 inoremap ∑ <c-o>:q<cr>
-" alt+shitf+w 退出标签页
+" shift+alt+w 关闭标签页
 nnoremap <expr> „ tabpagenr() > 1 ? ':tabclose<cr>' : ':qa<cr>'
 vnoremap <expr> „ tabpagenr() > 1 ? '<esc>:tabclose<cr>' : '<esc>:qa<cr>'
 inoremap <expr> „ tabpagenr() > 1 ? '<c-o>:tabclose<cr>' : '<c-o>:qa<cr>'
