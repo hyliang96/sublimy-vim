@@ -364,7 +364,7 @@ inoremap <silent> ᜭ <c-o>:exe "resize " . (winheight(0) * 9/10)<CR>
 "=========================================================================
 " plugin - NERD_tree.vim 以树状方式浏览系统中的文件和目录
 "=========================================================================
-" :ERDtree 打开NERD_tree         :NERDtreeClose    关闭NERD_tree
+" :NERDtree 打开NERD_tree         :NERDtreeClose    关闭NERD_tree
 " o 打开关闭文件或者目录         t 在标签页中打开
 " T 在后台标签页中打开           ! 执行此文件
 " p 到上层目录                   P 到根目录
@@ -381,12 +381,14 @@ let NERDTreeMapOpenInTab='<ENTER>'   " 在tree中，回车将文件开新tab
 "-----------------------------------------------------------------
 let s:open_tree_when_open_file=1     " 开vim即开nerdtree
 if s:open_tree_when_open_file
-    autocmd VimEnter * NERDTree
-    autocmd BufWinEnter * NERDTreeMirror
+    autocmd VimEnter * NERDTree | wincmd p
+    autocmd BufWinEnter * NERDTreeMirror | wincmd p
+else
+    autocmd VimEnter * wincmd p " 开vim或tab，默认进入右侧编辑区
 endif
 " 进入一个tab，将光标从tree窗口移到文件窗口
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-autocmd VimEnter * wincmd p " 开vim或tab，默认进入右侧编辑区
+
 " autocmd VimEnter,BufWinEnter * NERDTreeFind | wincmd p "进入vim时打开NERDTreeFind窗口
 " 解决在mac下，tree栏目中每行首显示^G, 这是因为其vim 不支持conceal，更新vim使之支持即可
 " let g:NERDTreeNodeDelimiter = "\u00a0"
@@ -431,7 +433,7 @@ function! NComment()
         startinsert
         normal! $
     else
-        exe "silent normal! :call NERDComment('n', 'Toggle')\<CR>"
+        exe "silent 6normal! :call NERDComment('n', 'Toggle')\<CR>"
         let len1=len(getline('.'))
         call cursor(l0,len1-len0+c0)
     endif
@@ -473,10 +475,10 @@ function! VComment() range
     endif
 endfunction
 vnoremap <silent> <C-/> :call VComment()<cr>
-" vmap <C-/> <Plug>NERDCommenterToggle<CR>gv
+" vmap <C-7/> <Plug>NERDCommenterToggle<CR>gv
 
 " function! IComment()
-    " let firstLine = line("'<")
+    " let f7irstLine = line("'<")
     " let lastLine = line("'>")
     " let theLine = getline('.')
     " if ( firstLine ==# lastLine ) && ( theLine =~ "^[ \t]*$" )
@@ -497,13 +499,18 @@ function! IComment()
         startinsert
         normal! $
     else
-        exe "silent normal! :call NERDComment('n', 'Toggle')\<CR>"
+        exe "silent normal! ^:call NERDComment('n', 'Toggle')\<CR>"
         let len1=len(getline('.'))
         startinsert
         call cursor(l0,len1-len0+c0)
     endif
 endfunction
-inoremap <silent> <C-/> <space><bs><c-o>:call IComment()<cr>
+function! AtLineEnd()
+    return col('.')==#(len(getline('.'))+1)
+endfunction
+inoremap <expr> <silent> <C-/>  AtLineEnd() && (! EmptyLine()) ?
+            \ "\<esc>:call NERDComment('n', 'Toggle')\<cr>$a" :
+            \ "\<space>\<bs>\<c-o>:call IComment()\<cr>"
 " imap <C-/> <ESC><Plug>NERDCommenterToggle$a
 
 " -----------------------------------------------------------------
@@ -677,7 +684,7 @@ let g:VM_maps["Add Cursor At Pos"]        = 'å'
 " FIXME 选区中有宽字符时会出错
 let g:VM_maps["Visual Cursors"]           = '<plug>(MultiLineCurosr)'
 " v模式下，ctrl+l: 单行为选中整行，多行则转为多行光标
-fun VCtrlL() range
+fun! VCtrlL() range
     if line("'<") <  line("'>")
         call feedkeys("gv\<plug>(MultiLineCurosr)")
     else
@@ -993,7 +1000,7 @@ set shiftround       " 总是缩进到4格的倍数
 nnoremap <expr> <c-]> ((col('.')==col('$')-1) ?
             \ 'v>gv<esc>$':
             \ 'v>gv<esc>'.&shiftwidth.'l')
-fun VMoveRight() range
+fun! VMoveRight() range
     let l1=line("'<")
     let c1=col("'<")
     let l2=line("'>")
@@ -1014,7 +1021,7 @@ inoremap <expr> <c-]> ((col('.')==col('$')) ?
 " 此处把 ᜁ 映射为如下
 " 这是因为vim 中，<c-[> 和 <esc> 同键值
 " nnoremap ᜁ   v<gvv
-fun NMoveLeft()
+fun! NMoveLeft()
     let l0=line(".")
     let c0=col(".")
     let [l0,c0]=MoveLeft_(l0,c0)
@@ -1046,7 +1053,7 @@ function! MoveLeft_(l,c)
     endif
     return [a:l,c]
 endfunction
-fun VMoveLeft() range
+fun! VMoveLeft() range
     let l1=line("'<")
     let c1=col("'<")
     let l2=line("'>")

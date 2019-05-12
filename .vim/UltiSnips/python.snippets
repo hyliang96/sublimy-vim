@@ -18,7 +18,7 @@ json.dumps(${1:object}, ensure_ascii=False, encoding='utf-8')
 endsnippet
 
 snippet mkdir "mkdir" w
-os.makedirs(${1:path}, exist_ok=True) ${2:# 即使此文件夹已存在也不报错}
+os.makedirs(${1:path}, exist_ok=True) # if no such path exists, iteratively created the dir
 endsnippet
 
 snippet here "the absolute path of the dir this file is in" w
