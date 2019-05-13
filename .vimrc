@@ -1238,8 +1238,14 @@ function! g:SuperTabNormalTab()
         let lid = line('.')
         let i = lid-1
         let command = "\<bs>\<cr>"
+        " 若上方最近的空行位于行首，则直接返回<tab>；
+        " 否则<bs>多次到这行尾，再<cr>相同次数，以实现按语法缩进
         while i > 0
             if ! (getline(i)=~ "^[ \t]*$")
+                if ! (getline(i)[0] =~ "[ \t]")
+                    " 若上方最近的空行位于行首，则直接返回<tab>
+                    let command = "\<tab>"
+                endif
                 break
             endif
             let i = i-1
@@ -1248,13 +1254,14 @@ function! g:SuperTabNormalTab()
         return "\<C-g>u".command       " 添加undo断点
     else
         if GetCharBeforeCursor() !~ "^[ \t]$"
-        " 一个字符若不是空白字符（space、tab）
+        " 光标前一个字符若不是空白字符（space、tab）
             return "\<C-g>u\<tab>"    " 添加undo断点
         else
             return "\<tab>"
         endif
     endif
 endfunction
+
 " ------------------------------------------------------------------------
 " 方案二 NeoComplCache.vim    自动补全插件
 " 暂时不删除，留待YCM无法编译时用
