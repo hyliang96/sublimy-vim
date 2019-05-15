@@ -379,7 +379,7 @@ let NERDTreeShowHidden=1             " 显示隐藏文件
 let NERDTreeWinSize=25               " tree栏宽度
 let NERDTreeMapOpenInTab='<ENTER>'   " 在tree中，回车将文件开新tab
 "-----------------------------------------------------------------
-let s:open_tree_when_open_file=1     " 开vim即开nerdtree
+let s:open_tree_when_open_file=0     " 开vim即开nerdtree
 if s:open_tree_when_open_file
     autocmd VimEnter * NERDTree | wincmd p
     autocmd BufWinEnter * NERDTreeMirror | wincmd p
