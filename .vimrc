@@ -1016,6 +1016,7 @@ vnoremap <c-]> :call VMoveRight()<cr>
 inoremap <expr> <c-]> ((col('.')==col('$')) ?
             \ '<c-o>:stopinsert<cr>v>gv<esc>gi<c-o>$' :
             \ '<c-o>:stopinsert<cr>v>gv<esc>gi<c-o>'.&shiftwidth.'l')
+
 " ctrl+[ 左一个缩进
 " iterm2 把ctrl+[ 映射为 ᜁ
 " 此处把 ᜁ 映射为如下
@@ -1025,7 +1026,8 @@ fun! NMoveLeft()
     let l0=line(".")
     let c0=col(".")
     let [l0,c0]=MoveLeft_(l0,c0)
-    normal! gv<gvv
+    normal! v<gvv
+    " normal <<
     call setpos(".",[0,l0,c0,0])
 endf
 nnoremap  ᜁ  :call NMoveLeft()<cr>
@@ -1071,7 +1073,8 @@ vnoremap  ᜁ  :call VMoveLeft()<cr>
 fun! IMoveLeft()
     let [l0,c0]=getpos(".")[1:2]
     let [l0,c0]=MoveLeft_(l0,c0)
-    normal! gv<gv
+    normal! v<gv
+    " normal! <<
     call setpos(".",[0,l0,c0,0])
     normal! v
 endf
