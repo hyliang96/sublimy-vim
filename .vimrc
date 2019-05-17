@@ -3,7 +3,7 @@
 " Last Change: 2019年03月04日
 " Version:     0.1
 " Source:
-"=========================================================================
+" =========================================================================
 
 " 加载插件配置文件
 if filereadable(expand("~/.vimrc.bundles"))
@@ -431,7 +431,7 @@ function! NComment()
         startinsert
         normal! $
     else
-        exe "silent 6normal! :call NERDComment('n', 'Toggle')\<CR>"
+        exe "silent normal! :call NERDComment('n', 'Toggle')\<CR>"
         let len1=len(getline('.'))
         call cursor(l0,len1-len0+c0)
     endif
