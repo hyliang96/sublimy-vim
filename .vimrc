@@ -717,7 +717,7 @@ let g:VM_maps['Find Under']         = '<plug>(FindUnder)'   " 增选下一个与
 let g:VM_maps['Find Subword Under'] = '<plug>(FindUnder)'   " 增选下一个与选区相同的文字
 let g:VM_maps["Select All"]               = '<plug>(SelectAll)'  " 全选
 let g:VM_maps["Remove Region"]=         '<c-x>'     " 清除这个光标
-let g:VM_maps['q Skip']               = '<c-q>'     " 跳过一个
+let g:VM_maps['Alt Skip']               = '<c-n>'     " 跳过一个
 " shift+ctrl+d： ᜤ
 nmap <c-d> <plug>(FindUnder)
 nmap  ᜤ   <plug>(SelectAll)
