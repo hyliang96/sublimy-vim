@@ -370,22 +370,67 @@ inoremap <silent> ᜭ <c-o>:exe "resize " . (winheight(0) * 9/10)<CR>
 " u 打开上层目录                 m 显示文件系统菜单（添加、删除、移动操作）
 " r 递归刷新当前目录             R 递归刷新当前根目录
 "-----------------------------------------------------------------
-" ctrl+T tree 切换
-noremap <c-t> :NERDTreeToggle<CR>
-inoremap <c-t> <c-o>:NERDTreeToggle<CR>
+" ctrl+T 开关所有tab的tree
+fun! TreeToggle()
+    let g:TreeOnOpen=!g:TreeOnOpen
+    let tabid=tabpagenr() " 记录当前tab的编号
+    tabdo NERDTreeToggle  " 所有tab同步开关Tree
+    exec "tabn ".tabid
+    " 返回此tab
+    if g:TreeOnOpen
+        wincmd p    " 移动到前一个 (previous) (上次访问的) 窗口
+    endif
+endf
+noremap <c-t> :call TreeToggle()<cr>
+inoremap <c-t> <c-o>:call TreeToggle()<cr>
+"-----------------------------------------------------------------
 let NERDTreeShowHidden=1             " 显示隐藏文件
 let NERDTreeWinSize=25               " tree栏宽度
 let NERDTreeMapOpenInTab='<ENTER>'   " 在tree中，回车将文件开新tab
+let g:TreeOnOpen=1     " 开vim、进入新tab 即开nerdtree 且光标移动到文本窗口
 "-----------------------------------------------------------------
-let s:open_tree_when_open_file=0     " 开vim即开nerdtree
-if s:open_tree_when_open_file
-    autocmd VimEnter * NERDTree | wincmd p
-    autocmd BufWinEnter * NERDTreeMirror | wincmd p
-else
-    autocmd VimEnter * wincmd p " 开vim或tab，默认进入右侧编辑区
-endif
-" 进入一个tab，将光标从tree窗口移到文件窗口
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" 开启vim时自动开启NERDTree
+fun! VimEnterAutoCmd()
+    if g:TreeOnOpen
+        NERDTree
+        wincmd p     " 移动到前一个 (previous) (上次访问的) 窗口
+    else
+        wincmd p     " 移动到前一个 (previous) (上次访问的) 窗口
+    endif
+endf
+autocmd VimEnter * call VimEnterAutoCmd()
+
+" 进入新tab自动开启NERDTree
+fun! BufWinEnterAutoCmd()
+    if g:TreeOnOpen
+        " 若  tree插件未加载          或    （ 虽然加载tree插件 但 当前tab无tree窗口）
+        if exists('g:NERDTree')
+            if ! g:NERDTree.IsOpen()
+                NERDTreeMirror
+                wincmd p    " 移动到前一个 (previous) (上次访问的) 窗口
+            endif
+        else
+            NERDTreeMirror
+            wincmd p    " 移动到前一个 (previous) (上次访问的) 窗口
+        endif
+    endif
+endf
+autocmd BufWinEnter * call BufWinEnterAutoCmd()
+
+"-----------------------------------------------------------------
+" noremap <c-t> :NERDTreeToggle<CR>
+" inoremap <c-t> <c-o>:NERDTreeToggle<CR>
+
+" let s:open_tree_when_open_file=0     " 开vim即开nerdtree
+" if s:open_tree_when_open_file
+    " autocmd VimEnter * NERDTree | wincmd p
+    " autocmd BufWinEnter * NERDTreeMirror | wincmd p
+" else
+    " autocmd VimEnter * wincmd p " 开vim或tab，默认进入右侧编辑区
+" endif
+
+" " 进入一个tab，将光标从tree窗口移到文件窗口
+" autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " autocmd VimEnter,BufWinEnter * NERDTreeFind | wincmd p "进入vim时打开NERDTreeFind窗口
 " 解决在mac下，tree栏目中每行首显示^G, 这是因为其vim 不支持conceal，更新vim使之支持即可
@@ -1599,17 +1644,22 @@ function! TreeWindowNumber()
     endif
 endfunction
 
+fun! CloseTabWithTree()
+    NERDTreeToggle
+    quit
+endf
+
 nnoremap <expr> <C-w> ((winnr('$')-TreeWindowNumber()) != 1 ? ':q<cr>' :
 \ (tabpagenr() > 1 ? ':tabclose<cr>' :
-\ (TreeWindowNumber()? ':NERDTreeToggle<CR>:q<CR>' : ':q<CR>'
+\ (TreeWindowNumber()? ':call CloseTabWithTree()<CR>' : ':q<CR>'
 \ )))
 vnoremap <expr> <C-w> ((winnr('$')-TreeWindowNumber())!= 1?'<esc>:q<cr>':
 \ (tabpagenr() > 1 ? '<esc>:tabclose<cr>' :
-\ (TreeWindowNumber()? '<esc>:NERDTreeToggle<CR>:q<CR>': '<esc>:q<CR>'
+\ (TreeWindowNumber()? '<esc>:call CloseTabWithTree()<CR>': '<esc>:q<CR>'
 \ )))
 inoremap <expr> <C-w> ((winnr('$')-TreeWindowNumber())!=1?'<c-o>:q<cr>':
 \ (tabpagenr() > 1 ? '<c-o>:tabclose<cr>' :
-\ (TreeWindowNumber()?'<c-o>:NERDTreeToggle<CR><c-o>:q<CR>': '<c-o>:q<CR>'
+\ (TreeWindowNumber()?'<c-o>:call CloseTabWithTree()<CR>': '<c-o>:q<CR>'
 \ )))
 
 " shift+ctrl+w vim程序退出
@@ -1621,9 +1671,9 @@ nnoremap ∑ :q<cr>
 vnoremap ∑ <esc>:q<cr>
 inoremap ∑ <c-o>:q<cr>
 " shift+alt+w 关闭标签页
-nnoremap <expr> „ tabpagenr() > 1 ? ':tabclose<cr>' : ':qa<cr>'
-vnoremap <expr> „ tabpagenr() > 1 ? '<esc>:tabclose<cr>' : '<esc>:qa<cr>'
-inoremap <expr> „ tabpagenr() > 1 ? '<c-o>:tabclose<cr>' : '<c-o>:qa<cr>'
+nnoremap <expr> „ tabpagenr('$') > 1 ? ':tabclose<cr>' : ':qa<cr>'
+vnoremap <expr> „ tabpagenr('$') > 1 ? '<esc>:tabclose<cr>' : '<esc>:qa<cr>'
+inoremap <expr> „ tabpagenr('$') > 1 ? '<c-o>:tabclose<cr>' : '<c-o>:qa<cr>'
 " ------------------------------------------------------------------------
 " 进出visual模式: ctrl+'
 vnoremap ᜏ <esc>
