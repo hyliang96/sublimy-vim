@@ -155,7 +155,7 @@ endif
 let g:airline#extensions#tabline#enabled = 1      " 标签页栏美化
 let g:airline#extensions#branch#enabled=1         " 显示 git 分支
 " let g:airline#extensions#hunks#enabled=0
-let g:airline_theme='gruvbox'   " 'molokai'       ” 状态栏配色
+let g:airline_theme='gruvbox'                     " 状态栏配色
 " 其他方案搭配
 " (colorscheme, airline_theme) = (vimmy_molokai, badwolf) | (gruvbox,gruvbox)
 " 安装airline配色方案： Plug 'morhetz/gruvbox'
@@ -301,6 +301,11 @@ inoremap » <c-o>:sp<cr>
 nnoremap <esc>» :sp<space>
 vnoremap <esc>» <esc>:sp<space>
 inoremap <esc>» <c-o>:sp<space>
+
+" 分屏线从虚线改为实线
+" hi VertSplit  term=reverse  cterm=reverse  gui=none
+" hi VertSplit guibg=#282828 guifg=#181A1F
+set fillchars=vert:│,fold:·
 "-----------------------------------------------------------------
 " alt+Fn+上下左右：去往上下左右一个窗口
 " alt+ctrl+left
@@ -387,7 +392,7 @@ inoremap <c-t> <c-o>:call TreeToggle()<cr>
 let NERDTreeShowHidden=1             " 显示隐藏文件
 let NERDTreeWinSize=25               " tree栏宽度
 let NERDTreeMapOpenInTab='<ENTER>'   " 在tree中，回车将文件开新tab
-let g:TreeOnOpen=1     " 开vim、进入新tab 即开nerdtree 且光标移动到文本窗口
+let g:TreeOnOpen=0                   " 开vim、进入新tab 即开nerdtree 且光标移动到文本窗口
 "-----------------------------------------------------------------
 " 开启vim时自动开启NERDTree
 fun! VimEnterAutoCmd()
