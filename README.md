@@ -8,7 +8,7 @@
 
 ![img0](README.assets/img0.png)
 
-## 快捷键演示
+g_d"_dd## 快捷键演示
 
 ### 模式切换
 

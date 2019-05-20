@@ -51,7 +51,8 @@ set nobackup                             " no backup files
 set noswapfile                           " no swap(缓冲文件) files
 set nowritebackup                        " only in case you don't want a backup file while editing
 set noundofile                           " no undo files
-au BufRead,BufNewFile,BufEnter * start   " 开vim/进入新窗口/进入新tab皆启动insert模式
+" au BufRead,BufNewFile,BufEnter * start
+au BufRead,BufNewFile * start            " 开vim/进入新窗口/进入新tab皆启动insert模式
 au BufRead,BufNewFile * filetype detect  " 开vim即检查文件类型
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}3?\ %c:%l/%L%)\
                                          " 设置在状态行显示的信息
@@ -599,59 +600,60 @@ inoremap <silent> ᜮ <c-o>:silent! nohls<cr>
 " 放弃搜索，退出搜索框 shift+ctrl+f
 cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
 
-" ------------------------------------------------------------------------
-" 目录下搜索
-" vimgrep /匹配模式/[g][j] 要搜索的文件/范围 
-" g：表示是否把每一行的多个匹配结果都加入
-" j：表示是否搜索完后定位到第一个匹配位置
+" " ------------------------------------------------------------------------
+" " 目录下搜索
+" " vimgrep /匹配模式/[g][j] 要搜索的文件/范围 
+" " g：表示是否把每一行的多个匹配结果都加入
+" " j：表示是否搜索完后定位到第一个匹配位置
 
-" vimgrep /pattern/ %           在当前打开文件中查找
-" vimgrep /pattern/ *           在当前目录下查找所有
-" vimgrep /pattern/ **          在当前目录及子目录下查找所有
-" vimgrep /pattern/ *.c         查找当前目录下所有.c文件
-" vimgrep /pattern/ **/*        只查找子目录
+" " vimgrep /pattern/ %           在当前打开文件中查找
+" " vimgrep /pattern/ *           在当前目录下查找所有
+" " vimgrep /pattern/ **          在当前目录及子目录下查找所有
+" " vimgrep /pattern/ *.c         查找当前目录下所有.c文件
+" " vimgrep /pattern/ **/*        只查找子目录
 
-" :copen       显示所有搜索结果
+" " :copen       显示所有搜索结果
 
 
-" alt+f
-nnoremap <plug>(VimGrep) :vimgrep //g **     \|"HELP\| * : under now dir\| ** : under now dir and subdirs\| *.c : .c files "\|<home><right><right><right><right><right><right><right><right><right>
-nmap ƒ <plug>(VimGrep)
-vmap ƒ <esc><plug>(VimGrep)
-imap ƒ  <c-o><plug>(VimGrep)
-" shift+alt+f  打开搜索列表
-" 左键双击/回车即可在当前窗口显示此文件，光标进入该窗口
-" 再要将光标回到搜索列表，可以鼠标点击进入下方列表窗口，
-                            " 或ctrl+alt+down，或
-                            " shift+alt+f
-" alt+shift+f 关闭列表窗口
-nnoremap <silent> Ï :copen<cr>
-vnoremap <silent> Ï <esc>:copen<cr>
-inoremap <silent> Ï <c-o>:copen<cr>
-" alt+enter 下一个
-fun! CNext()
-" 支持循环
-    try
-        cnext
-    catch /E553/
-        crewind
-    endtry
-endf
-nnoremap <silent> ᜯ   :call CNext()<cr>
-vnoremap <silent> ᜯ   <esc>:call CNext()<cr>
-inoremap <silent> ᜯ   <c-o>:call CNext()<cr>
-" shift+alt+enter 上一个
-fun! CPrevious()
-" 支持循环
-    try
-        cprevious
-    catch /E553/
-        clast
-    endtry
-endf
-nnoremap <silent> ᜰ  :call CPrevious()<cr>
-vnoremap <silent> ᜰ  <esc>:call CPrevious()<cr>
-inoremap <silent> ᜰ  <c-o>:call CPrevious()<cr>
+" " alt+f
+" nnoremap <plug>(VimGrep) :vimgrep //g **     \|"HELP\| * : under now dir\| ** : under now dir and subdirs\| *.c : .c files "\|<home><right><right><right><right><right><right><right><right><right>
+" nmap ƒ <plug>(VimGrep)
+" vmap ƒ <esc><plug>(VimGrep)
+" imap ƒ  <c-o><plug>(VimGrep)
+" " shift+alt+f  打开搜索列表
+" " 左键双击/回车即可在当前窗口显示此文件，光标进入该窗口
+" " 再要将光标回到搜索列表，可以鼠标点击进入下方列表窗口，
+                            " " 或ctrl+alt+down，或
+                            " " shift+alt+f
+" " alt+shift+f 关闭列表窗口
+" nnoremap <silent> Ï :copen<cr>
+" vnoremap <silent> Ï <esc>:copen<cr>
+" inoremap <silent> Ï <c-o>:copen<cr>
+" " alt+enter 下一个
+" fun! CNext()
+" " 支持循环
+    " try
+        " cnext
+    " catch /E553/
+        " crewind
+    " endtry
+" endf
+" nnoremap <silent> ᜯ   :call CNext()<cr>
+" vnoremap <silent> ᜯ   <esc>:call CNext()<cr>
+" inoremap <silent> ᜯ   <c-o>:call CNext()<cr>
+" " shift+alt+enter 上一个
+" fun! CPrevious()
+" " 支持循环
+    " try
+        " cprevious
+    " catch /E553/
+        " clast
+    " endtry
+" endf
+" nnoremap <silent> ᜰ  :call CPrevious()<cr>
+" vnoremap <silent> ᜰ  <esc>:call CPrevious()<cr>
+" inoremap <silent> ᜰ  <c-o>:call CPrevious()<cr>
+
 " ------------------------------------------------------------------------
 " 同词高亮
 " 双击选中一个词，高亮出全部相同的整词
@@ -1015,6 +1017,8 @@ nnoremap <backspace> i<backspace><c-o>:stopinsert<cr>
 " vmap c :call VC()<cr>
 " vnoremap c "_c
 
+" ctrl+v 在命令模式下黏贴
+cnoremap <c-v> <c-r>"
 "=========================================================================
 "缩进
 " ------------------------------------------------------------------------
@@ -1217,11 +1221,11 @@ call SetUndoableSpaceChar()
 " (几) alt+z : 前往前（几回）光标位置
 nnoremap Ω  <C-o>
 vnoremap Ω <esc><C-o>v
-inoremap Ω <esc><C-o>a
+inoremap Ω <c-o><C-o>
 " (几) alt+shift+z : 前往后（几回）光标位置
 nnoremap ¸ <C-i>
 vnoremap ¸ <esc><C-i>v
-inoremap ¸ <esc><C-i>a
+inoremap ¸ <c-o><C-i>
 
 "=========================================================================
 " 自动补全
@@ -1693,115 +1697,144 @@ cnoremap ᜎ  <c-u><bs><esc>a
 " noremap <esc> <NOP>
 " inoremap <esc> <NOP>
 
-"=========================================================================
-" ctrl+p：模糊搜索当前目录及其子目录下的所有文件
-" ------------------------------------------------------------------------
-" 教程
-" ------------------------------------------------------------------------
-" 进入ctrlp模式
-" - `C-P`或者`:CtrlP (起始目录)`: 在查找文件模式下调用CtrlP
-" - `:CtrlPBuffer`或`:CtrlPMRU`: 在查找缓冲区调用CtrlP或者查找MRU文件模式
-" - `<esc>` `<c-b>` `<c-w>` `alt+w`: 都可以退出ctrlp模式
-" ------------------------------------------------------------------------
-" 进入ctrlp模式后
-" 模式
-" - `<S-Left>`、`<S-right>`: 左、右移动切换模式(文件 file/最近打开的文件 MRU/ctrlp打开的历史 buff)
-" - `<c-f>`: 开关到仅文件名搜索而不是完整路径搜索
-" - `<c-r>`: 开关切换到正则表达式模式
-" 选择
-" - `Up`、`Down`:　在文件列表中上下移动
-" - `<c-z>`:　勾选/勾除记多个文件
-" 更新
-" - `<F5>`: 清除当前目录的缓存以获取新文件，删除已删除的文件并应用新的忽略选项
-" - `<F7>`：
-    " - MRU下直接按它清空所有文件
-    " - MRU下先`<c-z>`勾选文件在按它清之
-    " - buffer下按它清除所在行的文件
-" - `<c-z>`,`<c-s-z>`:　撤销、重做于ctrlp中
-" 打开命令
-" - `<A-C-N>`、`<A-t>`、`<A-S-\>`、`<A-\>`(即`<cr>`): 开在本窗口（现在的文件就关了）、新Tab、横分屏、竖分屏
-" - `<c-o>`：打开，ctrlp会问你用上述哪种方法打开
-" 输入路径
-" - `<s-tab>`：开关输入栏
-" - `tab`: 自动补全
-" - `left`、`right`：在自己输入的path中左右移动光标
-" - `<c-\>`：输入栏在光标处插入内容，会弹出选项，问从系统剪切板插入啥
-" - `..` 回车，上走一级目录，n个`.`后回车，上走n-1个目录
-" - 标记文件后，输`:number`，不回车，按打开命令，会打开并跳到指定行数
-" - 输入[父目录/父目录/]新文件名，`<c-n>` ，创建一个新文件及其父目录
-    " - 默认是绝对路径，相对路径请用`./`开头
-    " - 但貌似不能创建文件夹
-" - 对比文件：勾选多个文件
-    " - 输入`:diffthis`，不回车，按打开命令（通常竖分屏） /或按`<c-o>`来竖分屏
-    " - 或直接输入`<C-d>`，竖分屏
-" ------------------------------------------------------------------------
-" 文档：https://github.com/hyliang96/ctrlp.vim/blob/master/doc/ctrlp.cnx
-" 帮助
-" - `:help ctrlp-options`: 获取帮助文档
-" - `:help ctrlp-mappings`：按键帮助
-" - `:help ctrlp-commands`：获取ctrlp命令的帮助
-" ------------------------------------------------------------------------
-nnoremap <c-p> :CtrlP<cr>
-vnoremap <c-p> <esc>:CtrlP<cr>
-inoremap <c-p> <esc>:CtrlP<cr>
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_cmd = 'CtrlP'
-" 设置过滤不进行查找的后缀名
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+" ========================================================================
+" 模糊查找插件 LeaderF
+" alt+f
+inoremap <c-p> <esc>:Leaderf self<cr>
+inoremap <c-p>p <esc>:Leaderf file<cr>
+inoremap <c-p>f <esc>:Leaderf function<cr>
+inoremap <c-p>l <esc>:Leaderf line<cr>
+inoremap <c-p>t <esc>:Leaderf! bufTag --right --all<cr>
+inoremap <c-p>b <esc>:Leaderf buffer<cr>
+inoremap <c-p>m <esc>:Leaderf mru<cr>
+inoremap <c-p>c <esc>:Leaderf mru --cwd<cr>
 
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ 'link': 'some_bad_symbolic_links',
+" 最优结果显示在最下面
+let g:Lf_ReverseOrder=1
+let g:Lf_CommandMap = {
+    \ '<C-]>':      ['«', '<C-]>'],
+    \ '<C-X>':      ['»', '<C-X>'],
+    \ '<C-T>':      ['†', '<C-T>', '<CR>', '<C-M>'],
+    \ '<CR>':       ['<C-O>'],
+    \}
+
+let g:Lf_NormalMap = {
+    \ 'q': ['q', '<ESC>']
     \ }
-" " Use a custom file listing command
-" let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
-" let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
-" follow .gitignore
-" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_show_hidden=1
-let g:ctrlp_exit_to_insert=1   " 退出ctrlp则进入insert模式
-" 用户覆盖默认快捷键
-let g:ctrlp_prompt_mappings = {
-\ 'PrtHistory(1)':        ['<c-z>'],
-\ 'PrtHistory(-1)':       ['ᜃ'],
-\ 'CreateNewFile()':      ['<c-n>'],
-\ 'ToggleType(1)':        ['<S-right>'],
-\ 'ToggleType(-1)':       ['<S-left>'],
-\ 'AcceptSelection("h")': ['»','<c-h>'],
-\ 'AcceptSelection("v")': ['«','<c-v>','<cr>'],
-\ 'AcceptSelection("e")': ['ᜦ','<2-LeftMouse>'],
-\ 'ToggleByFname()':      ['<c-f>'],
-\ 'ToggleRegex()':        ['<c-r>'],
-\ 'PrtCurLeft()':         ['<left>'],
-\ 'PrtCurRight()':        ['<right>'],
-\ 'MarkToOpen()':         ['<c-l>'],
-\ 'PrtDeleteWord()':      ['<esc><BS>'],
-\ 'PrtCurStart()':        ['<c-a>','<esc>[1~'],
-\ 'PrtCurEnd()':          ['<c-e>','<esc>[4~'],
-\ 'PrtClear()':           ['<c-u>','<c-u><c-k>'],
-\ 'PrtExit()':    ['<esc>', 'ᜎ ','<c-w>','∑'],
-\ 'DiffOpen("\<c-o>")':   ['<c-d>'],
-\ }
-" ------------------------------------------------------------------------
-"  ctrlp 的插件
-let g:ctrlp_extensions = ['funky']
-" funky: 函数的模糊搜索
-" alt+p 进入当前文件的函数列表搜索
-nnoremap π :CtrlPFunky<Cr>
-inoremap π <esc>:CtrlPFunky<Cr>
-" alt+shif+p 搜索当前光标下单词对应的函数
-nnoremap ∏ :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-inoremap ∏ <esc>:execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-let g:ctrlp_funky_syntax_highlight = 1
-let g:ctrlp_funky_matchtype = 'path'
+" cnoremap † <C-T>
+
+
+" "=========================================================================
+" " ctrl+p：模糊搜索当前目录及其子目录下的所有文件
+" " ------------------------------------------------------------------------
+" " 教程
+" " ------------------------------------------------------------------------
+" " 进入ctrlp模式
+" " - `C-P`或者`:CtrlP (起始目录)`: 在查找文件模式下调用CtrlP
+" " - `:CtrlPBuffer`或`:CtrlPMRU`: 在查找缓冲区调用CtrlP或者查找MRU文件模式
+" " - `<esc>` `<c-b>` `<c-w>` `alt+w`: 都可以退出ctrlp模式
+" " ------------------------------------------------------------------------
+" " 进入ctrlp模式后
+" " 模式
+" " - `<S-Left>`、`<S-right>`: 左、右移动切换模式(文件 file/最近打开的文件 MRU/ctrlp打开的历史 buff)
+" " - `<c-f>`: 开关到仅文件名搜索而不是完整路径搜索
+" " - `<c-r>`: 开关切换到正则表达式模式
+" " 选择
+" " - `Up`、`Down`:　在文件列表中上下移动
+" " - `<c-z>`:　勾选/勾除记多个文件
+" " 更新
+" " - `<F5>`: 清除当前目录的缓存以获取新文件，删除已删除的文件并应用新的忽略选项
+" " - `<F7>`：
+    " " - MRU下直接按它清空所有文件:exec g:Lf_py
+    " "   "fileExplManager._previewResult(False)"
+    " "
+    " " - MRU下先`<c-z>`勾选文件在按它清之
+    " " - buffer下按它清除所在行的文件
+" " - `<c-z>`,`<c-s-z>`:　撤销、重做于ctrlp中
+" " 打开命令
+" " - `<A-C-N>`、`<A-t>`、`<A-S-\>`、`<A-\>`(即`<cr>`): 开在本窗口（现在的文件就关了）、新Tab、横分屏、竖分屏
+" " - `<c-o>`：打开，ctrlp会问你用上述哪种方法打开
+" " 输入路径
+" " - `<s-tab>`：开关输入栏
+" " - `tab`: 自动补全
+" " - `left`、`right`：在自己输入的path中左右移动光标
+" " - `<c-\>`：输入栏在光标处插入内容，会弹出选项，问从系统剪切板插入啥
+" " - `..` 回车，上走一级目录，n个`.`后回车，上走n-1个目录
+" " - 标记文件后，输`:number`，不回车，按打开命令，会打开并跳到指定行数
+" " - 输入[父目录/父目录/]新文件名，`<c-n>` ，创建一个新文件及其父目录
+    " " - 默认是绝对路径，相对路径请用`./`开头
+    " " - 但貌似不能创建文件夹
+" " - 对比文件：勾选多个文件
+    " " - 输入`:diffthis`，不回车，按打开命令（通常竖分屏） /或按`<c-o>`来竖分屏
+    " " - 或直接输入`<C-d>`，竖分屏
+" " ------------------------------------------------------------------------
+" " 文档：https://github.com/hyliang96/ctrlp.vim/blob/master/doc/ctrlp.cnx
+" " 帮助
+" " - `:help ctrlp-options`: 获取帮助文档
+" " - `:help ctrlp-mappings`：按键帮助
+" " - `:help ctrlp-commands`：获取ctrlp命令的帮助
+" " ------------------------------------------------------------------------
+" nnoremap <c-p> :CtrlP<cr>
+" vnoremap <c-p> <esc>:CtrlP<cr>
+" inoremap <c-p> <esc>:CtrlP<cr>
+" let g:ctrlp_map = '<leader>p'
+" let g:ctrlp_cmd = 'CtrlP'
+" " 设置过滤不进行查找的后缀名
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+" set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+" let g:ctrlp_custom_ignore = {
+    " \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    " \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    " \ 'link': 'some_bad_symbolic_links',
+    " \ }
+" " " Use a custom file listing command
+" " let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+" " let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+" " follow .gitignore
+" " let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" let g:ctrlp_working_path_mode=0
+" let g:ctrlp_match_window_bottom=1
+" let g:ctrlp_max_height=15
+" let g:ctrlp_match_window_reversed=0
+" let g:ctrlp_mruf_max=500
+" let g:ctrlp_follow_symlinks=1
+" let g:ctrlp_show_hidden=1
+" let g:ctrlp_exit_to_insert=1   " 退出ctrlp则进入insert模式
+" " 用户覆盖默认快捷键
+" let g:ctrlp_prompt_mappings = {
+" \ 'PrtHistory(1)':        ['<c-z>'],
+" \ 'PrtHistory(-1)':       ['ᜃ'],
+" \ 'CreateNewFile()':      ['<c-n>'],
+" \ 'ToggleType(1)':        ['<S-right>'],
+" \ 'ToggleType(-1)':       ['<S-left>'],
+" \ 'AcceptSelection("h")': ['»','<c-h>'],
+" \ 'AcceptSelection("v")': ['«','<c-v>','<cr>'],
+" \ 'AcceptSelection("e")': ['ᜦ','<2-LeftMouse>'],
+" \ 'ToggleByFname()':      ['<c-f>'],
+" \ 'ToggleRegex()':        ['<c-r>'],
+" \ 'PrtCurLeft()':         ['<left>'],
+" \ 'PrtCurRight()':        ['<right>'],
+" \ 'MarkToOpen()':         ['<c-l>'],
+" \ 'PrtDeleteWord()':      ['<esc><BS>'],
+" \ 'PrtCurStart()':        ['<c-a>','<esc>[1~'],
+" \ 'PrtCurEnd()':          ['<c-e>','<esc>[4~'],
+" \ 'PrtClear()':           ['<c-u>','<c-u><c-k>'],
+" \ 'PrtExit()':    ['<esc>', 'ᜎ ','<c-w>','∑'],
+" \ 'DiffOpen("\<c-o>")':   ['<c-d>'],
+" \ }
+" " ------------------------------------------------------------------------
+" "  ctrlp 的插件
+" let g:ctrlp_extensions = ['funky']
+" " funky: 函数的模糊搜索
+" " alt+p 进入当前文件的函数列表搜索
+" nnoremap π :CtrlPFunky<Cr>
+" inoremap π <esc>:CtrlPFunky<Cr>
+" " alt+shif+p 搜索当前光标下单词对应的函数
+" nnoremap ∏ :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+" inoremap ∏ <esc>:execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+" let g:ctrlp_funky_syntax_highlight = 1
+" let g:ctrlp_funky_matchtype = 'path'
 "=========================================================================
 " 括号补全
 " Plug 'Raimondi/delimitMate'
