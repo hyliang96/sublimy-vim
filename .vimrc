@@ -603,6 +603,51 @@ inoremap <silent> ᜮ <c-o>:silent! nohls<cr>
 " 放弃搜索，退出搜索框 shift+ctrl+f
 cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
 
+
+" =========================================================================
+" CtrlSF 目录下搜文件内容，高速
+" alt+f 开始搜索
+nnoremap ƒ :CtrlSF<space>
+vnoremap ƒ <esc>:CtrlSF<space>
+inoremap ƒ <c-o>:CtrlSF<space>
+" shift+alt+f  显示/隐藏搜索栏
+nnoremap ƒ :CtrlSF<space>
+vnoremap ƒ <esc>:CtrlSF<space>
+inoremap ƒ <c-o>:CtrlSF<space>
+
+" 在搜索结果栏中的快捷键
+" 下一条：alt+enter
+" 上一条：shift+alt+enter
+" 打开到新tab：enter，t
+" 打开到竖分屏：alt+|
+" 打开到横分屏：shift+alt+|
+" 退出搜索栏/提前结束搜索：esc，q
+let g:ctrlsf_mapping={
+    \ "next": "ᜯ",
+    \ "prev": "ᜰ",
+    \ "open": ["<c-o>", "o"],
+    \ "tab":  ["<cr>", "<c-m>", "t"],
+    \ "vsplit": "«",
+    \ "split": "»",
+    \ "quit": ["q", "<esc>"]
+    \ }
+" 默认用normal(有上下文)型搜索结果栏，而非compact（无上下文）
+let g:ctrlsf_default_view_mode = 'normal'
+" noraml型搜索结果栏放在右侧
+let g:ctrlsf_position = 'right'
+" 任何时候 开了一个搜索结果 也不关闭窗口
+let g:ctrlsf_auto_close = {
+    \ "normal" : 0,
+    \ "compact": 0
+    \}
+" 当1000ms以内搜完 则自动将focus到搜索结果栏；
+" 否则在搜索进行时用户可以正常编辑文件（这叫做异步搜索）
+let g:ctrlsf_auto_focus = {
+    \ "at": "done",
+    \ "duration_less_than": 1000
+    \ }
+
+
 " " ------------------------------------------------------------------------
 " " 目录下搜索
 " " vimgrep /匹配模式/[g][j] 要搜索的文件/范围 
@@ -1703,90 +1748,93 @@ cnoremap ᜎ  <c-u><bs><esc>a
 " ========================================================================
 " 模糊查找插件 LeaderF
 " alt+f
-inoremap <c-p> <esc>:Leaderf! self<cr>
-inoremap <c-p>p <esc>:Leaderf! file<cr>
-inoremap <c-p>f <esc>:Leaderf! function<cr>
-inoremap <c-p>l <esc>:Leaderf! line<cr>
-inoremap <c-p>t <esc>:Leaderf! bufTag --right --stayOpen<cr>
-" inoremap <c-p>t <esc>:Leaderf! gtags [--current-buffer \| --all-buffers \| --all] --definition
-inoremap <c-p>b <esc>:Leaderf! buffer<cr>
-inoremap <c-p>m <esc>:Leaderf! mru<cr>
-inoremap <c-p>c <esc>:Leaderf! mru --cwd<cr>
+nnoremap <c-p> :Leaderf! self --stayOpen<cr>
+vnoremap <c-p> <esc>:Leaderf! self --stayOpen<cr>
+inoremap <c-p> <c-o>:Leaderf! self --stayOpen<cr>
+
+" inoremap <c-p>p <esc>:Leaderf! file<cr>
+" inoremap <c-p>f <esc>:Leaderf! function<cr>
+" inoremap <c-p>l <esc>:Leaderf! line<cr>
+" inoremap <c-p>t <esc>:Leaderf! bufTag --right --stayOpen<cr>
+" " inoremap <c-p>t <esc>:Leaderf! gtags [--current-buffer \| --all-buffers \| --all] --definition
+" inoremap <c-p>b <esc>:Leaderf! buffer<cr>
+" inoremap <c-p>m <esc>:Leaderf! mru<cr>
+" inoremap <c-p>c <esc>:Leaderf! mru --cwd<cr>
 
 
-" RgKeyMap={
-    " \ ''
-    " \ 'CurrentDir': [ '<c-c>' ],
-    " \ 'CurrentBuffer': [ '<c-f>' ],
-    " \ 'OpenedBuffers': []
-    " \}
-" function! TemporaryStatus()
-    " if exists("g:temp_var")
-        " return g:temp_var
+" " RgKeyMap={
+    " " \ ''
+    " " \ 'CurrentDir': [ '<c-c>' ],
+    " " \ 'CurrentBuffer': [ '<c-f>' ],
+    " " \ 'OpenedBuffers': []
+    " " \}
+" " function! TemporaryStatus()
+    " " if exists("g:temp_var")
+        " " return g:temp_var
+    " " else
+        " " return ""
+    " " endif
+" " endfunction
+
+" fun! RgStatusline()
+    " if g:RgIfRegex
+        " let regexText='\[\.\*\]'
     " else
-        " return ""
+        " let regexText='\ \.\*\ '
     " endif
-" endfunction
 
-fun! RgStatusline()
-    if g:RgIfRegex
-        let regexText='\[\.\*\]'
-    else
-        let regexText='\ \.\*\ '
-    endif
+    " if g:RgIfCase
+        " let caseText='\[Aa\]'
+    " else
+        " let caseText='\ Aa\ '
+    " endif
 
-    if g:RgIfCase
-        let caseText='\[Aa\]'
-    else
-        let caseText='\ Aa\ '
-    endif
+    " if g:RgIfWord
+        " let wordText='\[\"\"\]'
+    " else
+        " let wordText='\ \"\"\ '
+    " endif
 
-    if g:RgIfWord
-        let wordText='\[\"\"\]'
-    else
-        let wordText='\ \"\"\ '
-    endif
+    " if g:RgWhere=='CurrBuf'
+        " let whereText='Current_Buffer'
+    " elseif g:RgWhere=='AllBuf'
+        " let whereText='All_Buffers'
+    " elseif g:RgWhere=='CurDir'
+        " let whereText='Current_Dir'
+    " elseif g:RgWhere=='Add_a_Dir'
+    " endif
 
-    if g:RgWhere=='CurrBuf'
-        let whereText='Current_Buffer'
-    elseif g:RgWhere=='AllBuf'
-        let whereText='All_Buffers'
-    elseif g:RgWhere=='CurDir'
-        let whereText='Current_Dir'
-    elseif g:RgWhere=='Add_a_Dir'
-    endif
+    " exec 'set statusline='.regexText.'\|'.caseText.'\|'.wordText.'\|'.whereText.'\|'
+    " redraw!
+" endfun
 
-    exec 'set statusline='.regexText.'\|'.caseText.'\|'.wordText.'\|'.whereText.'\|'
-    redraw!
-endfun
+" let g:RgLine=''
 
-let g:RgLine=''
+" fun! RgFind()
+    " let originlStatuslin=&statusline
 
-fun! RgFind()
-    let originlStatuslin=&statusline
+    " let g:RgIfCase=1
+    " let g:RgIfRegex=1
+    " let g:RgIfWord=1
+    " let g:RgWhere='CurrBuf'
 
-    let g:RgIfCase=1
-    let g:RgIfRegex=1
-    let g:RgIfWord=1
-    let g:RgWhere='CurrBuf'
+    " call RgStatusline()
+    " let c=getchar()
+    " call feedkeys(c)
 
-    call RgStatusline()
-    let c=getchar()
-    call feedkeys(c)
+    " exec 'set statusline='.originlStatuslin
+    " redraw!
+" endfun
+" " inoremap ƒ <esc>:let g:RgLine=''|call RgFind()<cr>
 
-    exec 'set statusline='.originlStatuslin
-    redraw!
-endfun
-" inoremap ƒ <esc>:let g:RgLine=''|call RgFind()<cr>
-
-" 正则表达式匹配 当前目录下所有文件 目录栏不消失
-inoremap <c-p>r <esc>:Leaderf! rg --stayOpen -e ""<left>
-" 原文匹配 ctrl+"
-cnoremap ᜏ <c-e><space>-F
-" 当前打开文件
-cnoremap <c-f> <c-e><space>--current-buffer
-" 所有打开文件
-cnoremap <c-a> <c-e><space>--all-buffers
+" " 正则表达式匹配 当前目录下所有文件 目录栏不消失
+" inoremap <c-p>r <esc>:Leaderf! rg --stayOpen -e ""<left>
+" " 原文匹配 ctrl+"
+" cnoremap ᜏ <c-e><space>-F
+" " 当前打开文件
+" cnoremap <c-f> <c-e><space>--current-buffer
+" " 所有打开文件
+" cnoremap <c-a> <c-e><space>--all-buffers
 
 " 最优结果显示在最下面
 " let g:Lf_ReverseOrder=1
@@ -1814,23 +1862,7 @@ let g:Lf_NormalMap = {
         \}
 
 
-inoremap ƒ <c-o>:CtrlSF<space>
-" inoremap ᜯ
-let g:ctrlsf_mapping={
-    \ "next": "ᜯ",
-    \ "prev": "ᜰ",
-    \ "open": ["<c-o>", "o"],
-    \ "tab":  ["<cr>", "<c-m>", "t"],
-    \ "vsplit": "«",
-    \ "split": "»",
-    \ "quit": ["q", "<esc>"]
-    \ }
-let g:ctrlsf_position = 'right'
-let g:ctrlsf_default_view_mode = 'normal'
-let g:ctrlsf_auto_focus = {
-    \ "at": "done",
-    \ "duration_less_than": 1000
-    \ }
+
 " "=========================================================================
 " " ctrl+p：模糊搜索当前目录及其子目录下的所有文件
 " " ------------------------------------------------------------------------
