@@ -52,8 +52,11 @@ set noswapfile                           " no swap(缓冲文件) files
 set nowritebackup                        " only in case you don't want a backup file while editing
 set noundofile                           " no undo files
 " au BufRead,BufNewFile,BufEnter * start
-au BufRead,BufNewFile * start            " 开vim/进入新窗口/进入新tab皆启动insert模式
-au BufRead,BufNewFile * filetype detect  " 开vim即检查文件类型
+" au BufRead,BufNewFile * start            " 开vim/进入新窗口/进入新tab皆启动insert模式
+" autocmd BufNewFile,BufEnter * if @%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__'   | startinsert | endif
+autocmd BufRead,BufNewFile * if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__') | startinsert | filetype detect | endif
+autocmd BufNewFile,BufEnter * if @%==#'__CtrlSF__'  | stopinsert | endif
+" au BufRead,BufNewFile,BufEnter * filetype detect  " 开vim即检查文件类型
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}3?\ %c:%l/%L%)\
                                          " 设置在状态行显示的信息
 if has('mouse') | set mouse=a | endif    " 启用鼠标
@@ -1700,17 +1703,93 @@ cnoremap ᜎ  <c-u><bs><esc>a
 " ========================================================================
 " 模糊查找插件 LeaderF
 " alt+f
-inoremap <c-p> <esc>:Leaderf self<cr>
-inoremap <c-p>p <esc>:Leaderf file<cr>
-inoremap <c-p>f <esc>:Leaderf function<cr>
-inoremap <c-p>l <esc>:Leaderf line<cr>
-inoremap <c-p>t <esc>:Leaderf! bufTag --right --all<cr>
-inoremap <c-p>b <esc>:Leaderf buffer<cr>
-inoremap <c-p>m <esc>:Leaderf mru<cr>
-inoremap <c-p>c <esc>:Leaderf mru --cwd<cr>
+inoremap <c-p> <esc>:Leaderf! self<cr>
+inoremap <c-p>p <esc>:Leaderf! file<cr>
+inoremap <c-p>f <esc>:Leaderf! function<cr>
+inoremap <c-p>l <esc>:Leaderf! line<cr>
+inoremap <c-p>t <esc>:Leaderf! bufTag --right --stayOpen<cr>
+" inoremap <c-p>t <esc>:Leaderf! gtags [--current-buffer \| --all-buffers \| --all] --definition
+inoremap <c-p>b <esc>:Leaderf! buffer<cr>
+inoremap <c-p>m <esc>:Leaderf! mru<cr>
+inoremap <c-p>c <esc>:Leaderf! mru --cwd<cr>
+
+
+" RgKeyMap={
+    " \ ''
+    " \ 'CurrentDir': [ '<c-c>' ],
+    " \ 'CurrentBuffer': [ '<c-f>' ],
+    " \ 'OpenedBuffers': []
+    " \}
+" function! TemporaryStatus()
+    " if exists("g:temp_var")
+        " return g:temp_var
+    " else
+        " return ""
+    " endif
+" endfunction
+
+fun! RgStatusline()
+    if g:RgIfRegex
+        let regexText='\[\.\*\]'
+    else
+        let regexText='\ \.\*\ '
+    endif
+
+    if g:RgIfCase
+        let caseText='\[Aa\]'
+    else
+        let caseText='\ Aa\ '
+    endif
+
+    if g:RgIfWord
+        let wordText='\[\"\"\]'
+    else
+        let wordText='\ \"\"\ '
+    endif
+
+    if g:RgWhere=='CurrBuf'
+        let whereText='Current_Buffer'
+    elseif g:RgWhere=='AllBuf'
+        let whereText='All_Buffers'
+    elseif g:RgWhere=='CurDir'
+        let whereText='Current_Dir'
+    elseif g:RgWhere=='Add_a_Dir'
+    endif
+
+    exec 'set statusline='.regexText.'\|'.caseText.'\|'.wordText.'\|'.whereText.'\|'
+    redraw!
+endfun
+
+let g:RgLine=''
+
+fun! RgFind()
+    let originlStatuslin=&statusline
+
+    let g:RgIfCase=1
+    let g:RgIfRegex=1
+    let g:RgIfWord=1
+    let g:RgWhere='CurrBuf'
+
+    call RgStatusline()
+    let c=getchar()
+    call feedkeys(c)
+
+    exec 'set statusline='.originlStatuslin
+    redraw!
+endfun
+" inoremap ƒ <esc>:let g:RgLine=''|call RgFind()<cr>
+
+" 正则表达式匹配 当前目录下所有文件 目录栏不消失
+inoremap <c-p>r <esc>:Leaderf! rg --stayOpen -e ""<left>
+" 原文匹配 ctrl+"
+cnoremap ᜏ <c-e><space>-F
+" 当前打开文件
+cnoremap <c-f> <c-e><space>--current-buffer
+" 所有打开文件
+cnoremap <c-a> <c-e><space>--all-buffers
 
 " 最优结果显示在最下面
-let g:Lf_ReverseOrder=1
+" let g:Lf_ReverseOrder=1
 let g:Lf_CommandMap = {
     \ '<C-]>':      ['«', '<C-]>'],
     \ '<C-X>':      ['»', '<C-X>'],
@@ -1719,11 +1798,39 @@ let g:Lf_CommandMap = {
     \}
 
 let g:Lf_NormalMap = {
-    \ 'q': ['q', '<ESC>']
+        \ "File":    [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+        \ "Buffer":  [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+        \ "Mru":     [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+        \ "Tag":     [['<ESC>', ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+        \ "BufTag":  [['<ESC>', ':exec g:Lf_py "bufTagExplManager.quit()"<CR>']],
+        \ "Gtags":     [['<ESC>', ':exec g:Lf_py "gtagsExplManager.quit()"<CR>']],
+        \ "Function":[['<ESC>', ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+        \ "Line":    [['<ESC>', ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
+        \ "History": [['<ESC>', ':exec g:Lf_py "historyExplManager.quit()"<CR>']],
+        \ "Help":    [['<ESC>', ':exec g:Lf_py "helpExplManager.quit()"<CR>']],
+        \ "Self":    [['<ESC>', ':exec g:Lf_py "selfExplManager.quit()"<CR>']],
+        \ "Colorscheme":[['<ESC>', ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+        \ "Rg":[['<ESC>', ':exec g:Lf_py "rgExplManager.quit()"<CR>']]
+        \}
+
+
+inoremap ƒ <c-o>:CtrlSF<space>
+" inoremap ᜯ
+let g:ctrlsf_mapping={
+    \ "next": "ᜯ",
+    \ "prev": "ᜰ",
+    \ "open": ["<c-o>", "o"],
+    \ "tab":  ["<cr>", "<c-m>", "t"],
+    \ "vsplit": "«",
+    \ "split": "»",
+    \ "quit": ["q", "<esc>"]
     \ }
-" cnoremap † <C-T>
-
-
+let g:ctrlsf_position = 'right'
+let g:ctrlsf_default_view_mode = 'normal'
+let g:ctrlsf_auto_focus = {
+    \ "at": "done",
+    \ "duration_less_than": 1000
+    \ }
 " "=========================================================================
 " " ctrl+p：模糊搜索当前目录及其子目录下的所有文件
 " " ------------------------------------------------------------------------
