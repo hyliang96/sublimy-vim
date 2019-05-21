@@ -610,10 +610,10 @@ cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
 nnoremap ƒ :CtrlSF<space>
 vnoremap ƒ <esc>:CtrlSF<space>
 inoremap ƒ <c-o>:CtrlSF<space>
-" shift+alt+f  显示/隐藏搜索栏
-nnoremap ƒ :CtrlSF<space>
-vnoremap ƒ <esc>:CtrlSF<space>
-inoremap ƒ <c-o>:CtrlSF<space>
+" shift+alt+f  显示之前的搜索栏/终止搜索并关闭搜索栏
+nnoremap Ï :CtrlSFToggle<cr>
+vnoremap Ï <esc>:CtrlSFToggle<cr>
+inoremap Ï <c-o>:CtrlSFToggle<cr>
 
 " 在搜索结果栏中的快捷键
 " 下一条：alt+enter
@@ -621,7 +621,7 @@ inoremap ƒ <c-o>:CtrlSF<space>
 " 打开到新tab：enter，t
 " 打开到竖分屏：alt+|
 " 打开到横分屏：shift+alt+|
-" 退出搜索栏/提前结束搜索：esc，q
+" 终止搜索并关闭搜索栏：esc，q
 let g:ctrlsf_mapping={
     \ "next": "ᜯ",
     \ "prev": "ᜰ",
@@ -1742,99 +1742,12 @@ nnoremap ᜎ  i
 " 退出命令模式，进入insert模式
 cnoremap ᜎ  <c-u><bs><esc>a
 
-" noremap <esc> <NOP>
-" inoremap <esc> <NOP>
-
 " ========================================================================
 " 模糊查找插件 LeaderF
 " alt+f
 nnoremap <c-p> :Leaderf! self --stayOpen<cr>
 vnoremap <c-p> <esc>:Leaderf! self --stayOpen<cr>
 inoremap <c-p> <c-o>:Leaderf! self --stayOpen<cr>
-
-" inoremap <c-p>p <esc>:Leaderf! file<cr>
-" inoremap <c-p>f <esc>:Leaderf! function<cr>
-" inoremap <c-p>l <esc>:Leaderf! line<cr>
-" inoremap <c-p>t <esc>:Leaderf! bufTag --right --stayOpen<cr>
-" " inoremap <c-p>t <esc>:Leaderf! gtags [--current-buffer \| --all-buffers \| --all] --definition
-" inoremap <c-p>b <esc>:Leaderf! buffer<cr>
-" inoremap <c-p>m <esc>:Leaderf! mru<cr>
-" inoremap <c-p>c <esc>:Leaderf! mru --cwd<cr>
-
-
-" " RgKeyMap={
-    " " \ ''
-    " " \ 'CurrentDir': [ '<c-c>' ],
-    " " \ 'CurrentBuffer': [ '<c-f>' ],
-    " " \ 'OpenedBuffers': []
-    " " \}
-" " function! TemporaryStatus()
-    " " if exists("g:temp_var")
-        " " return g:temp_var
-    " " else
-        " " return ""
-    " " endif
-" " endfunction
-
-" fun! RgStatusline()
-    " if g:RgIfRegex
-        " let regexText='\[\.\*\]'
-    " else
-        " let regexText='\ \.\*\ '
-    " endif
-
-    " if g:RgIfCase
-        " let caseText='\[Aa\]'
-    " else
-        " let caseText='\ Aa\ '
-    " endif
-
-    " if g:RgIfWord
-        " let wordText='\[\"\"\]'
-    " else
-        " let wordText='\ \"\"\ '
-    " endif
-
-    " if g:RgWhere=='CurrBuf'
-        " let whereText='Current_Buffer'
-    " elseif g:RgWhere=='AllBuf'
-        " let whereText='All_Buffers'
-    " elseif g:RgWhere=='CurDir'
-        " let whereText='Current_Dir'
-    " elseif g:RgWhere=='Add_a_Dir'
-    " endif
-
-    " exec 'set statusline='.regexText.'\|'.caseText.'\|'.wordText.'\|'.whereText.'\|'
-    " redraw!
-" endfun
-
-" let g:RgLine=''
-
-" fun! RgFind()
-    " let originlStatuslin=&statusline
-
-    " let g:RgIfCase=1
-    " let g:RgIfRegex=1
-    " let g:RgIfWord=1
-    " let g:RgWhere='CurrBuf'
-
-    " call RgStatusline()
-    " let c=getchar()
-    " call feedkeys(c)
-
-    " exec 'set statusline='.originlStatuslin
-    " redraw!
-" endfun
-" " inoremap ƒ <esc>:let g:RgLine=''|call RgFind()<cr>
-
-" " 正则表达式匹配 当前目录下所有文件 目录栏不消失
-" inoremap <c-p>r <esc>:Leaderf! rg --stayOpen -e ""<left>
-" " 原文匹配 ctrl+"
-" cnoremap ᜏ <c-e><space>-F
-" " 当前打开文件
-" cnoremap <c-f> <c-e><space>--current-buffer
-" " 所有打开文件
-" cnoremap <c-a> <c-e><space>--all-buffers
 
 " 最优结果显示在最下面
 " let g:Lf_ReverseOrder=1
@@ -1860,8 +1773,6 @@ let g:Lf_NormalMap = {
         \ "Colorscheme":[['<ESC>', ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
         \ "Rg":[['<ESC>', ':exec g:Lf_py "rgExplManager.quit()"<CR>']]
         \}
-
-
 
 " "=========================================================================
 " " ctrl+p：模糊搜索当前目录及其子目录下的所有文件
@@ -1974,6 +1885,7 @@ let g:Lf_NormalMap = {
 " inoremap ∏ <esc>:execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " let g:ctrlp_funky_syntax_highlight = 1
 " let g:ctrlp_funky_matchtype = 'path'
+
 "=========================================================================
 " 括号补全
 " Plug 'Raimondi/delimitMate'

@@ -27,10 +27,10 @@ Plug 'hyliang96/nerdcommenter'
 Plug 'Yggdroot/indentLine'
 " , {'on' : 'IndentLinesToggle'}
 " 多光标
-" Plug 'hyliang96/vim-multiple-cursors'
-" 更好用的多光标
-Plug 'mg979/vim-visual-multi'
-" , {'branch': 'test'}
+    " Plug 'hyliang96/vim-multiple-cursors'
+    " 更好用的多光标
+    Plug 'mg979/vim-visual-multi'
+    " , {'branch': 'test'}
 " 界面框架（tab，提示栏等）美化
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -42,22 +42,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 " 用于支持我的vimrc中的双击选词高亮相同词
 Plug 'Tuxdude/mark.vim'
-
 " " 模糊搜索文件
-" Plug 'hyliang96/ctrlp.vim'
-" " , { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRU' ] }
-" " 模糊搜索文件内容的方法名
-" Plug 'tacahiroy/ctrlp-funky'
-" " , { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRU' ] }
-
-" 工程内模糊搜索文件、最近文（mru）件、函数/类/变量（tags）、命令历史、文件
-" 中的某一行、vim的help、marks"
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-
-
+    " Plug 'hyliang96/ctrlp.vim'
+    " " , { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRU' ] }
+    " " 模糊搜索文件内容的方法名
+    " Plug 'tacahiroy/ctrlp-funky'
+    " " , { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRU' ] }
+    " 工程内模糊搜索文件、最近文（mru）件、函数/类/变量（tags）、命令历史、文件、中的某一行、vim的help、marks"
+    Plug 'hyliang96/LeaderF', { 'do': './install.sh' }
 " 高速全局搜索插件
 Plug 'dyng/ctrlsf.vim'
-" Plug 'mileszs/ack.vim'
 " 自动补全
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " ultisnips是引擎
