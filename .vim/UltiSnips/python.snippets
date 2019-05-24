@@ -1,5 +1,5 @@
 snippet py "python head" b
-#! /usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 endsnippet
@@ -22,7 +22,7 @@ os.makedirs(${1:path}, exist_ok=True) # if no such path exists, iteratively crea
 endsnippet
 
 snippet here "the absolute path of the dir this file is in" w
-os.path.dirname(os.path.realpath(__file__)) ${1:# get absoltae path to the dir this is in}
+os.path.dirname(os.path.realpath(__file__)) ${1:# get absoltae path to the dir this file is in}
 endsnippet
 
 snippet importplt "import plt" w

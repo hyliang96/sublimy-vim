@@ -11,7 +11,7 @@ snippet here "get the absolute path of the dir this file is in" b
 ${1:here}=\$(cd "\$(dirname "\${BASH_SOURCE[0]-\$0}")"; pwd)
 endsnippet
 
-snippet getopt "the template of getopt argparsing, long arg is supported" b
+snippet argparse "the template of getopt argparsing, long arg is supported" b
 
 # 使用规则
 # bash/zsh getopt_demo.sh 一堆参数，其前中后均可有 余参数
