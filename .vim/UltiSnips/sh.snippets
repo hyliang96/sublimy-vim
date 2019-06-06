@@ -2,7 +2,21 @@ snippet houtai "run on background, output to a file" b
 ( (
     ${1:# content}
 ) & ) > ${2:/dev/null} 2>&1
-]]>
+endsnippet
+
+snippet paral "parallel running" b
+rand="\$RANDOM"
+log_file="/tmp/parallels\$rand"
+(
+    ${1:for ...}; do
+    {
+        ${2:# content}
+    } >> \$log_file & # stdout
+    done
+    wait
+) >& ${3:/dev/null} # stdout, warning, error
+cat \$log_file
+rm \$log_file
 endsnippet
 
 snippet here "get the absolute path of the dir this file is in" b
@@ -19,7 +33,7 @@ snippet argparse "the template of getopt argparsing, long arg is supported" b
     #             短参数                           长参数
     # 无选项       -a                              --a-long
     # 必有选项     -bss          -b ss             --b-long ss
-    #             -b'sds sds'   -b 'sds sds'      --b-long 'sds sds'
+    #              -b'sds sds'   -b 'sds sds'      --b-long 'sds sds'
     # 可有选项若无  -c                              --c-long
     # 可有选项若有  -css          -c'sds sds'  只可短参数，选项与参数间不得有空格
 # 余参数：不以'-'开头
