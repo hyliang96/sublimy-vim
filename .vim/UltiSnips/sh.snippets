@@ -11,10 +11,10 @@ log_file="/tmp/parallels\$rand"
     ${1:for ...}; do
     {
         ${2:# content}
-    } >> \$log_file & # stdout
+    } >> ${3:2>&1} \$log_file &
     done
     wait
-) >& ${3:/dev/null} # stdout, warning, error
+) >& ${4:/dev/null} # stdout, warning, error
 cat \$log_file
 rm \$log_file
 endsnippet
