@@ -29,8 +29,7 @@ Plug 'Yggdroot/indentLine'
 " 多光标
     " Plug 'hyliang96/vim-multiple-cursors'
     " 更好用的多光标
-    Plug 'mg979/vim-visual-multi'
-    " , {'branch': 'test'}
+    Plug 'mg979/vim-visual-multi' , {'tag': 'v0.2'}
 " 界面框架（tab，提示栏等）美化
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
