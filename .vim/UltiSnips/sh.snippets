@@ -23,6 +23,9 @@ snippet here "get the absolute path of the dir this file is in" b
 # get absoltae path to the dir this is in, work in bash, zsh
 # if you want transfer symbolic link to true path, just change \`pwd\` to \`pwd -P\`
 ${1:here}=\$(cd "\$(dirname "\${BASH_SOURCE[0]-\$0}")"; pwd)
+
+# release this variable in the end of file
+unset -v $1
 endsnippet
 
 snippet argparse "the template of getopt argparsing, long arg is supported" b
