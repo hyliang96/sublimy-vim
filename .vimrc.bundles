@@ -52,7 +52,8 @@ Plug 'Tuxdude/mark.vim'
 " 高速全局搜索插件
 Plug 'dyng/ctrlsf.vim'
 " 自动补全
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " ultisnips是引擎
 Plug 'SirVer/ultisnips'
 " 所有常用snippet都在vim-snippets里
