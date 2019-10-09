@@ -29,7 +29,8 @@ Plug 'Yggdroot/indentLine'
 " 多光标
     " Plug 'hyliang96/vim-multiple-cursors'
     " 更好用的多光标
-    Plug 'mg979/vim-visual-multi' , {'tag': 'v0.2'}
+    Plug 'mg979/vim-visual-multi'
+    " Plug 'mg979/vim-visual-multi' , {'tag': 'v0.2'}
 " 界面框架（tab，提示栏等）美化
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -52,7 +53,9 @@ Plug 'Tuxdude/mark.vim'
 " 高速全局搜索插件
 Plug 'dyng/ctrlsf.vim'
 " 自动补全
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
+" mac 上的 conda里的python无法编译ycm，需要系统自带的Python
+" 详见 https://github.com/ycm-core/YouCompleteMe#ycm-does-not-work-with-my-anaconda-python-setup
+Plug 'ycm-core/YouCompleteMe', { 'do': '~/.vim/install_ycm.sh' }
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " ultisnips是引擎
 Plug 'SirVer/ultisnips'

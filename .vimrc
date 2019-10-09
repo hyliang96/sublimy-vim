@@ -773,12 +773,68 @@ let g:multi_cursor_quit_key            = '≈' " alt+x
 let g:VM_maps = {}
 " ------------------------------------------------------------------------
 "  进入多光标模式：
+
+" " v模式下， <esc>alt+a 清空多光标选区，再将当前区域加入多光标选区
+" let g:VM_maps["Visual All"]               = '<esc>å'
+
 " v模式下，alt+a：将选中区域加入多光标选区
-let g:VM_maps["Visual Add"]               = 'å'
-" v模式下， <esc>alt+a 清空多光标选区，再将当前区域加入多光标选区
-let g:VM_maps["Visual All"]               = '<esc>å'
 " i/n 模式下，alt+a，光标所在区加一个多光标
-let g:VM_maps["Add Cursor At Pos"]        = 'å'
+let g:VM_maps["Visual Add"]               = '<plug>(AddRegion)'
+let g:VM_maps["Add Cursor At Pos"]        = '<plug>(AddCursor)'
+vmap å <plug>(AddRegion)
+nmap å <plug>(AddCursor)
+imap å <esc><plug>(AddCursor)
+
+
+" -------------------------------------------------------------------------
+"  使用说明
+" -------------------------------------------------------------------------
+" 如何进入多选模式（多光标v模式）
+"
+"   i/n模式下
+"     ctrl+d，选中光标所在词，继续按ctrl+d以增选整词
+"         q: 跳过一个
+"         Q: 清除这个光标,返回上一个
+"     shift+ctrl+d 选中所有与光标所在词相同的整词
+"
+"   v模式下
+"     ctrl+d，增选与选区相同的文字，不必是整词
+"     shift+ctrl+d，选中所有与选区相同的文字，不必是整词
+"<Plug>(VM-LazyNoh)     ctrl+l，选中多行，将其转为每行一个光标
+"
+"   多光标v模式下
+"     鼠标选中一个区域，alt+a，添加到多光标选区
+" ------------------------------------------------------------------------
+" 如何进入多位置模式（多光标v模式）
+"   i/n 模式下，alt+a，添加一个光标位置，形如宽度为1的选区
+"   在多光标n模式下，鼠标点击位置，alt+a，继续添加一个光标位置
+"
+" -------------------------------------------------------------------------
+" 在多光标n/v模式下：
+    "   S-Left/Right：左右移动选区边界
+    "   o 切换在选区左还是右边界
+    "   移动边：界h左，l右; j下，k上；0行首，^行非空之首，$行尾
+    " p: 用剪切板替换各选区
+    " c：清空当前各选区，加入插入模式
+    " a: 选区后进入插入模式
+    " i: 选区前进入插入模式
+        " <esc>/<c-i>: 退出多光标i模式
+        " <esc>/<c-'>: 退出多光标v模式
+    " <esc>: 在多光标n/v模式，按它退出多光标模式
+" ------------------------------------------------------------------------
+
+let g:VM_maps['Find Under']         = '<plug>(FindUnder)'   " 增选下一个与本词相同的词
+let g:VM_maps['Find Subword Under'] = '<plug>(FindUnder)'   " 增选下一个与选区相同的文字
+let g:VM_maps["Select All"]         = '<plug>(SelectAll)'  " 全选
+let g:VM_maps["Remove Region"]      = 'Q'     " 清除这个光标
+let g:VM_maps['Skip Region']        = 'q'     " 跳过一个
+" shift+ctrl+d： ᜤ
+nmap <c-d> <plug>(FindUnder)
+nmap  ᜤ   <plug>(SelectAll)
+vmap <c-d> :<c-u>stopinsert<cr>gv<plug>(FindUnder)
+vmap  ᜤ  :<c-u>stopinsert<cr>gv<plug>(FindUnder)<plug>(SelectAll)
+imap <c-d> <esc><plug>(FindUnder)
+imap ᜤ  <esc><plug>(SelectAll)
 " ctrl+l: 多行选择转多行光标：多行选中（v模式），选区变为多行光标的insert模式，光标都在选区开头字符所在列
 " FIXME 选区中有宽字符时会出错
 let g:VM_maps["Visual Cursors"]           = '<plug>(MultiLineCurosr)'
@@ -791,47 +847,6 @@ fun! VCtrlL() range
     endif
 endf
 vmap  <c-l> :call VCtrlL()<cr>
-
-" -------------------------------------------------------------------------
-"  使用说明
-" -------------------------------------------------------------------------
-" i/n模式下
-"   ctrl+d，选中光标所在词，继续按ctrl+d以增选整词
-""      <c-q>：跳过一个
-"       <c-x>: 清除这个光标
-"   shift+ctrl+d 选中所有与光标所在词相同的整词
-" -------------------------------------------------------------------------
-" v模式下
-"   ctrl+d，增选与选区相同的文字，不必是整词
-"   shift+ctrl+d，选中所有与选区相同的文字，不必是整词
-"   ctrl+l，选中多行，将其转为每行一个光标
-" 上述按键按完后，都进入到多光标的n模式
-" ------------------------------------------------------------------------
-" 在多光标n模式下：
-    "   S-Left/Right：左右移动选区边界
-    "   o 切换在选区左还是右边界
-    " p: 用剪切板替换各选区
-    " c：清空当前各选区，加入插入模式
-    " a: 选区后进入插入模式
-    " i: 选区前进入插入模式
-        " <esc>/<c-i>: 退出多光标i模式
-        " <esc>/<c-'>: 退出多光标v模式
-    " <esc>: 在多光标n模式，按它退出多光标模式
-" ------------------------------------------------------------------------
-
-let g:VM_maps['Find Under']         = '<plug>(FindUnder)'   " 增选下一个与本词相同的词
-let g:VM_maps['Find Subword Under'] = '<plug>(FindUnder)'   " 增选下一个与选区相同的文字
-let g:VM_maps["Select All"]         = '<plug>(SelectAll)'  " 全选
-let g:VM_maps["Remove Region"]      = '<c-x>'     " 清除这个光标
-let g:VM_maps['Alt Skip']           = '<c-n>'     " 跳过一个
-" shift+ctrl+d： ᜤ
-nmap <c-d> <plug>(FindUnder)
-nmap  ᜤ   <plug>(SelectAll)
-vmap <c-d> :<c-u>stopinsert<cr>gv<plug>(FindUnder)
-vmap  ᜤ  :<c-u>stopinsert<cr>gv<plug>(FindUnder)<plug>(SelectAll)
-imap <c-d> <esc><plug>(FindUnder)
-imap ᜤ  <esc><plug>(SelectAll)
-
 
 " let g:VM_maps["Start Regex Search"]       = '<plug>(RegExSearch)'
 " let g:VM_maps["Visual Regex"]             = '<plug>(RegExSearch)'
