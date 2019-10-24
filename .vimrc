@@ -158,7 +158,8 @@ if has('gui_running')
 endif
 let g:airline#extensions#tabline#enabled = 1      " 标签页栏美化
 let g:airline#extensions#branch#enabled=1         " 显示 git 分支
-" let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#hunks#enabled=0          " ' +n ~m -k '显示在 git 分支左侧, 表示增/改/删的行数
+        " 它和‘保存时删除行尾空字符’ 兼容不好，若二者皆开，则保存文件时' +n ~m -k '会闪烁多次
 let g:airline_theme='gruvbox'                     " 状态栏配色
 " 其他方案搭配
 " (colorscheme, airline_theme) = (vimmy_molokai, badwolf) | (gruvbox,gruvbox)
@@ -1679,6 +1680,7 @@ inoremap <plug>(DeleteLine) <c-g>u<c-o>0<C-o>v$"_d
 "=========================================================================
 " ctrl+s保存
 autocmd BufWritePost * :%s/\s\+$//e  " 保存时自动删除行尾空格
+
 
 function! UpDate()
     let l=line('.')
