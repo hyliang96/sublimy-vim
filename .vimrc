@@ -9,7 +9,7 @@
 if filereadable(expand("~/.vimrc.bundles"))
     source ~/.vimrc.bundles
 endif
-
+" let g:ycm_log_level = 'debug'
 "-----------------------------------------------------------------
 " 基础设置
 "-----------------------------------------------------------------
