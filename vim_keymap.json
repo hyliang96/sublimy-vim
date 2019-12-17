@@ -40,16 +40,16 @@
   },
   "Triggers" : [
     {
-      "partial" : true,
+      "action" : "SetDirectoryTrigger",
       "parameter" : "\\1",
       "regex" : " \\w+@[\\w.\\-]+  ([^]+) ",
-      "action" : "SetDirectoryTrigger"
+      "partial" : true
     },
     {
-      "action" : "SetHostnameTrigger",
+      "partial" : true,
       "parameter" : "\\1@\\2",
       "regex" : " (\\w+)@([\\w.\\-]+)  [^]+ ",
-      "partial" : true
+      "action" : "SetHostnameTrigger"
     },
     {
       "regex" : " \\w+@[\\w.\\-]+  [^]+ ",
@@ -62,28 +62,28 @@
       "partial" : true
     },
     {
-      "partial" : false,
+      "action" : "MuteCoprocessTrigger",
       "parameter" : "\/usr\/local\/bin\/iterm2-send-zmodem.sh",
       "regex" : "rz waiting to receive.\\*\\*B0100",
-      "action" : "MuteCoprocessTrigger"
-    },
-    {
-      "action" : "MuteCoprocessTrigger",
-      "parameter" : "\/usr\/local\/bin\/iterm2-recv-zmodem.sh",
-      "regex" : "\\*\\*B00000000000000",
-      "partial" : false
-    },
-    {
-      "action" : "MuteCoprocessTrigger",
-      "parameter" : "python \/Users\/mac\/Desktop\/终端脚本\/sublime_open_remote_dir.py \\1 \\2 '\\3'",
-      "regex" : "user: ([\\w]+); hostname: ([\\w.\\-]+); path: '([^\\n]+)'",
       "partial" : false
     },
     {
       "partial" : false,
+      "parameter" : "\/usr\/local\/bin\/iterm2-recv-zmodem.sh",
+      "regex" : "\\*\\*B00000000000000",
+      "action" : "MuteCoprocessTrigger"
+    },
+    {
+      "partial" : false,
+      "parameter" : "python \/Users\/mac\/Desktop\/终端脚本\/sublime_open_remote_dir.py \\1 \\2 '\\3'",
+      "regex" : "user: ([\\w]+); hostname: ([\\w.\\-]+); path: '([^\\n]+)'",
+      "action" : "MuteCoprocessTrigger"
+    },
+    {
+      "action" : "MuteCoprocessTrigger",
       "parameter" : "open -a \"\/Applications\/Sublime Text.app\"",
       "regex" : "\"open sublime on mac client\"",
-      "action" : "MuteCoprocessTrigger"
+      "partial" : false
     },
     {
       "regex" : "llocal open app: open; user: ([\\w]+); hostname: ([\\w.\\-]+); path: ([^\\n]+)",
@@ -96,10 +96,10 @@
       "parameter" : "python \/Users\/mac\/Desktop\/终端脚本\/open_in_sshfs.py sub \\1 \\2 \\3"
     },
     {
-      "partial" : false,
-      "parameter" : "zsh \/Users\/mac\/Desktop\/终端脚本\/remote_open\/remote_open.sh \"\\1\"",
+      "action" : "MuteCoprocessTrigger",
+      "parameter" : "zsh \/Users\/mac\/Desktop\/终端脚本\/remote_open\/remote_open.sh \"\\1\" 2> \/dev\/null",
       "regex" : "remote open: ([^\\n]+)",
-      "action" : "MuteCoprocessTrigger"
+      "partial" : false
     }
   ],
   "Mouse Reporting" : true,
@@ -133,6 +133,7 @@
     "Green Component" : 0.9268307089805603
   },
   "BM Growl" : true,
+  "AWDS Window Directory" : "",
   "Ansi 3 Color" : {
     "Red Component" : 0.808441162109375,
     "Color Space" : "sRGB",
@@ -159,475 +160,476 @@
   },
   "Unlimited Scrollback" : false,
   "Custom Command" : "No",
+  "AWDS Tab Option" : "No",
   "HotKey Key Code" : 49,
   "Keyboard Map" : {
     "0x6e-0xc0000" : {
-      "Text" : "ᜦ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜦ"
     },
     "0xd-0xa0000" : {
-      "Text" : "ᜰ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜰ"
     },
     "0x7c-0xa0000" : {
-      "Action" : 12,
-      "Text" : "»"
+      "Text" : "»",
+      "Action" : 12
     },
     "0x65-0x80000" : {
-      "Action" : 12,
-      "Text" : "ᜢ"
+      "Text" : "ᜢ",
+      "Action" : 12
     },
     "0xf702-0x220000" : {
-      "Text" : "[1;2D",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2D"
     },
     "0xd-0x40000" : {
-      "Text" : "ᜫ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜫ"
     },
     "0xf700-0x280000" : {
-      "Action" : 12,
-      "Text" : "ᜅ"
+      "Text" : "ᜅ",
+      "Action" : 12
     },
     "0x3-0x200000" : {
-      "Text" : "0xd",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0xd"
     },
     "0x36-0x200000" : {
-      "Text" : "6",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "6"
     },
     "0xf703-0x240000" : {
-      "Text" : "[1;5C",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;5C"
     },
     "0x38-0x40000" : {
-      "Text" : "0x7f",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x7f"
     },
     "0x76-0x80000" : {
-      "Text" : "√",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "√"
     },
     "0xf700-0x2c0000" : {
-      "Action" : 12,
-      "Text" : "ᜋ"
+      "Text" : "ᜋ",
+      "Action" : 12
     },
     "0x77-0xc0000" : {
-      "Text" : "ᜨ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜨ"
     },
     "0x3b-0x40000" : {
-      "Text" : "ᜪ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜪ"
     },
     "0x33-0x200000" : {
-      "Text" : "3",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "3"
     },
     "0x57-0x60000" : {
-      "Action" : 12,
-      "Text" : "ᜐ"
+      "Text" : "ᜐ",
+      "Action" : 12
     },
     "0x3d-0x80000" : {
-      "Action" : 12,
-      "Text" : "≠"
+      "Text" : "≠",
+      "Action" : 12
     },
     "0xf72b-0x20000" : {
-      "Text" : "[1;2F",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2F"
     },
     "0xf705-0x20000" : {
-      "Text" : "[1;2Q",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2Q"
     },
     "0x33-0x40000" : {
-      "Text" : "0x1b",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x1b"
     },
     "0x5a-0x60000" : {
-      "Action" : 12,
-      "Text" : "ᜃ"
+      "Text" : "ᜃ",
+      "Action" : 12
     },
     "0xd-0x80000" : {
-      "Text" : "ᜯ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜯ"
     },
     "0x5b-0x80000" : {
-      "Action" : 12,
-      "Text" : "ᜠ"
+      "Text" : "ᜠ",
+      "Action" : 12
     },
     "0xf70a-0x20000" : {
-      "Text" : "[18;2~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[18;2~"
     },
     "0xf702-0x240000" : {
-      "Text" : "[1;5D",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;5D"
     },
     "0x2e-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜱ"
+      "Text" : "ᜱ",
+      "Action" : 12
     },
     "0xf703-0x260000" : {
-      "Text" : "[1;6C",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;6C"
     },
     "0xf729-0x20000" : {
-      "Text" : "[1;2H",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2H"
     },
     "0x3d-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜂ"
+      "Text" : "ᜂ",
+      "Action" : 12
     },
     "0xf708-0x20000" : {
-      "Text" : "[15;2~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[15;2~"
     },
     "0xf703-0x2a0000" : {
-      "Text" : "[F",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[F"
     },
     "0x69-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜎ"
+      "Text" : "ᜎ",
+      "Action" : 12
     },
     "0xf70d-0x20000" : {
-      "Text" : "[21;2~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[21;2~"
     },
     "0x5b-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜁ"
+      "Text" : "ᜁ",
+      "Action" : 12
     },
     "0xf701-0x220000" : {
-      "Text" : "[1;2B",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2B"
     },
     "0x30-0x200000" : {
-      "Text" : "0",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "0"
     },
     "0x35-0x40000" : {
-      "Text" : "0x1d",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x1d"
     },
     "0x5d-0x80000" : {
-      "Action" : 12,
-      "Text" : "ᜡ"
+      "Text" : "ᜡ",
+      "Action" : 12
     },
     "0x37-0x200000" : {
-      "Text" : "7",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "7"
     },
     "0x6c-0x80000" : {
-      "Action" : 12,
-      "Text" : "¬"
+      "Text" : "¬",
+      "Action" : 12
     },
     "0x7f-0x20000" : {
-      "Text" : "0x05 0x15",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x05 0x15"
     },
     "0xf702-0x260000" : {
-      "Text" : "[1;6D",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;6D"
     },
     "0x46-0xa0000" : {
-      "Text" : "Ï",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "Ï"
     },
     "0x2b-0xa0000" : {
-      "Action" : 12,
-      "Text" : "±"
+      "Text" : "±",
+      "Action" : 12
     },
     "0xf72b-0x40000" : {
-      "Text" : "[1;5F",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;5F"
     },
     "0x34-0x200000" : {
-      "Text" : "4",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "4"
     },
     "0x2d-0x200000" : {
-      "Text" : "-",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "-"
     },
     "0xf703-0x280000" : {
-      "Action" : 10,
-      "Text" : "f"
+      "Text" : "f",
+      "Action" : 10
     },
     "0xf702-0x2a0000" : {
-      "Text" : "[H",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[H"
     },
     "0xf700-0x220000" : {
-      "Text" : "[1;2A",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2A"
     },
     "0x2a-0x200000" : {
-      "Text" : "*",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "*"
     },
     "0xf703-0x2c0000" : {
-      "Action" : 12,
-      "Text" : "ᜊ"
+      "Text" : "ᜊ",
+      "Action" : 12
     },
     "0x37-0x40000" : {
-      "Text" : "0x1f",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x1f"
     },
     "0xf701-0x240000" : {
-      "Text" : "[1;5B",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;5B"
     },
     "0xf729-0x40000" : {
-      "Text" : "[1;5H",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;5H"
     },
     "0x5f-0xa0000" : {
-      "Action" : 12,
-      "Text" : "ᜭ"
-    },
-    "0x6e-0x80000" : {
-      "Text" : "ᜩ",
-      "Action" : 12
-    },
-    "0x2d-0x80000" : {
-      "Action" : 12,
-      "Text" : "–"
-    },
-    "0x50-0xa0000" : {
-      "Action" : 12,
-      "Text" : "∏"
-    },
-    "0xf709-0x20000" : {
-      "Text" : "[17;2~",
-      "Action" : 10
-    },
-    "0x2e-0x200000" : {
-      "Text" : ".",
-      "Action" : 12
-    },
-    "0x57-0xa0000" : {
-      "Action" : 12,
-      "Text" : "„"
-    },
-    "0xf702-0x280000" : {
-      "Action" : 10,
-      "Text" : "b"
-    },
-    "0x66-0x80000" : {
-      "Action" : 12,
-      "Text" : "ƒ"
-    },
-    "0xf706-0x20000" : {
-      "Text" : "[1;2R",
-      "Action" : 10
-    },
-    "0x32-0x40000" : {
-      "Text" : "0x00",
-      "Action" : 11
-    },
-    "0xf728-0x80000" : {
-      "Text" : "d",
-      "Action" : 10
-    },
-    "0xf70b-0x20000" : {
-      "Text" : "[19;2~",
-      "Action" : 10
-    },
-    "0xd-0x60000" : {
-      "Text" : "ᜬ",
-      "Action" : 12
-    },
-    "0xf72b-0x0" : {
-      "Text" : "[F",
-      "Action" : 10
-    },
-    "0x31-0x200000" : {
-      "Text" : "1",
-      "Action" : 12
-    },
-    "0x77-0x80000" : {
-      "Action" : 12,
-      "Text" : "∑"
-    },
-    "0xf702-0x2c0000" : {
-      "Action" : 12,
-      "Text" : "ᜉ"
-    },
-    "0x5a-0xa0000" : {
-      "Action" : 12,
-      "Text" : "¸"
-    },
-    "0x5b-0xc0000" : {
-      "Text" : "ᜣ",
-      "Action" : 12
-    },
-    "0x38-0x200000" : {
-      "Text" : "8",
-      "Action" : 12
-    },
-    "0xf700-0x240000" : {
-      "Text" : "[1;5A",
-      "Action" : 10
-    },
-    "0x2d-0x40000" : {
-      "Text" : "0x1f",
-      "Action" : 11
-    },
-    "0xf70e-0x20000" : {
-      "Text" : "[23;2~",
-      "Action" : 10
-    },
-    "0x70-0x80000" : {
-      "Action" : 12,
-      "Text" : "π"
-    },
-    "0xf701-0x260000" : {
-      "Text" : "[1;6B",
-      "Action" : 10
-    },
-    "0x7f-0x80000" : {
-      "Text" : "0x1b 0x7f",
-      "Action" : 11
-    },
-    "0x61-0x80000" : {
-      "Text" : "å",
-      "Action" : 12
-    },
-    "0x7f-0xa0000" : {
-      "Action" : 11,
-      "Text" : "0x15"
-    },
-    "0x4c-0x60000" : {
       "Text" : "ᜭ",
       "Action" : 12
     },
-    "0x35-0x200000" : {
-      "Text" : "5",
+    "0x6e-0x80000" : {
+      "Action" : 12,
+      "Text" : "ᜩ"
+    },
+    "0x2d-0x80000" : {
+      "Text" : "–",
       "Action" : 12
+    },
+    "0x50-0xa0000" : {
+      "Text" : "∏",
+      "Action" : 12
+    },
+    "0xf709-0x20000" : {
+      "Action" : 10,
+      "Text" : "[17;2~"
+    },
+    "0x2e-0x200000" : {
+      "Action" : 12,
+      "Text" : "."
+    },
+    "0x57-0xa0000" : {
+      "Text" : "„",
+      "Action" : 12
+    },
+    "0xf702-0x280000" : {
+      "Text" : "b",
+      "Action" : 10
+    },
+    "0x66-0x80000" : {
+      "Text" : "ƒ",
+      "Action" : 12
+    },
+    "0xf706-0x20000" : {
+      "Action" : 10,
+      "Text" : "[1;2R"
+    },
+    "0x32-0x40000" : {
+      "Action" : 11,
+      "Text" : "0x00"
+    },
+    "0xf728-0x80000" : {
+      "Action" : 10,
+      "Text" : "d"
+    },
+    "0xf70b-0x20000" : {
+      "Action" : 10,
+      "Text" : "[19;2~"
+    },
+    "0xd-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜬ"
+    },
+    "0xf72b-0x0" : {
+      "Action" : 10,
+      "Text" : "[F"
+    },
+    "0x31-0x200000" : {
+      "Action" : 12,
+      "Text" : "1"
+    },
+    "0x77-0x80000" : {
+      "Text" : "∑",
+      "Action" : 12
+    },
+    "0xf702-0x2c0000" : {
+      "Text" : "ᜉ",
+      "Action" : 12
+    },
+    "0x5a-0xa0000" : {
+      "Text" : "¸",
+      "Action" : 12
+    },
+    "0x5b-0xc0000" : {
+      "Action" : 12,
+      "Text" : "ᜣ"
+    },
+    "0x38-0x200000" : {
+      "Action" : 12,
+      "Text" : "8"
+    },
+    "0xf700-0x240000" : {
+      "Action" : 10,
+      "Text" : "[1;5A"
+    },
+    "0x2d-0x40000" : {
+      "Action" : 11,
+      "Text" : "0x1f"
+    },
+    "0xf70e-0x20000" : {
+      "Action" : 10,
+      "Text" : "[23;2~"
+    },
+    "0x70-0x80000" : {
+      "Text" : "π",
+      "Action" : 12
+    },
+    "0xf701-0x260000" : {
+      "Action" : 10,
+      "Text" : "[1;6B"
+    },
+    "0x7f-0x80000" : {
+      "Action" : 11,
+      "Text" : "0x1b 0x7f"
+    },
+    "0x61-0x80000" : {
+      "Action" : 12,
+      "Text" : "å"
+    },
+    "0x7f-0xa0000" : {
+      "Text" : "0x15",
+      "Action" : 11
+    },
+    "0x4c-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜭ"
+    },
+    "0x35-0x200000" : {
+      "Action" : 12,
+      "Text" : "5"
     },
     "0x62-0xc0000" : {
-      "Text" : "ᜧ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜧ"
     },
     "0xf701-0x2a0000" : {
-      "Action" : 12,
-      "Text" : "ᜈ"
+      "Text" : "ᜈ",
+      "Action" : 12
     },
     "0x34-0x40000" : {
-      "Text" : "0x1c",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x1c"
     },
     "0x4d-0xa0000" : {
-      "Action" : 12,
-      "Text" : "Â"
+      "Text" : "Â",
+      "Action" : 12
     },
     "0x5c-0x80000" : {
-      "Action" : 12,
-      "Text" : "«"
+      "Text" : "«",
+      "Action" : 12
     },
     "0x2b-0x200000" : {
-      "Text" : "+",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "+"
     },
     "0xf729-0x0" : {
-      "Text" : "[H",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[H"
     },
     "0x44-0x60000" : {
-      "Text" : "ᜤ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜤ"
     },
     "0x5d-0xc0000" : {
-      "Text" : "ᜥ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜥ"
     },
     "0x2f-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜀ"
+      "Text" : "ᜀ",
+      "Action" : 12
     },
     "0xf739-0x0" : {
-      "Text" : "",
-      "Action" : 13
+      "Action" : 13,
+      "Text" : ""
     },
     "0x7a-0x80000" : {
-      "Action" : 12,
-      "Text" : "Ω"
+      "Text" : "Ω",
+      "Action" : 12
     },
     "0xf700-0x260000" : {
-      "Text" : "[1;6A",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;6A"
     },
     "0xf707-0x20000" : {
-      "Text" : "[1;2S",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2S"
     },
     "0xf703-0x220000" : {
-      "Text" : "[1;2C",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2C"
     },
     "0xf70f-0x20000" : {
-      "Text" : "[24;2~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[24;2~"
     },
     "0x27-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜏ"
+      "Text" : "ᜏ",
+      "Action" : 12
     },
     "0xf701-0x280000" : {
-      "Action" : 12,
-      "Text" : "ᜆ"
+      "Text" : "ᜆ",
+      "Action" : 12
     },
     "0xf70c-0x20000" : {
-      "Text" : "[20;2~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[20;2~"
     },
     "0x2f-0x200000" : {
-      "Text" : "\/",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "\/"
     },
     "0xf700-0x2a0000" : {
-      "Action" : 12,
-      "Text" : "ᜇ"
+      "Text" : "ᜇ",
+      "Action" : 12
     },
     "0x36-0x40000" : {
-      "Text" : "0x1e",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x1e"
     },
     "0xf704-0x20000" : {
-      "Text" : "[1;2P",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2P"
     },
     "0x74-0x80000" : {
-      "Action" : 12,
-      "Text" : "†"
+      "Text" : "†",
+      "Action" : 12
     },
     "0xf701-0x2c0000" : {
-      "Action" : 12,
-      "Text" : "ᜌ"
+      "Text" : "ᜌ",
+      "Action" : 12
     },
     "0x32-0x200000" : {
-      "Text" : "2",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "2"
     },
     "0x6d-0x80000" : {
-      "Action" : 12,
-      "Text" : "µ"
+      "Text" : "µ",
+      "Action" : 12
     },
     "0x46-0x60000" : {
-      "Text" : "ᜮ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜮ"
     },
     "0x39-0x200000" : {
-      "Text" : "9",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "9"
     },
     "0xf728-0xa0000" : {
-      "Action" : 11,
-      "Text" : "0x0b"
+      "Text" : "0x0b",
+      "Action" : 11
     }
   },
   "Ansi 14 Color" : {
@@ -721,9 +723,9 @@
   },
   "Smart Cursor Color" : false,
   "Semantic History" : {
-    "editor" : "com.sublimetext.3",
     "action" : "best editor",
-    "text" : ""
+    "text" : "",
+    "editor" : "com.sublimetext.3"
   },
   "Ambiguous Double Width" : false,
   "Ansi 0 Color" : {
@@ -734,6 +736,7 @@
     "Green Component" : 0.15686274509803921
   },
   "Cursor Type" : 1,
+  "AWDS Pane Directory" : "",
   "Blur" : false,
   "Normal Font" : "MesloLGSDZForPowerline-Regular 12",
   "Application Keypad Allowed" : false,
@@ -746,6 +749,8 @@
     "Green Component" : 0.78105825185775757
   },
   "Space" : 0,
+  "AWDS Tab Directory" : "",
+  "AWDS Pane Option" : "Recycle",
   "HotKey Window AutoHides" : false,
   "Command" : "",
   "Terminal Type" : "xterm-256color",
@@ -780,6 +785,7 @@
   "Initial Text" : "",
   "Screen" : -1,
   "HotKey Characters Ignoring Modifiers" : " ",
+  "AWDS Window Option" : "No",
   "Bound Hosts" : [
 
   ],
@@ -795,6 +801,7 @@
   "HotKey Alternate Shortcuts" : [
 
   ],
+  "Unicode Normalization" : 0,
   "Visual Bell" : true,
   "Custom Directory" : "Recycle",
   "Ansi 5 Color" : {
@@ -846,16 +853,16 @@
   },
   "Triggers" : [
     {
-      "partial" : true,
+      "action" : "SetDirectoryTrigger",
       "parameter" : "\\1",
       "regex" : " \\w+@[\\w.\\-]+  ([^]+) ",
-      "action" : "SetDirectoryTrigger"
+      "partial" : true
     },
     {
-      "action" : "SetHostnameTrigger",
+      "partial" : true,
       "parameter" : "\\1@\\2",
       "regex" : " (\\w+)@([\\w.\\-]+)  [^]+ ",
-      "partial" : true
+      "action" : "SetHostnameTrigger"
     },
     {
       "regex" : " \\w+@[\\w.\\-]+  [^]+ ",
@@ -868,28 +875,28 @@
       "partial" : true
     },
     {
-      "partial" : false,
+      "action" : "MuteCoprocessTrigger",
       "parameter" : "\/usr\/local\/bin\/iterm2-send-zmodem.sh",
       "regex" : "rz waiting to receive.\\*\\*B0100",
-      "action" : "MuteCoprocessTrigger"
-    },
-    {
-      "action" : "MuteCoprocessTrigger",
-      "parameter" : "\/usr\/local\/bin\/iterm2-recv-zmodem.sh",
-      "regex" : "\\*\\*B00000000000000",
-      "partial" : false
-    },
-    {
-      "action" : "MuteCoprocessTrigger",
-      "parameter" : "python \/Users\/mac\/Desktop\/终端脚本\/sublime_open_remote_dir.py \\1 \\2 '\\3'",
-      "regex" : "user: ([\\w]+); hostname: ([\\w.\\-]+); path: '([^\\n]+)'",
       "partial" : false
     },
     {
       "partial" : false,
+      "parameter" : "\/usr\/local\/bin\/iterm2-recv-zmodem.sh",
+      "regex" : "\\*\\*B00000000000000",
+      "action" : "MuteCoprocessTrigger"
+    },
+    {
+      "partial" : false,
+      "parameter" : "python \/Users\/mac\/Desktop\/终端脚本\/sublime_open_remote_dir.py \\1 \\2 '\\3'",
+      "regex" : "user: ([\\w]+); hostname: ([\\w.\\-]+); path: '([^\\n]+)'",
+      "action" : "MuteCoprocessTrigger"
+    },
+    {
+      "action" : "MuteCoprocessTrigger",
       "parameter" : "open -a \"\/Applications\/Sublime Text.app\"",
       "regex" : "\"open sublime on mac client\"",
-      "action" : "MuteCoprocessTrigger"
+      "partial" : false
     },
     {
       "regex" : "llocal open app: open; user: ([\\w]+); hostname: ([\\w.\\-]+); path: ([^\\n]+)",
@@ -902,10 +909,10 @@
       "parameter" : "python \/Users\/mac\/Desktop\/终端脚本\/open_in_sshfs.py sub \\1 \\2 \\3"
     },
     {
-      "partial" : false,
-      "parameter" : "zsh \/Users\/mac\/Desktop\/终端脚本\/remote_open\/remote_open.sh \"\\1\"",
+      "action" : "MuteCoprocessTrigger",
+      "parameter" : "zsh \/Users\/mac\/Desktop\/终端脚本\/remote_open\/remote_open.sh \"\\1\" 2> \/dev\/null",
       "regex" : "remote open: ([^\\n]+)",
-      "action" : "MuteCoprocessTrigger"
+      "partial" : false
     }
   ],
   "Blend" : 0.5,
@@ -969,472 +976,472 @@
   "HotKey Key Code" : 49,
   "Keyboard Map" : {
     "0x6e-0xc0000" : {
-      "Text" : "ᜦ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜦ"
     },
     "0xd-0xa0000" : {
-      "Text" : "ᜰ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜰ"
     },
     "0x7c-0xa0000" : {
-      "Action" : 12,
-      "Text" : "»"
+      "Text" : "»",
+      "Action" : 12
     },
     "0x65-0x80000" : {
-      "Action" : 12,
-      "Text" : "ᜢ"
+      "Text" : "ᜢ",
+      "Action" : 12
     },
     "0xf702-0x220000" : {
-      "Text" : "[1;2D",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2D"
     },
     "0xd-0x40000" : {
-      "Text" : "ᜫ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜫ"
     },
     "0xf700-0x280000" : {
-      "Action" : 12,
-      "Text" : "ᜅ"
+      "Text" : "ᜅ",
+      "Action" : 12
     },
     "0x3-0x200000" : {
-      "Text" : "0xd",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0xd"
     },
     "0x36-0x200000" : {
-      "Text" : "6",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "6"
     },
     "0xf703-0x240000" : {
-      "Text" : "[1;5C",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;5C"
     },
     "0x38-0x40000" : {
-      "Text" : "0x7f",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x7f"
     },
     "0x76-0x80000" : {
-      "Text" : "√",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "√"
     },
     "0xf700-0x2c0000" : {
-      "Action" : 12,
-      "Text" : "ᜋ"
+      "Text" : "ᜋ",
+      "Action" : 12
     },
     "0x77-0xc0000" : {
-      "Text" : "ᜨ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜨ"
     },
     "0x3b-0x40000" : {
-      "Text" : "ᜪ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜪ"
     },
     "0x33-0x200000" : {
-      "Text" : "3",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "3"
     },
     "0x57-0x60000" : {
-      "Action" : 12,
-      "Text" : "ᜐ"
+      "Text" : "ᜐ",
+      "Action" : 12
     },
     "0x3d-0x80000" : {
-      "Action" : 12,
-      "Text" : "≠"
+      "Text" : "≠",
+      "Action" : 12
     },
     "0xf72b-0x20000" : {
-      "Text" : "[1;2F",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2F"
     },
     "0xf705-0x20000" : {
-      "Text" : "[1;2Q",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2Q"
     },
     "0x33-0x40000" : {
-      "Text" : "0x1b",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x1b"
     },
     "0x5a-0x60000" : {
-      "Action" : 12,
-      "Text" : "ᜃ"
+      "Text" : "ᜃ",
+      "Action" : 12
     },
     "0xd-0x80000" : {
-      "Text" : "ᜯ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜯ"
     },
     "0x5b-0x80000" : {
-      "Action" : 12,
-      "Text" : "ᜠ"
+      "Text" : "ᜠ",
+      "Action" : 12
     },
     "0xf70a-0x20000" : {
-      "Text" : "[18;2~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[18;2~"
     },
     "0xf702-0x240000" : {
-      "Text" : "[1;5D",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;5D"
     },
     "0x2e-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜱ"
+      "Text" : "ᜱ",
+      "Action" : 12
     },
     "0xf703-0x260000" : {
-      "Text" : "[1;6C",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;6C"
     },
     "0xf729-0x20000" : {
-      "Text" : "[1;2H",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2H"
     },
     "0x3d-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜂ"
+      "Text" : "ᜂ",
+      "Action" : 12
     },
     "0xf708-0x20000" : {
-      "Text" : "[15;2~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[15;2~"
     },
     "0xf703-0x2a0000" : {
-      "Text" : "[F",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[F"
     },
     "0x69-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜎ"
+      "Text" : "ᜎ",
+      "Action" : 12
     },
     "0xf70d-0x20000" : {
-      "Text" : "[21;2~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[21;2~"
     },
     "0x5b-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜁ"
+      "Text" : "ᜁ",
+      "Action" : 12
     },
     "0xf701-0x220000" : {
-      "Text" : "[1;2B",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2B"
     },
     "0x30-0x200000" : {
-      "Text" : "0",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "0"
     },
     "0x35-0x40000" : {
-      "Text" : "0x1d",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x1d"
     },
     "0x5d-0x80000" : {
-      "Action" : 12,
-      "Text" : "ᜡ"
+      "Text" : "ᜡ",
+      "Action" : 12
     },
     "0x37-0x200000" : {
-      "Text" : "7",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "7"
     },
     "0x6c-0x80000" : {
-      "Action" : 12,
-      "Text" : "¬"
+      "Text" : "¬",
+      "Action" : 12
     },
     "0x7f-0x20000" : {
-      "Text" : "0x05 0x15",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x05 0x15"
     },
     "0xf702-0x260000" : {
-      "Text" : "[1;6D",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;6D"
     },
     "0x46-0xa0000" : {
-      "Text" : "Ï",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "Ï"
     },
     "0x2b-0xa0000" : {
-      "Action" : 12,
-      "Text" : "±"
+      "Text" : "±",
+      "Action" : 12
     },
     "0xf72b-0x40000" : {
-      "Text" : "[1;5F",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;5F"
     },
     "0x34-0x200000" : {
-      "Text" : "4",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "4"
     },
     "0x2d-0x200000" : {
-      "Text" : "-",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "-"
     },
     "0xf703-0x280000" : {
-      "Action" : 10,
-      "Text" : "f"
+      "Text" : "f",
+      "Action" : 10
     },
     "0xf702-0x2a0000" : {
-      "Text" : "[H",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[H"
     },
     "0xf700-0x220000" : {
-      "Text" : "[1;2A",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2A"
     },
     "0x2a-0x200000" : {
-      "Text" : "*",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "*"
     },
     "0xf703-0x2c0000" : {
-      "Action" : 12,
-      "Text" : "ᜊ"
+      "Text" : "ᜊ",
+      "Action" : 12
     },
     "0x37-0x40000" : {
-      "Text" : "0x1f",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x1f"
     },
     "0xf701-0x240000" : {
-      "Text" : "[1;5B",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;5B"
     },
     "0xf729-0x40000" : {
-      "Text" : "[1;5H",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;5H"
     },
     "0x5f-0xa0000" : {
-      "Action" : 12,
-      "Text" : "ᜭ"
-    },
-    "0x6e-0x80000" : {
-      "Text" : "ᜩ",
-      "Action" : 12
-    },
-    "0x2d-0x80000" : {
-      "Action" : 12,
-      "Text" : "–"
-    },
-    "0x50-0xa0000" : {
-      "Action" : 12,
-      "Text" : "∏"
-    },
-    "0xf709-0x20000" : {
-      "Text" : "[17;2~",
-      "Action" : 10
-    },
-    "0x2e-0x200000" : {
-      "Text" : ".",
-      "Action" : 12
-    },
-    "0x57-0xa0000" : {
-      "Action" : 12,
-      "Text" : "„"
-    },
-    "0xf702-0x280000" : {
-      "Action" : 10,
-      "Text" : "b"
-    },
-    "0x66-0x80000" : {
-      "Action" : 12,
-      "Text" : "ƒ"
-    },
-    "0xf706-0x20000" : {
-      "Text" : "[1;2R",
-      "Action" : 10
-    },
-    "0x32-0x40000" : {
-      "Text" : "0x00",
-      "Action" : 11
-    },
-    "0xf728-0x80000" : {
-      "Text" : "d",
-      "Action" : 10
-    },
-    "0xf70b-0x20000" : {
-      "Text" : "[19;2~",
-      "Action" : 10
-    },
-    "0xd-0x60000" : {
-      "Text" : "ᜬ",
-      "Action" : 12
-    },
-    "0xf72b-0x0" : {
-      "Text" : "[F",
-      "Action" : 10
-    },
-    "0x31-0x200000" : {
-      "Text" : "1",
-      "Action" : 12
-    },
-    "0x77-0x80000" : {
-      "Action" : 12,
-      "Text" : "∑"
-    },
-    "0xf702-0x2c0000" : {
-      "Action" : 12,
-      "Text" : "ᜉ"
-    },
-    "0x5a-0xa0000" : {
-      "Action" : 12,
-      "Text" : "¸"
-    },
-    "0x5b-0xc0000" : {
-      "Text" : "ᜣ",
-      "Action" : 12
-    },
-    "0x38-0x200000" : {
-      "Text" : "8",
-      "Action" : 12
-    },
-    "0xf700-0x240000" : {
-      "Text" : "[1;5A",
-      "Action" : 10
-    },
-    "0x2d-0x40000" : {
-      "Text" : "0x1f",
-      "Action" : 11
-    },
-    "0xf70e-0x20000" : {
-      "Text" : "[23;2~",
-      "Action" : 10
-    },
-    "0x70-0x80000" : {
-      "Action" : 12,
-      "Text" : "π"
-    },
-    "0xf701-0x260000" : {
-      "Text" : "[1;6B",
-      "Action" : 10
-    },
-    "0x7f-0x80000" : {
-      "Text" : "0x1b 0x7f",
-      "Action" : 11
-    },
-    "0x61-0x80000" : {
-      "Text" : "å",
-      "Action" : 12
-    },
-    "0x7f-0xa0000" : {
-      "Action" : 11,
-      "Text" : "0x15"
-    },
-    "0x4c-0x60000" : {
       "Text" : "ᜭ",
       "Action" : 12
     },
-    "0x35-0x200000" : {
-      "Text" : "5",
+    "0x6e-0x80000" : {
+      "Action" : 12,
+      "Text" : "ᜩ"
+    },
+    "0x2d-0x80000" : {
+      "Text" : "–",
       "Action" : 12
+    },
+    "0x50-0xa0000" : {
+      "Text" : "∏",
+      "Action" : 12
+    },
+    "0xf709-0x20000" : {
+      "Action" : 10,
+      "Text" : "[17;2~"
+    },
+    "0x2e-0x200000" : {
+      "Action" : 12,
+      "Text" : "."
+    },
+    "0x57-0xa0000" : {
+      "Text" : "„",
+      "Action" : 12
+    },
+    "0xf702-0x280000" : {
+      "Text" : "b",
+      "Action" : 10
+    },
+    "0x66-0x80000" : {
+      "Text" : "ƒ",
+      "Action" : 12
+    },
+    "0xf706-0x20000" : {
+      "Action" : 10,
+      "Text" : "[1;2R"
+    },
+    "0x32-0x40000" : {
+      "Action" : 11,
+      "Text" : "0x00"
+    },
+    "0xf728-0x80000" : {
+      "Action" : 10,
+      "Text" : "d"
+    },
+    "0xf70b-0x20000" : {
+      "Action" : 10,
+      "Text" : "[19;2~"
+    },
+    "0xd-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜬ"
+    },
+    "0xf72b-0x0" : {
+      "Action" : 10,
+      "Text" : "[F"
+    },
+    "0x31-0x200000" : {
+      "Action" : 12,
+      "Text" : "1"
+    },
+    "0x77-0x80000" : {
+      "Text" : "∑",
+      "Action" : 12
+    },
+    "0xf702-0x2c0000" : {
+      "Text" : "ᜉ",
+      "Action" : 12
+    },
+    "0x5a-0xa0000" : {
+      "Text" : "¸",
+      "Action" : 12
+    },
+    "0x5b-0xc0000" : {
+      "Action" : 12,
+      "Text" : "ᜣ"
+    },
+    "0x38-0x200000" : {
+      "Action" : 12,
+      "Text" : "8"
+    },
+    "0xf700-0x240000" : {
+      "Action" : 10,
+      "Text" : "[1;5A"
+    },
+    "0x2d-0x40000" : {
+      "Action" : 11,
+      "Text" : "0x1f"
+    },
+    "0xf70e-0x20000" : {
+      "Action" : 10,
+      "Text" : "[23;2~"
+    },
+    "0x70-0x80000" : {
+      "Text" : "π",
+      "Action" : 12
+    },
+    "0xf701-0x260000" : {
+      "Action" : 10,
+      "Text" : "[1;6B"
+    },
+    "0x7f-0x80000" : {
+      "Action" : 11,
+      "Text" : "0x1b 0x7f"
+    },
+    "0x61-0x80000" : {
+      "Action" : 12,
+      "Text" : "å"
+    },
+    "0x7f-0xa0000" : {
+      "Text" : "0x15",
+      "Action" : 11
+    },
+    "0x4c-0x60000" : {
+      "Action" : 12,
+      "Text" : "ᜭ"
+    },
+    "0x35-0x200000" : {
+      "Action" : 12,
+      "Text" : "5"
     },
     "0x62-0xc0000" : {
-      "Text" : "ᜧ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜧ"
     },
     "0xf701-0x2a0000" : {
-      "Action" : 12,
-      "Text" : "ᜈ"
+      "Text" : "ᜈ",
+      "Action" : 12
     },
     "0x34-0x40000" : {
-      "Text" : "0x1c",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x1c"
     },
     "0x4d-0xa0000" : {
-      "Action" : 12,
-      "Text" : "Â"
+      "Text" : "Â",
+      "Action" : 12
     },
     "0x5c-0x80000" : {
-      "Action" : 12,
-      "Text" : "«"
+      "Text" : "«",
+      "Action" : 12
     },
     "0x2b-0x200000" : {
-      "Text" : "+",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "+"
     },
     "0xf729-0x0" : {
-      "Text" : "[H",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[H"
     },
     "0x44-0x60000" : {
-      "Text" : "ᜤ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜤ"
     },
     "0x5d-0xc0000" : {
-      "Text" : "ᜥ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜥ"
     },
     "0x2f-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜀ"
+      "Text" : "ᜀ",
+      "Action" : 12
     },
     "0xf739-0x0" : {
-      "Text" : "",
-      "Action" : 13
+      "Action" : 13,
+      "Text" : ""
     },
     "0x7a-0x80000" : {
-      "Action" : 12,
-      "Text" : "Ω"
+      "Text" : "Ω",
+      "Action" : 12
     },
     "0xf700-0x260000" : {
-      "Text" : "[1;6A",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;6A"
     },
     "0xf707-0x20000" : {
-      "Text" : "[1;2S",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2S"
     },
     "0xf703-0x220000" : {
-      "Text" : "[1;2C",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2C"
     },
     "0xf70f-0x20000" : {
-      "Text" : "[24;2~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[24;2~"
     },
     "0x27-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜏ"
+      "Text" : "ᜏ",
+      "Action" : 12
     },
     "0xf701-0x280000" : {
-      "Action" : 12,
-      "Text" : "ᜆ"
+      "Text" : "ᜆ",
+      "Action" : 12
     },
     "0xf70c-0x20000" : {
-      "Text" : "[20;2~",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[20;2~"
     },
     "0x2f-0x200000" : {
-      "Text" : "\/",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "\/"
     },
     "0xf700-0x2a0000" : {
-      "Action" : 12,
-      "Text" : "ᜇ"
+      "Text" : "ᜇ",
+      "Action" : 12
     },
     "0x36-0x40000" : {
-      "Text" : "0x1e",
-      "Action" : 11
+      "Action" : 11,
+      "Text" : "0x1e"
     },
     "0xf704-0x20000" : {
-      "Text" : "[1;2P",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;2P"
     },
     "0x74-0x80000" : {
-      "Action" : 12,
-      "Text" : "†"
+      "Text" : "†",
+      "Action" : 12
     },
     "0xf701-0x2c0000" : {
-      "Action" : 12,
-      "Text" : "ᜌ"
+      "Text" : "ᜌ",
+      "Action" : 12
     },
     "0x32-0x200000" : {
-      "Text" : "2",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "2"
     },
     "0x6d-0x80000" : {
-      "Action" : 12,
-      "Text" : "µ"
+      "Text" : "µ",
+      "Action" : 12
     },
     "0x46-0x60000" : {
-      "Text" : "ᜮ",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "ᜮ"
     },
     "0x39-0x200000" : {
-      "Text" : "9",
-      "Action" : 12
+      "Action" : 12,
+      "Text" : "9"
     },
     "0xf728-0xa0000" : {
-      "Action" : 11,
-      "Text" : "0x0b"
+      "Text" : "0x0b",
+      "Action" : 11
     }
   },
   "Ansi 14 Color" : {
@@ -1501,7 +1508,7 @@
   },
   "Name" : "Hotkey Window",
   "Blinking Cursor" : true,
-  "Guid" : "8668723D-4A70-4961-BF32-2BECE9FEEE40",
+  "Guid" : "49622883-48D7-4808-8B5B-1CEFAEC66FDF",
   "Idle Code" : 0,
   "Ansi 10 Color" : {
     "Red Component" : 0.45490196078431372,
@@ -1526,12 +1533,12 @@
   },
   "Smart Cursor Color" : false,
   "Semantic History" : {
-    "editor" : "com.sublimetext.3",
     "action" : "best editor",
-    "text" : ""
+    "text" : "",
+    "editor" : "com.sublimetext.3"
   },
   "Ambiguous Double Width" : false,
-  "Blur Radius" : 1.1618436706852793,
+  "Blur Radius" : 0.96602157360406093,
   "Ansi 0 Color" : {
     "Red Component" : 0.15294117647058825,
     "Color Space" : "sRGB",
@@ -1574,7 +1581,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.66863783291510037
   },
-  "Transparency" : 0.089437262055837519,
+  "Transparency" : 0.081002141497461932,
   "HotKey Activated By Modifier" : false,
   "Background Color" : {
     "Red Component" : 0.15294117647058825,
@@ -1602,6 +1609,7 @@
   "HotKey Alternate Shortcuts" : [
 
   ],
+  "Unicode Normalization" : 0,
   "Visual Bell" : true,
   "Custom Directory" : "Recycle",
   "Ansi 5 Color" : {
