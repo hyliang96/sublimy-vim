@@ -96,3 +96,8 @@ endsnippet
 snippet getchar "get one char" b
 answer=\$(bash -c "read  -n 1 -p '${1:提示内容} ? [Y|N]' c; echo \\\$c"); echo
 endsnippet
+
+
+snippet ifmac "whether on macOS" b
+[ "$(uname)" = "Darwin" ]
+endsnippet
