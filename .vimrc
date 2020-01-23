@@ -619,19 +619,31 @@ inoremap Ï <c-o>:CtrlSFToggle<cr>
 " 在搜索结果栏中的快捷键
 " 下一条：alt+enter
 " 上一条：shift+alt+enter
-" 打开到新tab：enter，t
+" 打开到新tab：t
 " 打开到竖分屏：alt+|
 " 打开到横分屏：shift+alt+|
-" 终止搜索并关闭搜索栏：esc，q
-let g:ctrlsf_mapping={
-    \ "next": "ᜯ",
-    \ "prev": "ᜰ",
-    \ "open": ["<c-o>", "o"],
-    \ "tab":  ["<cr>", "<c-m>", "t"],
-    \ "vsplit": "«",
-    \ "split": "»",
-    \ "quit": ["q", "<esc>"]
-    \ }
+" 终止搜索并关闭搜索栏：q
+" 预览: p
+" 关闭预览栏: 光标移动到预览栏内, 按q, 而后会预览栏下回显示原来文件的页面
+
+let g:ctrlsf_mapping= {
+\       "open"    : ["o", "<c-o>"],
+\       "openb"   : "O",
+\       "split"   : "»",
+\       "vsplit"  : "«",
+\       "tab"     : "t",
+\       "tabb"    : "T",
+\       "popen"   : [ "p", "<CR>", "<c-m>" ],
+\       "popenf"  : "P",
+\       "quit"    : "q",
+\       "next"    : "ᜯ",
+\       "prev"    : "ᜰ",
+\       "pquit"   : "q",
+\       "loclist" : "l",
+\       "chgmode" : "M",
+\       "stop"    : "<C-C>",
+\   }
+
 " 默认用normal(有上下文)型搜索结果栏，而非compact（无上下文）
 let g:ctrlsf_default_view_mode = 'normal'
 " noraml型搜索结果栏放在右侧
@@ -759,14 +771,18 @@ let g:mwDefaultHighlightingPalette = 'mypalette'
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_start_word_key      = '<C-d>'
 " 在n模式，选择光所在整词，及全文与之相同的文本（不必整词）
-let g:multi_cursor_select_all_word_key = '∂' " alt+d
-let g:multi_cursor_start_key           = 'g<C-d>' " 按g松后，按立即按ctrl+d
-let g:multi_cursor_select_all_key      = 'g∂' " 按g松后，立即按+alt+d
+let g:multi_cursor_select_all_word_key = 'ᜤ'   " shift+ctrl+d
+" let g:multi_cursor_start_key           = '∂'  " alt+d
+" " 按g松后，按立即按ctrl+d
+" let g:multi_cursor_select_all_key      = 'Î' " shift+alt+d
+" " 按g松后，立即按+alt+d
+" "
 " 增选下一与之同的文本
 let g:multi_cursor_next_key            = '<C-d>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-q>'
-let g:multi_cursor_quit_key            = '≈' " alt+x
+let g:multi_cursor_quit_key            = '<esc>'
+" '≈' " alt+x
 
 "=========================================================================
 " Plug 'mg979/vim-visual-multi'
