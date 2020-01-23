@@ -52,6 +52,8 @@ Plug 'Tuxdude/mark.vim'
     Plug 'hyliang96/LeaderF', { 'do': './install.sh' }
 " 高速全局搜索插件
 Plug 'dyng/ctrlsf.vim'
+" 全局搜搜与替换
+Plug 'brooth/far.vim'
 " 自动补全
 " mac 上的 conda里的python无法编译ycm，需要系统自带的Python
 " 详见 https://github.com/ycm-core/YouCompleteMe#ycm-does-not-work-with-my-anaconda-python-setup

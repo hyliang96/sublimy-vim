@@ -576,7 +576,7 @@ let g:NERDToggleCheckAllLines = 1  " 当所选非空行皆被注释，toggle才�
 " 搜索
 "=========================================================================
 " 搜索 ctrl+f
-nnoremap <C-f> :MarkClear<cr>i<c-o>:stopinsert<cr>/
+nnoremap <expr> <C-f> (!&modifiable) ? ':MarkClear<cr>i<c-o>:stopinsert<cr>/' : ':MarkClear<cr>/'
 vnoremap <C-f> "9y:MarkClear<cr><esc>/<c-r>9<cr>
 inoremap <C-f> <c-o>:MarkClear<cr><c-o>/
 " 大小写敏感 case
