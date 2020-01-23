@@ -743,6 +743,8 @@ endfunction
 exec "let g:mwPalettes={'mypalette': [".s:GetColor('Search')."]}"
 let g:mwDefaultHighlightingPalette = 'mypalette'
 
+
+if PlugLoaded('vim-multiple-cursors')
 "=========================================================================
 " 多光标
 " Plug 'hyliang96/vim-multiple-cursors'
@@ -784,6 +786,12 @@ let g:multi_cursor_skip_key            = '<C-q>'
 let g:multi_cursor_quit_key            = '<esc>'
 " '≈' " alt+x
 
+imap <c-d> <c-o>:stopinsert<cr><c-d>
+imap ᜤ <c-o>:stopinsert<cr>ᜤ
+
+endif
+
+if PlugLoaded('vim-visual-multi')
 "=========================================================================
 " Plug 'mg979/vim-visual-multi'
 " 高性能多光标、多选区、正则表达式搜索、按住Shift+方向键选择
@@ -801,8 +809,6 @@ let g:VM_maps["Add Cursor At Pos"]        = '<plug>(AddCursor)'
 vmap å <plug>(AddRegion)
 nmap å <plug>(AddCursor)
 imap å <esc><plug>(AddCursor)
-
-
 " -------------------------------------------------------------------------
 "  使用说明
 " -------------------------------------------------------------------------
@@ -816,7 +822,7 @@ imap å <esc><plug>(AddCursor)
 "
 "   v模式下
 "     ctrl+d，增选与选区相同的文字，不必是整词
-"     shift+ctrl+d，选中所有与选区相同的文字，不必是整词
+"     shift+ctrl+d，选中所有与选区相同的文字，不必q是整词
 "<Plug>(VM-LazyNoh)     ctrl+l，选中多行，将其转为每行一个光标
 "
 "   多光标v模式下
@@ -886,6 +892,9 @@ vmap  <c-l> :call VCtrlL()<cr>
 let g:VM_maps["Visual Find"]              = ''
 " let g:VM_maps["Select l"]           = '<S-Right>'       " start selecting left
 " let g:VM_maps["Select h"]           = '<S-Left>'        " start selecting right
+
+endif
+
 
 "=========================================================================
 " 复制黏贴
