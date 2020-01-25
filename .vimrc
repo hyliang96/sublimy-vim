@@ -786,8 +786,11 @@ let g:multi_cursor_skip_key            = '<C-q>'
 let g:multi_cursor_quit_key            = '<esc>'
 " '≈' " alt+x
 
-imap <c-d> <c-o>:stopinsert<cr><c-d>
-imap ᜤ <c-o>:stopinsert<cr>ᜤ
+imap <silent> <c-d> <c-o>:stopinsert<cr><c-d>
+imap <silent> ᜤ <c-o>:stopinsert<cr>ᜤ
+
+" let g:multi_cursor_normal_maps={'ᜤ':1}
+" let g:multi_cursor_visual_maps={'ᜤ':1}
 
 endif
 
@@ -852,6 +855,7 @@ let g:VM_maps["Select All"]         = '<plug>(SelectAll)'  " 全选
 let g:VM_maps["Remove Region"]      = 'Q'     " 清除这个光标
 let g:VM_maps['Skip Region']        = 'q'     " 跳过一个
 " shift+ctrl+d： ᜤ
+" nmap <c-d> <plug>(VM-Find-Under)
 nmap <c-d> <plug>(FindUnder)
 nmap  ᜤ   <plug>(SelectAll)
 vmap <c-d> :<c-u>stopinsert<cr>gv<plug>(FindUnder)
