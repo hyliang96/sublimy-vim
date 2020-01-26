@@ -619,12 +619,22 @@ inoremap Ï <c-o>:CtrlSFToggle<cr>
 " 在搜索结果栏中的快捷键
 " 下一条：alt+enter
 " 上一条：shift+alt+enter
-" 打开到新tab：t
-" 打开到竖分屏：alt+|
-" 打开到横分屏：shift+alt+|
-" 终止搜索并关闭搜索栏：q
-" 预览: p
-" 关闭预览栏: 光标移动到预览栏内, 按q, 而后会预览栏下回显示原来文件的页面
+"
+" 在左侧窗口打开, 光标移过去: o, ctrl+o
+" 在左侧窗口打开, 光标还在ctrlsf窗口中: O
+" 打开到新tab, 光标过去：t
+" 打开到新tab, 光标还在CtrlSf窗口中: T
+" 打开到左侧窗口竖分屏, 光标移过去：alt+|
+" 打开到左侧窗口横分屏, 光标移过去：shift+alt+|
+"
+" 打开到左侧预览窗口, 光标不移过去: p, 回车, 左鼠标双击
+" 打开到左侧预览窗口, 光标移过去(. 进入insert模式): P
+" focus在预览窗口, 关闭预览窗口, 光标回到ctrlSF窗口, 左侧窗口恢复原状: q, alt+w, ctrl+w
+" 关闭ctrlsf窗口：q alt+w, ctrl+w
+"
+" ctrlsf窗口 的位置切换 在下方显示位置列表 <-> 在右侧显示附件全文: M
+" ctrlsf窗口下方显示一个匹配的位置列表: s  (这个没啥用)
+" 在ctrlsf窗口内, 终止搜索: ctrl+c
 
 let g:ctrlsf_mapping= {
 \       "open"    : ["o", "<c-o>"],
@@ -633,13 +643,13 @@ let g:ctrlsf_mapping= {
 \       "vsplit"  : "«",
 \       "tab"     : "t",
 \       "tabb"    : "T",
-\       "popen"   : [ "p", "<CR>", "<c-m>" ],
+\       "popen"   : [ "p", "<CR>", "<c-m>", "<2-LeftMouse>" ],
 \       "popenf"  : "P",
+\       "pquit"   : "q",
 \       "quit"    : "q",
 \       "next"    : "ᜯ",
 \       "prev"    : "ᜰ",
-\       "pquit"   : "q",
-\       "loclist" : "l",
+\       "loclist" : "s",
 \       "chgmode" : "M",
 \       "stop"    : "<C-C>",
 \   }
