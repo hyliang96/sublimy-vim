@@ -576,7 +576,8 @@ let g:NERDToggleCheckAllLines = 1  " 当所选非空行皆被注释，toggle才�
 " 搜索
 "=========================================================================
 " 搜索 ctrl+f
-nnoremap <expr> <C-f> (!&modifiable) ? ':MarkClear<cr>i<c-o>:stopinsert<cr>/' : ':MarkClear<cr>/'
+" nnoremap <c-f> :MarkClear<cr>/
+nnoremap <expr> <C-f> (&modifiable) ? ':MarkClear<cr>i<c-o>:stopinsert<cr>/' : ':MarkClear<cr>/'
 vnoremap <C-f> "9y:MarkClear<cr><esc>/<c-r>9<cr>
 inoremap <C-f> <c-o>:MarkClear<cr><c-o>/
 " 大小写敏感 case
@@ -606,6 +607,25 @@ cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
 
 
 " =========================================================================
+" far.vim 告诉全局搜索与替换
+if PlugLoaded('far.vim')
+set lazyredraw
+set regexpengine=1
+
+nnoremap <silent> ƒ :Farp<cr>
+vnoremap <silent> f :Farp<cr>
+inoremap <silent> ƒ <c-o>:Farp<cr>
+
+" let g:far#default_mappings=0
+" 在far.vim窗口内的操作: `:h far-mappings`
+" ctrl+=  展开/收起光标下的匹配项
+" nnoremap <buffer><silent> ᜂ :call g:far#change_collapse_under_cursor(-1)<cr>
+" "  shift+ctrl+=  所有匹配项 展开/收起
+" nnoremap <buffer><silent> ᜱ :call g:far#change_collapse_all(-1)<cr>
+endif
+
+" =========================================================================
+if PlugLoaded('ctrlsf')
 " CtrlSF 目录下搜文件内容，高速
 " alt+f 开始搜索
 nnoremap ƒ :CtrlSF<space>
@@ -670,6 +690,7 @@ let g:ctrlsf_auto_focus = {
     \ "duration_less_than": 1000
     \ }
 
+endif
 
 " " ------------------------------------------------------------------------
 " " 目录下搜索
