@@ -174,6 +174,12 @@ autocmd BufReadPost *
             \ endif
 "-----------------------------------------------------------------
 " help
+" :h 纵向分整个查看 显示在右侧的分屏
+augroup helpfiles
+  au!
+  au BufRead,BufEnter */doc/* wincmd L
+augroup END
+
 nnoremap <c-h> :h<space>
 vnoremap <c-h> :<c-u>h<space>
 inoremap <c-h> <c-o>:h<space>
@@ -611,10 +617,51 @@ cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
 if PlugLoaded('far.vim')
 set lazyredraw
 set regexpengine=1
+let g:far#auto_preview=1
 
-nnoremap <silent> ƒ :Farp<cr>
-vnoremap <silent> f :Farp<cr>
-inoremap <silent> ƒ <c-o>:Farp<cr>
+" let g:far#source='rg'
+" let g:mwIgnoreCase = 0
+" let g:far#debug = 1
+let g:show_prompt_key=1
+
+let g:far#prompt_mapping={
+    \ 'quit'           : { 'key' : '<esc>', 'prompt' : 'Esc' },
+    \ 'regex'          : { 'key' : '<c-x>', 'prompt' : '^X'  },
+    \ 'case_sensitive' : { 'key' : '<c-a>', 'prompt' : '^A'  },
+    \ 'word'           : { 'key' : 'ᜏ', 'prompt' : "^'"  },
+    \ 'substitute'     : { 'key' : '<S-Down>', 'prompt' : 'SS'  },
+    \ }
+
+let g:far#mapping = {
+    \ 'toggle_expand' : "ᜂ",
+    \ 'toggle_expand_all' : "ᜱ",
+    \ 'stoggle_expand_all' : "≠",
+    \ 'toggle_exclude' : "t",
+    \ 'stoggle_exclude_all' : "T",
+    \ 'toggle_exclude_all' : "R",
+    \ 'open_preview' : "p",
+    \ 'close_preview' : ["q", "P"],
+    \ 'jump_to_source' : ["<cr>", "<2-LeftMouse>"],
+    \ "preview_scroll_up" : "<PageUp>",
+    \ "preview_scroll_down" : "<PageDown>",
+    \ }
+
+" alt+f: find
+nnoremap <silent> ƒ  :Farf<cr>
+vnoremap <silent> ƒ  :Farf<cr>*<cr>
+inoremap <silent> ƒ  <c-o>:Farf<cr>
+" nnoremap  ƒ :F<space>
+" vnoremap  ƒ :F<space>*<space>
+" inoremap  ƒ <c-o>:F<space>
+"
+
+" shift+alt+f: replace
+nnoremap <silent> Ï :Farr<cr>
+vnoremap <silent> Ï :Farr<cr>*<cr>
+inoremap <silent> Ï <c-o>:Farr<cr>
+
+" 关闭正则表达式: alt+r
+cnoremap ® \V
 
 " let g:far#default_mappings=0
 " 在far.vim窗口内的操作: `:h far-mappings`
@@ -1727,15 +1774,15 @@ nnoremap <expr> <plug>(DeleteLineAfter) (col('.')>=col('$')-1)? 'a<c-g>u<del><c-
 inoremap <expr> <plug>(DeleteLineAfter) (col('.')==col('$'))? '<c-g>u<del>' : '<c-g>u<c-o>v$<left>"_d'
 " FIXME 在multiple-cursor下，撤销会出bug
 cnoremap <expr> <plug>(DeleteLineAfter) ''
-" cnorempa: FIXME 还不知道怎么写
+" cnoremap: FIXME 还不知道怎么写
 " shift+del 删除
 " 或 ctrl+l整行选中，backspace删除
-nmap  <c-e><c-u>   <plug>(DeleteLine)
-imap   <c-e><c-u>  <plug>(DeleteLine)
-" cmap <c-e><c-u> <plug>DeleteLine
+nmap <c-e><c-u> <plug>(DeleteLine)
+imap <c-e><c-u> <plug>(DeleteLine)
+cmap <c-e><c-u> <plug>(DeleteLine)
 nnoremap <plug>(DeleteLine) a<c-g>u<esc>0v$"_d
 inoremap <plug>(DeleteLine) <c-g>u<c-o>0<C-o>v$"_d
-" cnoremap <plug>(DeleteLine) <c-e><c-u>
+cnoremap <plug>(DeleteLine) <c-e><c-u>
 
 "=========================================================================
 " ctrl+s保存
