@@ -628,9 +628,10 @@ let g:far#prompt_mapping={
     \ 'quit'           : { 'key' : '<esc>', 'prompt' : 'Esc' },
     \ 'regex'          : { 'key' : '<c-x>', 'prompt' : '^X'  },
     \ 'case_sensitive' : { 'key' : '<c-a>', 'prompt' : '^A'  },
-    \ 'word'           : { 'key' : 'ᜏ', 'prompt' : "^'"  },
-    \ 'substitute'     : { 'key' : '<S-Down>', 'prompt' : 'SS'  },
+    \ 'word'           : { 'key' : '<c-w>', 'prompt' : "^W"  },
+    \ 'substitute'     : { 'key' : '<c-f>', 'prompt' : '^F'  },
     \ }
+let g:far#mode_open = { "regex" : 0, "case_sensitive"  : 0, "word" : 0, "substitute": 0 }
 
 let g:far#mapping = {
     \ 'toggle_expand' : "ᜂ",
