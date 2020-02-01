@@ -14,6 +14,8 @@ endif
 " 基础设置
 "-----------------------------------------------------------------
 if has('syntax') && !exists('g:syntax_on') | syntax enable | endif  " 开语法高亮
+set winminheight=0
+set winminwidth=0
 let g:python_highlight_all = 1           " 开启python的所有语法高亮，插件'hdima/python-syntax'
 set showcmd                              " 右下角：n模式显示已输入命令；v模式显示选区范围
 set showmode                             " 左下角的状态栏显示INSERT之类的字样
@@ -564,12 +566,14 @@ function! IComment()
         call cursor(l0,len1-len0+c0)
     endif
 endfunction
+
 function! AtLineEnd()
     return col('.')==#(len(getline('.'))+1)
 endfunction
 inoremap <expr> <silent> <C-/>  AtLineEnd() && (! EmptyLine()) ?
             \ "\<esc>:call NERDComment('n', 'Toggle')\<cr>$a" :
             \ "\<space>\<bs>\<c-o>:call IComment()\<cr>"
+
 " imap <C-/> <ESC><Plug>NERDCommenterToggle$a
 
 " -----------------------------------------------------------------
@@ -641,7 +645,7 @@ let g:far#mapping = {
     \ 'stoggle_exclude_all' : "T",
     \ 'toggle_exclude_all' : "R",
     \ 'open_preview' : "p",
-    \ 'close_preview' : ["q", "P"],
+    \ 'close_preview' : "P",
     \ 'jump_to_source' : ["<cr>", "<2-LeftMouse>"],
     \ "preview_scroll_up" : "<PageUp>",
     \ "preview_scroll_down" : "<PageDown>",
