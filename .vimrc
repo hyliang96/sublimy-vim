@@ -628,14 +628,14 @@ let g:far#auto_preview=1
 " let g:far#debug = 1
 let g:show_prompt_key=1
 
-let g:far#prompt_mapping={
-    \ 'quit'           : { 'key' : '<esc>', 'prompt' : 'Esc' },
-    \ 'regex'          : { 'key' : '<c-x>', 'prompt' : '^X'  },
-    \ 'case_sensitive' : { 'key' : '<c-a>', 'prompt' : '^A'  },
-    \ 'word'           : { 'key' : '<c-w>', 'prompt' : "^W"  },
-    \ 'substitute'     : { 'key' : '<c-f>', 'prompt' : '^F'  },
-    \ }
-let g:far#mode_open = { "regex" : 0, "case_sensitive"  : 0, "word" : 0, "substitute": 0 }
+" let g:far#prompt_mapping={
+    " \ 'quit'           : { 'key' : '<esc>', 'prompt' : 'Esc' },
+    " \ 'regex'          : { 'key' : '<c-x>', 'prompt' : '^X'  },
+    " \ 'case_sensitive' : { 'key' : '<c-a>', 'prompt' : '^A'  },
+    " \ 'word'           : { 'key' : '<c-w>', 'prompt' : "^W"  },
+    " \ 'substitute'     : { 'key' : '<c-f>', 'prompt' : '^F'  },
+    " \ }
+" let g:far#mode_open = { "regex" : 0, "case_sensitive"  : 0, "word" : 0, "substitute": 0 }
 
 let g:far#mapping = {
     \ 'toggle_expand' : "ᜂ",
@@ -653,7 +653,7 @@ let g:far#mapping = {
 
 " alt+f: find
 nnoremap <silent> ƒ  :Farf<cr>
-vnoremap <silent> ƒ  :Farf<cr>*<cr>
+vnoremap <silent> ƒ  :Farf<cr>
 inoremap <silent> ƒ  <c-o>:Farf<cr>
 " nnoremap  ƒ :F<space>
 " vnoremap  ƒ :F<space>*<space>
@@ -662,7 +662,7 @@ inoremap <silent> ƒ  <c-o>:Farf<cr>
 
 " shift+alt+f: replace
 nnoremap <silent> Ï :Farr<cr>
-vnoremap <silent> Ï :Farr<cr>*<cr>
+vnoremap <silent> Ï :Farr<cr>
 inoremap <silent> Ï <c-o>:Farr<cr>
 
 " 关闭正则表达式: alt+r
