@@ -622,10 +622,11 @@ if PlugLoaded('far.vim')
 set lazyredraw
 set regexpengine=1
 let g:far#auto_preview=1
+let g:far#auto_write_undo_buffers = 1
 
 " let g:far#source='rg'
 " let g:mwIgnoreCase = 0
-" let g:far#debug = 1
+let g:far#debug = 1
 let g:show_prompt_key=1
 
 " let g:far#prompt_mapping={
