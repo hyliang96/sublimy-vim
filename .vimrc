@@ -621,10 +621,10 @@ cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
 if PlugLoaded('far.vim')
 set lazyredraw
 set regexpengine=1
+" let g:far#source='vimgrep'
 let g:far#auto_preview_on_start=0
 " let g:far#auto_preview=0
 let g:far#enable_undo=1
-
 " let g:far#debug = 1
 
 let g:far#show_prompt_key=1
@@ -635,7 +635,7 @@ let g:far#show_prompt_key=1
     " \ 'word'           : { 'key' : '<c-w>', 'prompt' : "^W"  },
     " \ 'substitute'     : { 'key' : '<c-f>', 'prompt' : '^F'  },
     " \ }
-" let g:far#mode_open = { "regex" : 0, "case_sensitive"  : 0, "word" : 0, "substitute": 0 }
+let g:far#mode_open = { "regex" : 0, "case_sensitive"  : 1, "word" : 0, "substitute": 0 }
 
 let g:far#mapping = {
     \ 'stoggle_expand' : "ᜂ",
@@ -679,7 +679,7 @@ inoremap <silent> Ï <c-o>:Farr<cr>
 endif
 
 " =========================================================================
-if PlugLoaded('ctrlsf')
+if PlugLoaded('ctrlsf.vim')
 " CtrlSF 目录下搜文件内容，高速
 " alt+f 开始搜索
 nnoremap ƒ :CtrlSF<space>

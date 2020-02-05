@@ -52,9 +52,9 @@ Plug 'Tuxdude/mark.vim'
     " 工程内模糊搜索文件、最近文（mru）件、函数/类/变量（tags）、命令历史、文件、中的某一行、vim的help、marks"
     Plug 'hyliang96/LeaderF', { 'do': './install.sh' }
 " 高速全局搜索插件
-" Plug 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim'
 " 全局搜搜与替换
-Plug 'hyliang96/far.vim'
+" Plug 'hyliang96/far.vim'
 " Plug 'brooth/far.vim' " 等他收我的PR
 " 自动补全
 " mac 上的 conda里的python无法编译ycm，需要系统自带的Python
