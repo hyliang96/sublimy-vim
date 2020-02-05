@@ -681,14 +681,14 @@ endif
 " =========================================================================
 if PlugLoaded('ctrlsf.vim')
 " CtrlSF 目录下搜文件内容，高速
-" alt+f 开始搜索
-nnoremap ƒ :CtrlSF<space>
-vnoremap ƒ <esc>:CtrlSF<space>
-inoremap ƒ <c-o>:CtrlSF<space>
-" shift+alt+f  显示之前的搜索栏/终止搜索并关闭搜索栏
-nnoremap Ï :CtrlSFToggle<cr>
-vnoremap Ï <esc>:CtrlSFToggle<cr>
-inoremap Ï <c-o>:CtrlSFToggle<cr>
+" double alt+f 开始搜索
+nnoremap ƒƒ :CtrlSF<space>
+vnoremap ƒƒ <esc>:CtrlSF<space>
+inoremap ƒƒ <c-o>:CtrlSF<space>
+" double shift+alt+f  显示之前的搜索栏/终止搜索并关闭搜索栏
+nnoremap ÏÏ :CtrlSFToggle<cr>
+vnoremap ÏÏ <esc>:CtrlSFToggle<cr>
+inoremap ÏÏ <c-o>:CtrlSFToggle<cr>
 
 " 在搜索结果栏中的快捷键
 " 下一条：alt+enter
