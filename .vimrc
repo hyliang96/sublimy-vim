@@ -28,7 +28,7 @@ set ruler                                " 打开状态栏标尺
 set nobackup                             " 覆盖文件时不备份
 set autochdir                            " 自动切换当前目录为当前文件所在的目录
 set backupcopy=yes                       " 设置备份时的行为为覆盖
-set ignorecase smartcase                 " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
+set ignorecase smartcase                 " 搜索时忽略大小写(ignorecase)，但在有一个或以上大写字母时仍保持对大小写敏感(smartcase)
 " set nowrapscan                           " 禁止在搜索到文件两端时重新搜索
 set incsearch                            " 输入搜索内容时就显示搜索结果
 set hlsearch                             " 搜索时高亮显示被找到的文本
@@ -621,14 +621,13 @@ cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
 if PlugLoaded('far.vim')
 set lazyredraw
 set regexpengine=1
-let g:far#auto_preview=1
-let g:far#auto_write_undo_buffers = 1
+" let g:far#auto_preview=1
+" let g:far#auto_write_undo_buffers = 1
+let g:far#enable_undo=1
 
-" let g:far#source='rg'
-" let g:mwIgnoreCase = 0
-let g:far#debug = 1
-let g:show_prompt_key=1
+" let g:far#debug = 1
 
+let g:far#show_prompt_key=1
 " let g:far#prompt_mapping={
     " \ 'quit'           : { 'key' : '<esc>', 'prompt' : 'Esc' },
     " \ 'regex'          : { 'key' : '<c-x>', 'prompt' : '^X'  },
@@ -644,7 +643,7 @@ let g:far#mapping = {
     \ 'stoggle_expand_all' : "≠",
     \ 'toggle_exclude' : "t",
     \ 'stoggle_exclude_all' : "T",
-    \ 'toggle_exclude_all' : "R",
+    \ 'toggle_exclude_all' : "w",
     \ 'open_preview' : "p",
     \ 'close_preview' : "P",
     \ 'jump_to_source' : ["<cr>", "<2-LeftMouse>"],
@@ -667,7 +666,7 @@ vnoremap <silent> Ï :Farr<cr>
 inoremap <silent> Ï <c-o>:Farr<cr>
 
 " 关闭正则表达式: alt+r
-cnoremap ® \V
+" cnoremap ® \V
 
 " let g:far#default_mappings=0
 " 在far.vim窗口内的操作: `:h far-mappings`
