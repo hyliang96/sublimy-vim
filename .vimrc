@@ -621,8 +621,8 @@ cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
 if PlugLoaded('far.vim')
 set lazyredraw
 set regexpengine=1
-" let g:far#auto_preview=1
-" let g:far#auto_write_undo_buffers = 1
+let g:far#auto_preview_on_start=0
+" let g:far#auto_preview=0
 let g:far#enable_undo=1
 
 " let g:far#debug = 1
@@ -638,15 +638,17 @@ let g:far#show_prompt_key=1
 " let g:far#mode_open = { "regex" : 0, "case_sensitive"  : 0, "word" : 0, "substitute": 0 }
 
 let g:far#mapping = {
-    \ 'toggle_expand' : "ᜂ",
-    \ 'toggle_expand_all' : "ᜱ",
-    \ 'stoggle_expand_all' : "≠",
-    \ 'toggle_exclude' : "t",
+    \ 'stoggle_expand' : "ᜂ",
+    \ 'stoggle_expand_all' : "ᜱ",
+    \ 'toggle_expand' : "≠",
+    \ 'toggle_expand_all' : "±",
+    \ 'stoggle_exclude' : "t",
+    \ 'toggle_exclude' : "f",
     \ 'stoggle_exclude_all' : "T",
-    \ 'toggle_exclude_all' : "w",
+    \ 'toggle_exclude_all' : "F",
     \ 'open_preview' : "p",
     \ 'close_preview' : "P",
-    \ 'jump_to_source' : ["<cr>", "<2-LeftMouse>"],
+    \ 'jump_to_source' : "<cr>",
     \ "preview_scroll_up" : "<PageUp>",
     \ "preview_scroll_down" : "<PageDown>",
     \ }
