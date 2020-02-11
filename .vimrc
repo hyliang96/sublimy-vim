@@ -56,7 +56,7 @@ set noundofile                           " no undo files
 " au BufRead,BufNewFile,BufEnter * start
 " au BufRead,BufNewFile * start            " 开vim/进入新窗口/进入新tab皆启动insert模式
 " autocmd BufNewFile,BufEnter * if @%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__'   | startinsert | endif
-autocmd BufRead,BufNewFile,BufEnter * if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | filetype detect | endif
+autocmd BufRead,BufNewFile * if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | filetype detect | endif
 autocmd BufNewFile,BufEnter * if @%==#'__CtrlSF__'  | stopinsert | endif
 autocmd BufNewFile,BufEnter * if @%=~#'FAR [0-9]\+'  | stopinsert | endif
 " au BufRead,BufNewFile,BufEnter * filetype detect  " 开vim即检查文件类型
@@ -623,6 +623,7 @@ if PlugLoaded('far.vim')
 set lazyredraw
 set regexpengine=1
 let g:far#source='rgnvim'
+let g:far#ignore_files=['~/.vim/farignore']
 let g:far#auto_preview_on_start=0
 " let g:far#auto_preview=0
 let g:far#enable_undo=1

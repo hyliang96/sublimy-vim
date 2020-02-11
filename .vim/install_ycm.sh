@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ "$(uname)" = "Darwin" ]; then
-    /usr/bin/python  ~/.vim/plugged/YouCompleteMe/install.py
+    /usr/local/bin/python3  ~/.vim/plugged/YouCompleteMe/install.py
 else
     ~/.vim/plugged/YouCompleteMe/install.py
 fi
