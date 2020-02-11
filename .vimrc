@@ -642,7 +642,7 @@ let g:far#mapping = {
     \ 'stoggle_expand_all' : "ᜱ",
     \ 'toggle_expand' : "≠",
     \ 'toggle_expand_all' : "±",
-    \ 'stoggle_exclude' : "t",
+    \ 'stoggle_exclude' : "b",
     \ 'toggle_exclude' : "f",
     \ 'stoggle_exclude_all' : "T",
     \ 'toggle_exclude_all' : "F",
@@ -1720,8 +1720,11 @@ nmap ᜡ  ]c
 vmap ᜡ  <esc>]c
 imap ᜡ  <c-o>]c
 " 开关gitgutter
-noremap  <Leader>g :GitGutterToggle<CR>
+noremap  <esc>g :GitGutterToggle<CR>
+vnoremap  <esc>g :GitGutterToggle<CR>
 inoremap  <esc>g <c-o>:GitGutterToggle<CR>
+" 打开vim 是否启动gitgutter, default=1
+" let g:gitgutter_enabled=0
 
 "========================================================================
 " 选择
