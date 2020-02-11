@@ -56,8 +56,9 @@ set noundofile                           " no undo files
 " au BufRead,BufNewFile,BufEnter * start
 " au BufRead,BufNewFile * start            " 开vim/进入新窗口/进入新tab皆启动insert模式
 " autocmd BufNewFile,BufEnter * if @%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__'   | startinsert | endif
-autocmd BufRead,BufNewFile * if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__') | startinsert | filetype detect | endif
+autocmd BufRead,BufNewFile,BufEnter * if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | filetype detect | endif
 autocmd BufNewFile,BufEnter * if @%==#'__CtrlSF__'  | stopinsert | endif
+autocmd BufNewFile,BufEnter * if @%=~#'FAR [0-9]\+'  | stopinsert | endif
 " au BufRead,BufNewFile,BufEnter * filetype detect  " 开vim即检查文件类型
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}3?\ %c:%l/%L%)\
                                          " 设置在状态行显示的信息
@@ -642,7 +643,7 @@ let g:far#mapping = {
     \ 'stoggle_expand_all' : "ᜱ",
     \ 'toggle_expand' : "≠",
     \ 'toggle_expand_all' : "±",
-    \ 'stoggle_exclude' : "b",
+    \ 'stoggle_exclude' : "t",
     \ 'toggle_exclude' : "f",
     \ 'stoggle_exclude_all' : "T",
     \ 'toggle_exclude_all' : "F",
