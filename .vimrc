@@ -1235,25 +1235,32 @@ set listchars=tab:>-,space:·,trail:·,extends:→,precedes:←
 set shiftround       " 总是缩进到4格的倍数
 " ctrl+] 右一个缩进
 " nnoremap <expr> <c-]> ((col('.')==col('$')-1) ? '>>$': '>>'.&shiftwidth.'l')
-nnoremap <expr> <c-]> ((col('.')==col('$')-1) ?
+nnoremap <expr> <c-]>  ( (getline('.')=='') ?  'a<tab><esc>' :
+            \ ((col('.')==col('$')-1) ?
             \ 'v>gv<esc>$':
-            \ 'v>gv<esc>'.&shiftwidth.'l')
+            \ 'v>gv<esc>'.&shiftwidth.'l'))
+
 fun! VMoveRight() range
-    let l1=line("'<")
-    let c1=col("'<")
-    let l2=line("'>")
-    let c2=col("'>")
-    normal! gv>gv
-    call setpos("'<", [0, l1, c1+&shiftwidth, 0])
-    call setpos("'>", [0, l2, c2+&shiftwidth, 0])
-    normal! gv
-endf
+    if getline('.') == '' && line("'<") == line("'>")
+        exe "normal! a\<tab>\<esc>v"
+    else
+        let l1=line("'<")
+        let c1=col("'<")
+        let l2=line("'>")
+        let c2=col("'>")
+        normal! gv>gv
+        call setpos("'<", [0, l1, c1+&shiftwidth, 0])
+        call setpos("'>", [0, l2, c2+&shiftwidth, 0])
+        normal! gv
+    endif
+endfun
 vnoremap <c-]> :call VMoveRight()<cr>
 " vnoremap <c-]> >gv
 " inoremap <c-]> <esc>v>gvva
-inoremap <expr> <c-]> ((col('.')==col('$')) ?
+inoremap <expr> <c-]> ( (getline('.')=='') ?  '<tab>' :
+            \ ((col('.')==col('$')) ?
             \ '<c-o>:stopinsert<cr>v>gv<esc>gi<c-o>$' :
-            \ '<c-o>:stopinsert<cr>v>gv<esc>gi<c-o>'.&shiftwidth.'l')
+            \ '<c-o>:stopinsert<cr>v>gv<esc>gi<c-o>'.&shiftwidth.'l'))
 
 " ctrl+[ 左一个缩进
 " iterm2 把ctrl+[ 映射为 ᜁ
@@ -1472,6 +1479,7 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 " SuperTab 插件
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabMappingTabManual = '<c-j>'
+
 function! g:SuperTabNormalTab()
     if col('.') ==# 1
     " 若光标在行首，则按tab一下，所在行会依照语法和上下文来缩进多个tab（可转为
