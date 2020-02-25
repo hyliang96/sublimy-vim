@@ -20,7 +20,7 @@
     "Green Component" : 0.98757272958755493
   },
   "Use Italic Font" : true,
-  "HotKey Characters" : " ",
+  "HotKey Characters" : "\u0000",
   "Foreground Color" : {
     "Red Component" : 0.7810397744178772,
     "Color Space" : "sRGB",
@@ -178,6 +178,10 @@
       "Action" : 12,
       "Text" : "»"
     },
+    "0xf728-0x100000" : {
+      "Action" : 11,
+      "Text" : "0x0b"
+    },
     "0x65-0x80000" : {
       "Action" : 12,
       "Text" : "ᜢ"
@@ -210,6 +214,10 @@
       "Text" : "0x7f",
       "Action" : 11
     },
+    "0xf702-0x300000" : {
+      "Action" : 10,
+      "Text" : "[H"
+    },
     "0x76-0x80000" : {
       "Text" : "√",
       "Action" : 12
@@ -221,6 +229,10 @@
     "0x77-0xc0000" : {
       "Text" : "ᜨ",
       "Action" : 12
+    },
+    "0x7f-0x100000" : {
+      "Action" : 11,
+      "Text" : "0x15"
     },
     "0x3b-0x40000" : {
       "Text" : "ᜪ",
@@ -270,10 +282,6 @@
       "Text" : "[1;5D",
       "Action" : 10
     },
-    "0x2e-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜱ"
-    },
     "0xf703-0x260000" : {
       "Text" : "[1;6C",
       "Action" : 10
@@ -288,10 +296,6 @@
     },
     "0xf708-0x20000" : {
       "Text" : "[15;2~",
-      "Action" : 10
-    },
-    "0xf703-0x2a0000" : {
-      "Text" : "[F",
       "Action" : 10
     },
     "0x69-0x40000" : {
@@ -335,8 +339,8 @@
       "Action" : 11
     },
     "0xf702-0x260000" : {
-      "Text" : "[1;6D",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;6D"
     },
     "0x46-0xa0000" : {
       "Text" : "Ï",
@@ -361,10 +365,6 @@
     "0xf703-0x280000" : {
       "Action" : 10,
       "Text" : "f"
-    },
-    "0xf702-0x2a0000" : {
-      "Text" : "[H",
-      "Action" : 10
     },
     "0xf700-0x220000" : {
       "Text" : "[1;2A",
@@ -502,10 +502,6 @@
       "Text" : "å",
       "Action" : 12
     },
-    "0x7f-0xa0000" : {
-      "Action" : 11,
-      "Text" : "0x15"
-    },
     "0x4c-0x60000" : {
       "Text" : "ᜭ",
       "Action" : 12
@@ -610,6 +606,10 @@
       "Action" : 12,
       "Text" : "†"
     },
+    "0xf703-0x300000" : {
+      "Action" : 10,
+      "Text" : "[F"
+    },
     "0xf701-0x2c0000" : {
       "Action" : 12,
       "Text" : "ᜌ"
@@ -626,28 +626,28 @@
       "Text" : "ᜮ",
       "Action" : 12
     },
+    "0x2b-0x60000" : {
+      "Text" : "ᜱ",
+      "Action" : 12
+    },
     "0x39-0x200000" : {
       "Text" : "9",
       "Action" : 12
-    },
-    "0xf728-0xa0000" : {
-      "Action" : 11,
-      "Text" : "0x0b"
     }
   },
   "Ansi 14 Color" : {
-    "Red Component" : 0.37597531080245972,
+    "Red Component" : 0.41708586923778057,
     "Color Space" : "sRGB",
-    "Blue Component" : 1,
+    "Blue Component" : 0.91363525390625,
     "Alpha Component" : 1,
-    "Green Component" : 0.99263292551040649
+    "Green Component" : 0.90777309265013384
   },
   "Ansi 2 Color" : {
-    "Red Component" : 0.54094038081862184,
+    "Red Component" : 0.53725490196078429,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.37924221716821194,
+    "Blue Component" : 0.37647058823529411,
     "Alpha Component" : 1,
-    "Green Component" : 0.711334228515625
+    "Green Component" : 0.70980392156862748
   },
   "Send Code When Idle" : false,
   "ASCII Anti Aliased" : true,
@@ -694,11 +694,11 @@
     "Green Component" : 0.726898193359375
   },
   "Ansi 1 Color" : {
-    "Red Component" : 0.789775550365448,
+    "Red Component" : 0.90087890625,
     "Color Space" : "sRGB",
-    "Blue Component" : 0,
+    "Blue Component" : 0.22346019744873047,
     "Alpha Component" : 1,
-    "Green Component" : 0.10676553100347519
+    "Green Component" : 0.25020041246822122
   },
   "Name" : "tmux",
   "Blinking Cursor" : true,
@@ -706,11 +706,11 @@
   "Badge Max Width" : 0.30000001192092896,
   "Idle Code" : 0,
   "Ansi 10 Color" : {
-    "Red Component" : 0.45490196078431372,
+    "Red Component" : 0.46629044364999578,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.45490196078431372,
+    "Blue Component" : 0.40258535742759705,
     "Alpha Component" : 1,
-    "Green Component" : 0.8666666666666667
+    "Green Component" : 0.904144287109375
   },
   "Ansi 8 Color" : {
     "Red Component" : 0.423004150390625,
@@ -729,8 +729,8 @@
   "Smart Cursor Color" : false,
   "Semantic History" : {
     "editor" : "com.sublimetext.3",
-    "text" : "",
-    "action" : "best editor"
+    "action" : "best editor",
+    "text" : ""
   },
   "Ambiguous Double Width" : false,
   "Badge Max Height" : 0.10000000149011612,
@@ -764,7 +764,7 @@
   "Option Key Sends" : 0,
   "Only The Default BG Color Uses Transparency" : true,
   "HotKey Window Animates" : false,
-  "HotKey Modifier Flags" : 1572864,
+  "HotKey Modifier Flags" : 1835008,
   "Ansi 15 Color" : {
     "Red Component" : 0.99999600648880005,
     "Color Space" : "sRGB",
@@ -812,11 +812,11 @@
   "Visual Bell" : true,
   "Custom Directory" : "Recycle",
   "Ansi 5 Color" : {
-    "Red Component" : 0.79022186994552612,
+    "Red Component" : 0.873321533203125,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.78154844045639038,
+    "Blue Component" : 0.84206091800532823,
     "Alpha Component" : 1,
-    "Green Component" : 0.18891248106956482
+    "Green Component" : 0.52163957851007581
   },
   "ASCII Ligatures" : false
 },
@@ -840,7 +840,7 @@
     "Green Component" : 0.98757272958755493
   },
   "Use Italic Font" : true,
-  "HotKey Characters" : " ",
+  "HotKey Characters" : "\u0000",
   "Foreground Color" : {
     "Red Component" : 0.7810397744178772,
     "Color Space" : "sRGB",
@@ -848,7 +848,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.78105825185775757
   },
-  "HotKey Window Floats" : false,
+  "HotKey Window Floats" : true,
   "Right Option Key Sends" : 0,
   "Character Encoding" : 4,
   "Selection Color" : {
@@ -945,7 +945,7 @@
     "telnet"
   ],
   "Scrollback Lines" : 50000,
-  "HotKey Window Reopens On Activation" : true,
+  "HotKey Window Reopens On Activation" : false,
   "Draw Powerline Glyphs" : true,
   "Flashing Bell" : false,
   "Cursor Guide Color" : {
@@ -999,6 +999,10 @@
       "Action" : 12,
       "Text" : "»"
     },
+    "0xf728-0x100000" : {
+      "Action" : 11,
+      "Text" : "0x0b"
+    },
     "0x65-0x80000" : {
       "Action" : 12,
       "Text" : "ᜢ"
@@ -1031,6 +1035,10 @@
       "Text" : "0x7f",
       "Action" : 11
     },
+    "0xf702-0x300000" : {
+      "Action" : 10,
+      "Text" : "[H"
+    },
     "0x76-0x80000" : {
       "Text" : "√",
       "Action" : 12
@@ -1042,6 +1050,10 @@
     "0x77-0xc0000" : {
       "Text" : "ᜨ",
       "Action" : 12
+    },
+    "0x7f-0x100000" : {
+      "Action" : 11,
+      "Text" : "0x15"
     },
     "0x3b-0x40000" : {
       "Text" : "ᜪ",
@@ -1091,10 +1103,6 @@
       "Text" : "[1;5D",
       "Action" : 10
     },
-    "0x2e-0x40000" : {
-      "Action" : 12,
-      "Text" : "ᜱ"
-    },
     "0xf703-0x260000" : {
       "Text" : "[1;6C",
       "Action" : 10
@@ -1109,10 +1117,6 @@
     },
     "0xf708-0x20000" : {
       "Text" : "[15;2~",
-      "Action" : 10
-    },
-    "0xf703-0x2a0000" : {
-      "Text" : "[F",
       "Action" : 10
     },
     "0x69-0x40000" : {
@@ -1156,8 +1160,8 @@
       "Action" : 11
     },
     "0xf702-0x260000" : {
-      "Text" : "[1;6D",
-      "Action" : 10
+      "Action" : 10,
+      "Text" : "[1;6D"
     },
     "0x46-0xa0000" : {
       "Text" : "Ï",
@@ -1182,10 +1186,6 @@
     "0xf703-0x280000" : {
       "Action" : 10,
       "Text" : "f"
-    },
-    "0xf702-0x2a0000" : {
-      "Text" : "[H",
-      "Action" : 10
     },
     "0xf700-0x220000" : {
       "Text" : "[1;2A",
@@ -1323,10 +1323,6 @@
       "Text" : "å",
       "Action" : 12
     },
-    "0x7f-0xa0000" : {
-      "Action" : 11,
-      "Text" : "0x15"
-    },
     "0x4c-0x60000" : {
       "Text" : "ᜭ",
       "Action" : 12
@@ -1431,6 +1427,10 @@
       "Action" : 12,
       "Text" : "†"
     },
+    "0xf703-0x300000" : {
+      "Action" : 10,
+      "Text" : "[F"
+    },
     "0xf701-0x2c0000" : {
       "Action" : 12,
       "Text" : "ᜌ"
@@ -1447,28 +1447,28 @@
       "Text" : "ᜮ",
       "Action" : 12
     },
+    "0x2b-0x60000" : {
+      "Text" : "ᜱ",
+      "Action" : 12
+    },
     "0x39-0x200000" : {
       "Text" : "9",
       "Action" : 12
-    },
-    "0xf728-0xa0000" : {
-      "Action" : 11,
-      "Text" : "0x0b"
     }
   },
   "Ansi 14 Color" : {
-    "Red Component" : 0.37597531080245972,
+    "Red Component" : 0.41708586923778057,
     "Color Space" : "sRGB",
-    "Blue Component" : 1,
+    "Blue Component" : 0.91363525390625,
     "Alpha Component" : 1,
-    "Green Component" : 0.99263292551040649
+    "Green Component" : 0.90777309265013384
   },
   "Ansi 2 Color" : {
-    "Red Component" : 0.54094038081862184,
+    "Red Component" : 0.53725490196078429,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.37924221716821194,
+    "Blue Component" : 0.37647058823529411,
     "Alpha Component" : 1,
-    "Green Component" : 0.711334228515625
+    "Green Component" : 0.70980392156862748
   },
   "Send Code When Idle" : false,
   "ASCII Anti Aliased" : true,
@@ -1513,23 +1513,23 @@
     "Green Component" : 0.726898193359375
   },
   "Ansi 1 Color" : {
-    "Red Component" : 0.789775550365448,
+    "Red Component" : 0.90087890625,
     "Color Space" : "sRGB",
-    "Blue Component" : 0,
+    "Blue Component" : 0.22346019744873047,
     "Alpha Component" : 1,
-    "Green Component" : 0.10676553100347519
+    "Green Component" : 0.25020041246822122
   },
   "Name" : "Hotkey Window",
   "Blinking Cursor" : true,
-  "Guid" : "CFC3D7DF-EAA5-4CEC-AAC6-D95E6CC1F943",
+  "Guid" : "2A0494C5-92F9-4664-AC73-74954DC8A256",
   "Badge Max Width" : 0.30000001192092896,
   "Idle Code" : 0,
   "Ansi 10 Color" : {
-    "Red Component" : 0.45490196078431372,
+    "Red Component" : 0.46629044364999578,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.45490196078431372,
+    "Blue Component" : 0.40258535742759705,
     "Alpha Component" : 1,
-    "Green Component" : 0.8666666666666667
+    "Green Component" : 0.904144287109375
   },
   "Ansi 8 Color" : {
     "Red Component" : 0.423004150390625,
@@ -1548,11 +1548,11 @@
   "Smart Cursor Color" : false,
   "Semantic History" : {
     "editor" : "com.sublimetext.3",
-    "text" : "",
-    "action" : "best editor"
+    "action" : "best editor",
+    "text" : ""
   },
   "Ambiguous Double Width" : false,
-  "Blur Radius" : 1.1612507931472082,
+  "Blur Radius" : 2.0861397525380712,
   "Badge Max Height" : 0.10000000149011612,
   "Ansi 0 Color" : {
     "Red Component" : 0.15294117647058825,
@@ -1577,14 +1577,14 @@
   "Space" : -1,
   "AWDS Tab Directory" : "",
   "AWDS Pane Option" : "Recycle",
-  "HotKey Window AutoHides" : true,
+  "HotKey Window AutoHides" : false,
   "Command" : "",
   "Terminal Type" : "xterm-256color",
   "Horizontal Spacing" : 1,
   "Option Key Sends" : 0,
   "Only The Default BG Color Uses Transparency" : true,
   "HotKey Window Animates" : true,
-  "HotKey Modifier Flags" : 1572864,
+  "HotKey Modifier Flags" : 1835008,
   "Ansi 15 Color" : {
     "Red Component" : 0.99999600648880005,
     "Color Space" : "sRGB",
@@ -1599,7 +1599,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.66863783291510037
   },
-  "Transparency" : 0.09263761104060915,
+  "Transparency" : 0.093726205583756342,
   "HotKey Activated By Modifier" : false,
   "Background Color" : {
     "Red Component" : 0.15294117647058825,
@@ -1633,11 +1633,11 @@
   "Visual Bell" : true,
   "Custom Directory" : "Recycle",
   "Ansi 5 Color" : {
-    "Red Component" : 0.79022186994552612,
+    "Red Component" : 0.873321533203125,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.78154844045639038,
+    "Blue Component" : 0.84206091800532823,
     "Alpha Component" : 1,
-    "Green Component" : 0.18891248106956482
+    "Green Component" : 0.52163957851007581
   },
   "ASCII Ligatures" : false
 }
