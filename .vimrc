@@ -1480,10 +1480,58 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabMappingTabManual = '<c-j>'
 
+
+
+" function! g:SuperTabNormalTab()
+    " if col('.') ==# 1
+    " " 若光标在行首，则按tab一下，所在行会依照语法和上下文来缩进多个tab（可转为
+    " " 若干个space）
+        " silent! exe "normal a\<C-g>u"
+        " let old_col = col('.')
+
+
+        " let lid = line('.')
+        " let i = lid-1
+        " " 若上方最近的空行位于行首，则直接返回<tab>；
+        " " 否则<bs>多次到这行尾，再<cr>相同次数，以实现按语法缩进
+
+
+        " while getline(i) == ''
+            " let i -= 1
+        " endwhile
+
+        " exe "normal :" . i ."\<cr>"
+        " undojoin | normal o
+        " undojoin | delete 2
+
+        " exe "normal :". lid . "\<cr>"
+        " undojoin | delete 1
+        " undojoin | exe "normal \"2P"
+        " return ''
+        " " if old_col == col('.')
+            " " return "\<tab>"
+        " " else
+            " " return ''
+        " " endif
+
+    " else
+        " if GetCharBeforeCursor() !~ "^[ \t]$"
+        " " 光标前一个字符若不是空白字符（space、tab）
+            " return "\<C-g>u\<tab>"    " 添加undo断点
+        " else
+            " return "\<tab>"
+        " endif
+    " endif
+
+" endfunction
+
+
+
 function! g:SuperTabNormalTab()
     if col('.') ==# 1
     " 若光标在行首，则按tab一下，所在行会依照语法和上下文来缩进多个tab（可转为
     " 若干个space）
+        let g:SuperTabPos = col('.')
         let lid = line('.')
         let i = lid-1
         let command = "\<bs>\<cr>"
@@ -1491,16 +1539,19 @@ function! g:SuperTabNormalTab()
         " 否则<bs>多次到这行尾，再<cr>相同次数，以实现按语法缩进
         while i > 0
             if ! (getline(i)=~ "^[ \t]*$")
-                if ! (getline(i)[0] =~ "[ \t]")
-                    " 若上方最近的空行位于行首，则直接返回<tab>
-                    let command = "\<tab>"
-                endif
+                " if ! (getline(i)[0] =~ "[ \t]")
+                    " " 若上方最近的空行位于行首，则直接返回<tab>
+                    " let command = "\<tab>"
+                " endif
                 break
             endif
             let i = i-1
             let command = "\<bs>".command."\<cr>"
         endwhile
-        return "\<C-g>u".command       " 添加undo断点
+        " 添加undo断点 : <c-g>u
+        return "\<C-g>u" . command
+            \ . "-\<left>\<c-o>:if col('.') ==# g:SuperTabPos|"
+            \ . "call feedkeys(\"\\<space>\\<tab>\")|endif\<cr>\<del>"
     else
         if GetCharBeforeCursor() !~ "^[ \t]$"
         " 光标前一个字符若不是空白字符（space、tab）
@@ -1510,6 +1561,7 @@ function! g:SuperTabNormalTab()
         endif
     endif
 endfunction
+
 
 " ------------------------------------------------------------------------
 " 方案二 NeoComplCache.vim    自动补全插件
