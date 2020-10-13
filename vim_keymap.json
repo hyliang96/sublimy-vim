@@ -103,7 +103,7 @@
     }
   ],
   "Mouse Reporting" : true,
-  "Cursor Boost" : 0.11724016853932584,
+  "Cursor Boost" : 0,
   "Ansi 4 Color" : {
     "Red Component" : 0.31764705882352939,
     "Color Space" : "sRGB",
@@ -123,7 +123,7 @@
     "slogin",
     "telnet"
   ],
-  "Scrollback Lines" : 50000,
+  "Scrollback Lines" : 10000,
   "HotKey Window Reopens On Activation" : false,
   "Draw Powerline Glyphs" : true,
   "Flashing Bell" : false,
@@ -166,6 +166,10 @@
   "AWDS Tab Option" : "No",
   "HotKey Key Code" : 49,
   "Keyboard Map" : {
+    "0xd-0x100000" : {
+      "Text" : "",
+      "Action" : 13
+    },
     "0xf700-0x2a0000" : {
       "Action" : 12,
       "Text" : "ᜇ"
@@ -715,18 +719,18 @@
   "HotKey Window Dock Click Action" : 0,
   "Default Bookmark" : "No",
   "Cursor Color" : {
-    "Red Component" : 0.726898193359375,
+    "Red Component" : 0.488067626953125,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.726898193359375,
+    "Blue Component" : 0.488067626953125,
     "Alpha Component" : 1,
-    "Green Component" : 0.726898193359375
+    "Green Component" : 0.488067626953125
   },
   "Ansi 1 Color" : {
-    "Red Component" : 0.90087890625,
+    "Red Component" : 0.89803921568627454,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.22346019744873047,
+    "Blue Component" : 0.2196078431372549,
     "Alpha Component" : 1,
-    "Green Component" : 0.25020041246822122
+    "Green Component" : 0.24705882352941178
   },
   "Name" : "tmux",
   "Blinking Cursor" : true,
@@ -772,9 +776,9 @@
   "Cursor Type" : 1,
   "AWDS Pane Directory" : "",
   "Blur" : false,
-  "Normal Font" : "MesloLGSDZForPowerline-Regular 12",
+  "Normal Font" : "RobotoMonoForPowerline-Regular 12",
   "Application Keypad Allowed" : false,
-  "Vertical Spacing" : 1,
+  "Vertical Spacing" : 1.1000000000000001,
   "Ansi 7 Color" : {
     "Red Component" : 0.7810397744178772,
     "Color Space" : "sRGB",
@@ -794,12 +798,13 @@
   "HotKey Window Animates" : false,
   "HotKey Modifier Flags" : 1835008,
   "Ansi 15 Color" : {
-    "Red Component" : 0.99999600648880005,
+    "Red Component" : 1,
     "Color Space" : "sRGB",
     "Blue Component" : 1,
     "Alpha Component" : 1,
     "Green Component" : 1
   },
+  "Minimum Contrast" : 0,
   "Ansi 6 Color" : {
     "Red Component" : 0.38133472763001919,
     "Color Space" : "sRGB",
@@ -824,7 +829,7 @@
   "Bound Hosts" : [
 
   ],
-  "Non Ascii Font" : "NotoMonoForPowerline 12",
+  "Non Ascii Font" : "RobotoMonoForPowerline-Regular 12",
   "Ansi 13 Color" : {
     "Red Component" : 1,
     "Color Space" : "sRGB",
@@ -876,7 +881,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.78105825185775757
   },
-  "HotKey Window Floats" : true,
+  "HotKey Window Floats" : false,
   "Right Option Key Sends" : 0,
   "Character Encoding" : 4,
   "Selection Color" : {
@@ -1015,6 +1020,10 @@
   "AWDS Tab Option" : "No",
   "HotKey Key Code" : 49,
   "Keyboard Map" : {
+    "0xd-0x100000" : {
+      "Text" : "",
+      "Action" : 13
+    },
     "0xf700-0x2a0000" : {
       "Action" : 12,
       "Text" : "ᜇ"
@@ -1562,11 +1571,11 @@
   "HotKey Window Dock Click Action" : 0,
   "Default Bookmark" : "No",
   "Cursor Color" : {
-    "Red Component" : 0.726898193359375,
+    "Red Component" : 0.48627450980392156,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.726898193359375,
+    "Blue Component" : 0.48627450980392156,
     "Alpha Component" : 1,
-    "Green Component" : 0.726898193359375
+    "Green Component" : 0.48627450980392156
   },
   "Ansi 1 Color" : {
     "Red Component" : 0.90087890625,
