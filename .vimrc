@@ -4,6 +4,7 @@
 " Version:     0.1
 " Source:
 " =========================================================================
+let g:python3_host_prog='/usr/bin/python3' " '/home/hyliang/ENV/localENV/anaconda3/bin/python3'
 
 " 加载插件配置文件
 if filereadable(expand("~/.vimrc.bundles"))
