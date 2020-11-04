@@ -4,8 +4,8 @@
 " Version:     0.1
 " Source:
 " =========================================================================
-"
-"
+
+
 " 加载插件配置文件
 if filereadable(expand("~/.vimrc.bundles"))
     source ~/.vimrc.bundles
