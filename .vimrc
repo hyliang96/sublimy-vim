@@ -724,7 +724,7 @@ let g:ctrlsf_mapping= {
 \       "popenf"  : "P",
 \       "pquit"   : "q",
 \       "quit"    : "q",
-\       "next"    : ["ᜯ", '<A-CR>'],
+\       "next"    : '<A-CR>',
 \       "prev"    : "ᜰ",
 \       "loclist" : "s",
 \       "chgmode" : "M",
