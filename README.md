@@ -345,13 +345,12 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
   ```
   # 已使用了：
   \xE1\x9C\x80-\xE1\x9C\x8F
-  \xE1\x9C\xA0-\xE1\x9C\xB1
+  \xE1\x9C\xA0-\xE1\x9C\xAE
+  \xE1\x9C\xB0-\xE1\x9C\xB1
   \xE1\x9D\x80
-  # 其中未被用的
+  # 其中未被用的:
+  \xE1\x9C\xAF  =  ᜯ  
   ```
-```
-  
-```
   # 闲置未被用为vim快捷键的按键组合
 
 ```
