@@ -1865,7 +1865,7 @@ autocmd BufWritePost * :%s/\s\+$//e  " 保存时自动删除行尾空格
 function! UpDate()
     let l=line('.')
     let c=col('.')
-    update
+    update!
     call cursor(l,c)
     nohls
 endfunction
