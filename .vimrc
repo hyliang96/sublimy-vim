@@ -21,10 +21,6 @@ let g:python_highlight_all = 1           " 开启python的所有语法高亮，�
 set showcmd                              " 右下角：n模式显示已输入命令；v模式显示选区范围
 set showmode                             " 左下角的状态栏显示INSERT之类的字样
 set nocompatible                         " 关闭 vi 兼容模式
-colorscheme gruvbox                      " 设定配色方案, 其他备选  Monokai my_molokai gruvbox
-let g:gruvbox_transparent_bg=1
-" hi Normal       guibg=none ctermbg=none
-" set bg=dark                              " 背景设置为dark色
 set number                               " 显示行号
 set cursorline                           " 突出显示当前行
 set ruler                                " 打开状态栏标尺
@@ -167,11 +163,25 @@ let g:airline#extensions#branch#enabled=1         " 显示 git 分支
 let g:airline#extensions#hunks#enabled=0          " ' +n ~m -k '显示在 git 分支左侧, 表示增/改/删的行数
         " 它和‘保存时删除行尾空字符’ 兼容不好，若二者皆开，则保存文件时' +n ~m -k '会闪烁多次
 let g:airline_theme='gruvbox'                     " 状态栏配色
+" let g:airline_theme='gruvbox_material'                     " 状态栏配色
 " 其他方案搭配
 " (colorscheme, airline_theme) = (vimmy_molokai, badwolf) | (gruvbox,gruvbox)
 " 安装airline配色方案： Plug 'morhetz/gruvbox'
 let g:airline#extensions#tabline#show_buffers = 0 " 不显示已关tab的遗骸
 let g:airline_powerline_fonts=1
+" ----------------------------------------------------------------
+" 编辑区配色
+" Plug 'sainnhe/gruvbox-material'  " 不好看, 但背景默认透明
+" set bg=dark                              " 背景设置为dark色
+" let g:gruvbox_material_transparent_background = 1
+" let g:gruvbox_material_background = 'soft'
+" colorscheme gruvbox-material
+
+" Plug 'morhetz/gruvbox'           " 好看
+colorscheme gruvbox                      " 设定配色方案, 其他备选  Monokai my_molokai gruvbox
+" 透明背景
+autocmd VimEnter *  hi Normal       guibg=none ctermbg=none
+set bg=dark                              " 背景设置为dark色
 "-----------------------------------------------------------------
 "让vim记忆上次编辑的位置
 autocmd BufReadPost *
@@ -993,20 +1003,62 @@ endif
 "=========================================================================
 " 复制黏贴
 " ------------------------------------------------------------------------
+" 从服务器vim剪/拷到笔记本剪切板
+"   * 鼠标双击选词    鼠标双击选中一词，再按d(相当于cmd+x)/y(相当于cmd+c)
+"   * 鼠标拉动选中    鼠标拉动选中一片(可跨页)，再按d(相当于cmd+x)/y(相当于cmd+c)
+"   * visual选中      v,y复制、v,d剪切
+"   * (数字)yy/dd     整(几)行复制/剪切
+" 发送到笔记本的系统剪切板，但不清空vim的寄存器
+" 上述操作选中都不会选到行号
+function! ToClipboard()
+    call system('timeout 0.1 nc localhost 8377 &', @")
+endfunction
+
+vnoremap <silent> y y:call ToClipboard()<CR>
+vnoremap <silent> d d:call ToClipboard()<CR>
+nnoremap <silent> yy yy:call ToClipboard()<CR>
+nnoremap <silent> dd dd:call ToClipboard()<CR>
+" 全选发送到笔记本剪切板
+" noremap <C-a> :%w !timeout 0.1 nc localhost 8377<CR><CR>
+" ------------------------------------------------------------------------
+" vim剪切板同步到本机系统剪切板
+" set clipboard=unnamed     " 所有vim剪切板均与系统剪切板同步
+" 注释掉则只同步"剪切板，对应y d dd yy c cc 操作
+"
+" vim --version | grep  clipboad
+" 见+clipborad则为支持clipboard，见-clipboard则为不支持
+" - 我的mac装了最新的vim后，支持cliboard，可复制到系统见其版
+" - linux服务器上即便用`conda install -c conda-forge vim`,也不支持clipboard，或
+"    是因为服务器没有显示设备
+"    未解决复制到linux系统剪切板
+"
+" vnoremap y :w !pbcopy<CR><CR>
+" nnoremap p :r !pbpaste<CR><CR>
+" vnoremap "+y :w !pbcopy<CR><CR>
+" nnoremap "+p :r !pbpaste<CR><CR>
+" vnoremap y y:call system('xclip -selection clipboard', @")<cr>
+" nnoremap p p:call system('xclip -selection clipboard -o', @")<cr>
+" vnoremap y :w !xclip -selection clipboard<cr><cr>
+" nnoremap p :r !xclip -selection clipboard -o<cr><cr>
+" ------------------------------------------------------------------------
 " 剪切
 " 删去一行
 " 不剪切换行符、和行首缩进
 function! NCtrlX()
     let this_line = getline(".")
     if this_line =~ "^[ \t]*$"
-        call feedkeys("\"_dd")
+        normal! "_dd
+        " call feedkeys("\"_dd")
     else
-        call feedkeys("^vg_d\"_dd")
+        normal! ^vg_d"_dd
+        " call feedkeys("^vg_d\"_dd")
     endif
+    call ToClipboard()
 endfunction
 nnoremap <C-x> :call NCtrlX()<cr>
 " nmap <C-x> ^vg_d"_dd
 " vmap <C-x> d
+
 " 选区末尾若有换行符，不剪切该换行符
 function! VCtrlX() range
     if strlen(getline("'>"))<col("'>")
@@ -1022,14 +1074,15 @@ function! VCtrlX() range
     else
         normal! gvd
     endif
-    call system('timeout 0.1 nc localhost 8377 &', @")
+    call ToClipboard()
 endfunction
 vnoremap <c-x> :call VCtrlX()<cr>
 
 fun! EmptyLine()
     return getline(".")=~ "^[ \t]*$"
 endf
-imap <expr> <c-x> EmptyLine()? '<esc>"_ddi' : '<esc>^vg_d"_ddi'
+inoremap <c-x> <esc>:call NCtrlX()<cr>gi
+" imap <expr> <c-x> EmptyLine()? '<esc>"_ddi' : '<esc>^vg_d"_ddi'
 " imap <c-x> <c-o>:stopinsert<cr>ddi
 " imap <expr> <C-x> col('.')==1?'<esc>ddi':'<esc>dda'
 " imap <C-x> <c-o>:stopinsert<cr>dda
@@ -1038,7 +1091,7 @@ imap <expr> <c-x> EmptyLine()? '<esc>"_ddi' : '<esc>^vg_d"_ddi'
 " 复制一行，带换行符
 " nmap <C-c> ^vg_y
 " 复制一行，不带换行符
-noremap <expr> <c-c> EmptyLine()? '' : 'mz^y$:call system("timeout 0.1 nc localhost 8377 &", @")<CR>`z'
+noremap <expr> <c-c> EmptyLine()? '' : 'mz^y$:call ToClipboard()<CR>`z'
 " 选区末尾若有换行符，不复制该换行符
 function! VCtrlC() range
     if strlen(getline("'>"))<col("'>")
@@ -1057,7 +1110,7 @@ function! VCtrlC() range
         normal! gvygv
         " normal! gvy
     endif
-    call system('timeout 0.1 nc localhost 8377 &', @")
+    call ToClipboard()
 endfunction
 vnoremap <c-c> :call VCtrlC()<cr>
 
@@ -1087,9 +1140,8 @@ function! VCtrlV() range
     endif
 endfunction
 " 删除选区并替换为剪切板内容，不改变剪切板内容
-vmap <c-v> :call VCtrlV()<cr>
-vmap p :call VCtrlV()<cr>
-" vnoremap p "_dP
+vnoremap <c-v> :call VCtrlV()<cr>
+vnoremap p :call VCtrlV()<cr>
 
 " vnoremap <expr> <C-v> SelectOneChar()? '<esc>Pv<right><esc>' : '"_dPv<esc>"'
 " vmap <C-v> <c-b>Pv<right>
@@ -1106,40 +1158,6 @@ inoremap <C-v> <space><bs><C-o>:set paste<CR><C-R>"<C-o>:set nopaste<CR>
 "   * 不出现自动缩进
 "   * 若受行为注释，所粘诸行不自动加注
 set pastetoggle=√     " alt+v  开关原文黏贴模式
-" ------------------------------------------------------------------------
-" 从服务器vim剪/拷到笔记本剪切板
-"   * 鼠标双击选词    鼠标双击选中一词，再按d(相当于cmd+x)/y(相当于cmd+c)
-"   * 鼠标拉动选中    鼠标拉动选中一片(可跨页)，再按d(相当于cmd+x)/y(相当于cmd+c)
-"   * visual选中      v,y复制、v,d剪切
-"   * (数字)yy/dd     整(几)行复制/剪切
-" 发送到笔记本的系统剪切板，但不清空vim的寄存器
-" 上述操作选中都不会选到行号
-vnoremap <silent> y y:call system('timeout 0.1 nc localhost 8377 &', @")<CR>
-vnoremap <silent> d d:call system('timeout 0.1 nc localhost 8377 &', @")<CR>
-nnoremap <silent> yy yy:call system('timeout 0.1 nc localhost 8377 &', @")<CR>
-nnoremap <silent> dd dd:call system('timeout 0.1 nc localhost 8377 &', @")<CR>
-" 全选发送到笔记本剪切板
-" noremap <C-a> :%w !timeout 0.1 nc localhost 8377<CR><CR>
-" ------------------------------------------------------------------------
-" vim剪切板同步到本机系统剪切板
-" set clipboard=unnamed     " 所有vim剪切板均与系统剪切板同步
-" 注释掉则只同步"剪切板，对应y d dd yy c cc 操作
-"
-" vim --version | grep  clipboad
-" 见+clipborad则为支持clipboard，见-clipboard则为不支持
-" - 我的mac装了最新的vim后，支持cliboard，可复制到系统见其版
-" - linux服务器上即便用`conda install -c conda-forge vim`,也不支持clipboard，或
-"    是因为服务器没有显示设备
-"    未解决复制到linux系统剪切板
-"
-" vnoremap y :w !pbcopy<CR><CR>
-" nnoremap p :r !pbpaste<CR><CR>
-" vnoremap "+y :w !pbcopy<CR><CR>
-" nnoremap "+p :r !pbpaste<CR><CR>
-" vnoremap y y:call system('xclip -selection clipboard', @")<cr>
-" nnoremap p p:call system('xclip -selection clipboard -o', @")<cr>
-" vnoremap y :w !xclip -selection clipboard<cr><cr>
-" nnoremap p :r !xclip -selection clipboard -o<cr><cr>
 " -----------------------------------------------------------------------
 " 选中状态下 cmd + c 复制
 "   * mac下command+V/C 复制黏贴有效

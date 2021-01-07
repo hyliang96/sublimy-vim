@@ -35,7 +35,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " airline的gruvbox主题
-Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'           " 好看
+" Plug 'sainnhe/gruvbox-material'  " 不好看
 " 获取git状态，让airline显示之；并支持在vim中进行git操作
 Plug 'tpope/vim-fugitive'
 " 它会在 Vim 的行号列旁显示 git diff 的差异标记
