@@ -761,59 +761,59 @@ let g:ctrlsf_auto_focus = {
 
 endif
 
-" ------------------------------------------------------------------------
-" 目录下搜索
-" vimgrep /匹配模式/[g][j] 要搜索的文件/范围 
-" g：表示是否把每一行的多个匹配结果都加入
-" j：表示是否搜索完后定位到第一个匹配位置
+" " ------------------------------------------------------------------------
+" " 目录下搜索
+" " vimgrep /匹配模式/[g][j] 要搜索的文件/范围 
+" " g：表示是否把每一行的多个匹配结果都加入
+" " j：表示是否搜索完后定位到第一个匹配位置
 
-" vimgrep /pattern/ %           在当前打开文件中查找
-" vimgrep /pattern/ *           在当前目录下查找所有
-" vimgrep /pattern/ **          在当前目录及子目录下查找所有
-" vimgrep /pattern/ *.c         查找当前目录下所有.c文件
-" vimgrep /pattern/ **/*        只查找子目录
+" " vimgrep /pattern/ %           在当前打开文件中查找
+" " vimgrep /pattern/ *           在当前目录下查找所有
+" " vimgrep /pattern/ **          在当前目录及子目录下查找所有
+" " vimgrep /pattern/ *.c         查找当前目录下所有.c文件
+" " vimgrep /pattern/ **/*        只查找子目录
 
-" :copen       显示所有搜索结果
+" " :copen       显示所有搜索结果
 
 
-" alt+f
-nnoremap <plug>(VimGrep) :vimgrep //g **     \|"HELP\| * : under now dir\| ** : under now dir and subdirs\| *.c : .c files "\|<home><right><right><right><right><right><right><right><right><right>
-nmap ƒ <plug>(VimGrep)
-vmap ƒ <esc><plug>(VimGrep)
-imap ƒ  <c-o><plug>(VimGrep)
-" shift+alt+f  打开搜索列表
-" 左键双击/回车即可在当前窗口显示此文件，光标进入该窗口
-" 再要将光标回到搜索列表，可以鼠标点击进入下方列表窗口，
-                            " 或ctrl+alt+down，或
-                            " shift+alt+f
-" alt+shift+f 关闭列表窗口
-nnoremap <silent> Ï :copen<cr>
-vnoremap <silent> Ï <esc>:copen<cr>
-inoremap <silent> Ï <c-o>:copen<cr>
-" alt+enter 下一个
-fun! CNext()
-" 支持循环
-    try
-        cnext
-    catch /E553/
-        crewind
-    endtry
-endf
-nnoremap <silent> ᜯ   :call CNext()<cr>
-vnoremap <silent> ᜯ   <esc>:call CNext()<cr>
-inoremap <silent> ᜯ   <c-o>:call CNext()<cr>
-" shift+alt+enter 上一个
-fun! CPrevious()
-" 支持循环
-    try
-        cprevious
-    catch /E553/
-        clast
-    endtry
-endf
-nnoremap <silent> ᜰ  :call CPrevious()<cr>
-vnoremap <silent> ᜰ  <esc>:call CPrevious()<cr>
-inoremap <silent> ᜰ  <c-o>:call CPrevious()<cr>
+" " alt+f
+" nnoremap <plug>(VimGrep) :vimgrep //g **     \|"HELP\| * : under now dir\| ** : under now dir and subdirs\| *.c : .c files "\|<home><right><right><right><right><right><right><right><right><right>
+" nmap ƒ <plug>(VimGrep)
+" vmap ƒ <esc><plug>(VimGrep)
+" imap ƒ  <c-o><plug>(VimGrep)
+" " shift+alt+f  打开搜索列表
+" " 左键双击/回车即可在当前窗口显示此文件，光标进入该窗口
+" " 再要将光标回到搜索列表，可以鼠标点击进入下方列表窗口，
+                            " " 或ctrl+alt+down，或
+                            " " shift+alt+f
+" " alt+shift+f 关闭列表窗口
+" nnoremap <silent> Ï :copen<cr>
+" vnoremap <silent> Ï <esc>:copen<cr>
+" inoremap <silent> Ï <c-o>:copen<cr>
+" " alt+enter 下一个
+" fun! CNext()
+" " 支持循环
+    " try
+        " cnext
+    " catch /E553/
+        " crewind
+    " endtry
+" endf
+" nnoremap <silent> ᜯ   :call CNext()<cr>
+" vnoremap <silent> ᜯ   <esc>:call CNext()<cr>
+" inoremap <silent> ᜯ   <c-o>:call CNext()<cr>
+" " shift+alt+enter 上一个
+" fun! CPrevious()
+" " 支持循环
+    " try
+        " cprevious
+    " catch /E553/
+        " clast
+    " endtry
+" endf
+" nnoremap <silent> ᜰ  :call CPrevious()<cr>
+" vnoremap <silent> ᜰ  <esc>:call CPrevious()<cr>
+" inoremap <silent> ᜰ  <c-o>:call CPrevious()<cr>
 
 " ------------------------------------------------------------------------
 " 同词高亮
@@ -1411,14 +1411,6 @@ function! GetCharBeforeCursor()
     call cursor(l,c)
     return char
 endfunction
-" 获得光标所在的一个字符（以utf8字符计）
-function! GetCharUnderCursor()
-    if getline('.') == ''
-        return ''
-    else
-        return StrIdx(getline('.'),col('.')-1)
-    endif
-endfunction
 " 最终的空格、tab、换行
 fun! SetUndoableSpaceChar()
         " 光标所在行中，光标前一字符，不是空格和tab，则标记undo节点
@@ -1840,15 +1832,7 @@ else
     imap <esc><bs> <plug>(DeleteWordBefore)
     cmap <esc><bs> <plug>(DeleteWordBefore)
 endif
-function! IfDeleteOneChar()
-    return GetCharBeforeCursor()=="'" || GetCharBeforeCursor()=='"' || col('.')==1
-endfunction
-nnoremap <expr> <plug>(DeleteWordBefore) (GetCharBeforeCursor()=="'") ? ( 'a<c-g>u<esc><left>va' . "'" . '"_d' ) :
-    \ ( col('.')==1 ? 'i<c-g>u<bs><c-o>:stopinsert<cr>'   :
-    \ ( GetCharBeforeCursor() =~ '[() ]' ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' :  'a<c-g>u<esc><left>vb"_d' ))
-" 'i<c-g>u<left><c-o>:stopinsert<cr>'
-"     \ ( GetCharUnderCursor()=="''   )
-" IfDeleteOneChar() ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>vb"_d'
+nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>vb"_d'
 " nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? 'i<bs><c-o>:stopinsert<cr>' : ' <left>vb"_d'
 inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<c-g>u<bs>' : '<c-g>u<left><c-o>vb"_d'
 " inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<bs>' : '<left><c-o>vb"_d'
