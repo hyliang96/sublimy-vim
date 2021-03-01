@@ -1372,11 +1372,20 @@ endf
 " nnoremap <C-z> u
 " vnoremap <expr> <c-z>  SelectOneChar()? '<esc>u': '<esc>ugv'
 " imap <expr> <c-z>  pumvisible()?  '<esc>uua' : '<c-o>u'
-nnoremap <c-z> g-
-vnoremap <c-z> <esc>g-a
-snoremap <c-z> <c-g><esc>g-a
+
+
+nnoremap <c-z> u
+vnoremap <c-z> <esc>ua
+snoremap <c-z> <c-g><esc>ua
 " vnoremap <expr> <c-z>  SelectOneChar()? '<esc>g-': '<esc>g-gv'
-inoremap <c-z> <esc>g-a
+inoremap <c-z> <c-o>u
+
+
+" nnoremap <c-z> g-
+" vnoremap <c-z> <esc>g-a
+" snoremap <c-z> <c-g><esc>g-a
+" " vnoremap <expr> <c-z>  SelectOneChar()? '<esc>g-': '<esc>g-gv'
+" inoremap <c-z> <esc>g-a
 
 " imap <expr> <c-z>  pumvisible()?  '<esc>g-a' : '<c-o>u'
 " 重做
@@ -1844,22 +1853,11 @@ function! IfDeleteOneChar()
     return GetCharBeforeCursor()=="'" || GetCharBeforeCursor()=='"' || col('.')==1
 endfunction
 
-nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1) ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc><left>a<c-o>:set foldmethod=manual<cr>vb"_da<c-o>:set foldmethod=syntax<c-o>:stopinsert<cr>'
-" :set foldmethod=syntax<cr>
+nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1) ? 'i<bs><c-o>:stopinsert<cr>' : 'i <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr><c-o>:stopinsert<cr>'
+" nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1) ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'i<c-g>u <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr><c-o>:stopinsert<cr>'
+inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<bs>' : ' <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr>'
+" inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<c-g>u<bs>' : '<c-g> <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr>'
 
-" nnoremap <expr> <plug>(DeleteWordBefore) (GetCharBeforeCursor()=="'") ? ( 'a<c-g>u<esc><left>va' . "'" . '"_d' ) :
-"     \ ( col('.')==1 ? 'i<c-g>u<bs><c-o>:stopinsert<cr>'   :
-"     \ ( GetCharBeforeCursor() =~ '[() ]' ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' :  'a<c-g>u<esc><left>vb"_d' ))
-
-" 'i<c-g>u<left><c-o>:stopinsert<cr>'
-"     \ ( GetCharUnderCursor()=="''   )
-" IfDeleteOneChar() ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>vb"_d'
-" nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? 'i<bs><c-o>:stopinsert<cr>' : ' <left>vb"_d'
-
-inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<c-g>u<bs>' : '<c-g>u<left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr>'
-" inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<c-g>u<bs>' : '<c-g>u<left><c-o>vb"_d'
-
-" inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<bs>' : '<left><c-o>vb"_d'
 cnoremap <plug>(DeleteWordBefore) <c-w>
 " alt+fn+del 删除后一个词
 if has('nvim')
@@ -1871,34 +1869,45 @@ else
     imap <esc>d <plug>(DeleteWordAfter)
     cmap <esc>d <plug>(DeleteWordAfter)
 endif
-nnoremap <expr> <plug>(DeleteWordAfter) ((col('.')==col('$')-1)? 'a<c-g>u<del><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>ve"_d')
-inoremap <expr> <plug>(DeleteWordAfter) (col('.')==col('$'))? '<del>' : '<c-g>u<C-o>ve"_d'
+nnoremap <expr> <plug>(DeleteWordAfter) ((col('.')==col('$')-1)? 'a<del><c-o>:stopinsert<cr>' : 'a<esc>ve"_d')
+" nnoremap <expr> <plug>(DeleteWordAfter) ((col('.')==col('$')-1)? 'a<c-g>u<del><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>ve"_d')
+inoremap <expr> <plug>(DeleteWordAfter) (col('.')==col('$'))? '<del>' : '<c-o>ve"_d'
+
+" inoremap <expr> <plug>(DeleteWordAfter) (col('.')==col('$'))? '<del>' : '<c-g>u<C-o>ve"_d'
 cnoremap <expr> <plug>(DeleteWordAfter) ''
 " cnoremap <plug>(DeleteWordAfter) <S-right><c-w>  " FIXME 这样写不行，还不知道怎么写
-" alt+shift+del 删除光标前的整行
+
+" cmd+del 删除光标前的整行
 nmap <c-u> <plug>(DeleteLineBefore)
 imap <c-u> <plug>(DeleteLineBefore)
 cmap <c-u> <plug>(DeleteLineBefore)
-nnoremap <expr> <plug>(DeleteLineBefore) (col('.')==1) ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc><left>v0"_d'
-inoremap <expr> <plug>(DeleteLineBefore) (col('.')==1) ? '<c-g>u<bs>' :'<c-g>u<left><c-o>v0"_d'
+nnoremap <expr> <plug>(DeleteLineBefore) (col('.')==1) ? 'i <bs><bs><c-o>:stopinsert<cr>' : 'a <bs><esc><left>v0"_d'
+" nnoremap <expr> <plug>(DeleteLineBefore) (col('.')==1) ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc><left>v0"_d'
+inoremap <expr> <plug>(DeleteLineBefore) (col('.')==1) ? '<bs>' :' <bs><left><c-o>v0"_d'
 cnoremap <plug>(DeleteLineBefore) <c-u>
-" alt+shift+fn+del 删除光标 后的整行
+
+" cmd+fn+del 删除光标 后的整行
 nmap <c-k> <plug>(DeleteLineAfter)
 imap <c-k> <plug>(DeleteLineAfter)
 cmap <c-k> <plug>(DeleteLineAfter)
-nnoremap <expr> <plug>(DeleteLineAfter) (col('.')>=col('$')-1)? 'a<c-g>u<del><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>v$h"_d'
+nnoremap <expr> <plug>(DeleteLineAfter) (col('.')>=col('$')-1)? 'a<del><c-o>:stopinsert<cr>' : 'v$h"_d'
+" nnoremap <expr> <plug>(DeleteLineAfter) (col('.')>=col('$')-1)? 'a<c-g>u<del><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>v$h"_d'
 " FIXME 在multiple-cursor下，撤销会出bug
-inoremap <expr> <plug>(DeleteLineAfter) (col('.')==col('$'))? '<c-g>u<del>' : '<c-g>u<c-o>v$<left>"_d'
+inoremap <expr> <plug>(DeleteLineAfter) (col('.')==col('$'))? '<del>' : '<c-o>v$<left>"_d'
+" inoremap <expr> <plug>(DeleteLineAfter) (col('.')==col('$'))? '<c-g>u<del>' : '<c-g>u<c-o>v$<left>"_d'
 " FIXME 在multiple-cursor下，撤销会出bug
 cnoremap <expr> <plug>(DeleteLineAfter) ''
 " cnoremap: FIXME 还不知道怎么写
+
 " shift+del 删除
 " 或 ctrl+l整行选中，backspace删除
 nmap <c-e><c-u> <plug>(DeleteLine)
 imap <c-e><c-u> <plug>(DeleteLine)
 cmap <c-e><c-u> <plug>(DeleteLine)
-nnoremap <plug>(DeleteLine) a<c-g>u<esc>0v$"_d
-inoremap <plug>(DeleteLine) <c-g>u<c-o>0<C-o>v$"_d
+nnoremap <plug>(DeleteLine) i<space><bs><esc>0v$"_d
+" nnoremap <plug>(DeleteLine) a<c-g>u<esc>0v$"_d
+inoremap <plug>(DeleteLine) <space><bs><c-o>0<C-o>v$"_d
+" inoremap <plug>(DeleteLine) <c-g>u<c-o>0<C-o>v$"_d
 cnoremap <plug>(DeleteLine) <c-e><c-u>
 
 "=========================================================================
