@@ -1843,14 +1843,22 @@ endif
 function! IfDeleteOneChar()
     return GetCharBeforeCursor()=="'" || GetCharBeforeCursor()=='"' || col('.')==1
 endfunction
-nnoremap <expr> <plug>(DeleteWordBefore) (GetCharBeforeCursor()=="'") ? ( 'a<c-g>u<esc><left>va' . "'" . '"_d' ) :
-    \ ( col('.')==1 ? 'i<c-g>u<bs><c-o>:stopinsert<cr>'   :
-    \ ( GetCharBeforeCursor() =~ '[() ]' ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' :  'a<c-g>u<esc><left>vb"_d' ))
+
+nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1) ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc><left>a<c-o>:set foldmethod=manual<cr>vb"_da<c-o>:set foldmethod=syntax<c-o>:stopinsert<cr>'
+" :set foldmethod=syntax<cr>
+
+" nnoremap <expr> <plug>(DeleteWordBefore) (GetCharBeforeCursor()=="'") ? ( 'a<c-g>u<esc><left>va' . "'" . '"_d' ) :
+"     \ ( col('.')==1 ? 'i<c-g>u<bs><c-o>:stopinsert<cr>'   :
+"     \ ( GetCharBeforeCursor() =~ '[() ]' ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' :  'a<c-g>u<esc><left>vb"_d' ))
+
 " 'i<c-g>u<left><c-o>:stopinsert<cr>'
 "     \ ( GetCharUnderCursor()=="''   )
 " IfDeleteOneChar() ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>vb"_d'
 " nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? 'i<bs><c-o>:stopinsert<cr>' : ' <left>vb"_d'
-inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<c-g>u<bs>' : '<c-g>u<left><c-o>vb"_d'
+
+inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<c-g>u<bs>' : '<c-g>u<left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr>'
+" inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<c-g>u<bs>' : '<c-g>u<left><c-o>vb"_d'
+
 " inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<bs>' : '<left><c-o>vb"_d'
 cnoremap <plug>(DeleteWordBefore) <c-w>
 " alt+fn+del 删除后一个词
