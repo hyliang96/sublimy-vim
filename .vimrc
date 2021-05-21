@@ -2000,7 +2000,7 @@ cnoremap ᜎ  <c-u><bs><esc>a
 
 " ========================================================================
 " 模糊查找插件 LeaderF
-" alt+f
+" ctrl+p
 nnoremap <c-p> :Leaderf! self --stayOpen<cr>
 vnoremap <c-p> <esc>:Leaderf! self --stayOpen<cr>
 inoremap <c-p> <c-o>:Leaderf! self --stayOpen<cr>
