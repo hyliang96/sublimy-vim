@@ -180,7 +180,7 @@ let g:airline_powerline_fonts=1
 " Plug 'morhetz/gruvbox'           " 好看
 colorscheme gruvbox                      " 设定配色方案, 其他备选  Monokai my_molokai gruvbox
 " 透明背景
-autocmd VimEnter *  hi Normal       guibg=none ctermbg=none
+autocmd VimEnter *  hi Normal       guibg=NONE ctermbg=NONE
 set bg=dark                              " 背景设置为dark色
 "-----------------------------------------------------------------
 "让vim记忆上次编辑的位置
