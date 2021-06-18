@@ -599,11 +599,13 @@ let g:NERDToggleCheckAllLines = 1  " 当所选非空行皆被注释，toggle才�
 "=========================================================================
 " 搜索
 "=========================================================================
-" 搜索 ctrl+f
-" nnoremap <c-f> :MarkClear<cr>/
-nnoremap <expr> <C-f> (&modifiable) ? ':MarkClear<cr>i<c-o>:stopinsert<cr>/' : ':MarkClear<cr>/'
-vnoremap <C-f> "9y:MarkClear<cr><esc>/<c-r>9<cr>
-inoremap <C-f> <c-o>:MarkClear<cr><c-o>/
+" 搜索/关闭搜索高亮 ctrl+f
+nnoremap <expr> <C-f>  v:hlsearch ? ':silent! nohls<cr>'  : ( (&modifiable) ? ':MarkClear<cr>i<c-o>:stopinsert<cr>/' : ':MarkClear<cr>/')
+vnoremap <expr> <C-f>  v:hlsearch ? '<esc>:silent! nohls<cr>v' : '"9y:MarkClear<cr><esc>/<c-r>9<cr>'
+inoremap <expr> <C-f>  v:hlsearch ? '<c-o>:silent! nohls<cr>' : '<c-o>:MarkClear<cr><c-o>/'
+" 放弃搜索，退出搜索框 shift+ctrl+f
+cnoremap <silent> <C-f> <c-u><bs><esc>:silent! nohls<cr>gi
+
 " 大小写敏感 case
 cnoremap <C-c> \C
 " 大小写不敏感 non-sensitive
@@ -622,12 +624,12 @@ inoremap ᜫ  <c-o>n
 nnoremap ᜬ   N
 vnoremap ᜬ <esc>N
 inoremap ᜬ  <c-o>N
-" 关闭搜索的高亮 shift+ctrl+f
-nnoremap <silent> ᜮ :silent! nohls<cr>
-vnoremap <silent> ᜮ <esc>:silent! nohls<cr>v
-inoremap <silent> ᜮ <c-o>:silent! nohls<cr>
-" 放弃搜索，退出搜索框 shift+ctrl+f
-cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
+" " 关闭搜索的高亮 shift+ctrl+f
+" nnoremap <silent> ᜮ :silent! nohls<cr>
+" vnoremap <silent> ᜮ <esc>:silent! nohls<cr>v
+" inoremap <silent> ᜮ <c-o>:silent! nohls<cr>
+" " 放弃搜索，退出搜索框 shift+ctrl+f
+" cnoremap <silent> ᜮ <c-u><bs><esc>:silent! nohls<cr>gi
 
 
 " =========================================================================
