@@ -260,6 +260,37 @@ cp vim_keymap.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
 
 ![修改mac的英文键盘方案](README.assets/img1.png)
 
+## 从vim向本地电脑剪切板拷贝文本
+
+- 在个人电脑 安装clipper，MacOS使用  `brew install clipper` 安装
+
+- 用brew将clipper为开机自启 `brew services start clipper`
+
+- clipper启动后，通过下面的命令连接到远程机器：
+
+```bash
+ssh 用户名@网址或ip -R 8377:localhost:8377
+```
+
+`-R 服务器端口:localhost:本机端口`其含义是在ssh时，将此服务器端口将转发到此本地端口。
+
+clipper默认从`8377`读取远程传来的文本，将其写入到本地系统剪切板。
+
+- 配置ssh设置
+
+为免去每次登录加 `-R 8377:localhost:8377` 参数，可修改 `~/.ssh/config` 文件，其中每个Host配置下加一句`RemoteForward 8377 localhost:8377`（`RemoteForward 服务器端口 localhost:本机端口`）。完整的一个Host配置例如：
+
+```
+Host 别名
+	HostName 网址或ip
+	Port 端口号
+	User 用户名
+	IdentityFile ~/.ssh/id_rsa
+	RemoteForward 8377 localhost:8377
+```
+
+- 确认远程机器上安装有 `nc`。使用本vim配置，每次在vim内按ctrl+C拷贝文本时，不但会拷贝到vim的剪切板，还会用vim后台执行`:call system('timeout 0.1 nc localhost 8377', @")`，将vim的剪切板发送给服务器的nc，再通过ssh的8377端口映射到本地的8377端口，然后被本机的clipper监听8377端口，写入到本机的系统剪切板。
+
 ## 快捷键设置
 
 为了能够利用尽可能多的快捷键，需要用iterm2的按键映射功能
