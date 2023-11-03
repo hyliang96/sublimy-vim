@@ -40,7 +40,7 @@ Plug 'morhetz/gruvbox'           " 好看
 " 获取git状态，让airline显示之；并支持在vim中进行git操作
 Plug 'tpope/vim-fugitive'
 " 它会在 Vim 的行号列旁显示 git diff 的差异标记
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter', { 'branch' : 'main' }
 " 用于支持我的vimrc中的双击选词高亮相同词
 Plug 'Tuxdude/mark.vim'
 " " 模糊搜索文件
