@@ -8,7 +8,7 @@ if &compatible
 end
 
 call plug#begin('~/.vim/plugged')
-
+let g:plug_url_format = 'git@github.com:%s.git'
 " ------Plugins start-------
 " 中文帮助, 使用方法`:h 待查找的内容`
 Plug 'yianwillis/vimcdoc'
