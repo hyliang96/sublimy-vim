@@ -1835,9 +1835,9 @@ nnoremap <c-l> 0v$
 vnoremap <plug>(SelectOneLine) <esc>0v$
 inoremap <c-l> <c-o>0<C-o>v$
 " 全选
-nnoremap <C-a> ggv<S-g>$
-vnoremap <C-a> <esc>ggv<s-g>$
-inoremap <C-a> <c-o>gg<c-o>v<S-g>$
+nnoremap <C-a> gg^v<S-g>$
+vnoremap <C-a> <esc>gg^v<s-g>$
+inoremap <C-a> <c-o>gg<c-o>^<c-o>v<S-g>$
 "========================================================================
 " 这些删除每做一次，，故可一步步撤销
 " 删除
