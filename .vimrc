@@ -64,7 +64,7 @@ autocmd BufNewFile,BufEnter * if @%=~#'FAR [0-9]\+'  | stopinsert | endif
 " autocmd BufEnter * if &readonly | stopinsert | endif
 " autocmd BufNewFile,BufEnter * if (@%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly) | startinsert | endif
 autocmd BufNewFile,BufRead  * filetype detect | if ( &filetype!=#'leaderf'  &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly ) | startinsert | endif
-autocmd BufNewFile,BufEnter * call writefile([@%.' '.&filetype], $HOME."/debug.vim.log", "a")
+" autocmd BufNewFile,BufEnter * call writefile([@%.' '.&filetype], $HOME."/vim.bufenter.log", "a")
 
 " autocmd BufRead,BufNewFile,BufEnter * filetype detect  " 开vim即检查文件类型
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}3?\ %c:%l/%L%)\
@@ -76,6 +76,8 @@ noremap <C-n> :set invnumber<CR>|        " 开关行号
 let &t_SI = "\<Esc>]50;CursorShape=1\x7" " 插入模式改为细光标
 let &t_EI = "\<Esc>]50;CursorShape=0\x7" " 其他模式还是粗光标
 " endif
+
+autocmd VimLeavePre * let &t_SI = "\<Esc>]50;CursorShape=1\x7" | let &t_EI = "\<Esc>]50;CursorShape=1\x7"
 
 " enable cursor blinking
 set guicursor+=a:blinkon1
