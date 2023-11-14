@@ -52,42 +52,17 @@ set nobackup                             " no backup files
 set noswapfile                           " no swap(缓冲文件) files
 set nowritebackup                        " only in case you don't want a backup file while editing
 set noundofile                           " no undo files
+
 " autocmd BufRead,BufNewFile,BufEnter * startinsert " 开vim/进入新窗口/进入新tab皆启动insert模式
-" autocmd BufNewFile,BufEnter * if @%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__'   | startinsert | endif
+" autocmd BufRead,BufNewFile * filetype detect | if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | endif
 
-" autocmd BufRead,BufNewFile,BufEnter * if (@%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | endif
-" autocmd BufRead,BufNewFile * if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | filetype detect | endif
-" let g:Lf_HideHelp = 0
-" autocmd BufRead,BufNewFile *  if ( @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' ) | startinsert | filetype detect | if &filetype==#'leaderf' | stopinsert | endif | endif
-" autocmd BufRead,BufNewFile *  filetype detect | if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | endif
-" autocmd BufRead,BufNewFile *  if &filetype==#'leaderf' | stopinsert | endif
-
-" autocmd BufRead,BufNewFile,BufEnter * filetype detect | if &filetype==#'leaderf' | stopinsert | endif
+autocmd BufNewFile,BufEnter * filetype detect | if &filetype!=#'leaderf'  | stopinsert | endif
 autocmd BufNewFile,BufEnter * if @%==#'__CtrlSF__'  | stopinsert | endif
 autocmd BufNewFile,BufEnter * if @%=~#'FAR [0-9]\+'  | stopinsert | endif
-
-" autocmd BufReadPost * if &readonly | stopinsert | endif
-" augroup readonly
-    " autocmd!
-    " autocmd BufReadPost *
-        " \  if &readonly
-        " \|  echom "read only"
-        " \| else
-        " \|  echom "not read only"
-        " \| endif
-        " \| autocmd! readonly
-" augroup end
-
-
-autocmd BufNewFile,BufEnter  *
-    \  if @%=~#'/LeaderF$'
-    \|  echo "LeaderF"
-    \| else
-    \|  echo "not Leaderf"
-    \| endif
-
-
-
+autocmd BufEnter * if &readonly | stopinsert | endif
+" autocmd BufNewFile,BufEnter * if (@%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly) | startinsert | endif
+autocmd BufNewFile,BufEnter * filetype detect | if ( &filetype!=#'leaderf'  &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly ) | startinsert | endif
+autocmd BufNewFile,BufEnter * call writefile([@%], $HOME."/debug.vim.log", "a")
 
 " autocmd BufRead,BufNewFile,BufEnter * filetype detect  " 开vim即检查文件类型
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}3?\ %c:%l/%L%)\
@@ -724,6 +699,63 @@ inoremap <silent> Ï <c-o>:Farr<cr>
 " nnoremap <buffer><silent> ᜂ :call g:far#change_collapse_under_cursor(-1)<cr>
 " "  shift+ctrl+=  所有匹配项 展开/收起
 " nnoremap <buffer><silent> ᜱ :call g:far#change_collapse_all(-1)<cr>
+
+else
+
+" ------------------------------------------------------------------------
+" 目录下搜索
+" vimgrep /匹配模式/[g][j] 要搜索的文件/范围 
+" g：表示是否把每一行的多个匹配结果都加入
+" j：表示是否搜索完后定位到第一个匹配位置
+
+" vimgrep /pattern/ %           在当前打开文件中查找
+" vimgrep /pattern/ *           在当前目录下查找所有
+" vimgrep /pattern/ **          在当前目录及子目录下查找所有
+" vimgrep /pattern/ *.c         查找当前目录下所有.c文件
+" vimgrep /pattern/ **/*        只查找子目录
+
+" :copen       显示所有搜索结果
+
+
+" alt+f
+nnoremap <plug>(VimGrep) :vimgrep //g **     \|"HELP\| * : under now dir\| ** : under now dir and subdirs\| *.c : .c files "\|<home><right><right><right><right><right><right><right><right><right>
+nmap ƒ <plug>(VimGrep)
+vmap ƒ <esc><plug>(VimGrep)
+imap ƒ  <c-o><plug>(VimGrep)
+" shift+alt+f  打开搜索列表
+" 左键双击/回车即可在当前窗口显示此文件，光标进入该窗口
+" 再要将光标回到搜索列表，可以鼠标点击进入下方列表窗口，
+                            " 或ctrl+alt+down，或
+                            " shift+alt+f
+" alt+shift+f 关闭列表窗口
+nnoremap <silent> Ï :copen<cr>
+vnoremap <silent> Ï <esc>:copen<cr>
+inoremap <silent> Ï <c-o>:copen<cr>
+" alt+enter 下一个
+fun! CNext()
+" 支持循环
+    try
+        cnext
+    catch /E553/
+        crewind
+    endtry
+endf
+nnoremap <silent> ᜯ   :call CNext()<cr>
+vnoremap <silent> ᜯ   <esc>:call CNext()<cr>
+inoremap <silent> ᜯ   <c-o>:call CNext()<cr>
+" shift+alt+enter 上一个
+fun! CPrevious()
+" 支持循环
+    try
+        cprevious
+    catch /E553/
+        clast
+    endtry
+endf
+nnoremap <silent> ᜰ  :call CPrevious()<cr>
+vnoremap <silent> ᜰ  <esc>:call CPrevious()<cr>
+inoremap <silent> ᜰ  <c-o>:call CPrevious()<cr>
+
 endif
 
 " =========================================================================
@@ -793,60 +825,6 @@ let g:ctrlsf_auto_focus = {
     \ }
 
 endif
-
-" ------------------------------------------------------------------------
-" 目录下搜索
-" vimgrep /匹配模式/[g][j] 要搜索的文件/范围 
-" g：表示是否把每一行的多个匹配结果都加入
-" j：表示是否搜索完后定位到第一个匹配位置
-
-" vimgrep /pattern/ %           在当前打开文件中查找
-" vimgrep /pattern/ *           在当前目录下查找所有
-" vimgrep /pattern/ **          在当前目录及子目录下查找所有
-" vimgrep /pattern/ *.c         查找当前目录下所有.c文件
-" vimgrep /pattern/ **/*        只查找子目录
-
-" :copen       显示所有搜索结果
-
-
-" alt+f
-nnoremap <plug>(VimGrep) :vimgrep //g **     \|"HELP\| * : under now dir\| ** : under now dir and subdirs\| *.c : .c files "\|<home><right><right><right><right><right><right><right><right><right>
-nmap ƒ <plug>(VimGrep)
-vmap ƒ <esc><plug>(VimGrep)
-imap ƒ  <c-o><plug>(VimGrep)
-" shift+alt+f  打开搜索列表
-" 左键双击/回车即可在当前窗口显示此文件，光标进入该窗口
-" 再要将光标回到搜索列表，可以鼠标点击进入下方列表窗口，
-                            " 或ctrl+alt+down，或
-                            " shift+alt+f
-" alt+shift+f 关闭列表窗口
-nnoremap <silent> Ï :copen<cr>
-vnoremap <silent> Ï <esc>:copen<cr>
-inoremap <silent> Ï <c-o>:copen<cr>
-" alt+enter 下一个
-fun! CNext()
-" 支持循环
-    try
-        cnext
-    catch /E553/
-        crewind
-    endtry
-endf
-nnoremap <silent> ᜯ   :call CNext()<cr>
-vnoremap <silent> ᜯ   <esc>:call CNext()<cr>
-inoremap <silent> ᜯ   <c-o>:call CNext()<cr>
-" shift+alt+enter 上一个
-fun! CPrevious()
-" 支持循环
-    try
-        cprevious
-    catch /E553/
-        clast
-    endtry
-endf
-nnoremap <silent> ᜰ  :call CPrevious()<cr>
-vnoremap <silent> ᜰ  <esc>:call CPrevious()<cr>
-inoremap <silent> ᜰ  <c-o>:call CPrevious()<cr>
 
 " ------------------------------------------------------------------------
 " 同词高亮

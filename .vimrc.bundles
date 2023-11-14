@@ -51,12 +51,12 @@ Plug 'Tuxdude/mark.vim'
     " " , { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRU' ] }
     " 工程内模糊搜索文件、最近文（mru）件、函数/类/变量（tags）、命令历史、文件、中的某一行、vim的help、marks"
     " Plug 'hyliang96/LeaderF', { 'do': './install.sh' }
-    Plug 'Yggdroot/LeaderF',  { 'do': ':LeaderfInstallCExtension' } 
+    Plug 'Yggdroot/LeaderF',  { 'do': ':LeaderfInstallCExtension' }
 " 高速全局搜索插件
 Plug 'dyng/ctrlsf.vim'
 " 全局搜搜与替换
-Plug 'hyliang96/far.vim'
-" Plug 'brooth/far.vim' " 等他收我的PR
+" Plug 'hyliang96/far.vim'  " 已经merge到'brooth/far.vim'
+Plug 'brooth/far.vim'
 " 自动补全
 " mac 上的 conda里的python无法编译ycm，需要系统自带的Python
 " 详见 https://github.com/ycm-core/YouCompleteMe#ycm-does-not-work-with-my-anaconda-python-setup
