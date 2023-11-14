@@ -73,34 +73,16 @@ if has('mouse') | set mouse=a | endif    " 启用鼠标
 noremap <C-n> :set invnumber<CR>|        " 开关行号
 
 " if $TERM_PROGRAM =~ "iTerm"
-" let &t_SI = "\<Esc>]50;CursorShape=1\x7" " 插入模式改为细光标
-" let &t_EI = "\<Esc>]50;CursorShape=0\x7" " 其他模式还是粗光标
+let &t_SI = "\<Esc>]50;CursorShape=1\x7" " 插入模式改为细光标
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7" " 其他模式还是粗光标
 " endif
 
-" autocmd VimLeavePre * let &t_SI = "\<Esc>]50;CursorShape=1\x7" | let &t_EI = "\<Esc>]50;CursorShape=1\x7"
+" 在退出vim后恢复终端原来的光标形态
+autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
 
-" enable cursor blinking
-" set guicursor+=a:blinkon1
-
-"Mode Settings
-
-" let &t_SI.="\e[5 q" "SI = INSERT mode
-" let &t_SR.="\e[4 q" "SR = REPLACE mode
-" let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
-
-"Cursor settings:
-
-"  1 -> blinking block
-"  2 -> solid block
-"  3 -> blinking underscore
-"  4 -> solid underscore
-"  5 -> blinking vertical bar
-"  6 -> solid vertical bar
-
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
+" 光标闪烁
+set guicursor+=a:blinkon1
 
 map ᜪ <c-;>
 map! ᜪ <c-;>
