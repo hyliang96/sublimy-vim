@@ -73,14 +73,14 @@ if has('mouse') | set mouse=a | endif    " 启用鼠标
 noremap <C-n> :set invnumber<CR>|        " 开关行号
 
 " if $TERM_PROGRAM =~ "iTerm"
-let &t_SI = "\<Esc>]50;CursorShape=1\x7" " 插入模式改为细光标
-let &t_EI = "\<Esc>]50;CursorShape=0\x7" " 其他模式还是粗光标
+" let &t_SI = "\<Esc>]50;CursorShape=1\x7" " 插入模式改为细光标
+" let &t_EI = "\<Esc>]50;CursorShape=0\x7" " 其他模式还是粗光标
 " endif
 
-autocmd VimLeavePre * let &t_SI = "\<Esc>]50;CursorShape=1\x7" | let &t_EI = "\<Esc>]50;CursorShape=1\x7"
+" autocmd VimLeavePre * let &t_SI = "\<Esc>]50;CursorShape=1\x7" | let &t_EI = "\<Esc>]50;CursorShape=1\x7"
 
 " enable cursor blinking
-set guicursor+=a:blinkon1
+" set guicursor+=a:blinkon1
 
 map ᜪ <c-;>
 map! ᜪ <c-;>
