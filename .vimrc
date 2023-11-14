@@ -52,13 +52,44 @@ set nobackup                             " no backup files
 set noswapfile                           " no swap(缓冲文件) files
 set nowritebackup                        " only in case you don't want a backup file while editing
 set noundofile                           " no undo files
-" au BufRead,BufNewFile,BufEnter * start
-" au BufRead,BufNewFile * start            " 开vim/进入新窗口/进入新tab皆启动insert模式
+" autocmd BufRead,BufNewFile,BufEnter * startinsert " 开vim/进入新窗口/进入新tab皆启动insert模式
 " autocmd BufNewFile,BufEnter * if @%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__'   | startinsert | endif
-autocmd BufRead,BufNewFile * if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | filetype detect | endif
+
+" autocmd BufRead,BufNewFile,BufEnter * if (@%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | endif
+" autocmd BufRead,BufNewFile * if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | filetype detect | endif
+" let g:Lf_HideHelp = 0
+" autocmd BufRead,BufNewFile *  if ( @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' ) | startinsert | filetype detect | if &filetype==#'leaderf' | stopinsert | endif | endif
+" autocmd BufRead,BufNewFile *  filetype detect | if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | endif
+" autocmd BufRead,BufNewFile *  if &filetype==#'leaderf' | stopinsert | endif
+
+" autocmd BufRead,BufNewFile,BufEnter * filetype detect | if &filetype==#'leaderf' | stopinsert | endif
 autocmd BufNewFile,BufEnter * if @%==#'__CtrlSF__'  | stopinsert | endif
 autocmd BufNewFile,BufEnter * if @%=~#'FAR [0-9]\+'  | stopinsert | endif
-" au BufRead,BufNewFile,BufEnter * filetype detect  " 开vim即检查文件类型
+
+" autocmd BufReadPost * if &readonly | stopinsert | endif
+" augroup readonly
+    " autocmd!
+    " autocmd BufReadPost *
+        " \  if &readonly
+        " \|  echom "read only"
+        " \| else
+        " \|  echom "not read only"
+        " \| endif
+        " \| autocmd! readonly
+" augroup end
+
+
+autocmd BufNewFile,BufEnter  *
+    \  if @%=~#'/LeaderF$'
+    \|  echo "LeaderF"
+    \| else
+    \|  echo "not Leaderf"
+    \| endif
+
+
+
+
+" autocmd BufRead,BufNewFile,BufEnter * filetype detect  " 开vim即检查文件类型
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}3?\ %c:%l/%L%)\
                                          " 设置在状态行显示的信息
 if has('mouse') | set mouse=a | endif    " 启用鼠标
@@ -2002,10 +2033,16 @@ cnoremap ᜎ  <c-u><bs><esc>a
 
 " ========================================================================
 " 模糊查找插件 LeaderF
+" set foldmethod=expr
+
 " ctrl+p
 nnoremap <c-p> :Leaderf! self --stayOpen<cr>
 vnoremap <c-p> <esc>:Leaderf! self --stayOpen<cr>
-inoremap <c-p> <c-o>:Leaderf! self --stayOpen<cr>
+inoremap <c-p> <c-o>:Leaderf! self --stayOpen<cr><c-o>:stopinsert<cr>
+
+" nnoremap <c-p> :Leaderf! self --stayOpen<cr>
+" vnoremap <c-p> <esc>:Leaderf! self --stayOpen<cr>
+" inoremap <c-p> <c-o>:Leaderf! self --stayOpen<cr>
 
 " 最优结果显示在最下面
 " let g:Lf_ReverseOrder=1
