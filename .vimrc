@@ -53,16 +53,18 @@ set noswapfile                           " no swap(缓冲文件) files
 set nowritebackup                        " only in case you don't want a backup file while editing
 set noundofile                           " no undo files
 
-" autocmd BufRead,BufNewFile,BufEnter * startinsert " 开vim/进入新窗口/进入新tab皆启动insert模式
-" autocmd BufRead,BufNewFile * filetype detect | if (&filetype!=#'leaderf' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+') | startinsert | endif
 
-autocmd BufNewFile,BufEnter * filetype detect | if &filetype!=#'leaderf'  | stopinsert | endif
+" BufNewFile : 在窗口创建新文件
+" BufRead    : 窗口加载文件
+" BufEnter   : 进入窗口。可以反复进出同一个窗口，每次进入时都会触发。
+
+autocmd BufNewFile,BufEnter * filetype detect  | if &filetype==#'leaderf' | stopinsert | endif
 autocmd BufNewFile,BufEnter * if @%==#'__CtrlSF__'  | stopinsert | endif
 autocmd BufNewFile,BufEnter * if @%=~#'FAR [0-9]\+'  | stopinsert | endif
-autocmd BufEnter * if &readonly | stopinsert | endif
+" autocmd BufEnter * if &readonly | stopinsert | endif
 " autocmd BufNewFile,BufEnter * if (@%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly) | startinsert | endif
-autocmd BufNewFile,BufEnter * filetype detect | if ( &filetype!=#'leaderf'  &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly ) | startinsert | endif
-autocmd BufNewFile,BufEnter * call writefile([@%], $HOME."/debug.vim.log", "a")
+autocmd BufNewFile,BufRead  * filetype detect | if ( &filetype!=#'leaderf'  &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly ) | startinsert | endif
+autocmd BufNewFile,BufEnter * call writefile([@%.' '.&filetype], $HOME."/debug.vim.log", "a")
 
 " autocmd BufRead,BufNewFile,BufEnter * filetype detect  " 开vim即检查文件类型
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}3?\ %c:%l/%L%)\
@@ -74,6 +76,9 @@ noremap <C-n> :set invnumber<CR>|        " 开关行号
 let &t_SI = "\<Esc>]50;CursorShape=1\x7" " 插入模式改为细光标
 let &t_EI = "\<Esc>]50;CursorShape=0\x7" " 其他模式还是粗光标
 " endif
+
+" enable cursor blinking
+set guicursor+=a:blinkon1
 
 map ᜪ <c-;>
 map! ᜪ <c-;>
@@ -618,10 +623,10 @@ cnoremap <C-c> \C
 cnoremap <C-n> \c
 " 整词匹配 大小写敏感
 cnoremap <C-w> \<\><left><left>
-" " 整词搜索 <esc> ctrl+f     进入搜索栏会显示'\<光标\>'
-" nnoremap <esc><C-f> :MarkClear<cr>i<c-o>:stopinsert<cr>/\<\><left><left>
-" vnoremap <esc><C-f> "9y:MarkClear<cr><esc>/\<\><left><left><c-r>9<cr>
-" inoremap <esc><C-f> <c-o>:MarkClear<cr><c-o>/\<\><left><left>
+" " 整词搜索  双击ctrl+f     进入搜索栏会显示'\<光标\>'
+" nnoremap <C-f><C-f> :MarkClear<cr>i<c-o>:stopinsert<cr>/\<\><left><left>
+" vnoremap <C-f><C-f> "9y:MarkClear<cr><esc>/\<\><left><left><c-r>9<cr>
+" inoremap <C-f><C-f> <c-o>:MarkClear<cr><c-o>/\<\><left><left>
 " 下一个 ctrl+enter
 nnoremap ᜫ  n
 vnoremap ᜫ  <esc>n
@@ -850,6 +855,7 @@ function! s:GetColor(color_type)
     let result="{'". result . "'}"
     return result
 endfunction
+
 " 更换mark.vim （插件）的默认色表
 exec "let g:mwPalettes={'mypalette': [".s:GetColor('Search')."]}"
 let g:mwDefaultHighlightingPalette = 'mypalette'
