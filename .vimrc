@@ -53,20 +53,18 @@ set noswapfile                           " no swap(缓冲文件) files
 set nowritebackup                        " only in case you don't want a backup file while editing
 set noundofile                           " no undo files
 
-
 " BufNewFile : 在窗口创建新文件
 " BufRead    : 窗口加载文件
 " BufEnter   : 进入窗口。可以反复进出同一个窗口，每次进入时都会触发。
-
 autocmd BufNewFile,BufEnter * filetype detect  | if &filetype==#'leaderf' | stopinsert | endif
 autocmd BufNewFile,BufEnter * if @%==#'__CtrlSF__'  | stopinsert | endif
 autocmd BufNewFile,BufEnter * if @%=~#'FAR [0-9]\+'  | stopinsert | endif
-" autocmd BufEnter * if &readonly | stopinsert | endif
+autocmd BufNewFile,BufEnter * if &readonly | stopinsert | endif
 " autocmd BufNewFile,BufEnter * if (@%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly) | startinsert | endif
-autocmd BufNewFile,BufRead  * filetype detect | if ( &filetype!=#'leaderf'  &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly ) | startinsert | endif
+autocmd BufNewFile,BufRead  * filetype detect | if ( &filetype!=#'leaderf'  &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly ) | startinsert | endif  " 默认使用插入模式
 " autocmd BufNewFile,BufEnter * call writefile([@%.' '.&filetype], $HOME."/vim.bufenter.log", "a")
-
 " autocmd BufRead,BufNewFile,BufEnter * filetype detect  " 开vim即检查文件类型
+"
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}3?\ %c:%l/%L%)\
                                          " 设置在状态行显示的信息
 if has('mouse') | set mouse=a | endif    " 启用鼠标
