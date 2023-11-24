@@ -76,8 +76,10 @@ let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7" " 其他模式还是粗光标
 " endif
 
-" 在退出vim后恢复终端原来的光标形态
-autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
+" 在退出nvim后恢复终端原来的光标形态
+if has('nvim')
+    autocmd VimLeave * set guicursor= | call chansend(v:stderr, "\x1b[ q")
+endif
 
 " 光标闪烁
 set guicursor+=a:blinkon1
