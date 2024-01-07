@@ -1,6 +1,5 @@
 # 我的vim配置
 
-
 此vim仿sublime的快捷键，绝大多数时间可在insert模式下工作
 
 安装了各种实用插件，fork了一些插件，改善了corner cases下的用户体验
