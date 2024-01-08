@@ -915,6 +915,7 @@ imap <silent> ᜤ <c-o>:stopinsert<cr>ᜤ
 
 endif
 
+
 if PlugLoaded('vim-visual-multi')
 "=========================================================================
 " Plug 'mg979/vim-visual-multi'

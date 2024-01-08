@@ -88,11 +88,21 @@ endif
 call plug#end()
 
 
+
 function! PlugLoaded(name)
+    let l:container = {}
+    function! container.RemoveDirTail(dir)
+        let l:len = len(a:dir)
+        if a:dir[l:len-1] == '/'
+            return a:dir[0 : l:len-2]
+        endif
+        return a:dir
+    endfunction
+
     return (
         \ has_key(g:plugs, a:name) &&
         \ isdirectory(g:plugs[a:name].dir) &&
-        \ stridx(&rtp, g:plugs[a:name].dir) >= 0)
+        \ stridx(&rtp, l:container.RemoveDirTail(g:plugs[a:name].dir)) >= 0)
 endfunction
 
 " 参考插件
@@ -179,5 +189,6 @@ endfunction
 "-----------------------------------------------------------------
 " plugin - taglist.vim  查看函数列表，需要ctags程序
 " F4 打开隐藏taglist窗口
+
 
 
