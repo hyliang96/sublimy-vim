@@ -1934,7 +1934,7 @@ cnoremap <plug>(DeleteLine) <c-e><c-u>
 
 "=========================================================================
 " ctrl+s保存
-autocmd BufWritePost * :%s/\s\+$//e  " 保存时自动删除行尾空格
+autocmd BufWritePre * :%s/\s\+$//e  " 保存时自动删除行尾空格
 
 
 function! UpDate()
