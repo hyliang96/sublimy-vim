@@ -1723,7 +1723,8 @@ inoremap <S-C-Up> <c-o>gg
 " 去文件尾巴
 noremap <S-C-Down> <S-g>$
 inoremap <S-C-Down> <c-o><S-g><C-o>$
-" ------------------------------------------------------------------------
+" -----------------------------------------------------------------------
+
 " 左右移动
 " " 左走一词
 " noremap <S-Left> gE
@@ -1744,16 +1745,37 @@ else
     map! <esc>f <M-right>
 endif
 
-" alt+left => <esc>b 左移一词
-noremap  <M-left>  ge
-inoremap  <M-left>  <left><c-o>ge<right>
+" " alt+left => <esc>b 左移一词
+" noremap  <M-left>  ge
+" inoremap  <M-left>  <left><c-o>ge<right>
+" cnoremap  <M-left>  <s-left>
+" " alt+right => <esc>w 右移一词
+" noremap  <M-right>   e
+" inoremap  <M-right>   <esc>ea
+" cnoremap  <M-right>   <s-right>
+
+
+" 在行首
+function! LineHead()
+    return col('.') == 1
+    " || col('.')==1
+endfunction
+" 在行尾
+function! LineEnd()
+    return col('.') == len(getline('.'))
+    " || col('.')==1
+endfunction
+
+" alt+left 左移一词
+noremap <expr> <M-left>  LineHead()? 'h' : ( EmptyBefore()? '0' : 'b')
+inoremap <expr> <M-left>  LineHead()? '<c-o>h' : ( EmptyBefore()? '<c-o>0' : '<c-o>b')
 cnoremap  <M-left>  <s-left>
-" alt+right => <esc>f 右移一词
-noremap  <M-right>   e
-inoremap  <M-right>   <esc>ea
+" alt+right 右移一词
+noremap <expr> <M-right> LineEnd()? 'l' : 'e'
+inoremap <expr> <M-right> AtLineEnd()? '<esc>li' : '<esc>ea'
 cnoremap  <M-right>   <s-right>
 
-" 光标前皆字符，且不在行首
+" 光标前皆空白字符，且不在行首
 function! EmptyBefore()
     return getline('.')[0:col('.')-2]=~'^\s*$' && col('.') != 1
     " || col('.')==1
@@ -1761,7 +1783,7 @@ endfunction
 " function! EmptyBeforeAndThis()
     " return getline('.')[0:col('.')-1]=~'^\s*$'
     " " && getline('.')[col('.')-1]=~'^\S$'
-" endfunction
+    " endfunction
 " 去行头 Fn+Left,
     " 亦可 alt+shift+left --- iterm2 --->  Home
 noremap <expr>  <Home> EmptyBefore()? '0' : '^'
