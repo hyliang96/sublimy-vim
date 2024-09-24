@@ -1881,7 +1881,7 @@ nnoremap <C-a> gg^v<S-g>$
 vnoremap <C-a> <esc>gg^v<s-g>$
 inoremap <C-a> <c-o>gg<c-o>^<c-o>v<S-g>$
 "========================================================================
-" 这些删除每做一次，，故可一步步撤销
+" 这些删除每做一次，故可一步步撤销
 " 删除
 " alt+del 删除前一个词
 if has('nvim')
@@ -1897,12 +1897,29 @@ function! IfDeleteOneChar()
     return GetCharBeforeCursor()=="'" || GetCharBeforeCursor()=='"' || col('.')==1
 endfunction
 
-nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1) ? 'i<bs><c-o>:stopinsert<cr>' : 'i <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr><c-o>:stopinsert<cr>'
-" nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1) ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'i<c-g>u <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr><c-o>:stopinsert<cr>'
-inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<bs>' : ' <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr>'
-" inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<c-g>u<bs>' : '<c-g> <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr>'
+function! MoreThanOneEmptyBefore()
+    " 光标前有>=2个空格
+    return getline('.')[0:col('.')-2]=~'\S \{2,\}$'
+endfunction
+function! EmptyFromLineHead()
+    return getline('.')[0:col('.')-2]=~'^ \+$'
+endfunction
 
+nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1) ? 'i<bs><c-o>:stopinsert<cr>' :  (
+    \ EmptyFromLineHead() ? 'd0'  : (
+        \ MoreThanOneEmptyBefore() ? 'geldw' : 'db'
+        \ ) )
+" nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1) ? 'i<bs><c-o>:stopinsert<cr>' : 'i <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr><c-o>:stopinsert<cr>'
+" nnoremap <expr> <plug>(DeleteWordBefore) (col('.')==1) ? 'i<c-g>u<bs><c-o>:stopinsert<cr>' : 'i<c-g>u <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr><c-o>:stopinsert<cr>'
+inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1) ? '<bs>' : (
+    \  MoreThanOneEmptyBefore() ? '<c-o>ge<c-o>l<c-o>dw' : (
+        \  EmptyFromLineHead() ? '<c-o>d0'  : (
+            \  AtLineEnd()?  '.<c-o>db<bs>' : '<c-o>db'
+            \ ) ) )
+" inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<bs>' : ' <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr>'
+" inoremap <expr> <plug>(DeleteWordBefore) (col('.')==1)? '<c-g>u<bs>' : '<c-g> <bs><left><c-o>:set foldmethod=manual<cr><c-o>vb"_d<c-o>:set foldmethod=syntax<cr>'
 cnoremap <plug>(DeleteWordBefore) <c-w>
+
 " alt+fn+del 删除后一个词
 if has('nvim')
     nmap <M-d> <plug>(DeleteWordAfter)
