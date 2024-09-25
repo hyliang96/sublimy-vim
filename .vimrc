@@ -1930,10 +1930,50 @@ else
     imap <esc>d <plug>(DeleteWordAfter)
     cmap <esc>d <plug>(DeleteWordAfter)
 endif
-nnoremap <expr> <plug>(DeleteWordAfter) ((col('.')==col('$')-1)? 'a<del><c-o>:stopinsert<cr>' : 'a<esc>ve"_d')
+
+function! OneCharBeforeLineEnd()
+    return col('.')==#(len(getline('.')))
+endfunction
+function! AtSign()
+    " return GetCharUnderCursor() =~ '\W' && GetCharUnderCursor() =~ '\S' && GetCharUnderCursor() =~ '[\x00-\x7f]'
+    return GetCharUnderCursor() =~ '[^\w\s\x80-\xff]'
+endfunction
+function! AtEmpty()
+    return GetCharUnderCursor() =~ '\s'
+endfunction
+function! LineFromCursor()
+    " 返回：从光标开始（含光标）向后的该行所有字符（不含换行符）
+    return getline('.')[col('.')-1:len(getline('.'))-1]
+endfunction
+function! OnlyOneLetterAfter()
+    return LineFromCursor() =~ '^\w\W' || LineFromCursor() =~ '^\w$'
+endfunction
+function! OnlyOneSignAfter()
+    return ( LineFromCursor() =~ '^\W\w' && LineFromCursor() =~ '^\S\w' ) ||
+        \  ( LineFromCursor() =~ '^\W\s' && LineFromCursor() =~ '^\S\s' ) ||
+        \  ( LineFromCursor() =~ '^\W$' && LineFromCursor() =~ '^\S$' )
+    " AtSign() && (OneCharBeforeLineEnd() ||   || )
+endfunction
+function! MultiEmptyAfter()
+    return LineFromCursor() =~ '^\s\s'
+endfunction
+function! OnlyOneLetterAfter_Or_AtSign()
+    return OnlyOneLetterAfter() || AtSign()
+endfunction
+" d<space> : OnlyOneLetterAfter || OnyOneSign
+" dw : MultiEmptyAfter
+" de : OneOrNoEmptyAfter
+" Jdw : AtLineEnd && NotAtEmpty
+" Jh : AtLineEnd && AtEmpty
+
+nnoremap <expr> <plug>(DeleteWordAfter)
+    \ OneCharBeforeLineEnd()? 'a<del><esc>' :
+    \ ( OnlyOneLetterAfter_Or_AtSign() ? 'd<space>' :
+        \ ( MultiEmptyAfter() ? 'dw' : 'de' ) )
+
+" nnoremap <expr> <plug>(DeleteWordAfter) ((col('.')==col('$')-1)? 'a<del><c-o>:stopinsert<cr>' : 'a<esc>ve"_d')
 " nnoremap <expr> <plug>(DeleteWordAfter) ((col('.')==col('$')-1)? 'a<c-g>u<del><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>ve"_d')
 inoremap <expr> <plug>(DeleteWordAfter) (col('.')==col('$'))? '<del>' : '<c-o>ve"_d'
-
 " inoremap <expr> <plug>(DeleteWordAfter) (col('.')==col('$'))? '<del>' : '<c-g>u<C-o>ve"_d'
 cnoremap <expr> <plug>(DeleteWordAfter) ''
 " cnoremap <plug>(DeleteWordAfter) <S-right><c-w>  " FIXME 这样写不行，还不知道怎么写
