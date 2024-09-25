@@ -1939,7 +1939,7 @@ function! AtEmpty()
     return GetCharUnderCursor() =~ '\s'
 endfunction
 function! LineFromCursor()
-    " 返回：从光标开始（含光标）向后的该行所有字符（不含换行符）
+    " 返回：从光标开始（含光标)向后的该行所有字符（不含换行符）
     return getline('.')[col('.')-1:len(getline('.'))-1]
 endfunction
 function! OnlyOneLetterAfter()
@@ -1963,13 +1963,15 @@ endfunction
 nnoremap <expr> <plug>(DeleteWordAfter)
     \ OneCharBeforeLineEnd()? 'a<del><esc>' :
     \ ( OnlyOneLetterAfter_Or_OnlyOneSignAfter() ? 'd<space>' :
-        \ ( MultiEmptyAfter() ? 'dw' : 'de' ) )
+        \ ( MultiEmptyAfter() ? 'dw' :
+            \ ( AtEmpty() ? 'vlwhd' : 'vwhd' )  ) )
 " nnoremap <expr> <plug>(DeleteWordAfter) ((col('.')==col('$')-1)? 'a<del><c-o>:stopinsert<cr>' : 'a<esc>ve"_d')
 " nnoremap <expr> <plug>(DeleteWordAfter) ((col('.')==col('$')-1)? 'a<c-g>u<del><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>ve"_d')
 inoremap <expr> <plug>(DeleteWordAfter)
     \ AtLineEnd()? '<del>' :
     \ ( OnlyOneLetterAfter_Or_OnlyOneSignAfter() ? '<c-o>d<space>' :
-        \ ( MultiEmptyAfter() ? '<c-o>dw' : '<c-o>de' ) )
+        \ ( MultiEmptyAfter() ? '<c-o>dw' :
+            \  (  AtEmpty() ? '<c-o>vlwhd' : '<c-o>vwhd' ) ) )
 " inoremap <expr> <plug>(DeleteWordAfter) (col('.')==col('$'))? '<del>' : '<c-o>ve"_d'
 " inoremap <expr> <plug>(DeleteWordAfter) (col('.')==col('$'))? '<del>' : '<c-g>u<C-o>ve"_d'
 cnoremap <expr> <plug>(DeleteWordAfter) ''
