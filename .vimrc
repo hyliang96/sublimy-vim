@@ -1932,11 +1932,8 @@ else
 endif
 
 function! OneCharBeforeLineEnd()
-    return col('.')==#(len(getline('.')))
-endfunction
-function! AtSign()
-    " return GetCharUnderCursor() =~ '\W' && GetCharUnderCursor() =~ '\S' && GetCharUnderCursor() =~ '[\x00-\x7f]'
-    return GetCharUnderCursor() =~ '[^\w\s\x80-\xff]'
+    return GetCharUnderCursor()==LineFromCursor()
+    " return col('.')==#(len(getline('.')))
 endfunction
 function! AtEmpty()
     return GetCharUnderCursor() =~ '\s'
@@ -1946,34 +1943,34 @@ function! LineFromCursor()
     return getline('.')[col('.')-1:len(getline('.'))-1]
 endfunction
 function! OnlyOneLetterAfter()
-    return LineFromCursor() =~ '^\w\W' || LineFromCursor() =~ '^\w$'
+    return LineFromCursor() =~ '^\w\W' || LineFromCursor() =~ '^\w$' ||
+        \ ( LineFromCursor() =~ '^[^\x00-\x7f][\x00-\x7f]' && ( LineFromCursor() =~ '^[^\x00-\x7f]\w' || LineFromCursor() =~ '^[^\x00-\x7f]\s' ) ) ||
+        \ LineFromCursor() =~ '^[^\x00-\x7f]$'
 endfunction
 function! OnlyOneSignAfter()
-    return ( LineFromCursor() =~ '^\W\w' && LineFromCursor() =~ '^\S\w' ) ||
-        \  ( LineFromCursor() =~ '^\W\s' && LineFromCursor() =~ '^\S\s' ) ||
-        \  ( LineFromCursor() =~ '^\W$' && LineFromCursor() =~ '^\S$' )
-    " AtSign() && (OneCharBeforeLineEnd() ||   || )
+    return ( LineFromCursor() =~ '^\W\w' && LineFromCursor() =~ '^\S\w' &&  LineFromCursor() =~ '^[\x00-\x7f]\w' ) ||
+        \  ( LineFromCursor() =~ '^\W\s' && LineFromCursor() =~ '^\S\s' &&  LineFromCursor() =~ '^[\x00-\x7f]\s'  ) ||
+        \  ( LineFromCursor() =~ '^\W[^\x00-\x7f]' && LineFromCursor() =~ '^\S[^\x00-\x7f]' &&  LineFromCursor() =~ '^[\x00-\x7f][^\x00-\x7f]'  ) ||
+        \  ( LineFromCursor() =~ '^\W$' && LineFromCursor() =~ '^\S$' &&   LineFromCursor() =~ '^[\x00-\x7f]$' )
 endfunction
 function! MultiEmptyAfter()
     return LineFromCursor() =~ '^\s\s'
 endfunction
-function! OnlyOneLetterAfter_Or_AtSign()
-    return OnlyOneLetterAfter() || AtSign()
+function! OnlyOneLetterAfter_Or_OnlyOneSignAfter()
+    return OnlyOneLetterAfter() || OnlyOneSignAfter()
 endfunction
-" d<space> : OnlyOneLetterAfter || OnyOneSign
-" dw : MultiEmptyAfter
-" de : OneOrNoEmptyAfter
-" Jdw : AtLineEnd && NotAtEmpty
-" Jh : AtLineEnd && AtEmpty
 
 nnoremap <expr> <plug>(DeleteWordAfter)
     \ OneCharBeforeLineEnd()? 'a<del><esc>' :
-    \ ( OnlyOneLetterAfter_Or_AtSign() ? 'd<space>' :
+    \ ( OnlyOneLetterAfter_Or_OnlyOneSignAfter() ? 'd<space>' :
         \ ( MultiEmptyAfter() ? 'dw' : 'de' ) )
-
 " nnoremap <expr> <plug>(DeleteWordAfter) ((col('.')==col('$')-1)? 'a<del><c-o>:stopinsert<cr>' : 'a<esc>ve"_d')
 " nnoremap <expr> <plug>(DeleteWordAfter) ((col('.')==col('$')-1)? 'a<c-g>u<del><c-o>:stopinsert<cr>' : 'a<c-g>u<esc>ve"_d')
-inoremap <expr> <plug>(DeleteWordAfter) (col('.')==col('$'))? '<del>' : '<c-o>ve"_d'
+inoremap <expr> <plug>(DeleteWordAfter)
+    \ AtLineEnd()? '<del>' :
+    \ ( OnlyOneLetterAfter_Or_OnlyOneSignAfter() ? '<c-o>d<space>' :
+        \ ( MultiEmptyAfter() ? '<c-o>dw' : '<c-o>de' ) )
+" inoremap <expr> <plug>(DeleteWordAfter) (col('.')==col('$'))? '<del>' : '<c-o>ve"_d'
 " inoremap <expr> <plug>(DeleteWordAfter) (col('.')==col('$'))? '<del>' : '<c-g>u<C-o>ve"_d'
 cnoremap <expr> <plug>(DeleteWordAfter) ''
 " cnoremap <plug>(DeleteWordAfter) <S-right><c-w>  " FIXME 这样写不行，还不知道怎么写
