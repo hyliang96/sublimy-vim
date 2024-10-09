@@ -62,6 +62,8 @@ autocmd BufNewFile,BufEnter * if @%=~#'FAR [0-9]\+'  | stopinsert | endif
 autocmd BufNewFile,BufEnter * if &readonly | stopinsert | endif
 " autocmd BufNewFile,BufEnter * if (@%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly) | startinsert | endif
 autocmd BufNewFile,BufRead  * filetype detect | if ( &filetype!=#'leaderf'  &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly ) | startinsert | endif  " 默认使用插入模式
+autocmd BufRead * edit ++ff=unix    " 显示行尾的^M（由windows创建的文件会包含）
+
 " autocmd BufNewFile,BufEnter * call writefile([@%.' '.&filetype], $HOME."/vim.bufenter.log", "a")
 " autocmd BufRead,BufNewFile,BufEnter * filetype detect  " 开vim即检查文件类型
 "
@@ -2012,8 +2014,8 @@ cnoremap <plug>(DeleteLine) <c-e><c-u>
 
 "=========================================================================
 " ctrl+s保存
+autocmd BufWritePre * :%s/\r$//e  " 保存时自动将行尾的^M删除（windows上创建的文件会在行尾添加^M）
 autocmd BufWritePre * :%s/\s\+$//e  " 保存时自动删除行尾空格
-
 
 function! UpDate()
     let l=line('.')
