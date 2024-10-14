@@ -1041,8 +1041,7 @@ vnoremap <silent> y y:call ToClipboard()<CR>
 vnoremap <silent> d d:call ToClipboard()<CR>
 nnoremap <silent> yy yy:call ToClipboard()<CR>
 nnoremap <silent> dd dd:call ToClipboard()<CR>
-" 全选发送到笔记本剪切板
-" noremap <C-a> :%w !timeout 0.1 nc localhost 8377<CR><CR>
+
 " ------------------------------------------------------------------------
 " vim剪切板同步到本机系统剪切板
 " set clipboard=unnamed     " 所有vim剪切板均与系统剪切板同步
@@ -1140,7 +1139,7 @@ vnoremap <c-c> :call VCtrlC()<cr>
 " vmap <expr> <C-c> (strlen(getline("'>"))<col("'>"))? ':call CCtrlC()<cr>' : 'y'
 " imap <expr> <C-c> col('.')==1?'<esc>yyi':'<esc>yya'
 " 选区末尾若有换行符，不复制该换行符
-inoremap <expr> <c-c> EmptyLine()? '' : '<esc>^y$:call system("timeout 0.1 nc localhost 8378 &", @")<CR>gi'
+inoremap <expr> <c-c> EmptyLine()? '' : '<esc>^y$:call ToClipboard()<CR>gi'
 " imap <C-c> <c-o>:stopinsert<cr>yya
 
 " -----------------------------------------
