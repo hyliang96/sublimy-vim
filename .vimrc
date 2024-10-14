@@ -1034,7 +1034,8 @@ endif
 " 发送到笔记本的系统剪切板，但不清空vim的寄存器
 " 上述操作选中都不会选到行号
 function! ToClipboard()
-    call system('timeout 0.1 nc localhost 8377 &', @")
+    call system('timeout 0.03 nc localhost 8377', @")
+    " call system('timeout 0.1 nc localhost 8377 &', @")
 endfunction
 
 vnoremap <silent> y y:call ToClipboard()<CR>
