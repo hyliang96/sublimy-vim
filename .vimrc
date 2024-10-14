@@ -61,8 +61,12 @@ autocmd BufNewFile,BufEnter * if @%==#'__CtrlSF__'  | stopinsert | endif
 autocmd BufNewFile,BufEnter * if @%=~#'FAR [0-9]\+'  | stopinsert | endif
 autocmd BufNewFile,BufEnter * if &readonly | stopinsert | endif
 " autocmd BufNewFile,BufEnter * if (@%!~#'/LeaderF$' &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly) | startinsert | endif
-autocmd BufNewFile,BufRead  * filetype detect | if ( &filetype!=#'leaderf'  &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly ) | startinsert | endif  " 默认使用插入模式
-autocmd BufRead * edit ++ff=unix    " 显示行尾的^M（由windows创建的文件会包含）
+autocmd BufNewFile,BufReadPost  * filetype detect | if ( &filetype!=#'leaderf'  &&  @%!=#'__CtrlSF__' && @%!~#'FAR [0-9]\+' && !&readonly ) | startinsert | endif  " 默认使用插入模式
+
+" 让vim记忆上次编辑的位置
+autocmd BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+" 显示行尾的^M（由windows创建的文件会包含）
+autocmd BufReadPost * edit ++ff=unix
 
 " autocmd BufNewFile,BufEnter * call writefile([@%.' '.&filetype], $HOME."/vim.bufenter.log", "a")
 " autocmd BufRead,BufNewFile,BufEnter * filetype detect  " 开vim即检查文件类型
@@ -129,7 +133,7 @@ let helptags=$VIMFILES.'/doc'
 if has("win32")
     set guifont=Inconsolata:h12:cANSI
 endif
-"-----------------------------------------------------------------
+" -----------------------------------------------------------------
 " 配置多语言环境
 if has("multi_byte")
     " UTF-8 编码
@@ -199,12 +203,7 @@ colorscheme gruvbox                      " 设定配色方案, 其他备选  Mon
 " 透明背景
 autocmd VimEnter *  hi Normal       guibg=NONE ctermbg=NONE
 set bg=dark                              " 背景设置为dark色
-"-----------------------------------------------------------------
-"让vim记忆上次编辑的位置
-autocmd BufReadPost *
-            \ if line("'\"")>0&&line("'\"")<=line("$") |
-            \   exe "normal g'\"" |
-            \ endif
+
 "-----------------------------------------------------------------
 " help
 " :h 纵向分整个查看 显示在右侧的分屏
