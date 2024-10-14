@@ -1140,7 +1140,7 @@ vnoremap <c-c> :call VCtrlC()<cr>
 " vmap <expr> <C-c> (strlen(getline("'>"))<col("'>"))? ':call CCtrlC()<cr>' : 'y'
 " imap <expr> <C-c> col('.')==1?'<esc>yyi':'<esc>yya'
 " 选区末尾若有换行符，不复制该换行符
-inoremap <expr> <c-c> EmptyLine()? '' : '<esc>^y$:call system("timeout 0.1 nc localhost 8377 &", @")<CR>gi'
+inoremap <expr> <c-c> EmptyLine()? '' : '<esc>^y$:call system("timeout 0.1 nc localhost 8378 &", @")<CR>gi'
 " imap <C-c> <c-o>:stopinsert<cr>yya
 
 " -----------------------------------------
