@@ -2396,4 +2396,3 @@ let Tlist_Compact_Format = 1
 " Best view with a 256 color terminal and Powerline fonts
 " Updated by Dorian Neto (https://github.com/dorianneto)"
 "=========================================================================
-"
