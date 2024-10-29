@@ -2013,6 +2013,7 @@ cnoremap <plug>(DeleteLine) <c-e><c-u>
 
 "=========================================================================
 " ctrl+s保存
+autocmd BufWritePre * :%s/\s\+$//e  " 保存时自动删除行尾空格
 autocmd BufWritePre * :%s/\r$//e  " 保存时自动将行尾的^M删除（windows上创建的文件会在行尾添加^M）
 autocmd BufWritePre * :%s/\s\+$//e  " 保存时自动删除行尾空格
 autocmd BufWritePre * :%retab!     " 保存时自动将1个制表符缩进转为4个空格
@@ -2324,7 +2325,7 @@ autocmd FileType python  nnoremap <c-\> O__import__('ipdb').set_trace()
 autocmd FileType python  vnoremap <c-\> <esc>O__import__('ipdb').set_trace()
 "=========================================================================
 " 关闭 vimscript的换行号自动缩进三个tab的特性
-" inoremap \ <space><backspace>\
+" inoremap \ <space><backspace>\
 
 "========================================================================="
 " 实用小函数
