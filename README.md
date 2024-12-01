@@ -24,11 +24,11 @@ g_d"_dd## 快捷键演示
 
 `⌃F`：从常规、插入、选择模式进入**搜索**模式
 
-​	`⌃↩`：下一条搜索
+​  `⌃↩`：下一条搜索
 
-​	`⇧⌃↩`：上一条搜索
+​  `⇧⌃↩`：上一条搜索
 
-​	`⌥F`：退出搜索模式，或在常规、插入、选择模式中关闭搜中区域的高亮
+​  `⌥F`：退出搜索模式，或在常规、插入、选择模式中关闭搜中区域的高亮
 
 ### 复制、粘贴、剪切、注释
 
@@ -44,11 +44,11 @@ g_d"_dd## 快捷键演示
 
 `←/→`左/右一字可跨行，       `⌥←/→`左/右一词可跨行，      `⌘←/→`到行首/尾不跨行
 
-​	                                                                                按一下`⌘←`跳到'^'位置，再按到'0'位置
+​                                                                                  按一下`⌘←`跳到'^'位置，再按到'0'位置
 
 `⌫/⌦`左/右一字删可跨行，`⌥⌫/⌦`左/右删一词可跨行，`⌘⌫/⌦`删行首/尾不跨行
 
-​	                                                                                按一下`⌘⌫`删到'^'位置，再按到上一行尾
+​                                                                                  按一下`⌘⌫`删到'^'位置，再按到上一行尾
 
 `⇧⌫`删除整行
 
@@ -165,17 +165,17 @@ sudo apt-get install vim-gnome
   直接`./nvim.appimage`，即启动nvim，相当于输入`vim`命令
 
       修改PATH以便使用：
-      
+
       ```bash
       mv nvim.appimage 【某个你用的路径，如/local】/bin/nvim
       ```
-      
+
       在.zshenv之类的文件中加入
-      
+
       ```bash
       export PATH=【某个你用的路径，如/local】/bin:$PATH
       ```
-      
+
       而后在命令行中输入`nvim`即可使用此镜像
 
     - 若系统无FUSE，将镜像解压，执行其中的二进制文件
@@ -247,12 +247,12 @@ nvim  +'PlugInstall --sync' +'PlugUpdate' +qa
 [图文教程](https://www.jianshu.com/p/c251d26374c5)
 
 ```bash
-cp vim_keymap.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
+cp iterm2_profile.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
 ```
 
-在iterm2 （不用重启，动态加载），`⌘,`设置，中选择vim_keymap 这个profile
+在iterm2 （不用重启，动态加载），`⌘,`设置，中选择iterm2_profile 这个profile
 
-注：GUID是profile的唯一id。vim_keymap.json中的GUID参数不可与你已有profile的GUID相同，不然vim_keymap不会加载。
+注：GUID是profile的唯一id。iterm2_profile.json中的GUID参数不可与你已有profile的GUID相同，不然iterm2_profile不会加载。
 
 ### 修改mac的英文键盘方案
 
@@ -282,11 +282,11 @@ clipper默认从`8377`读取远程传来的文本，将其写入到本地系统�
 
 ```
 Host 别名
-	HostName 网址或ip
-	Port 端口号
-	User 用户名
-	IdentityFile ~/.ssh/id_rsa
-	RemoteForward 8377 localhost:8377
+    HostName 网址或ip
+    Port 端口号
+    User 用户名
+    IdentityFile ~/.ssh/id_rsa
+    RemoteForward 8377 localhost:8377
 ```
 
 - 确认远程机器上安装有 `nc`。使用本vim配置，每次在vim内按ctrl+C拷贝文本时，不但会拷贝到vim的剪切板，还会用vim后台执行`:call system('timeout 0.1 nc localhost 8377', @")`，将vim的剪切板发送给服务器的nc，再通过ssh的8377端口映射到本地的8377端口，然后被本机的clipper监听8377端口，写入到本机的系统剪切板。
@@ -354,7 +354,7 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
   if has('nvim')
       nmap <M-d>  <plug>DeleteWordAfter
   else
-  	nmap <esc>d <plug>DeleteWordAfter
+    nmap <esc>d <plug>DeleteWordAfter
   endif
   ```
 
@@ -380,14 +380,14 @@ escqpe sequence是以escape键开头的一串按键，例如\<esc>d，只要你�
   \xE1\x9C\xB0-\xE1\x9C\xB1
   \xE1\x9D\x80
   # 其中未被用的:
-  \xE1\x9C\xAF  =  ᜯ  
+  \xE1\x9C\xAF  =  ᜯ
   ```
   # 闲置未被用为vim快捷键的按键组合
 
 ```
-  
+
 然后在~/.vimrc中写这样的映射
-  
+
   ```vim
   nnoremap ᜀ  do_some_thing
 ```
