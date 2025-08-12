@@ -1078,7 +1078,7 @@ function! NCtrlX()
     endif
     call ToClipboard()
 endfunction
-nnoremap <C-x> :call NCtrlX()<cr>
+nnoremap <silent> <C-x> :call NCtrlX()<cr>
 " nmap <C-x> ^vg_d"_dd
 " vmap <C-x> d
 
@@ -1099,12 +1099,15 @@ function! VCtrlX() range
     endif
     call ToClipboard()
 endfunction
-vnoremap <c-x> :call VCtrlX()<cr>
+vnoremap <silent> <c-x> :call VCtrlX()<cr>
 
 fun! EmptyLine()
     return getline(".")=~ "^[ \t]*$"
 endf
-inoremap <c-x> <esc>:call NCtrlX()<cr>gi
+
+" plugged/supertab/plugin/supertab.vim 中绑定了 <c-x> 触发 ManualCompletionEnter，似乎是每当进入insert模式就执行该绑定
+" 因此以下的重新绑定需要每当InsertEnter就执行
+autocmd InsertEnter * inoremap <silent> <C-x> <esc>:call NCtrlX()<cr>gi
 " imap <expr> <c-x> EmptyLine()? '<esc>"_ddi' : '<esc>^vg_d"_ddi'
 " imap <c-x> <c-o>:stopinsert<cr>ddi
 " imap <expr> <C-x> col('.')==1?'<esc>ddi':'<esc>dda'
@@ -1114,7 +1117,7 @@ inoremap <c-x> <esc>:call NCtrlX()<cr>gi
 " 复制一行，带换行符
 " nmap <C-c> ^vg_y
 " 复制一行，不带换行符
-noremap <expr> <c-c> EmptyLine()? '' : 'mz^y$:call ToClipboard()<CR>`z'
+noremap <expr> <silent> <c-c> EmptyLine()? '' : 'mz^y$:call ToClipboard()<CR>`z'
 " 选区末尾若有换行符，不复制该换行符
 function! VCtrlC() range
     if strlen(getline("'>"))<col("'>")
@@ -1135,17 +1138,17 @@ function! VCtrlC() range
     endif
     call ToClipboard()
 endfunction
-vnoremap <c-c> :call VCtrlC()<cr>
+vnoremap <silent> <c-c> :call VCtrlC()<cr>
 
 " vmap <expr> <C-c> (strlen(getline("'>"))<col("'>"))? ':call CCtrlC()<cr>' : 'y'
 " imap <expr> <C-c> col('.')==1?'<esc>yyi':'<esc>yya'
 " 选区末尾若有换行符，不复制该换行符
-inoremap <expr> <c-c> EmptyLine()? '' : '<esc>^y$:call ToClipboard()<CR>gi'
+inoremap <expr> <silent> <c-c> EmptyLine()? '' : '<esc>^y$:call ToClipboard()<CR>gi'
 " imap <C-c> <c-o>:stopinsert<cr>yya
 
 " -----------------------------------------
 " 粘贴
-nnoremap <C-v> :set paste<cr>O<right><left><C-r>"<esc>:set nopaste<cr>
+nnoremap <silent> <C-v> :set paste<cr>O<right><left><C-r>"<esc>:set nopaste<cr>
 " 选区末尾若有换行符，删除该换行符
 function! VCtrlV() range
     if strlen(getline("'>"))<col("'>")
@@ -1163,14 +1166,14 @@ function! VCtrlV() range
     endif
 endfunction
 " 删除选区并替换为剪切板内容，不改变剪切板内容
-vnoremap <c-v> :call VCtrlV()<cr>
-vnoremap p :call VCtrlV()<cr>
+vnoremap <silent> <c-v> :call VCtrlV()<cr>
+vnoremap <silent> p :call VCtrlV()<cr>
 
 " vnoremap <expr> <C-v> SelectOneChar()? '<esc>Pv<right><esc>' : '"_dPv<esc>"'
 " vmap <C-v> <c-b>Pv<right>
 " inoremap <C-v> <c-r>"
 " inoremap <C-v> <C-o>:set paste<CR><C-R>"<C-o>:set nopaste<CR>
-inoremap <C-v> <space><bs><C-o>:set paste<CR><C-R>"<C-o>:set nopaste<CR>
+inoremap <silent> <C-v> <space><bs><C-o>:set paste<CR><C-R>"<C-o>:set nopaste<CR>
 ""<C-o>:stopinsert<cr>:call ICtrlV()<cr>
 " ------------------------------------------------------------------------
 " 原文粘贴
@@ -1248,7 +1251,7 @@ nnoremap <backspace> i<backspace><c-o>:stopinsert<cr>
 " vnoremap c "_c
 
 " ctrl+v 在命令模式下黏贴
-cnoremap <c-v> <c-r>"
+cnoremap <silent> <c-v> <c-r>"
 "=========================================================================
 "缩进
 " ------------------------------------------------------------------------
