@@ -138,7 +138,7 @@ endif
 if has("multi_byte")
     " UTF-8 编码
     set encoding=utf-8
-    set termencoding=utf-8
+  " set termencoding=utf-8
     set formatoptions+=mM
     set fileencoding=utf-8
     scriptencoding utf-8
@@ -201,7 +201,10 @@ let g:airline_powerline_fonts=1
 " Plug 'morhetz/gruvbox'           " 好看
 colorscheme gruvbox                      " 设定配色方案, 其他备选  Monokai my_molokai gruvbox
 " 透明背景
-autocmd VimEnter *  hi Normal       guibg=NONE ctermbg=NONE
+autocmd VimEnter * hi Normal       guibg=NONE ctermbg=NONE
+autocmd VimEnter * hi statusline cterm=NONE gui=NONE
+autocmd VimEnter * hi tabline cterm=NONE gui=NONE
+autocmd VimEnter * hi winbar cterm=NONE gui=NONE
 set bg=dark                              " 背景设置为dark色
 
 "-----------------------------------------------------------------
@@ -1176,14 +1179,18 @@ vnoremap <silent> p :call VCtrlV()<cr>
 inoremap <silent> <C-v> <space><bs><C-o>:set paste<CR><C-R>"<C-o>:set nopaste<CR>
 ""<C-o>:stopinsert<cr>:call ICtrlV()<cr>
 " ------------------------------------------------------------------------
-" 原文粘贴
-" 在任何模式下，alt+v 开/关 原文粘贴（paste模式）
-"   * cmd+V插入文字前，需开paste模式
-"   * cmd+V插入文字后，需关paste模式
-" paste模式下，进入插入模式，cmd+V可原文粘贴
-"   * 不出现自动缩进
-"   * 若受行为注释，所粘诸行不自动加注
-set pastetoggle=√     " alt+v  开关原文黏贴模式
+if !has('nvim')
+    " nvim中cmd+V会自动按paste模式处理，pastetoggle已无法设置
+    "
+    " 原文粘贴
+    " 在任何模式下，alt+v 开/关 原文粘贴（paste模式）
+    "   * cmd+V插入文字前，需开paste模式
+    "   * cmd+V插入文字后，需关paste模式
+    " paste模式下，进入插入模式，cmd+V可原文粘贴
+    "   * 不出现自动缩进
+    "   * 若受行为注释，所粘诸行不自动加注
+    set pastetoggle=√     " alt+v  开关原文黏贴模式
+endif
 " -----------------------------------------------------------------------
 " 选中状态下 cmd + c 复制
 "   * mac下command+V/C 复制黏贴有效
