@@ -1247,7 +1247,7 @@
   "Use Underline Color" : false,
   "Space" : -1,
   "Badge Max Height" : 0.10000000149011612,
-  "HotKey Modifier Flags" : 393216,
+  "HotKey Modifier Flags" : 655360,
   "Cursor Type" : 1,
   "Keyboard Map" : {
     "0xd-0x100000" : {
@@ -2127,7 +2127,7 @@
   },
   "Blur" : true,
   "Initial Use Transparency" : true,
-  "HotKey Characters" : "\u0000",
+  "HotKey Characters" : " ",
   "Terminal Type" : "xterm-256color",
   "Ansi 13 Color" : {
     "Red Component" : 1,
